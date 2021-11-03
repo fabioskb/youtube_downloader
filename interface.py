@@ -31,9 +31,9 @@ class Interface(object):
 				if (alt - 1) == linha or linha == 0:
 					print(f'{caracter*larg}')
 				elif alt // 2 == linha:
-					print(f'{caracter}\033[7;31m{titulo.upper().center(larg-2)}\033[m{caracter}')
+					print(f'\033[7;31m{titulo.upper().center(larg)}\033[m')
 				else:
-					print(f'{caracter}\033[7;31m{" ".center(larg-2)}\033[m{caracter}')
+					print(f'\033[7;31m{" ".center(larg)}\033[m')
 			print(f'\n{mens}' if not desc else (f'\033[4m{"DESCRIÇÃO".center(larg)}\033[m\n{mens.center(larg)}\n{caracter*larg}' if self.lang == 'pt' else f'\033[4m{"DESCRIPTION".center(larg)}\033[m\n{mens.center(larg)}\n{caracter*larg}'))
 		else:
 			print(f'\n{mens}')
