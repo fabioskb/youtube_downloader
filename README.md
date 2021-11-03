@@ -6,7 +6,7 @@
 * Pesquisa vídeos do YouTube pelo nome;
 * Salva até 20 links relacionados a pesquisa (se disponível);
 * Mostra cada captura detalhadamente para a escolha do usuário (título, descrição, autor e duração);
-* Opção de escolha entre vídeo ou áudio;
+* Opção de escolha vídeo ou áudio;
 * Opções para escolha de resolução ou qualidade de vídeo/áudio para baixar;
 * Renomeia .mp4 para .mp3 (se possível) após baixar, se a escolha for áudio;
 * Salva o arquivo no diretório de downloads padrão.
