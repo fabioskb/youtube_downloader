@@ -29,7 +29,7 @@ class Interface(object):
 			self.limpar_tela()
 			for linha in range(alt):
 				if (alt - 1) == linha or linha == 0:
-					print(f'{" "*larg}')
+					print(caracter * larg if linha == 0 else " " * larg)
 				elif alt // 2 == linha:
 					print(f'\033[7;31m{titulo.upper().center(larg)}\033[m')
 				else:
