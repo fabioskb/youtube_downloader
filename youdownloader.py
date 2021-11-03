@@ -124,7 +124,7 @@ class YoutubeDownloader(Interface):
 # Tratar o Download e baixar
         while True:
             audio_video = self.entrada_txt(
-                '\nEscolha uma das opções abaixo\n[1] - Áudio\n[2] - Vídeo\nOpção: ' if self.lang == 'pt' else '\nChoose one of the options below\n[1] - Audio\n[2] - Video\nOption: ')
+                '\n\033[33mEscolha uma das opções abaixo\n[1] - Áudio\n[2] - Vídeo\nOpção:\033[m ' if self.lang == 'pt' else '\n\033[33mChoose one of the options below\n[1] - Audio\n[2] - Video\nOption:\033[m ')
             if audio_video in ('1', '2'):
                 break
             else:
