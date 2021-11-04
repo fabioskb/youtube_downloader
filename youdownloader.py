@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 from interface import Interface
 from time import sleep
 from pytube import YouTube
