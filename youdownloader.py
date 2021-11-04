@@ -213,9 +213,9 @@ if __name__ == '__main__':
         ydl.pesquisar_capturar()
         ydl.obter_baixar()
         novo = ' '
-        while novo not in 'SNY':
+        while novo not in ('S', 'N', 'Y'):
             novo = input('\nDeseja fazer uma nova pesquisa? [S/N] ' if ydl.lang == 'pt' else 'Do you want to do a new search? [Y/N]').strip().upper()
-            if novo in 'SY':
+            if novo in ('S', 'Y'):
                 pass
             elif novo == 'N':
                 sair = True
