@@ -21,17 +21,19 @@ class YoutubeDownloader(Interface):
         self.arq = 'video_links.txt'
         self.video = False
         self.audio = False
+        self.video_existe = False
         if os.name == 'nt':
             self.pasta_download = fr'C:\Users\{os.getlogin()}\Downloads/'
         else:
             self.pasta_download = fr'/home/{os.getlogin()}/Downloads/'
-        self.video_existe = False
 
 # Pesquisar pelo nome no Google.
     def pesquisar_capturar(self):
         if self.lang == 'pt':
             self.criar_banner(desc=True, mens="""\033[32m
-* Roda em background;            
+* Idiomas: Português e Inglês;
+* Compatível com Windows e Linux;
+* Roda em background via terminal;            
 * Pesquisa o possível nome do vídeo;
 * Salva os links de até 20 vídeos relacionados a pesquisa;
 * Mostra opções de todos os vídeos capturados, com título, descrição, autor e duração;
@@ -39,7 +41,9 @@ class YoutubeDownloader(Interface):
 * Opções de escolha de resolução ou qualidade do vídeo/áudio para baixar.\033[m""")
         else:
             self.criar_banner(desc=True, mens="""\033[32m
-* Runs in background;
+* Languages: Portuguese and English;
+* Compatible with Windows and Linux;
+* Runs in background via terminal;
 * Search the possible video name;
 * Saves the links of up to 20 videos related to search;
 * Shows options of all captured videos, with title, description, author and duration;
@@ -58,7 +62,7 @@ class YoutubeDownloader(Interface):
             try:
                 options = webdriver.ChromeOptions()
                 options.add_argument('headless')
-                #options.add_argument('window_size=0x0')
+                options.add_argument('disable-gpu')
                 browser = webdriver.Chrome('chromedriver', options=options)
             except Exception as e:
                 if os.name == 'posix':
@@ -116,7 +120,7 @@ class YoutubeDownloader(Interface):
                           f'\033[1;31mDescription:\033[m\n        {youtube.description[0:801] if len(youtube.description) > 800 else youtube.description}...\n    '
                           f'\033[1;31mAuthor:\033[m\n        {youtube.author}\n    '
                           f'\033[1;31mDuration:\033[m\n        {youtube.length / 60:.1f} minutes\n')
-            sleep(2)
+            #sleep(2)
         self.menu(linha=True)
 
         opcao_video = self.entrada_num()
@@ -131,6 +135,7 @@ class YoutubeDownloader(Interface):
                 print('Opção inválida, tente novamente.' if self.lang ==
                       'pt' else 'Invalid option, try again.')
 
+        self.criar_banner(mens='Aguardando...' if self.lang == 'pt' else 'Waitting...')
         for c, link in enumerate(links):  # Prepara e trata o download.
             if c + 1 == opcao_video:
                 youtube = YouTube(link)
@@ -151,7 +156,6 @@ class YoutubeDownloader(Interface):
                               'pt' else 'Invalid option!\nDownload cancelled!')
                         self.video_existe = True
                         break
-                self.criar_banner()
                 print(f'LINK: {link}\nTÍTULO: {title}' if self.lang == 'pt' else f'LINK: {link}\nTITLE: {title}')
 
                 if audio_video == '2':
@@ -202,6 +206,25 @@ class YoutubeDownloader(Interface):
 
 
 # Executando
-ydl = YoutubeDownloader()
-ydl.pesquisar_capturar()
-ydl.obter_baixar()
+if __name__ == '__main__':
+    sair = False
+    while True:
+        ydl = YoutubeDownloader()
+        ydl.pesquisar_capturar()
+        ydl.obter_baixar()
+        novo = ' '
+        while novo not in 'SNY':
+            novo = input('\nDeseja fazer uma nova pesquisa? [S/N] ' if ydl.lang == 'pt' else 'Do you want to do a new search? [Y/N]').strip().upper()
+            if novo in 'SY':
+                pass
+            elif novo == 'N':
+                sair = True
+            else:
+                print('\033[31mOpção inválida\nTente novamente.\033[m\n' if ydl.lang == 'pt' else '\033[31mInvalid option\nTry again.\033[m\n')
+        if sair:
+            print('\nSaindo...' if ydl.lang == 'pt' else '\nExitting...')
+            sleep(2)
+            ydl.limpar_tela()
+            break
+        else:
+            pass
