@@ -1,36 +1,38 @@
 # YouTube Downloader
 #### Baixe vídeos e áudios do YouTube
-* Roda em Windows e Linux;
-* Idiomas: Potuguês e Inglês;
-* Roda em background via terminal;
-* Pesquisa vídeos do YouTube pelo nome;
-* Salva até 20 links relacionados a pesquisa (se disponível);
-* Mostra cada captura detalhadamente para a escolha do usuário (título, descrição, autor e duração);
-* Opção de escolha vídeo ou áudio;
-* Opções para escolha de resolução ou qualidade de vídeo/áudio para baixar;
-* Renomeia .mp4 para .mp3 (se possível) após baixar, se a escolha for áudio;
-* Salva o arquivo no diretório de downloads padrão.
+* Languages: Portuguese and English;
+* Compatible with Windows and Linux;
+* Runs in background via terminal;
+* Search the possible video name;
+* Saves the links of up to 20 videos related to search;
+* Shows options of all captured videos, with title, description, author and duration;
+* Options to choose between downloading video (mp4) or audio (mp3);
+* Options to choose video/audio resolution or quality to download.
+* Convert .mp4 to .mp3 (if possible) after downloading, if audio is chosen;
+* Save the file in the default download directory.
 
-### Requisitos
-* python3
-  - $ sudo apt-get install python3
-* python3-pip
-  - $ sudo apt-get install python3-pip
-  - $ sudo pip install -U pip
-* git
-  - $ sudo apt-get install git
-* pytube
-  - $ sudo pip install -U pytube
-* selenium
-  - $ sudo pip install -U selenium
-#### Windows (testado no windows 10 64bit)
-* Navegador Microsoft Edge (só);
-* msedgedriver (extrair na mesma pasta do script youdownloader.py).
+# Requirements
+* $ sudo apt-get install python3
+* $ sudo apt-get install python3-pip
+* $ sudo pip install -U pip
+* $ sudo apt-get install git
+* $ sudo pip install -U pytube
+* $ sudo pip install -U selenium
 #### Linux
-* Navegador Chromium ou Firefox;
-* chromedriver (Chromium) ou geckodriver (Firefox) em /usr/bin/ ou /usr/local/bin.
+* Navegador Chromium (recommended) or Firefox;
+* chromedriver (recommended) or geckodriver em /usr/bin/ ou /usr/local/bin.
+#### For Windows
+* Microsoft Edge Browser (only);
+* msedgedriver (extract in the same folder as the youdownloader.py script).
 
-### Instalação e Execução
+# Install
+#### Linux
 * $ git clone https://github.com/fabioskb/youtube_downloader
 * $ cd youtube_downloader
-* $ python3 youdownloader.py
+* $ chmod +x youdpwnloader.py
+* $ ./youdownloader.py
+#### Windows
+* Download youtube_downloader.zip
+* Extract
+* Enter the youtube_downloader folder
+* python youtube_downloader.zip
