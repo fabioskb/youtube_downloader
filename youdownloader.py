@@ -26,7 +26,7 @@ class YoutubeDownloader(Interface):
         else:
             self.pasta_download = fr'/home/{os.getlogin()}/Downloads/'
 
-# Pesquisar pelo nome no Google.
+# Criar Título com descrição e pesquisar pelo nome no Google.
     def pesquisar_capturar(self):
         if self.lang == 'pt':
             self.criar_banner(desc=True, mens="""\033[32m
@@ -69,14 +69,17 @@ class YoutubeDownloader(Interface):
                       'pt' else '\033[31mCould not use chromedriver.\033[m\n\033[32mWait!\nTrying with Firefox...\033[m')
                     options = webdriver.FirefoxOptions()
                     options.add_argument('--headless')
-                    browser = webdriver.Firefox(options=options)
+                    options.add_argument('disable-gpu')
+                    browser = webdriver.Firefox(options=None)
                 else:
                     pass
-        browser.get("https://google.com")
+        browser.get("https://www.google.com/")
         pesq = browser.find_element(By.CLASS_NAME, 'gLFyf')
         pesq.send_keys('youtube ' + nome_video)
         pesq.send_keys(Keys.RETURN)
-        sleep(3)
+
+        sleep(2)
+
 # Capturar e salvar os links dos vídeos do YouTube.
         elementos = browser.find_elements(By.TAG_NAME, 'a')
         self.remover(self.arq, printar=False)
@@ -91,8 +94,7 @@ class YoutubeDownloader(Interface):
 # Remover links duplicados e obter informações de até 20 links
 # salvos.
     def obter_baixar(self):
-        self.criar_banner(
-            mens='Removendo links duplicados e obtendo\ninformações...' if self.lang == 'pt' else 'Removing duplicate links and getting\ninformation...')
+        self.criar_banner(mens='Removendo links duplicados e obtendo\ninformações...' if self.lang == 'pt' else 'Removing duplicate links and getting\ninformation...')
         links = self.abrir_arquivo(self.arq).split()
 
         for link in links:  # Remove duplicados.
@@ -119,7 +121,8 @@ class YoutubeDownloader(Interface):
                           f'\033[1;31mDescription:\033[m\n        {youtube.description[0:801] if len(youtube.description) > 800 else youtube.description}...\n    '
                           f'\033[1;31mAuthor:\033[m\n        {youtube.author}\n    '
                           f'\033[1;31mDuration:\033[m\n        {youtube.length / 60:.1f} minutes\n')
-            #sleep(2)
+                sleep(0.5)
+
         self.menu(linha=True)
 
         opcao_video = self.entrada_num()
@@ -139,8 +142,9 @@ class YoutubeDownloader(Interface):
             if c + 1 == opcao_video:
                 youtube = YouTube(link)
                 title = youtube.title.strip()
+                arq = f'{self.pasta_download + title}.mp4' if audio_video == '2' else f'{self.pasta_download + title}.mp3'
 
-                if os.path.isfile(f'{self.pasta_download + title}.mp4' if audio_video == '2' else f'{self.pasta_download + title}.mp3'):
+                if os.path.isfile(arq):
                     dl_condicao = input(
                         'O arquivo já existe, deseja fazer novo download? [s/n] ' if self.lang == 'pt' else 'The file already exists, do you want to download it again? [y/n] ').strip().upper()
                     if dl_condicao in 'SY':
@@ -179,7 +183,7 @@ class YoutubeDownloader(Interface):
                 if self.video:
                     print(f"[{c+1}] - {video[3].center(5)} {video[5].center(5)}")
                 elif self.audio:
-                    print(f'[{c+1}] - {video[0:-1]}')
+                    print(f'[{c+1}] - {video}')
 
             self.menu(linha=True)
             resposta = self.entrada_num()
@@ -187,21 +191,27 @@ class YoutubeDownloader(Interface):
                 self.criar_banner(mens=f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
             else:
                 self.criar_banner(mens=f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
-            videos[resposta-1].download(self.pasta_download)
-            sleep(4)
-
-            if self.audio:
-                try:
-                    os.rename(fr'{self.pasta_download}{title}.mp4', fr'{self.pasta_download}{title}.mp3')
-                except FileNotFoundError:
-                    print(f'\033[31m\nERRO AO RENOMEAR: Não foi possivel renomear o "{title}.mp4" para .mp3\nFaça isso manualmente!\033[m' if self.lang == 'pt' else f'\033[31m\nERROR '
-                        f'RENAMING: Unable to rename "{title}.mp4" to .mp3\nDo this manually!\033[m')
+            arq_baixado = videos[resposta-1].download(self.pasta_download)
+            
+            try:
+                nome, ext = os.path.splitext(arq_baixado)
+                mp4 = nome + ext
+                if self.audio:
+                    mp3 = self.pasta_download + title + '.mp3'
+                    os.rename(mp4, mp3)
+                else:
+                    mp4_mod = self.pasta_download + title + '.mp4'
+                    os.rename(mp4, mp4_mod)
+            except FileNotFoundError:
+                if self.audio:
+                    print(f'\033[31m\nERRO AO RENOMEAR: Não foi possivel renomear o "{mp4}" para "{mp3}"\nFaça isso manualmente!\033[m' if self.lang == 'pt' else f'\033[31m\nERROR '
+                        f'RENAMING: Unable to rename "{mp4}" to "{mp3}"\nDo this manually!\033[m')
+                else:
+                    print(f'\033[31mErro ao tentar renomear de acordo com "{title}"\033[m')
 
             print('Download concluído!' if self.lang == 'pt' else 'Done!')
         else:
-            print(
-                ('Não há opções com áudio para este vídeo.' if self.lang == 'pt' else 'There are no audio options '
-                    'for this video.') if self.video_existe else ('FALHA' if self.lang == 'pt' else 'ERROR'))
+            print('' if self.video_existe else ('\033[31mFALHA\033[m' if self.lang == 'pt' else '\033[31mERROR\033[m'))
 
 
 # Executando
@@ -226,4 +236,5 @@ if __name__ == '__main__':
             ydl.limpar_tela()
             break
         else:
-            pass
+            print('\nContinuando...' if ydl.lang == 'pt' else '\nContinuing...')
+            sleep(2)
