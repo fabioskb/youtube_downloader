@@ -19,7 +19,7 @@
 * $ sudo pip install -U pytube
 * $ sudo pip install -U selenium
 #### Linux
-* Navegador Chromium (recommended) or Firefox;
+* Chromium (recommended) or Firefox;
 * chromedriver (recommended) or geckodriver em /usr/bin/ ou /usr/local/bin.
 #### For Windows
 * Microsoft Edge Browser (only);
