@@ -26,3 +26,6 @@
 * Extract
 * Enter the youtube_downloader folder
 * python youtube_downloader.zip
+
+# Downloads
+* <a href="https://github.com/fabioskb/releases">Releases</a>
