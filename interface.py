@@ -1,4 +1,5 @@
 import os, locale
+from time import sleep
 
 ### CLASS ArqInterface
 class Interface(object):
@@ -9,37 +10,65 @@ class Interface(object):
 
 	def __init__(self):
 		#super(Interface, self).__init__()
-		pass
+		self.cor = False
+
+	def tema(self):
+		while True:
+			self.limpar_tela()
+			self.menu('YouTube Downloader', caracter='-')
+			opc = self.entrada_num("""[1] - Aplicar tema
+[2] - Não usar tema
+
+Informe uma das opções acima para começarmos: """)
+			print()
+			if opc == 1:
+				self.cor = True
+				break
+			elif opc == 2:
+				break
+			else:
+				print('\033[31mOpção inválida!\033[m')
+				sleep(2)
 
 # Cria banner
-	def criar_banner(self, titulo='YouTube Downloader', mens='', caracter='*', alt=15, larg=largura, banner=True, desc=False):
+	def criar_banner(self, titulo='YouTube Downloader', mens='', caracter='*', alt=15, larg=largura, c=0, banner=True, desc=False):
 		"""Cria e imprime um banner no terminal (opcional, padrão=True) retangular feito com caracteres, e, com uma
 		mensagem abaixo.
 		
 		Args:
-		    titulo (str, optional): Adiciona um título no centro do banner do banner, se o banner estiver habilitado (padrão='YOUTUBE DOWNLOADER').
+		    titulo (str, optional): Adiciona um título no centro do banner, se o banner estiver habilitado (padrão='YOUTUBE DOWNLOADER').
 		    mens (str): Adiciona uma mensagem abaixo do banner, se habilitado, se não imprime apenas a mensagem (padrão='').
 		    caracter (str, optional): Caracter que compõe o banner (padrão='*').
 		    alt (int, optional): Número (ÍMPAR) de caracteres na vertical do banner (altura) (padrão=7).
 		    larg (int, optional): Número de caracteres na horizontal do banner (largura) (padrão=40).
 		    banner (bool, optional): Habilita/desabilita o banner, padrão Habilitado (padrão=True).
 		    desc (bool, optional): Habilita/desabilita uma descrição centralizada em vez de só uma mensagem, abaixo do banner (padrão=False).
+			c (int, optiona): Cor da mensagem (padrão=0)
 		"""
 		if banner:
 			self.limpar_tela()
 			for linha in range(alt):
 				if (alt - 1) == linha or linha == 0:
-					print(" " * larg)
+					if self.cor:
+						print(" " * larg)
+					else:
+						print(caracter * larg)
 				elif alt // 2 == linha:
-					print(f'\033[7;31m{titulo.upper().center(larg)}\033[m')
+					if self.cor:
+						print(f'\033[7;{30+c}m{titulo.upper().center(larg)}\033[m')
+					else:
+						print(f'*{titulo.upper().center(larg-2)}*')
 				else:
-					print(f'\033[7;31m{" ".center(larg)}\033[m')
+					if self.cor:
+						print(f'\033[7;{30+c}m{" ".center(larg)}\033[m')
+					else:
+						print(f"*{' '.center(larg-2)}*")
 			print(f'\n{mens}' if not desc else (f'\033[4m{"DESCRIÇÃO".center(larg)}\033[m\n{mens.center(larg)}\n{caracter*larg}' if self.lang == 'pt' else f'\033[4m{"DESCRIPTION".center(larg)}\033[m\n{mens.center(larg)}\n{caracter*larg}'))
 		else:
 			print(f'\n{mens}')
 
 # Menus
-	def menu(self, titulo=' ', caracter='\033[34m-\033[m', linha=False):
+	def menu(self, titulo=' ', caracter='-', linha=False):
 		"""Cria um menu com uma linha de 40 caracteres encima e abaixo, com um título centralizado ou apenas imprime uma linha com 40 caracteres no terminal.
 		
 		Args:
@@ -88,7 +117,7 @@ class Interface(object):
 			try:
 				opcao = int(input(num_text))
 			except ValueError:
-				print('Digite apenas números inteiros.' if self.lang == 'pt' else 'Enter whole numbers only.')
+				print('\033[31mDigite apenas números inteiros válidos.\033[m\n' if self.lang == 'pt' else 'Enter whole numbers only.')
 			else:
 				break
 		return opcao

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from interface import Interface
+
 from time import sleep
 from pytube import YouTube
 from selenium.webdriver.common.by import By
@@ -14,6 +15,7 @@ os.environ['TERM'] = 'xterm'
 class YoutubeDownloader(Interface):
     """docstrinsecsg for YoutubeDownloader"""
     lang = locale.getdefaultlocale()[0][0:2]
+    cores = 0
 
     def __init__(self):
         super(YoutubeDownloader, self).__init__()
@@ -28,8 +30,29 @@ class YoutubeDownloader(Interface):
 
 # Criar Título com descrição e pesquisar pelo nome no Google.
     def pesquisar_capturar(self):
+        
+        if self.cor:
+            self.menu('Temas')
+            while self.cores not in range(1,8):
+                self.cores = ydl.entrada_num('''[1] - vermelho
+[2] - verde
+[3] - amarelo
+[4] - azul
+[5] - roxo
+[6] - azul claro
+[7] - cinza
+
+Informe uma das opções acima: ''')
+                if self.cores not in range(1, 8):
+                    print('\033[31mOpção inválida!\033[m')
+                else:
+                    print('\033[32mProsseguindo...\033[m' if self.lang == 'pt' else '\033[32m...\033[m')
+                    sleep(1)
+        else:
+            pass
+
         if self.lang == 'pt':
-            self.criar_banner(desc=True, mens="""\033[32m
+            self.criar_banner(c=self.cores, desc=True, mens="""\033[37m
 * Idiomas: Português e Inglês;
 * Compatível com Windows e Linux;
 * Roda em background via terminal;            
@@ -39,7 +62,7 @@ class YoutubeDownloader(Interface):
 * Opções de escolha entre baixar em vídeo (mp4) ou áudio (mp3);
 * Opções de escolha de resolução ou qualidade do vídeo/áudio para baixar.\033[m""")
         else:
-            self.criar_banner(desc=True, mens="""\033[32m
+            self.criar_banner(c=self.cores, desc=True, mens="""\033[37m
 * Languages: Portuguese and English;
 * Compatible with Windows and Linux;
 * Runs in background via terminal;
@@ -48,10 +71,12 @@ class YoutubeDownloader(Interface):
 * Shows options of all captured videos, with title, description, author and duration;
 * Options to choose between downloading video (mp4) or audio (mp3);
 * Options to choose video/audio resolution or quality to download.\033[m""")
+
         nome_video = self.entrada_txt(
             'Pesquise por: ' if self.lang == 'pt' else 'Search for: ')
         self.criar_banner(
             banner=False, mens='Pesquisando...' if self.lang == 'pt' else 'Searching...')
+
         if os.name == 'nt':
             options = webdriver.EdgeOptions()
             options.add_argument('headless')
@@ -61,7 +86,9 @@ class YoutubeDownloader(Interface):
             try:
                 options = webdriver.ChromeOptions()
                 options.add_argument('headless')
-                options.add_argument('disable-gpu')
+                options.add_argument("--disable-dev-shm-usage")
+                options.add_argument('--no-sandbox')
+                options.add_argument('--disable-extensions')
                 browser = webdriver.Chrome('chromedriver', options=options)
             except Exception as e:
                 if os.name == 'posix':
@@ -69,10 +96,13 @@ class YoutubeDownloader(Interface):
                       'pt' else '\033[31mCould not use chromedriver.\033[m\n\033[32mWait!\nTrying with Firefox...\033[m')
                     options = webdriver.FirefoxOptions()
                     options.add_argument('--headless')
-                    options.add_argument('disable-gpu')
-                    browser = webdriver.Firefox(options=None)
+                    options.add_argument("--disable-dev-shm-usage")
+                    options.add_argument('--no-sandbox')
+                    options.add_argument('--disable-extensions')
+                    browser = webdriver.Firefox(options=options)
                 else:
                     pass
+
         browser.get("https://www.google.com/")
         pesq = browser.find_element(By.CLASS_NAME, 'gLFyf')
         pesq.send_keys('youtube ' + nome_video)
@@ -89,17 +119,23 @@ class YoutubeDownloader(Interface):
             href = link.get_attribute('href')
             if href is not None and 'https://www.youtube.com/watch' in href.split('?v='):
                 self.editar_arquivo(href, self.arq)
+            else:
+                pass
+
         browser.quit()
 
 # Remover links duplicados e obter informações de até 20 links
 # salvos.
     def obter_baixar(self):
-        self.criar_banner(mens='Removendo links duplicados e obtendo\ninformações...' if self.lang == 'pt' else 'Removing duplicate links and getting\ninformation...')
+        self.criar_banner(c=self.cores, mens='Removendo links duplicados e obtendo\ninformações...' if self.lang == 'pt' else 'Removing duplicate links and getting\ninformation...')
         links = self.abrir_arquivo(self.arq).split()
 
         for link in links:  # Remove duplicados.
             if links.count(link) > 1:
                 links.remove(link)
+            else:
+                pass
+
         quant_links = str(len(links)) if len(links) <= 20 else '20'
         self.menu(titulo=quant_links + ' OPÇÕES' if self.lang ==
                   'pt' else ' OPTIONS')
@@ -127,6 +163,13 @@ class YoutubeDownloader(Interface):
 
         opcao_video = self.entrada_num()
 
+        for c, link in enumerate(links): # Capturando o título do vídeo
+            if c + 1 == opcao_video:
+                youtube = YouTube(link)
+                title = youtube.title.strip()
+            else:
+                pass
+
 # Tratar o Download e baixar
         while True:
             audio_video = self.entrada_txt(
@@ -137,43 +180,63 @@ class YoutubeDownloader(Interface):
                 print('Opção inválida, tente novamente.' if self.lang ==
                       'pt' else 'Invalid option, try again.')
 
-        self.criar_banner(mens='Aguardando...' if self.lang == 'pt' else 'Waitting...')
-        for c, link in enumerate(links):  # Prepara e trata o download.
-            if c + 1 == opcao_video:
-                youtube = YouTube(link)
-                title = youtube.title.strip()
-                arq = f'{self.pasta_download + title}.mp4' if audio_video == '2' else f'{self.pasta_download + title}.mp3'
+        self.criar_banner(c=self.cores, mens='Aguardando...' if self.lang == 'pt' else 'Waitting...')
+        arq = f'{self.pasta_download + title}.mp4' if audio_video == '2' else f'{self.pasta_download + title}.mp3'
+        dl_condicao = 'S'
 
-                if os.path.isfile(arq):
-                    dl_condicao = input(
-                        'O arquivo já existe, deseja fazer novo download? [s/n] ' if self.lang == 'pt' else 'The file already exists, do you want to download it again? [y/n] ').strip().upper()
-                    if dl_condicao in 'SY':
-                        pass
-                    elif dl_condicao == 'N':
-                        print('Download cancelado!' if self.lang ==
-                              'pt' else 'Download cancelled')
-                        self.video_existe = True
-                        break
-                    else:
-                        print('Opção inválida!\nDownload cancelado!' if self.lang ==
-                              'pt' else 'Invalid option!\nDownload cancelled!')
-                        self.video_existe = True
-                        break
-                print(f'LINK: {link}\nTÍTULO: {title}' if self.lang == 'pt' else f'LINK: {link}\nTITLE: {title}')
+        if os.path.isfile(arq):
+            
+            if self.video_existe:
+                self.video_existe = False
+            else:
+                pass
 
-                if audio_video == '2':
-                    videos = youtube.streams.filter(progressive=True)
+            dl_condicao = input(
+            'O arquivo já existe, deseja fazer novo download? [s/n] ' if self.lang == 'pt' else 'The file already exists, do you want to download it again? [y/n] ').strip().upper()
+            
+            if dl_condicao in 'SY':
+                pass
+            elif dl_condicao == 'N':
+                print('Download cancelado!' if self.lang ==
+                        'pt' else 'Download cancelled')
+                self.video_existe = True
+            else:
+                print('Opção inválida!\nDownload cancelado!' if self.lang ==
+                        'pt' else 'Invalid option!\nDownload cancelled!')
+                self.video_existe = True
+        else:
+            pass
+
+        if not self.video_existe and dl_condicao in 'SY':
+            for c, link in enumerate(links):  # Prepara e trata o download.
+                if c + 1 == opcao_video:
+                    youtube = YouTube(link)
+                    print(f'LINK: {link}\nTÍTULO: {title}' if self.lang == 'pt' else f'LINK: {link}\nTITLE: {title}')
                 else:
-                    videos = youtube.streams.filter(only_audio=True)
+                    pass
 
-                if len(videos) >= 1:
+                try:
                     if audio_video == '2':
-                        self.video = True
+                        videos = youtube.streams.filter(progressive=True)
                     else:
-                        self.audio = True
+                        videos = youtube.streams.filter(only_audio=True)
+                except Exception as e:
+                    print(f'\n\033[31mError: {e}\033[m')
+                    sleep(2)
+                    #quit()
+                else:
+                    if len(videos) >= 1:
+                        if audio_video == '2':
+                            self.video = True
+                        else:
+                            self.audio = True
+                    else:
+                        pass
                 break
+        else:
+            pass    
 
-        if self.video or self.audio:  # Baixar (se disponível).
+        if self.video or self.audio and not self.video_existe:  # Baixar (se disponível).
             self.menu(titulo='OPÇÕES PARA BAIXAR' if self.lang ==
                       'pt' else 'DOWNLOAD OPTIONS')
 
@@ -188,9 +251,9 @@ class YoutubeDownloader(Interface):
             self.menu(linha=True)
             resposta = self.entrada_num()
             if os.name == 'nt':
-                self.criar_banner(mens=f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
+                self.criar_banner(c=self.cores, mens=f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m{self.pasta_download + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
             else:
-                self.criar_banner(mens=f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
+                self.criar_banner(c=self.cores, mens=f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nBaixando...' if self.lang == 'pt' else f'\n\033[32m~{self.pasta_download[-11:] + title}{".mp4" if self.video else ".mp3"}\033[m\nDownloading...')
             arq_baixado = videos[resposta-1].download(self.pasta_download)
             
             try:
@@ -211,30 +274,34 @@ class YoutubeDownloader(Interface):
 
             print('Download concluído!' if self.lang == 'pt' else 'Done!')
         else:
-            print('' if self.video_existe else ('\033[31mFALHA\033[m' if self.lang == 'pt' else '\033[31mERROR\033[m'))
-
+            print('\n\033[31mNo Options!\033[m' if self.video_existe else ('\033[31mFALHA!\033[m' if self.lang == 'pt' else '\033[31mERROR!\033[m'))
 
 # Executando
 if __name__ == '__main__':
     sair = False
+    cont = 0
     while True:
-        ydl = YoutubeDownloader()
-        ydl.pesquisar_capturar()
-        ydl.obter_baixar()
-        novo = ' '
-        while novo not in ('S', 'N', 'Y'):
-            novo = input('\nDeseja fazer uma nova pesquisa? [S/N] ' if ydl.lang == 'pt' else 'Do you want to do a new search? [Y/N]').strip().upper()
-            if novo in ('S', 'Y'):
-                pass
-            elif novo == 'N':
-                sair = True
-            else:
-                print('\033[31mOpção inválida\nTente novamente.\033[m\n' if ydl.lang == 'pt' else '\033[31mInvalid option\nTry again.\033[m\n')
-        if sair:
-            print('\nSaindo...' if ydl.lang == 'pt' else '\nExitting...')
-            sleep(2)
-            ydl.limpar_tela()
-            break
+        if cont == 0:
+            ydl = YoutubeDownloader()
+            ydl.tema()
         else:
-            print('\nContinuando...' if ydl.lang == 'pt' else '\nContinuing...')
-            sleep(2)
+            ydl.pesquisar_capturar()
+            ydl.obter_baixar()
+            novo = ' '
+            while novo not in ('S', 'N', 'Y'):
+                novo = input('\nDeseja fazer uma nova pesquisa? [S/N] ' if ydl.lang == 'pt' else 'Do you want to do a new search? [Y/N]').strip().upper()
+                if novo in ('S', 'Y'):
+                    pass
+                elif novo == 'N':
+                    sair = True
+                else:
+                    print('\033[31mOpção inválida\nTente novamente.\033[m\n' if ydl.lang == 'pt' else '\033[31mInvalid option\nTry again.\033[m\n')
+            if sair:
+                print('\nSaindo...' if ydl.lang == 'pt' else '\nExitting...')
+                sleep(2)
+                ydl.limpar_tela()
+                break
+            else:
+                print('\nContinuando...' if ydl.lang == 'pt' else '\nContinuing...')
+                sleep(2)
+        cont += 1
