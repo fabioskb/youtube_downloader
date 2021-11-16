@@ -28,4 +28,4 @@
 * python youtube_downloader.zip
 
 # Downloads
-* <a href="https://github.com/fabioskb/releases">Releases</a>
+* <a href="https://github.com/fabioskb/youtube_downloader/releases">Releases</a>
