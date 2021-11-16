@@ -29,3 +29,4 @@
 
 # Downloads
 * <a href="https://github.com/fabioskb/youtube_downloader/releases">Releases</a>
+* <a href="https://github.com/fabioskb/changes/blob/main/youdl.md">Changlogs</a>
