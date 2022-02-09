@@ -27,5 +27,5 @@ Download videos and audios from YouTube.
 **A stable internet connection is required.**
 
 # Downloads
-* [Latest](https://github.com/fabioskb/youtube_downloader/releases/latest)
+* [Latest](https://github.com/fabioskb/youtube_downloader/releases/Latest)
 * [Changelogs](https://github.com/fabioskb/changes/blob/main/youdl.md)
