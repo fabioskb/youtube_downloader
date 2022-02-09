@@ -2,11 +2,12 @@
 Download videos and audios from YouTube.
 
 # Requirements
+* default-jre
 * python3
 * python3-pip
 * ffmpeg
-* youtube-search (python3 package)
-* youtube-dl (python3 package)
+* youtube-search (pip3 package)
+* youtube-dl (pip3 package)
 
 # Recommended
 * VLC Player
