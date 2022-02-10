@@ -75,6 +75,7 @@ public class YoutubeText {
 			"<html><center>Verificando o download...</center></html>",  // [31] lblResultado Verificando o download
 
 			"<html>Os resultados serão mostrados aqui</html>",          // [32] lblResultado ToolTip
+			"<html><center>Pegando o título...   </center></htm>",      // [33] lblResults pegando título
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -106,25 +107,25 @@ public class YoutubeText {
 			"<html>Select to download video (mp4)</html>",    // [14] checkVideo toolTip
 			"<html>Select to download audio (mp3)</html>",    // [15] checkAudio toolTip
 			"<html><center>Searching...&nbsp;</center></html>",    // [16] lblResultado texto Pesquisando...
-			"<html><center>Failed search!!! </center></html> ",// [17] lblResultado Falha na pesquisa
+			"<html><center>Failed search!!!&nbsp;&nbsp;</center></html> ",// [17] lblResultado Falha na pesquisa
 			"<html><center>Downloading...&nbsp;</center></html> ", // [18] lblresultado Baixando...
 			
-			"<html><center>Select an item from the list or add an valid link&nbsp;<br/>"
-			+ " <strong>PLEASE!!!&nbsp;</strong></center></html> ",// [19] lblResultado aviso item não selecionado
-			"<html><center>Select audio or video&nbsp;</center> "
+			"<html><center>Select an item from the list or add an valid link&nbsp;&nbsp;<br/>"
+			+ " <strong>PLEASE!!!&nbsp;&nbsp;</strong></center></html> ",// [19] lblResultado aviso item não selecionado
+			"<html><center>Select audio or video&nbsp;&nbsp;</center> "
 			+ "</html>",                                      // [20] lblResultado aviso se não é video ou audio selecionado
-			"<html><center>Download Failed!&nbsp;</center></html> ",// [21] lblResultado erro falha no download
+			"<html><center>Download Failed!&nbsp;&nbsp;</center></html> ",// [21] lblResultado erro falha no download
 			
-			"<html><center>Download Done!&nbsp;<br/>"
-			+ "~/YDownloads</center></html>",                 // [22] lblResultado download concluído
+			"<html><center>Download Done!&nbsp;&nbsp;<br/>"
+			+ "~/YDownloads&nbsp;&nbsp;</center></html>",                 // [22] lblResultado download concluído
 			
 			"<html><center>Select an item from the list above (if "
 			+ "available) or <br/>add a valid link and click "
-			+ "here.</center></html>",                        // [23] ToolTip download button
+			+ "here.</center></html>",                             // [23] ToolTip download button
 			
 			"<html><center>Select an item (if available)</center>"
-			+ "</html>",                                      // [24] ToolTip search result list
-			"<html><center>Searching Done!&nbsp;</center></html>",  // [25] lblResultado pesquisa concluída
+			+ "</html>",                                           // [24] ToolTip search result list
+			"<html><center>Searching Done!&nbsp;&nbsp;</center></html>",  // [25] lblResultado pesquisa concluída
 			
 			"<html><center>WELCOME TO YOUTUBE DOWNLOADER<br/>It will be"
 			+ "Need to install dependencies.<br/>"
@@ -146,6 +147,7 @@ public class YoutubeText {
 
             "<html><center>Checking the download...</center></html>",// [31] Checking the download
 			"<html>Results will be shown here</html>",          // [32] lblResult ToolTip
+			"<html><center>Getting title...   </center></htm>", // [33] lblResults getting title
 	};
 	
 	public YoutubeText(String idioma) {
@@ -163,7 +165,7 @@ public class YoutubeText {
 	 * [21] lblResultado Falha no download, [22] lblResultado download concluido, [23] tooltip botão baixar, [24] tooltip lista results, [25] lblResultado Pesquisa conc, 
 	 * [26] JOptionPane Boas vindas, [27] JOptionPane Erro na instalação dependencias, [28] JOptionPane Instalação completada, [29] JOtionPane Erro pip não instalado,
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
-	 * ToolTip
+	 * ToolTip, [33] lblResultado pegando título
 	 * @return String - Texto
 	 */
 	public String getTextos(int indice) {

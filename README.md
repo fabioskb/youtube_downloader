@@ -27,6 +27,12 @@ Download videos and audios from YouTube.
 
 **A stable internet connection is required.**
 
+# Credits
+* [youtube-search](https://pypi.org/project/youtube-search/ "Python function for searching for youtube videos to avoid using their heavily rate-limited API")
+* [youtube-dl](https://pypi.org/project/youtube_dl/ "Command-line program to download videos from YouTube.com and other video sites")
+* [Python](https://www.python.org/ "Python site")
+* [Java](https://www.java.com "Java site")
+
 # Downloads
 * <a href="https://github.com/fabioskb/youtube_downloader/releases/Latest">Latest</a>
 * <a href="https://github.com/fabioskb/changes/blob/main/youdl.md">Changlogs</a>
