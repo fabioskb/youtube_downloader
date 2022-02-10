@@ -40,8 +40,11 @@ public class YoutubeComando {
 	public String comando(String executavel, String arg, String arg0) {
 		comando = new CommandLine(executavel, arg, arg0);
 		comando.execute();
+		sleep(0.1);
 		saida = comando.getStdOut();
+		sleep(0.1);
 		comando.destroy();
+		sleep(0.1);
 		return saida;
 	}
 	
