@@ -2,6 +2,7 @@ package app;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import metodos.YoutubeArquivo;
 
@@ -110,7 +111,13 @@ public class Youtube extends YoutubeForm {
 				link, format));
 
 				// Executa o download
-				cmdLine = cmd.comando("python3", "/tmp/baixar");
+				try {
+					cmdLine = cmd.comando("python3 /tmp/baixar");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(cmdLine);
 			}
 
 			// Mostra os resultados do download
@@ -160,8 +167,9 @@ public class Youtube extends YoutubeForm {
 						txtPesquisa.getText(), links.length));
 				
 				// Executando o arquivo temporario e pegando os títulos e links.
-				cmdLine = cmd.comando("python3", "/tmp/youtubeSearch");
-				if (!cmdLine.startsWith("Traceback (most recent call last):")) {
+				cmdLine = cmd.comando("python3 /tmp/youtubeSearch");
+				System.out.println(cmdLine);
+				if (!cmdLine.startsWith("Traceback (most recent call last):") && cmdLine.length() > 0) {
 					lstTits = cmdLine.split("\n");
 					// Adicionando os títulos na lstTitulos e os links no vetor links[].
 					int c = 0;

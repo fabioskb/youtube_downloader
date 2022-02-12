@@ -1,6 +1,5 @@
 package app;
 
-import io.netty.util.internal.SystemPropertyUtil;
 import metodos.*;
 
 import javax.swing.*;
@@ -10,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 public abstract class YoutubeForm extends JFrame {
@@ -61,8 +61,8 @@ public abstract class YoutubeForm extends JFrame {
 	private int cont;
 
 	// Atributos Finais
-	private final String usuario = SystemPropertyUtil.get("user.name");
-	private final String sistema = SystemPropertyUtil.get("os.name");
+	private final String usuario = System.getProperty("user.name");
+	private final String sistema = System.getProperty("os.name");
 	private final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
 	private final Font FONT_DESC = new Font(Font.SANS_SERIF, Font.BOLD, 12);
 	private final YoutubeImage IMAGEM = new YoutubeImage();
@@ -75,7 +75,12 @@ public abstract class YoutubeForm extends JFrame {
 	 * Construtor
 	 */
 	public YoutubeForm() {
-		this.inicializar();
+		try {
+			this.inicializar();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setCores(true);
 		this.eventos();
 	}
@@ -83,8 +88,9 @@ public abstract class YoutubeForm extends JFrame {
 	/**
 	 * Checa se esta Ok, corrige se necessário e possível, e, 
 	 * inicializa todos os componentes da aplicação (se possível).
+	 * @throws IOException
 	 */
-	private void inicializar() {
+	private void inicializar() throws IOException {
 		// Seta a pasta principal da app
 		if (this.sistema.contains("Windows"))
 			this.pasta = "C:\\users\\" + usuario + "\\YDownloads\\";
@@ -95,22 +101,21 @@ public abstract class YoutubeForm extends JFrame {
 		if (!d.isDirectory()) d.mkdir();
 		
 		// Checa se pip e dependências estão instalados
-		String ydlSaida = cmd.comando("pip", "show", "youtube_dl");
-		String ysSaida = cmd.comando("pip", "show", "youtube_search");
+		String ydlSaida = cmd.comando("pip show youtube_dl");
+		String ysSaida = cmd.comando("pip show youtube_search");
 		YoutubeArquivo check = new YoutubeArquivo(pasta + ".check");
 
 		if (ydlSaida.contains("command not found") || ysSaida.contains("command not found")) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
-		} else if ((!ydlSaida.startsWith("Name: youtube-dl") || !ysSaida.startsWith("Name: youtube-search")) && check.getArq().isFile())
-			check.deletar();
+		} else if ((!ydlSaida.startsWith("Name: youtube-dl") || !ysSaida.startsWith("Name: youtube-search")) && check.getArq().isFile()) check.deletar();
 		else check.criar("Checado!");
-		
+
 		// Checa se o sistema está configurado corretamente, e, corrige se necessário; 
 		if (!check.getArq().isFile()) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
-			String installYdl = cmd.comando("pip", "install", "youtube-dl");
-			String installYs = cmd.comando("pip", "install", "youtube-search");
+			String installYdl = cmd.comando("pip install youtube-dl");
+			String installYs = cmd.comando("pip install youtube-search");
 			if (installYdl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl") 
 					|| installYs.contains("ERROR: Could not find a version that satisfies the requirement youtube-search")) {
 				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);

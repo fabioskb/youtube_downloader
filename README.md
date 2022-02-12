@@ -1,7 +1,14 @@
 # YouTube Downloader
 Download videos and audios from YouTube.
 
+# Screenshots
+## Night Mode
+![ydlNightMode](./screenshots/YoutubeDownloader_night_mode.png "Night Mode YouTube Downloader")
+## Default
+![ydl](./screenshots/YoutubeDownloader.png "Default YouTube Downloader")
+
 # Requirements
+* wget (optional to download the .deb package)
 * default-jre
 * python3
 * python3-pip
@@ -13,17 +20,15 @@ Download videos and audios from YouTube.
 * VLC Player
 
 # Install
-## apt install
-1. Download youtube-downloader_amd64_x.deb 
-1. `$ cd <Downloads folder path here>`
-2. `$ sudo apt install ./youtube-downloader_amd64_x.deb` (replace x with the downloaded version)
-1. `$ ydl` (or simply open it in the network applications category).
-## dpkg install
-1. Download deb package 
-1. `$ cd <Downloads folder path here>`
-2. `$ sudo dpkg -i ./youtube-downloader_amd64_x.deb` (replace x with the downloaded version)
+## via apt
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.0.2_amd64.deb` 
+2. `$ sudo apt install ./youtube-downloader_amd64_2.0.2.deb` 
+1. `$ ydl` (or simply open it in the network applications category)
+## via dpkg 
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.0.2_amd64.deb` 
+2. `$ sudo dpkg -i ./youtube-downloader_amd64_2.0.2.deb` 
 3. `$ sudo apt install -f`
-4. `$ ydl`
+4. `$ ydl` (or simply open it in the network applications category)
 
 **A stable internet connection is required.**
 

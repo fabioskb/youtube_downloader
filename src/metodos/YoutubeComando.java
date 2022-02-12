@@ -1,50 +1,31 @@
 package metodos;
 
-import org.openqa.selenium.os.CommandLine;
+import java.io.*;
 
 public class YoutubeComando {
-	private CommandLine comando;
-	private String saida; 
-	
-	public CommandLine getComando() {
-		return comando;
-	}
-
-	public void setComando(CommandLine comando) {
-		this.comando = comando;
-	}
-
-	/**
-	 * Executa e retorna a saida do comando com argumento.
-	 * 
-	 * @param executavel (String) - String de um executavel
-	 * @param arg (String) - Argumento do executavel
-	 * @return saida do comando
-	 */
-	public String comando(String executavel, String arg) {
-		comando = new CommandLine(executavel, arg);
-		comando.execute();
-		saida = comando.getStdOut();
-		comando.destroy();
-		return saida;
-	}
+	private final Runtime RUN = Runtime.getRuntime();
+	private Process pro;
+	private BufferedReader read;
+	private String saida, line;
 	
 	/**
-	 * Executa e retorna a saida do comando com até 3 argumentos.
+	 * Executa e retorna a saida do comando.
 	 * 
 	 * @param executavel (String) - String de um executavel
-	 * @param arg (String) - Argumento do executavel
-	 * @param arg0 (String) - segundo argumento do executável
-	 * @return saida do comando
+	 * @return (String) saida do comando
+	 * @throws IOException
 	 */
-	public String comando(String executavel, String arg, String arg0) {
-		comando = new CommandLine(executavel, arg, arg0);
-		comando.execute();
-		sleep(0.1);
-		saida = comando.getStdOut();
-		sleep(0.1);
-		comando.destroy();
-		sleep(0.1);
+	public String comando(String command) throws IOException {
+		pro = RUN.exec(command);
+		read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+		saida = "";
+		line = null;
+
+		while ((line=read.readLine())!=null) {
+			saida += line + "\n";
+		}
+		read.close();
+
 		return saida;
 	}
 	
