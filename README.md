@@ -40,4 +40,4 @@ Download videos and audios from YouTube.
 
 # Downloads
 * <a href="https://github.com/fabioskb/youtube_downloader/releases/Latest">Latest</a>
-* <a href="https://github.com/fabioskb/changes/blob/main/youdl.md">Changlogs</a>
+* <a href="https://github.com/fabioskb/changes/blob/main/youdl.md">Changelogs</a>
