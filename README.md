@@ -1,5 +1,10 @@
 # YouTube Downloader
-Download videos and audios from YouTube.
+### Download videos and audios from YouTube.
+* **You can download directly through the link or search by name. The search returns 20 options that can be downloaded**
+* **Support only for Linux amd64 (for now)**
+* **Option for night mode**
+* **Choose between audio or video to download**
+* **Install all dependencies on the first boot of the application**
 
 # Screenshots
 ## Night Mode
@@ -9,7 +14,7 @@ Download videos and audios from YouTube.
 
 # Requirements
 * wget (optional to download the .deb package)
-* default-jre
+* default-jre (jre-11+ recommended)
 * python3
 * python3-pip
 * ffmpeg
