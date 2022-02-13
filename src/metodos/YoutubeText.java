@@ -127,12 +127,12 @@ public class YoutubeText {
 			+ "</html>",                                           // [24] ToolTip search result list
 			"<html><center>Searching Done!&nbsp;&nbsp;</center></html>",  // [25] lblResultado pesquisa concluída
 			
-			"<html><center>WELCOME TO YOUTUBE DOWNLOADER<br/>It will be"
-			+ "Need to install dependencies.<br/>"
-			+ "Press OK and wait!</center></html>",            // [26] JOption Boas vindas
+			"<html><center>WELCOME TO YOUTUBE DOWNLOADER<br/>It will be "
+			+ "need to install dependencies.<br/>"
+			+ "Press OK and wait!</center></html>",            // [26] JOptionPane Boas vindas
 			
 			"<html><center>Could not install dependencies<br/>"
-			+ " check the internet connection and try again! <br/>"
+			+ "check the internet connection and try again!<br/>"
 			+ "</center></html>",                              // [27] JOptionPane - Error installing dependencies
 			
 			"<html><center>Dependencies installed with "
