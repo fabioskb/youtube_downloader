@@ -17,26 +17,25 @@ public abstract class YoutubeForm extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// Topo componentes
+
 	protected JLabel lblBanner;
 	protected JLabel lblDescricao;
 	protected final JLabel LBL_VAZIO = new JLabel("                ");
-	// Esquerda componentes
+
 	protected JToggleButton btnModoNoite;
 	protected JCheckBox checkVideo, checkAudio;
-	// Centro componentes
+
 	protected JTextField txtLink;
 	protected JTextField txtPesquisa;
 	protected JButton btnPesquisa;
 	protected JLabel lblLink;
-	// Direita componentes
+
 	protected JList<String> lstPesquisa;
 	protected DefaultListModel<String> lstTitulos = new DefaultListModel<String>();
 	protected JButton btnBaixa;
-	// Rodapé componentes
+	
 	protected JLabel lblResultado;
 
-	// Paineis atributos
 	protected JPanel pnlTopo;
 
 	protected JPanel pnlEsquerda;
@@ -53,14 +52,11 @@ public abstract class YoutubeForm extends JFrame {
 	protected JPanel pnlDireito;
 	
 	protected JPanel pnlRodape;
-	//
 
-	// Atributos
 	private boolean noturno, video, audio;
-	protected String pasta, titulo;
-	private int cont;
+	protected String pastaPrincipal, titulo;
+	protected int contador;
 
-	// Atributos Finais
 	private final String usuario = System.getProperty("user.name");
 	private final String sistema = System.getProperty("os.name");
 	private final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
@@ -78,7 +74,6 @@ public abstract class YoutubeForm extends JFrame {
 		try {
 			this.inicializar();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.setCores(true);
@@ -91,42 +86,38 @@ public abstract class YoutubeForm extends JFrame {
 	 * @throws IOException
 	 */
 	private void inicializar() throws IOException {
-		// Seta a pasta principal da app
 		if (this.sistema.contains("Windows"))
-			this.pasta = "C:\\users\\" + usuario + "\\YDownloads\\";
+			this.pastaPrincipal = "C:\\users\\" + usuario + "\\YDownloads\\";
 		else
-			this.pasta = "/home/" + usuario + "/YDownloads/";
+			this.pastaPrincipal = "/home/" + usuario + "/YDownloads/";
 
-		File d = new File(this.pasta);
-		if (!d.isDirectory()) d.mkdir();
+		File diretorioPadrao = new File(this.pastaPrincipal);
+		if (!diretorioPadrao.isDirectory()) diretorioPadrao.mkdir();
 		
-		// Checa se pip e dependências estão instalados
-		String ydlSaida = cmd.comando("pip show youtube_dl");
-		String ysSaida = cmd.comando("pip show youtube_search");
-		YoutubeArquivo check = new YoutubeArquivo(pasta + ".check");
+		String youtubeDlSaida = cmd.comando("pip show youtube_dl");
+		String youtubeSearchSaida = cmd.comando("pip show youtube_search");
+		YoutubeArquivo arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check");
 
-		if (ydlSaida.contains("command not found") || ysSaida.contains("command not found")) {
+		if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
-		} else if ((!ydlSaida.startsWith("Name: youtube-dl") || !ysSaida.startsWith("Name: youtube-search")) && check.getArq().isFile()) check.deletar();
-		else check.criar("Checado!");
+		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && arquivoChecaPrograma.getArq().isFile()) arquivoChecaPrograma.deletar();
+		else arquivoChecaPrograma.criar("Checado!");
 
-		// Checa se o sistema está configurado corretamente, e, corrige se necessário; 
-		if (!check.getArq().isFile()) {
+		if (!arquivoChecaPrograma.getArq().isFile()) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
-			String installYdl = cmd.comando("pip install youtube-dl");
-			String installYs = cmd.comando("pip install youtube-search");
-			if (installYdl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl") 
-					|| installYs.contains("ERROR: Could not find a version that satisfies the requirement youtube-search")) {
+			String installYoutubeDl = cmd.comando("pip install youtube-dl");
+			String installYoutubeSearch = cmd.comando("pip install youtube-search");
+			if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl") 
+					|| installYoutubeSearch.contains("ERROR: Could not find a version that satisfies the requirement youtube-search")) {
 				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			} else {
-				check.criar("Checado!");
+				arquivoChecaPrograma.criar("Checado!");
 				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
-		// Inicia os componentes se estiver tudo OK.
 		this.setTitle("YouTube Downloader");
 		this.setResizable(true);
 		this.setSize(920, 680);
@@ -173,7 +164,7 @@ public abstract class YoutubeForm extends JFrame {
 	 * tratamentos de erros, avisos, pasta do download e etc.
 	 * @param ev - evento
 	 */
-	protected abstract void baixarClick(ActionEvent ev);
+	protected abstract void btnBaixarClick(ActionEvent ev);
 
 	/**
 	 * Pesquisa o vídeo ou áudio pelo nome e retorna até 20 opções 
@@ -201,7 +192,7 @@ public abstract class YoutubeForm extends JFrame {
 		btnModoNoite.addActionListener(this::btnModoNoiteClick);
 		checkVideo.addActionListener(this::checkVideoClick);
 		checkAudio.addActionListener(this::checkAudioClick);
-		btnBaixa.addActionListener(this::baixarClick);
+		btnBaixa.addActionListener(this::btnBaixarClick);
 		btnPesquisa.addActionListener(this::btnPesquisaClick);
 
 		txtLink.addMouseListener(new MouseAdapter() {
@@ -266,12 +257,12 @@ public abstract class YoutubeForm extends JFrame {
 
 	// METODOS ESPECIAIS
 	
-	public void setCont(int cont) {
-		this.cont = cont;
+	public void setCont(int contador) {
+		this.contador = contador;
 	}
 
 	public int getCont() {
-		return cont;
+		return contador;
 	}
 
 	/**

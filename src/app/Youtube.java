@@ -6,21 +6,20 @@ import java.io.IOException;
 
 import metodos.YoutubeArquivo;
 
-@SuppressWarnings("serial")
 public class Youtube extends YoutubeForm {
-	private String format, cmdLine;
+	private String format, cmdLineSaida;
 	private String[] links;
-	private boolean modificaBg = true;
+	private boolean modificaBgLabelResultado = true;
 	
 
 	@Override
 	protected void btnModoNoiteClick(ActionEvent ev) {
 		if (!btnModoNoite.isSelected()) {
 			setNoturno(false);
-			setCores(modificaBg);
+			setCores(modificaBgLabelResultado);
 		} else {
 			setNoturno(true);
-			setCores(modificaBg);
+			setCores(modificaBgLabelResultado);
 		}
 	}
 
@@ -45,16 +44,13 @@ public class Youtube extends YoutubeForm {
 	}
 
 	@Override
-	protected void baixarClick(ActionEvent ev) {
-		@SuppressWarnings("static-access")
-		Thread b = new Thread(() -> {
-			cmdLine = ""; 
+	protected void btnBaixarClick(ActionEvent ev) {
+		Thread download = new Thread(() -> {
+			cmdLineSaida = ""; 
 			String link = txtLink.getText();
 			int index = 0;
 
-			// Preparando o Download
 			lblResultado.setText(TEXTOS.getTextos(31));
-			System.out.println((IDIOMA.contains("português")?"Verificando...":"Verifying..."));
 			if ((isVideo() || isAudio()) && !lstPesquisa.isSelectionEmpty()) {
 				txtLink.setText(" Link");
 				index = lstPesquisa.getSelectedIndex();
@@ -62,28 +58,27 @@ public class Youtube extends YoutubeForm {
 			} else if (!isVideo() && !isAudio()) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 8));
 				lblResultado.setText(TEXTOS.getTextos(20));
-				modificaBg = false;
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			} else if (!lstPesquisa.isSelectedIndex(index) && !link.startsWith("https://www.youtube.com/watch?v=")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 8));
 				lblResultado.setText(TEXTOS.getTextos(19));
-				modificaBg = false;
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			}
 			
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
-				modificaBg = true;
-				setCores(modificaBg);
+				modificaBgLabelResultado = true;
+				setCores(modificaBgLabelResultado);
 				System.out.println("link: "+link);
 
-				// Configura o Download
 				lblResultado.setText(TEXTOS.getTextos(31));
-				modificaBg = true;
-				setCores(modificaBg);
+				modificaBgLabelResultado = true;
+				setCores(modificaBgLabelResultado);
 				lblResultado.setText(TEXTOS.getTextos(18));
-				System.out.println((IDIOMA.contains("português"))?"Baixando...":"Downloading...");
+
 				format = (isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]',\n" 
-				+ "'outtmpl': '%s' + title + '.mp4'}", pasta)                        // format video para o YoutubeDL
+				+ "'outtmpl': '%s' + title + '.mp4'}", pastaPrincipal)                        // format video para o YoutubeDL
 				:
 				String.format("{'format': 'bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp3',\n"
@@ -92,10 +87,9 @@ public class Youtube extends YoutubeForm {
 				+ "    'preferredcodec': 'mp3',\n" 
 				+ "    'preferredquality': '0'\n" 
 				+ "    }]\n" 
-				+ "}", pasta);                                                     
-
-				YoutubeArquivo arquivo = new YoutubeArquivo("/tmp/baixar");
-				arquivo.criar(String.format(
+				+ "}", pastaPrincipal);                                                     
+				YoutubeArquivo scriptBaixar = new YoutubeArquivo("/tmp/baixar");
+				scriptBaixar.criar(String.format(
 						"#!/usr/bin/python3\n" 
 				+ "import youtube_dl\n\n"
 				+ "" 
@@ -110,50 +104,43 @@ public class Youtube extends YoutubeForm {
 				+ "    ydl.download([link])",
 				link, format));
 
-				// Executa o download
 				try {
-					cmdLine = cmd.comando("python3 /tmp/baixar");
+					cmdLineSaida = cmd.comando("python3 /tmp/baixar");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(cmdLine);
 			}
 
-			// Mostra os resultados do download
-			if (cmdLine.contains("[download] 100%")) {
+			if (cmdLineSaida.contains("[download] 100%")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
-				lblResultado.setText(TEXTOS.getTextos(22) + String.format("<html><center><br/>%s</center></html>", pasta));
-				modificaBg = false;
-				System.out.println((IDIOMA.contains("português"))?"Concluído!":"Done!");
+				lblResultado.setText(TEXTOS.getTextos(22));
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			} else {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(21));
-				modificaBg = false;
-				System.out.println((IDIOMA.contains("português"))?"Concluído!":"Done!");
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			}
 		});
-		b.start();
+		download.start();
 	}
 
 	@Override
 	protected void btnPesquisaClick(ActionEvent ev) {
 		Thread pesquisa = new Thread(() -> {
 			if (!lstTitulos.isEmpty()) lstTitulos.removeAllElements();
+
 			links = new String[20];
-			modificaBg = true;
-			setCores(modificaBg);
+			String[] lstTitulosTmp = null;
+
+			modificaBgLabelResultado = true;
+			setCores(modificaBgLabelResultado);
 			lblResultado.setText(TEXTOS.getTextos(16));
-			System.out.println((IDIOMA.contains("português")?"Pesquisando...":"Searching..."));
-			String[] lstTits = null;
 			
-			// Pesquisando
 			try {
-				// Criando o arquivo temporario
-				YoutubeArquivo ytTitulos = new YoutubeArquivo("/tmp/youtubeSearch");
-				ytTitulos.criar(String.format("#!/usr/bin/python3\n"
+				YoutubeArquivo scriptTitulosLinks = new YoutubeArquivo("/tmp/youtubeSearch");
+				scriptTitulosLinks.criar(String.format("#!/usr/bin/python3\n"
 						+ "from youtube_search import YoutubeSearch\n\n"
 						+ ""
 						+ "texto = '%s'\n"
@@ -166,46 +153,41 @@ public class Youtube extends YoutubeForm {
 						+ "      print('https://www.youtube.com'+i['url_suffix'])", 
 						txtPesquisa.getText(), links.length));
 				
-				// Executando o arquivo temporario e pegando os títulos e links.
-				cmdLine = cmd.comando("python3 /tmp/youtubeSearch");
-				System.out.println(cmdLine);
-				if (!cmdLine.startsWith("Traceback (most recent call last):") && cmdLine.length() > 0) {
-					lstTits = cmdLine.split("\n");
-					// Adicionando os títulos na lstTitulos e os links no vetor links[].
-					int c = 0;
-					for (int i = 0; i < lstTits.length; i++) {
-						if (i % 2 == 0)lstTitulos.addElement(lstTits[i]);
+				cmdLineSaida = cmd.comando("python3 /tmp/youtubeSearch");
+
+				if (!cmdLineSaida.startsWith("Traceback (most recent call last):") && cmdLineSaida.length() > 0) {
+					lstTitulosTmp = cmdLineSaida.split("\n");
+					contador = 0;
+					for (int i = 0; i < lstTitulosTmp.length; i++) {
+						if (i % 2 == 0)lstTitulos.addElement(lstTitulosTmp[i]);
 						else if (i % 2 == 1) {
-							links[c] = lstTits[i];
-							c++;
+							links[contador] = lstTitulosTmp[i];
+							contador++;
 						}
 						cmd.sleep(0.2);
 					}	
 				}
 				
-			// Mostrando os resultados no lblResultado.
 			} catch (Exception e) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(17));
-				modificaBg = false;
-				System.out.println((IDIOMA.contains("português"))?"Falhou!":"Failed!");
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			}
-			if (!lstTitulos.isEmpty() || !(lstTitulos != null)) {
+			if (!lstTitulos.isEmpty()) {
 				lblResultado.setText(TEXTOS.getTextos(25));
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
-				modificaBg = false;
-				System.out.println((IDIOMA.contains("português"))?"Concluído!":"Done!");
+				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
 			} else {
 				lblResultado.setText(TEXTOS.getTextos(17));
-				System.out.println((IDIOMA.contains("português"))?"Falhou!":"Failed!");
+				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
+				modificaBgLabelResultado = false;
 			}
 		});
 		pesquisa.start();
 	}
 	
-
 	@Override
 	protected void txtLinkMouseClick(MouseEvent ev) {
 		txtLink.selectAll();

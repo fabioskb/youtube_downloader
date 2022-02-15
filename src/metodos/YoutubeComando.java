@@ -37,7 +37,6 @@ public class YoutubeComando {
 		try {
 			Thread.sleep((long) (segundos*1000));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
