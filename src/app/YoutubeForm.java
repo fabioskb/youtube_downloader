@@ -4,19 +4,19 @@ import metodos.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class YoutubeForm extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	protected JLabel lblBanner;
 	protected JLabel lblDescricao;
@@ -32,6 +32,7 @@ public abstract class YoutubeForm extends JFrame {
 
 	protected JList<String> lstPesquisa;
 	protected DefaultListModel<String> lstTitulos = new DefaultListModel<String>();
+	protected List<String> lstDescricao = new LinkedList<>();
 	protected JButton btnBaixa;
 	
 	protected JLabel lblResultado;
@@ -182,8 +183,23 @@ public abstract class YoutubeForm extends JFrame {
 	/**
 	 * Ao clicar na caixa de texto da pesquisa com o mouse seleciona o texto.
 	 * @param ev - evento
+	 * 
 	 */
 	protected abstract void txtPesquisaMouseClick(MouseEvent ev);
+
+	/**
+	 * Muda o Tooltip da lstPesquisa quando ocorre um AncestorEvent
+	 * @param ev
+	 */
+	protected abstract void lstPesquisaAncestor(AncestorEvent ev);
+
+	/**
+	 * Muda o Tooltip da lstPesquisa de acordo com a seleção do item na lista atraves do mouseClick.
+	 * @param ev
+	 */
+	protected abstract void lstPesquisaMouseClickItem(MouseEvent ev);
+
+
 	/**
 	 * Chama todos os eventos de clique da aplicação
 	 * em botões, caixas de texto, labels e etc.
@@ -204,6 +220,31 @@ public abstract class YoutubeForm extends JFrame {
 		txtPesquisa.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent ev) {
 				txtPesquisaMouseClick(ev);
+			}
+		});
+
+		lstPesquisa.addAncestorListener(new AncestorListener() {
+
+			@Override
+			public void ancestorAdded(AncestorEvent event) {
+				lstPesquisaAncestor(event);
+			}
+
+			@Override
+			public void ancestorMoved(AncestorEvent event) {
+				lstPesquisaAncestor(event);
+			}
+
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {
+				lstPesquisaAncestor(event);
+			}
+			
+		});  
+
+		lstPesquisa.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent ev) {
+				lstPesquisaMouseClickItem(ev);
 			}
 		});
 	}

@@ -15,14 +15,15 @@ public class YoutubeText {
 			
 			"<html><center>Vídeo</center></html>",              // [2] Vídeo
 			"<html><center>Áudio</center></html>",              // [3] Áudio
-			"<html><center>Baixar<br/>Direto</center></html>",      // [4] Botão baixar direto
+			"<html><center>Baixar<br/>Direto</center></html>",  // [4] Botão baixar direto
 			"<html><center>Pesquisar</center></html>",          // [5] Botão Pesquisar
 			"<html><center>Baixar</center></html>",             // [6] Botão Baixar
 			" Link",								            // [7] Texto de txtLink
 			" Nome", 								            // [8] Texto de txtPesquisa
 			"<html>Ativa o Modo Noturno</html>",                // [9] Botão ModoNoturno ToolTip
 			
-			"<html>Insira um link válido do YouTube</html>",    // [10] txtLink ToolTip
+			"<html>Insira um link válido do YouTube e "
+			+ "clique no botão Baixar</html>",                  // [10] txtLink ToolTip
 			"<html>Insira um nome para buscar</html>",          // [11] txtPesquisa ToolTip
 			"<html>Baixa através de um link válido</html>",     // [12] btnBaixaDireto ToolTip
 			
@@ -97,7 +98,8 @@ public class YoutubeText {
 			" Name",							             // [8] txtSearch
 			"<html>Enable Night Mode</html>",                // [9] Botão ModoNoturno ToolTip
 			
-			"<html>Please enter a valid YouTube link</html>",// [10] txtLink ToolTip
+			"<html>Please enter a valid YouTube link" 
+			+ " and click the download button</html>",       // [10] txtLink ToolTip
 			"<html>Enter a name to search</html>",           // [11] txtPesquisa ToolTip
 			"<html>Download via a valid link</html>",        // [12] btnBaixaDireto ToolTip
 			

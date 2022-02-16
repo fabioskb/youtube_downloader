@@ -31,11 +31,6 @@ public class YoutubeArquivo {
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
-        try {
-            this.escrever = new BufferedWriter(new FileWriter(this.arq));
-        } catch (IOException ex) {
-        }
-        
     }
     
     // Métodos personalizados
@@ -73,6 +68,7 @@ public class YoutubeArquivo {
         try {
             l = Files.readAllLines(this.arq.toPath());
         } catch (IOException ex) {
+            System.out.println(ex);
         }
         return l;
     }
@@ -83,6 +79,11 @@ public class YoutubeArquivo {
      * @param conteudo String de conteúdo.
      */
     public void editar(String conteudo) {
+        try {
+            this.escrever = new BufferedWriter(new FileWriter(this.arq));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             this.escrever.append(conteudo);
             this.escrever.close();
@@ -97,6 +98,11 @@ public class YoutubeArquivo {
      * @param conteudo Lista de conteúdos.
      */
     public void editar(List<String> conteudo) {
+        try {
+            this.escrever = new BufferedWriter(new FileWriter(this.arq));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         for (String item : conteudo) {
             try {
                 this.escrever.append(item);

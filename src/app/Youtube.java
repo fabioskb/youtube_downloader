@@ -3,6 +3,7 @@ package app;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import javax.swing.event.AncestorEvent;
 
 import metodos.YoutubeArquivo;
 
@@ -10,8 +11,8 @@ public class Youtube extends YoutubeForm {
 	private String format, cmdLineSaida;
 	private String[] links;
 	private boolean modificaBgLabelResultado = true;
-	
-
+	private int index = 0;
+			
 	@Override
 	protected void btnModoNoiteClick(ActionEvent ev) {
 		if (!btnModoNoite.isSelected()) {
@@ -48,7 +49,6 @@ public class Youtube extends YoutubeForm {
 		Thread download = new Thread(() -> {
 			cmdLineSaida = ""; 
 			String link = txtLink.getText();
-			int index = 0;
 
 			lblResultado.setText(TEXTOS.getTextos(31));
 			if ((isVideo() || isAudio()) && !lstPesquisa.isSelectionEmpty()) {
@@ -72,8 +72,6 @@ public class Youtube extends YoutubeForm {
 				setCores(modificaBgLabelResultado);
 				System.out.println("link: "+link);
 
-				lblResultado.setText(TEXTOS.getTextos(31));
-				modificaBgLabelResultado = true;
 				setCores(modificaBgLabelResultado);
 				lblResultado.setText(TEXTOS.getTextos(18));
 
@@ -101,13 +99,13 @@ public class Youtube extends YoutubeForm {
 				+ "options = format\n\n" 
 				+ ""				
 				+ "with youtube_dl.YoutubeDL(options) as ydl:\n" 
-				+ "    ydl.download([link])",
+				+ "    ydl.download([link])\n",
 				link, format));
 
 				try {
 					cmdLineSaida = cmd.comando("python3 /tmp/baixar");
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 
@@ -130,6 +128,8 @@ public class Youtube extends YoutubeForm {
 	protected void btnPesquisaClick(ActionEvent ev) {
 		Thread pesquisa = new Thread(() -> {
 			if (!lstTitulos.isEmpty()) lstTitulos.removeAllElements();
+			if (!lstDescricao.isEmpty()) lstDescricao.clear();
+			YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt");
 
 			links = new String[20];
 			String[] lstTitulosTmp = null;
@@ -139,22 +139,31 @@ public class Youtube extends YoutubeForm {
 			lblResultado.setText(TEXTOS.getTextos(16));
 			
 			try {
+				arquivoDesc.deletar();
 				YoutubeArquivo scriptTitulosLinks = new YoutubeArquivo("/tmp/youtubeSearch");
 				scriptTitulosLinks.criar(String.format("#!/usr/bin/python3\n"
+				        + "import os, time\n"
 						+ "from youtube_search import YoutubeSearch\n\n"
 						+ ""
 						+ "texto = '%s'\n"
+						+ "arquivo = '/tmp/descricoes.txt'\n"
 						+ "results = YoutubeSearch(texto, %d)\n\n"
 						+ ""
 						+ "for i in results.videos:\n"
 						+ "  for k, v in i.items():\n"
 						+ "    if k == 'title':\n"
 						+ "      print(v)\n"
-						+ "      print('https://www.youtube.com'+i['url_suffix'])", 
+						+ "      print('https://www.youtube.com'+i['url_suffix'])\n"
+						+ "      with open(arquivo, 'a' if os.path.isfile(arquivo) else 'w') as arqDesc:\n"
+						+ "        arqDesc.write(f'Channel: {i[\"channel\"]}, Duration: {i[\"duration\"]}, Views: {i[\"views\"]}, Publish_time: {i[\"publish_time\"]}\\n')\n", 
 						txtPesquisa.getText(), links.length));
 				
 				cmdLineSaida = cmd.comando("python3 /tmp/youtubeSearch");
 
+				for (String line : arquivoDesc.listar()) {
+					if (!line.equals(null)) lstDescricao.add(line);
+				}
+				
 				if (!cmdLineSaida.startsWith("Traceback (most recent call last):") && cmdLineSaida.length() > 0) {
 					lstTitulosTmp = cmdLineSaida.split("\n");
 					contador = 0;
@@ -167,7 +176,8 @@ public class Youtube extends YoutubeForm {
 						cmd.sleep(0.2);
 					}	
 				}
-				
+
+
 			} catch (Exception e) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(17));
@@ -197,5 +207,21 @@ public class Youtube extends YoutubeForm {
 	protected void txtPesquisaMouseClick(MouseEvent ev) {
 		txtPesquisa.selectAll();
 	}
+
+	@Override
+	protected void lstPesquisaAncestor(AncestorEvent ev) {
+		if (!lstPesquisa.isSelectionEmpty()) {
+			index = lstPesquisa.getSelectedIndex();
+			lstPesquisa.setToolTipText("<html>"+lstDescricao.get(index)+"</html>");
+		}
+	}
 	
+	@Override
+	protected void lstPesquisaMouseClickItem(MouseEvent ev) {
+		if (!lstPesquisa.isSelectionEmpty()) {
+			index = lstPesquisa.getSelectedIndex();
+			lstPesquisa.setToolTipText("<html>"+lstDescricao.get(index)+"</html>");
+			
+		}
+	}
 }
