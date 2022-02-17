@@ -18,7 +18,8 @@ public class YoutubeText {
 			"<html><center>Baixar<br/>Direto</center></html>",  // [4] Botão baixar direto
 			"<html><center>Pesquisar</center></html>",          // [5] Botão Pesquisar
 			"<html><center>Baixar</center></html>",             // [6] Botão Baixar
-			" Link",								            // [7] Texto de txtLink
+			"LINK -> ex: https://www.youtube.com/watch?v"
+			+ "=CdRhjkkbD",				                        // [7] Texto de txtLink
 			" Nome", 								            // [8] Texto de txtPesquisa
 			"<html>Ativa o Modo Noturno</html>",                // [9] Botão ModoNoturno ToolTip
 			
@@ -94,7 +95,8 @@ public class YoutubeText {
 			"<html><center>Direct<br/>Download</center></html>", // [4] Download Button
 			"<html><center>Search</center></html>",          // [5] Search Button
 			"<html><center>Download</center></html>",        // [6] Download Button
-			" Link",			   				             // [7] txtLink
+			"LINK -> eg. https://www.youtube.com/watch?v"
+			+ "=CdRhjkkbD",                                  // [7] txtLink
 			" Name",							             // [8] txtSearch
 			"<html>Enable Night Mode</html>",                // [9] Botão ModoNoturno ToolTip
 			

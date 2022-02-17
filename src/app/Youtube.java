@@ -4,14 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.event.AncestorEvent;
-
 import metodos.YoutubeArquivo;
 
 public class Youtube extends YoutubeForm {
 	private String format, cmdLineSaida;
 	private String[] links;
 	private boolean modificaBgLabelResultado = true;
-	private int index = 0;
+	private int index = 20;
 			
 	@Override
 	protected void btnModoNoiteClick(ActionEvent ev) {
@@ -52,7 +51,7 @@ public class Youtube extends YoutubeForm {
 
 			lblResultado.setText(TEXTOS.getTextos(31));
 			if ((isVideo() || isAudio()) && !lstPesquisa.isSelectionEmpty()) {
-				txtLink.setText(" Link");
+				txtLink.setText(TEXTOS.getTextos(7));
 				index = lstPesquisa.getSelectedIndex();
 				link = links[index];
 			} else if (!isVideo() && !isAudio()) {
@@ -132,7 +131,7 @@ public class Youtube extends YoutubeForm {
 			YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt");
 
 			links = new String[20];
-			String[] lstTitulosTmp = null;
+			String[] lstTitulosLinksTmp = null;
 
 			modificaBgLabelResultado = true;
 			setCores(modificaBgLabelResultado);
@@ -165,15 +164,15 @@ public class Youtube extends YoutubeForm {
 				}
 				
 				if (!cmdLineSaida.startsWith("Traceback (most recent call last):") && cmdLineSaida.length() > 0) {
-					lstTitulosTmp = cmdLineSaida.split("\n");
+					lstTitulosLinksTmp = cmdLineSaida.split("\n");
 					contador = 0;
-					for (int i = 0; i < lstTitulosTmp.length; i++) {
-						if (i % 2 == 0)lstTitulos.addElement(lstTitulosTmp[i]);
+					for (int i = 0; i < lstTitulosLinksTmp.length; i++) {
+						if (i % 2 == 0) lstTitulos.addElement(lstTitulosLinksTmp[i]);
 						else if (i % 2 == 1) {
-							links[contador] = lstTitulosTmp[i];
+							links[contador] = lstTitulosLinksTmp[i];
 							contador++;
 						}
-						cmd.sleep(0.2);
+						cmd.sleep(0.1);
 					}	
 				}
 
@@ -218,10 +217,12 @@ public class Youtube extends YoutubeForm {
 	
 	@Override
 	protected void lstPesquisaMouseClickItem(MouseEvent ev) {
-		if (!lstPesquisa.isSelectionEmpty()) {
+		if (!lstPesquisa.isSelectionEmpty() && !lstPesquisa.isSelectedIndex(index)) {
 			index = lstPesquisa.getSelectedIndex();
 			lstPesquisa.setToolTipText("<html>"+lstDescricao.get(index)+"</html>");
-			
+		} else {
+			lstPesquisa.clearSelection();	
+			index = 20;
 		}
 	}
 }
