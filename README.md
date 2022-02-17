@@ -4,6 +4,7 @@
 * **Support only for Linux amd64 (for now)**
 * **Option for night mode**
 * **Choose between audio or video to download**
+* **Description of each item in the list via ToolTip when selecting with the mouse**
 * **Install all dependencies on the first boot of the application**
 
 # Screenshots

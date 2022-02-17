@@ -4,10 +4,11 @@ public class YoutubeText {
 	private String idioma;
 	private final String[] txts = {
 			"<html><center>"
-			+ "Idiomas: pt_BR, En;<br/>"
-			+ "Baixa vídeos e áudios do YouTube;<br/>"
-			+ "Opções de escolha: baixar direto pelo link ou pesquisar pelo nome;<br/>"
-			+ "Retorno de até 20 items na pesquisa;<br/>"
+			+ "Idiomas: pt_BR, En;<br>"
+			+ "Baixa vídeos e áudios do YouTube;<br>"
+			+ "Opções de escolha: baixar direto pelo link ou pesquisar pelo nome;<br>"
+			+ "Retorno de até 20 items na pesquisa;<br>"
+			+ "Descrição de cada item da lista via ToolTip ao selecionar com o mouse;<br>"
 			+ "Modo Noturno"
 			+ "</center></html>",    							// [0] Descrição
 			
@@ -81,10 +82,11 @@ public class YoutubeText {
 	};
 	private final String[] enTxts = {
 			"<html><center>"
-			+ "Languages: pt_BR, En;<br/>"
-			+ "Downloads videos and audios from YouTube;<br/>"
-			+ "Choice options: download directly from the link or search by name;<br/>"
-			+ "Return up to 20 items in the search;<br/>"
+			+ "Languages: pt_BR, En;<br>"
+			+ "Downloads videos and audios from YouTube;<br>"
+			+ "Choice options: download directly from the link or search by name;<br>"
+			+ "Return up to 20 items in the search;<br>"
+			+ "Description of each item in the list via ToolTip when selecting with the mouse;<br>"
 			+ "Night Mode"
 			+ "</center></html>",                            // [0] Description
 

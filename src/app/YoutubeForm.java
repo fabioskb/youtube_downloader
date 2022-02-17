@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -65,6 +66,8 @@ public abstract class YoutubeForm extends JFrame {
 	private final YoutubeImage IMAGEM = new YoutubeImage();
 	protected final YoutubeCores CORES = new YoutubeCores();
 	protected final String IDIOMA = Locale.getDefault().getDisplayLanguage();
+	private final Calendar CALENDARIO = Calendar.getInstance(Locale.getDefault());
+	protected final int HORA = CALENDARIO.get(Calendar.HOUR_OF_DAY);
 	protected final YoutubeText TEXTOS = new YoutubeText(IDIOMA);
 	protected final YoutubeComando cmd = new YoutubeComando();
 
@@ -134,10 +137,12 @@ public abstract class YoutubeForm extends JFrame {
 		this.getContentPane().add(getPnlRodape(), BorderLayout.SOUTH);
 
 		this.checkVideo.setSelected(true);
-		this.video = true;
+		this.setVideo(true);
 
-		
-		//this.pack();
+		if (this.HORA > 18 || this.HORA < 5) {
+			this.setNoturno(true);
+			this.btnModoNoite.setSelected(true);
+		}
 	}
 		
 	// METODOS CUSTOMIZADOS

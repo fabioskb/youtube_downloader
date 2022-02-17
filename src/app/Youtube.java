@@ -3,6 +3,8 @@ package app;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+
+import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 import metodos.YoutubeArquivo;
 
@@ -220,6 +222,8 @@ public class Youtube extends YoutubeForm {
 		if (!lstPesquisa.isSelectionEmpty() && !lstPesquisa.isSelectedIndex(index)) {
 			index = lstPesquisa.getSelectedIndex();
 			lstPesquisa.setToolTipText("<html>"+lstDescricao.get(index)+"</html>");
+			ToolTipManager.sharedInstance().mouseMoved(ev);
+			ToolTipManager.sharedInstance().setDismissDelay(6000);
 		} else {
 			lstPesquisa.clearSelection();	
 			index = 20;
