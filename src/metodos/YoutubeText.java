@@ -9,7 +9,7 @@ public class YoutubeText {
 			+ "Opções de escolha: baixar direto pelo link ou pesquisar pelo nome;<br>"
 			+ "Retorno de até 20 items na pesquisa;<br>"
 			+ "Descrição de cada item da lista via ToolTip ao selecionar com o mouse;<br>"
-			+ "Modo Noturno"
+			+ "Modo Noturno (Automático e Manual)"
 			+ "</center></html>",    							// [0] Descrição
 			
 			"<html><center>Modo<br/>Noturno</center></html>",   // [1] Botão Modo noite
@@ -87,7 +87,7 @@ public class YoutubeText {
 			+ "Choice options: download directly from the link or search by name;<br>"
 			+ "Return up to 20 items in the search;<br>"
 			+ "Description of each item in the list via ToolTip when selecting with the mouse;<br>"
-			+ "Night Mode"
+			+ "Night Mode (Automatic and Manual)"
 			+ "</center></html>",                            // [0] Description
 
 			"<html><center>Night<br/>Mode</center></html>",  // [1] Night Mode Button
