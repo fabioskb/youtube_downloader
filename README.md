@@ -1,18 +1,19 @@
 # YouTube Downloader
 ### Download videos and audios from YouTube.
-* **You can download directly through the link or search by name. The search returns 20 options that can be downloaded**
-* **Support only for Linux amd64 (for now)**
-* **Option for night mode**
-* **Automatically activated night mode if the time is between 18:00 and 5:00 hours**
-* **Choose between audio or video to download**
-* **Description of each item in the list via ToolTip when selecting with the mouse**
-* **Install all dependencies on the first boot of the application**
+* **You can download directly through the link or search by name.** 
+* **The search returns 20 options that can be downloaded.**
+* **Support only for Linux amd64 (for now).**
+* **Option for night mode.**
+* **Automatically activated night mode if the time is between 18:00 and 5:00 hours.**
+* **Choose between audio or video to download.**
+* **Description of each item in the list via ToolTip when selecting with the mouse (channel, duration, views and publish_time).**
+* **Install all dependencies on the first boot of the application.**
 
 # Screenshots
 ## Night Mode
-![ydlNightMode](./screenshots/YoutubeDownloader_night_mode.png "Night Mode YouTube Downloader")
+![ydlNightMode](./screenshots/youtube_downloader_night_mode.png "Night Mode YouTube Downloader")
 ## Default
-![ydl](./screenshots/YoutubeDownloader.png "Default YouTube Downloader")
+![ydl](./screenshots/youtube_downloader.png "Default YouTube Downloader")
 
 # Requirements
 * wget (optional to download the .deb package)
