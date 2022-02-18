@@ -76,7 +76,7 @@ public class Youtube extends YoutubeForm {
 				setCores(modificaBgLabelResultado);
 				lblResultado.setText(TEXTOS.getTextos(18));
 
-				format = (isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]',\n" 
+				format = (isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", pastaPrincipal)                        // format video para o YoutubeDL
 				:
 				String.format("{'format': 'bestaudio[ext=m4a]',\n" 
