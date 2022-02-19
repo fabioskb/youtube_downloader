@@ -103,11 +103,7 @@ public class Youtube extends YoutubeForm {
 				+ "    ydl.download([link])\n",
 				link, format));
 
-				try {
-					cmdLineSaida = cmd.comando("python3 /tmp/baixar");
-				} catch (IOException e) {
-					System.out.println(e);
-				}
+				cmdLineSaida = cmd.comando("python3 /tmp/baixar");
 			}
 
 			if (cmdLineSaida.contains("[download] 100%")) {

@@ -26,11 +26,6 @@ public class YoutubeArquivo {
     public YoutubeArquivo(String path) {
         this.caminho = path;
         this.arq = new File(this.caminho);
-        try {
-            this.arq1 = new Formatter(this.caminho);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-        }
     }
     
     // Métodos personalizados
@@ -39,6 +34,11 @@ public class YoutubeArquivo {
      * @param arquivoConteudo Conteúdo do arquivo.
      */
     public void criar(String arquivoConteudo) {
+        try {
+            this.arq1 = new Formatter(this.caminho);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         this.arq1.format(arquivoConteudo);
         this.arq1.close();
     }

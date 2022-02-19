@@ -57,9 +57,11 @@ public class YoutubeText {
 			
 			"<html><center>Pesquisa concluída!&nbsp;&nbsp;</center></html>",     // [25] lblResultado pesquisa concluída
 			
-			"<html><center>BEM-VINDO AO YOUTUBE DOWNLOADER<br/>Será"
-			+ " necessário instalar dependências.<br/>"
-			+ "Tecle OK e aguarde!</center></html>",                  // [26] JOptionPane - Boas vindas ao app
+			"<html><center><h1>BEM-VINDO AO YOUTUBE DOWNLOADER</h1><br>"
+			+ "As dependências não foram encontradas<br>"
+			+ "Será necessário instalar.<br>"
+			+ "Tecle OK e aguarde a instalação!<br><br><strong>É necessario uma conexão "
+			+ "estável com a internet.</strong></center></html>",      // [26] JOptionPane - Boas vindas ao app
 
 			"<html><center>Não foi possível instalar as dependências<br/>"
 			+ " verifique a conexão com a internet e tente novamente! <br/>"
@@ -133,9 +135,11 @@ public class YoutubeText {
 			+ "</html>",                                           // [24] ToolTip search result list
 			"<html><center>Searching Done!&nbsp;&nbsp;</center></html>",  // [25] lblResultado pesquisa concluída
 			
-			"<html><center>WELCOME TO YOUTUBE DOWNLOADER<br/>It will be "
-			+ "need to install dependencies.<br/>"
-			+ "Press OK and wait!</center></html>",            // [26] JOptionPane Boas vindas
+			"<html><center><h1>WELCOME TO YOUTUBE DOWNLOADER</h1><br>"
+			+ "The dependencies were not found<br>"
+			+ "You will need to install.<br>"
+			+ "Press OK and wait to install!<br><br><strong>A stable "
+			+ "internet connection is required</strong></center></html>", // [26] JOptionPane Boas vindas
 			
 			"<html><center>Could not install dependencies<br/>"
 			+ "check the internet connection and try again!<br/>"
@@ -145,7 +149,7 @@ public class YoutubeText {
 			+ "success!<br/>Press OK and <strong>LET'S "
 			+ "GO!</strong></center></html>",                  // [28] JOptionPane - Installation of dependencies completed
 			
-			"<html><center><h3>pip is not installed!</h3><br/>"
+			"<html><center><h3>pip is not installed!</h3>"
 			+ "Install it and try again.</center></html>",     // [29] JOptionPane - Error pip is not installed.
 
 			"<html><center>You have already downloaded this file!"

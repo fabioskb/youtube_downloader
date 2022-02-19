@@ -57,7 +57,9 @@ public abstract class YoutubeForm extends JFrame {
 
 	private boolean noturno, video, audio;
 	protected String pastaPrincipal, titulo;
+	private String installYoutubeSearch, installYoutubeDl;
 	protected int contador;
+	private YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
 
 	private final String usuario = System.getProperty("user.name");
 	private final String sistema = System.getProperty("os.name");
@@ -75,13 +77,27 @@ public abstract class YoutubeForm extends JFrame {
 	 * Construtor
 	 */
 	public YoutubeForm() {
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		if (this.sistema.contains("Windows")) {
+			this.pastaPrincipal = "C:\\users\\" + usuario + "\\YDownloads\\";
+		} else {
+			this.pastaPrincipal = "/home/" + usuario + "/YDownloads/";
+		}
+		this.diretorioPadrao = new YoutubeArquivo(this.pastaPrincipal);
+		if (!diretorioPadrao.getArq().isDirectory()) {
+			diretorioPadrao.getArq().mkdir();
+		}
+
+		this.arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check");		
 		try {
 			this.inicializar();
-		} catch (IOException e) {
-			e.printStackTrace();
+			this.setCores(true);
+			this.eventos();
+		} catch (NullPointerException e) {
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, (IDIOMA.contains("português")) ? "<html><center>Falhou!<br>Clique em OK e inicie a aplicação novamente</center></html>":"<html><center>Failed!<br>Click OK and start the application again</center></html>", "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
-		this.setCores(true);
-		this.eventos();
 	}
 
 	/**
@@ -89,61 +105,58 @@ public abstract class YoutubeForm extends JFrame {
 	 * inicializa todos os componentes da aplicação (se possível).
 	 * @throws IOException
 	 */
-	private void inicializar() throws IOException {
-		if (this.sistema.contains("Windows"))
-			this.pastaPrincipal = "C:\\users\\" + usuario + "\\YDownloads\\";
-		else
-			this.pastaPrincipal = "/home/" + usuario + "/YDownloads/";
-
-		File diretorioPadrao = new File(this.pastaPrincipal);
-		if (!diretorioPadrao.isDirectory()) diretorioPadrao.mkdir();
-		
+	private void inicializar() {
 		String youtubeDlSaida = cmd.comando("pip show youtube_dl");
 		String youtubeSearchSaida = cmd.comando("pip show youtube_search");
-		YoutubeArquivo arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check");
 
 		if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
-		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && arquivoChecaPrograma.getArq().isFile()) arquivoChecaPrograma.deletar();
-		else arquivoChecaPrograma.criar("Checado!");
+		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && arquivoChecaPrograma.getArq().isFile()) {
+			arquivoChecaPrograma.deletar();
+		} else {
+			arquivoChecaPrograma.criar("Checado!");
+		}
 
 		if (!arquivoChecaPrograma.getArq().isFile()) {
 			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
-			String installYoutubeDl = cmd.comando("pip install youtube-dl");
-			String installYoutubeSearch = cmd.comando("pip install youtube-search");
-			if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl") 
-					|| installYoutubeSearch.contains("ERROR: Could not find a version that satisfies the requirement youtube-search")) {
+			installYoutubeDl = cmd.comando("pip install youtube-dl");
+			installYoutubeSearch = cmd.comando("pip install youtube-search");
+			if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") || installYoutubeSearch.equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
 				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			} else {
 				arquivoChecaPrograma.criar("Checado!");
 				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+				youtubeDlSaida = "Name: youtube-dl";
+				youtubeSearchSaida = "Name: youtube-search";
 			}
 		}
-		
-		this.setTitle("YouTube Downloader");
-		this.setResizable(true);
-		this.setSize(920, 680);
-		this.setLocationRelativeTo(null);
-		this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		this.getContentPane().setLayout(new BorderLayout());
+		if (youtubeDlSaida.startsWith("Name: youtube-dl") || youtubeSearchSaida.startsWith("Name: youtube-search")) {
+			this.setTitle("YouTube Downloader");
+			this.setResizable(true);
+			this.setSize(920, 680);
+			this.setLocationRelativeTo(null);
+			this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
 
-		this.getContentPane().add(getPnlTopo(), BorderLayout.NORTH);
-		this.getContentPane().add(getPnlEsquerda(), BorderLayout.WEST);
-		this.getContentPane().add(getPnlCentro(), BorderLayout.CENTER);
-		this.getContentPane().add(getPnlRodape(), BorderLayout.SOUTH);
+			this.getContentPane().setLayout(new BorderLayout());
 
-		this.checkVideo.setSelected(true);
-		this.setVideo(true);
+			this.getContentPane().add(getPnlTopo(), BorderLayout.NORTH);
+			this.getContentPane().add(getPnlEsquerda(), BorderLayout.WEST);
+			this.getContentPane().add(getPnlCentro(), BorderLayout.CENTER);
+			this.getContentPane().add(getPnlRodape(), BorderLayout.SOUTH);
 
-		if (this.HORA > 18 || this.HORA < 5) {
-			this.setNoturno(true);
-			this.btnModoNoite.setSelected(true);
+			this.checkVideo.setSelected(true);
+			this.setVideo(true);
+
+			if (this.HORA >= 18 || this.HORA <= 5) {
+				this.setNoturno(true);
+				this.btnModoNoite.setSelected(true);
+			}
 		}
 	}
+	
 		
 	// METODOS CUSTOMIZADOS
 	

@@ -4,9 +4,9 @@ import java.io.*;
 
 public class YoutubeComando {
 	private final Runtime RUN = Runtime.getRuntime();
-	private Process pro;
-	private BufferedReader read;
-	private String saida, line;
+	private Process pro, pro2;
+	private BufferedReader read, read2;
+	private String saida, saidaFinal, line;
 	
 	/**
 	 * Executa e retorna a saida do comando.
@@ -15,18 +15,32 @@ public class YoutubeComando {
 	 * @return (String) saida do comando
 	 * @throws IOException
 	 */
-	public String comando(String command) throws IOException {
-		pro = RUN.exec(command);
-		read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+
+	 public String comando(String command) {
 		saida = "";
 		line = null;
+		
+		try {
+			pro = RUN.exec(command);
+			read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+			read2 = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+		
+			while ((line=read.readLine()) != null) {
+				saida += line + "\n";
+			} if (line == null || saida == "") {
+				while ((line=read2.readLine()) != null) {
+					saida += line + "\n";
+				}
+			}
+		
+			read.close();
+			read2.close();	
 
-		while ((line=read.readLine())!=null) {
-			saida += line + "\n";
+			return saida;
+		}catch (IOException e) {
+			saida = "command not found";
+			return saida;
 		}
-		read.close();
-
-		return saida;
 	}
 	
 	/**
@@ -39,6 +53,10 @@ public class YoutubeComando {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void destruir() {
+		RUN.exit(0);
 	}
 }
 
