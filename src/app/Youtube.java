@@ -111,7 +111,7 @@ public class Youtube extends YoutubeForm {
 				lblResultado.setText(TEXTOS.getTextos(22));
 				modificaBgLabelResultado = false;
 				Thread.currentThread().stop();
-			} else {
+			} else if (!cmdLineSaida.equals("command not found")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(21));
 				modificaBgLabelResultado = false;
@@ -161,17 +161,20 @@ public class Youtube extends YoutubeForm {
 					if (!line.equals(null)) lstDescricao.add(line);
 				}
 				
-				if (!cmdLineSaida.startsWith("Traceback (most recent call last):") && cmdLineSaida.length() > 0) {
+				if (!cmdLineSaida.startsWith("Traceback (most recent call last):") || !cmdLineSaida.startsWith("command not found") && cmdLineSaida.length() > 0) {
 					lstTitulosLinksTmp = cmdLineSaida.split("\n");
 					contador = 0;
-					for (int i = 0; i < lstTitulosLinksTmp.length; i++) {
-						if (i % 2 == 0) lstTitulos.addElement(lstTitulosLinksTmp[i]);
-						else if (i % 2 == 1) {
-							links[contador] = lstTitulosLinksTmp[i];
-							contador++;
-						}
-						cmd.sleep(0.1);
-					}	
+					if (!lstTitulosLinksTmp[0].equals("command not found")) {
+						for (int i = 0; i < lstTitulosLinksTmp.length; i++) {
+							if (i % 2 == 0) lstTitulos.addElement(lstTitulosLinksTmp[i]);
+							else if (i % 2 == 1) {
+								links[contador] = lstTitulosLinksTmp[i];
+								contador++;
+							}
+							cmd.sleep(0.1);
+							
+						}	
+					}
 				}
 
 
