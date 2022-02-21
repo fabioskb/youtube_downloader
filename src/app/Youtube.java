@@ -2,8 +2,6 @@ package app;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-
 import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 import metodos.YoutubeArquivo;
@@ -60,12 +58,12 @@ public class Youtube extends YoutubeForm {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 8));
 				lblResultado.setText(TEXTOS.getTextos(20));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
+				Thread.currentThread().interrupt();
 			} else if (!lstPesquisa.isSelectedIndex(index) && !link.startsWith("https://www.youtube.com/watch?v=")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 8));
 				lblResultado.setText(TEXTOS.getTextos(19));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
+				Thread.currentThread().interrupt();
 			}
 			
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
@@ -110,12 +108,10 @@ public class Youtube extends YoutubeForm {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
 				lblResultado.setText(TEXTOS.getTextos(22));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
 			} else if (!cmdLineSaida.equals("command not found")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(21));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
 			}
 		});
 		download.start();
@@ -182,13 +178,11 @@ public class Youtube extends YoutubeForm {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(17));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
 			}
 			if (!lstTitulos.isEmpty()) {
 				lblResultado.setText(TEXTOS.getTextos(25));
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
 				modificaBgLabelResultado = false;
-				Thread.currentThread().stop();
 			} else {
 				lblResultado.setText(TEXTOS.getTextos(17));
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));

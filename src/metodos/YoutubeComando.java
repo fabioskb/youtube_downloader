@@ -4,9 +4,9 @@ import java.io.*;
 
 public class YoutubeComando {
 	private final Runtime RUN = Runtime.getRuntime();
-	private Process pro, pro2;
+	private Process pro;
 	private BufferedReader read, read2;
-	private String saida, saidaFinal, line;
+	private String saida, line;
 	
 	/**
 	 * Executa e retorna a saida do comando.
