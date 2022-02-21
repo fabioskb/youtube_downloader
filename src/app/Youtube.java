@@ -2,6 +2,10 @@ package app;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 import metodos.YoutubeArquivo;
@@ -11,6 +15,10 @@ public class Youtube extends YoutubeForm {
 	private String[] links;
 	private boolean modificaBgLabelResultado = true;
 	private int index = 20;
+	private final Runtime RUN = Runtime.getRuntime();
+	private Process pro;
+	private BufferedReader read, read2;
+	private String saida = "", line = null;
 			
 	@Override
 	protected void btnModoNoiteClick(ActionEvent ev) {
@@ -49,6 +57,8 @@ public class Youtube extends YoutubeForm {
 			cmdLineSaida = ""; 
 			String link = txtLink.getText();
 
+			modificaBgLabelResultado = true;
+			setCores(modificaBgLabelResultado);
 			lblResultado.setText(TEXTOS.getTextos(31));
 			if ((isVideo() || isAudio()) && !lstPesquisa.isSelectionEmpty()) {
 				txtLink.setText(TEXTOS.getTextos(7));
@@ -67,14 +77,9 @@ public class Youtube extends YoutubeForm {
 			}
 			
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
-				modificaBgLabelResultado = true;
-				setCores(modificaBgLabelResultado);
-				System.out.println("link: "+link);
+				
 
-				setCores(modificaBgLabelResultado);
-				lblResultado.setText(TEXTOS.getTextos(18));
-
-				format = (isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio',\n" 
+				format = (isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", pastaPrincipal)                        // format video para o YoutubeDL
 				:
 				String.format("{'format': 'bestaudio[ext=m4a]',\n" 
@@ -101,14 +106,52 @@ public class Youtube extends YoutubeForm {
 				+ "    ydl.download([link])\n",
 				link, format));
 
-				cmdLineSaida = cmd.comando("python3 /tmp/baixar");
+				try {
+					pro = RUN.exec("python3 /tmp/baixar");
+					read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+					read2 = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+					
+					while ((line = read.readLine()) != null) {
+						if (!line.startsWith("[download] 100%") && !line.contains("Deleting")) {
+							if (lblResultado.getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
+								line = line.replace("[download]", "[downloading audio from video]");
+								lblResultado.setText(line);
+							} else {
+								lblResultado.setText(line);
+							}
+						} else {
+							lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
+							lblResultado.setText(TEXTOS.getTextos(22));
+							modificaBgLabelResultado = false;
+						}
+
+						cmdLineSaida += line + "\n";
+
+					} if (line == null) {
+						while ((line = read2.readLine()) != null) {
+							lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
+							lblResultado.setText(line);
+							modificaBgLabelResultado = false;
+
+							cmdLineSaida += line + "\n";
+
+						}
+
+					read.close();
+					read2.close();
+					}
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
+					lblResultado.setText(TEXTOS.getTextos(21));
+					modificaBgLabelResultado = false;
+				}
 			}
 
-			if (cmdLineSaida.contains("[download] 100%")) {
-				lblResultado.setBackground(CORES.getCor(isNoturno(), 9));
-				lblResultado.setText(TEXTOS.getTextos(22));
-				modificaBgLabelResultado = false;
-			} else if (!cmdLineSaida.equals("command not found")) {
+			System.out.println(lblResultado.getBackground().toString());
+
+			if (cmdLineSaida.equals("")) {
 				lblResultado.setBackground(CORES.getCor(isNoturno(), 7));
 				lblResultado.setText(TEXTOS.getTextos(21));
 				modificaBgLabelResultado = false;
