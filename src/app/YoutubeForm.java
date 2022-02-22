@@ -281,6 +281,13 @@ public abstract class YoutubeForm extends JFrame {
 		lblDescricao.setForeground(CORES.getCor(isNoturno(), 6));
 		lblDescricao.setBorder(new LineBorder(CORES.getCor(isNoturno(), 0)));
 
+		txtLink.setOpaque(true);
+		txtLink.setBackground(CORES.getCor(isNoturno(), 10));
+		txtPesquisa.setOpaque(true);
+		txtPesquisa.setBackground(CORES.getCor(isNoturno(), 10));
+		lstPesquisa.setOpaque(true);
+		lstPesquisa.setBackground(CORES.getCor(isNoturno(), 10));
+
 		if (modLblResultadoBg) lblResultado.setBackground(CORES.getCor(isNoturno(), 3));
 		else lblResultado.setBackground(lblResultado.getBackground());
 		lblResultado.setForeground(CORES.getCor(isNoturno(), 6));

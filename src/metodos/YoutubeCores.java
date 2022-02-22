@@ -19,6 +19,7 @@ public class YoutubeCores {
 		cores[7] = "#CC0000";      // Erros
 		cores[8] = "#FF6600";      // Avisos
 		cores[9] = "#00CC00";      // concluido com sucesso
+		cores[10] = "#EEEEEE";     // Área de textos (link, pesquisa e lista)
 		
 		// Night
 		coresNight[0] = "#333333"; // Banner background & Descrição borda
@@ -31,6 +32,7 @@ public class YoutubeCores {
 		coresNight[7] = "#CC0000"; // Erros
 		coresNight[8] = "#FF6600"; // Avisos
 		coresNight[9] = "#00CC00"; // concluido com sucesso
+		coresNight[10] = "#C0C0C0";// Área de textos (link, pesquisa e lista)
 	}
 	
 	/**
@@ -40,8 +42,7 @@ public class YoutubeCores {
 	 * @param noite - Se true o modo noturno será aplicado para o componente, se false, o padrão será aplicado.
 	 * @param indiceCor (int) - [0] Banner BG e Descrição Borda, [1] Banner FG, [2] lblResultado BG,
 	 * [3] Padrão BG, [4] Descrição BG, [5] Botões BG, [6] FG botões e descrição, [7] Erros, [8] Avisos,
-	 * [9] Concluído com sucesso.
-	 *  
+	 * [9] Concluído com sucesso, [10] Área de texto (link, pesquisa e lista).
 	 * @return Retorna uma cor de cores[].
 	 */
 	public Color getCor(boolean noite, int indiceCor) {

@@ -7,6 +7,7 @@
 * **Automatically activated night mode if the time is between 18:00 and 5:00 hours.**
 * **Choose between audio or video to download.**
 * **Description of each item in the list via ToolTip when selecting with the mouse (channel, duration, views and publish_time).**
+* **Download progress**
 * **Install all dependencies on the first boot of the application.**
 
 # Screenshots
@@ -29,12 +30,12 @@
 
 # Install
 ## via apt
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.1.2_amd64.deb` 
-2. `$ sudo apt install ./youtube-downloader_amd64_2.1.2.deb` 
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.2.0_amd64.deb` 
+2. `$ sudo apt install ./youtube-downloader_amd64_2.2.0.deb` 
 1. `$ ydl` (or simply open it in the network applications category)
 ## via dpkg 
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.1.2_amd64.deb` 
-2. `$ sudo dpkg -i ./youtube-downloader_amd64_2.1.2.deb` 
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.2.0_amd64.deb` 
+2. `$ sudo dpkg -i ./youtube-downloader_amd64_2.2.0.deb` 
 3. `$ sudo apt install -f`
 4. `$ ydl` (or simply open it in the network applications category)
 

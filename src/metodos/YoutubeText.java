@@ -9,7 +9,8 @@ public class YoutubeText {
 			+ "Opções de escolha: baixar direto pelo link ou pesquisar pelo nome;<br>"
 			+ "Retorno de até 20 items na pesquisa;<br>"
 			+ "Descrição de cada item da lista via ToolTip ao selecionar com o mouse;<br>"
-			+ "Modo Noturno (Automático e Manual)"
+			+ "Modo Noturno (Automático e Manual)<br>"
+			+ "Progresso do Download"
 			+ "</center></html>",    							// [0] Descrição
 			
 			"<html><center>Modo<br/>Noturno</center></html>",   // [1] Botão Modo noite
@@ -81,6 +82,8 @@ public class YoutubeText {
 
 			"<html>Os resultados serão mostrados aqui</html>",          // [32] lblResultado ToolTip
 			"<html><center>Pegando o título...   </center></htm>",      // [33] lblResults pegando título
+			"<html><center>Não é possível iniciar a pesquisa com<br>"
+			+ "download em andamento.</center></html>",                 // [34] Falha ao iniciar a ppesquisa com download em andamento 
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -89,7 +92,8 @@ public class YoutubeText {
 			+ "Choice options: download directly from the link or search by name;<br>"
 			+ "Return up to 20 items in the search;<br>"
 			+ "Description of each item in the list via ToolTip when selecting with the mouse;<br>"
-			+ "Night Mode (Automatic and Manual)"
+			+ "Night Mode (Automatic and Manual)<br>"
+			+ "Download progress"
 			+ "</center></html>",                            // [0] Description
 
 			"<html><center>Night<br/>Mode</center></html>",  // [1] Night Mode Button
@@ -158,6 +162,8 @@ public class YoutubeText {
             "<html><center>Checking the download...</center></html>",// [31] Checking the download
 			"<html>Results will be shown here</html>",          // [32] lblResult ToolTip
 			"<html><center>Getting title...   </center></htm>", // [33] lblResults getting title
+			"<html><center>Cannot start search with<br>"
+			+ "download in progress.</center></html>",           // [34] Failed to start psearch with download in progress
 	};
 	
 	public YoutubeText(String idioma) {
@@ -175,7 +181,7 @@ public class YoutubeText {
 	 * [21] lblResultado Falha no download, [22] lblResultado download concluido, [23] tooltip botão baixar, [24] tooltip lista results, [25] lblResultado Pesquisa conc, 
 	 * [26] JOptionPane Boas vindas, [27] JOptionPane Erro na instalação dependencias, [28] JOptionPane Instalação completada, [29] JOtionPane Erro pip não instalado,
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
-	 * ToolTip, [33] lblResultado pegando título
+	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento
 	 * @return String - Texto
 	 */
 	public String getTextos(int indice) {
