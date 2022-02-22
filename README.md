@@ -31,13 +31,13 @@
 # Install
 ## via apt
 1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.2.0_amd64.deb` 
-2. `$ sudo apt install ./youtube-downloader_amd64_2.2.0.deb` 
-1. `$ ydl` (or simply open it in the network applications category)
+2. `sudo apt install ./youtube-downloader_amd64_2.2.0.deb` 
+1. `ydl` (or simply open it in the network applications category)
 ## via dpkg 
 1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.2.0_amd64.deb` 
-2. `$ sudo dpkg -i ./youtube-downloader_amd64_2.2.0.deb` 
-3. `$ sudo apt install -f`
-4. `$ ydl` (or simply open it in the network applications category)
+2. `sudo dpkg -i ./youtube-downloader_amd64_2.2.0.deb` 
+3. `sudo apt install -f`
+4. `ydl` (or simply open it in the network applications category)
 
 **A stable internet connection is required on the first boot of the application.**
 
