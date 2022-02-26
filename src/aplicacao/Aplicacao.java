@@ -1,12 +1,12 @@
-package app;
+package aplicacao;
 
 import javax.swing.SwingUtilities;
 
-public class App {
+public class Aplicacao {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			Youtube ydl = new Youtube();
+			YoutubeDl ydl = new YoutubeDl();
 			ydl.setVisible(true);
 		});
 	}
