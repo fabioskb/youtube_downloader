@@ -19,51 +19,51 @@ public class YoutubeTela3 extends YoutubeTela2 {
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
 	protected void configurarCores(boolean modLblResultadoBg) {
-		getLblBanner().setBackground(getCORES().getCor(isNoturno(), 0));
-		getLblBanner().setForeground(getCORES().getCor(isNoturno(), 1));
+		getLblBanner().setBackground(CORES.getCor(isNoturno(), 0));
+		getLblBanner().setForeground(CORES.getCor(isNoturno(), 1));
 
 		getLblDescricao().setOpaque(true);
-		getLblDescricao().setBackground(getCORES().getCor(isNoturno(), 4));
-		getLblDescricao().setForeground(getCORES().getCor(isNoturno(), 6));
-		getLblDescricao().setBorder(new LineBorder(getCORES().getCor(isNoturno(), 0)));
+		getLblDescricao().setBackground(CORES.getCor(isNoturno(), 4));
+		getLblDescricao().setForeground(CORES.getCor(isNoturno(), 6));
+		getLblDescricao().setBorder(new LineBorder(CORES.getCor(isNoturno(), 0)));
 
 		getTxtLink().setOpaque(true);
-		getTxtLink().setBackground(getCORES().getCor(isNoturno(), 10));
+		getTxtLink().setBackground(CORES.getCor(isNoturno(), 10));
 		getTxtPesquisa().setOpaque(true);
-		getTxtPesquisa().setBackground(getCORES().getCor(isNoturno(), 10));
+		getTxtPesquisa().setBackground(CORES.getCor(isNoturno(), 10));
 		getLstPesquisa().setOpaque(true);
-		getLstPesquisa().setBackground(getCORES().getCor(isNoturno(), 10));
+		getLstPesquisa().setBackground(CORES.getCor(isNoturno(), 10));
 
-		if (modLblResultadoBg) getLblResultado().setBackground(getCORES().getCor(isNoturno(), 3));
+		if (modLblResultadoBg) getLblResultado().setBackground(CORES.getCor(isNoturno(), 3));
 		else getLblResultado().setBackground(getLblResultado().getBackground());
-		getLblResultado().setForeground(getCORES().getCor(isNoturno(), 6));
+		getLblResultado().setForeground(CORES.getCor(isNoturno(), 6));
 
 		Component[] btns = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo() };
 		setCont(0);
 		for (Component b : btns) {
 			if (getCont() >= 4 && getCont() <= 5) {
 				// Seta Background checkBoxes
-				b.setBackground(getCORES().getCor(isNoturno(), 3));
+				b.setBackground(CORES.getCor(isNoturno(), 3));
 			  // Seta Background e Foreground de todos os Botões
 			} else if (getCont() == 0 && getBtnModoNoite().isSelected())
-				b.setBackground(getCORES().getCor(isNoturno(), 6));
+				b.setBackground(CORES.getCor(isNoturno(), 6));
 			else
-				b.setBackground(getCORES().getCor(isNoturno(), 5));
-			b.setForeground(getCORES().getCor(isNoturno(), 6));
+				b.setBackground(CORES.getCor(isNoturno(), 5));
+			b.setForeground(CORES.getCor(isNoturno(), 6));
 			b.setFocusable(false);
 			setCont(getCont() + 1);
 		}
 
-		getPnlTopo().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlEsquerda().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlEsquerda1().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlEsquerda2().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlCentro().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlCentro1().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlCentro2().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlCentro3().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlCentro4().setBackground(getCORES().getCor(isNoturno(), 3));
-		getPnlRodape().setBackground(getCORES().getCor(isNoturno(), 3));
+		getPnlTopo().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlEsquerda().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlEsquerda1().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlEsquerda2().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlCentro().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlCentro1().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlCentro2().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlCentro3().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlCentro4().setBackground(CORES.getCor(isNoturno(), 3));
+		getPnlRodape().setBackground(CORES.getCor(isNoturno(), 3));
 	}
 
     @Override

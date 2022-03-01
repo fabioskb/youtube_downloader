@@ -64,27 +64,27 @@ public abstract class YoutubeTela1 extends JFrame {
 	private JPanel pnlCentro4;
 	private JScrollPane pnlExtra;
 	
-	private JPanel pnlDireito;
+	//private JPanel pnlDireito;
 	
 	private JPanel pnlRodape;
 	
 	private boolean noturno, video, audio;
-	private String pastaPrincipal, titulo;
+	private String pastaPrincipal;
 	private String installYoutubeSearch, installYoutubeDl;
 	private int contador;
 	private YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
 
-	private final String usuario = System.getProperty("user.name");
-	private final String sistema = System.getProperty("os.name");
-	private final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
-	private final Font FONT_DESC = new Font(Font.SANS_SERIF, Font.BOLD, 12);
-	private final YoutubeImage IMAGEM = new YoutubeImage();
-	private final YoutubeCores CORES = new YoutubeCores();
-	private final String IDIOMA = Locale.getDefault().getDisplayLanguage();
-	private final Calendar CALENDARIO = Calendar.getInstance(Locale.getDefault());
-	private final int HORA = CALENDARIO.get(Calendar.HOUR_OF_DAY);
-	private final YoutubeText TEXTOS = new YoutubeText(IDIOMA);
-	private final YoutubeComando cmd = new YoutubeComando();
+	protected static final String USUARIO = System.getProperty("user.name");
+	protected static final String SISTEMA = System.getProperty("os.name");
+	protected static final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
+	protected static final Font FONT_DESC = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+	protected static YoutubeImage IMAGEM = new YoutubeImage();
+	protected static final YoutubeCores CORES = new YoutubeCores();
+	protected static final String IDIOMA = Locale.getDefault().getDisplayLanguage();
+	protected final Calendar CALENDARIO = Calendar.getInstance(Locale.getDefault());
+	protected final int HORA = CALENDARIO.get(Calendar.HOUR_OF_DAY);
+	protected static final YoutubeText TEXTOS = new YoutubeText(IDIOMA);
+	protected static final YoutubeComando CMD = new YoutubeComando();
 
 	//////// PAINEIS PRINCIPAIS (Getters)
 	/**
@@ -220,13 +220,6 @@ public abstract class YoutubeTela1 extends JFrame {
 	public int getCont() { return contador; }
 
 	/**
-	 * Retorna o nome do sistema atual
-	 * 
-	 * @return String
-	 */
-	public String getSistema() { return sistema; }
-
-	/**
 	 * Retorna true se o checkbox video estiver selecionado.
 	 * É uma condição para baixar em vídeo (mp4).
 	 * 
@@ -258,69 +251,35 @@ public abstract class YoutubeTela1 extends JFrame {
 
 	public JLabel getLblBanner() { return lblBanner; }
 
-	public void setLblBanner(JLabel lblBanner) { this.lblBanner = lblBanner; }
-
 	public JLabel getLblDescricao() { return lblDescricao; }
-
-	public void setLblDescricao(JLabel lblDescricao) { this.lblDescricao = lblDescricao; }
-
-	public JLabel getLBL_VAZIO() { return LBL_VAZIO; }
 
 	public JToggleButton getBtnModoNoite() { return btnModoNoite; }
 
-	public void setBtnModoNoite(JToggleButton btnModoNoite) { this.btnModoNoite = btnModoNoite; }
-
 	public JCheckBox getCheckVideo() { return checkVideo; }
-
-	public void setCheckVideo(JCheckBox checkVideo) { this.checkVideo = checkVideo; }
 
 	public JCheckBox getCheckAudio() { return checkAudio; }
 
-	public void setCheckAudio(JCheckBox checkAudio) { this.checkAudio = checkAudio; }
-
 	public JTextField getTxtLink() { return txtLink; }
-
-	public void setTxtLink(JTextField txtLink) { this.txtLink = txtLink; }
 
 	public JTextField getTxtPesquisa() { return txtPesquisa; }
 
-	public void setTxtPesquisa(JTextField txtPesquisa) { this.txtPesquisa = txtPesquisa; }
-
 	public JButton getBtnPesquisa() { return btnPesquisa; }
-
-	public void setBtnPesquisa(JButton btnPesquisa) { this.btnPesquisa = btnPesquisa; }
 
 	public JLabel getLblLink() { return lblLink; }
 
-	public void setLblLink(JLabel lblLink) { this.lblLink = lblLink; }
-
 	public JList<String> getLstPesquisa() { return lstPesquisa; }
-
-	public void setLstPesquisa(JList<String> lstPesquisa) { this.lstPesquisa = lstPesquisa; }
 
 	public DefaultListModel<String> getLstTitulos() { return lstTitulos; }
 
-	public void setLstTitulos(DefaultListModel<String> lstTitulos) { this.lstTitulos = lstTitulos; }
-
 	public List<String> getLstDescricao() { return lstDescricao; }
-
-	public void setLstDescricao(List<String> lstDescricao) { this.lstDescricao = lstDescricao; }
 
 	public JButton getBtnBaixa() { return btnBaixa; }
 
-	public void setBtnBaixa(JButton btnBaixa) { this.btnBaixa = btnBaixa; }
-
 	public JLabel getLblResultado() { return lblResultado; }
-
-	public void setLblResultado(JLabel lblResultado) { this.lblResultado = lblResultado; }
 
 	public String getPastaPrincipal() { return pastaPrincipal; }
 
 	public void setPastaPrincipal(String pastaPrincipal) { this.pastaPrincipal = pastaPrincipal; }
-
-	public String getTitulo() { return titulo; }
-
-	public void setTitulo(String titulo) { this.titulo = titulo; }
 
 	public String getInstallYoutubeSearch() { return installYoutubeSearch; }
 
@@ -342,39 +301,9 @@ public abstract class YoutubeTela1 extends JFrame {
 
 	public void setDiretorioPadrao(YoutubeArquivo diretorioPadrao) { this.diretorioPadrao = diretorioPadrao; }
 
-	public String getUsuario() { return usuario; }
-
-	public Font getFONT_BANNER() { return FONT_BANNER; }
-
-	public Font getFONT_DESC() { return FONT_DESC; }
-
-	public YoutubeImage getIMAGEM() { return IMAGEM; }
-
-	public YoutubeCores getCORES() { return CORES; }
-
-	public String getIDIOMA() { return IDIOMA; }
-
-	public Calendar getCALENDARIO() { return CALENDARIO; }
-
-	public int getHORA() { return HORA; }
-
-	public YoutubeText getTEXTOS() { return TEXTOS; }
-
-	public YoutubeComando getCmd() { return cmd; }
-
-	public void setPnlTopo(JPanel pnlTopo) { this.pnlTopo = pnlTopo; }
-
-	public void setPnlEsquerda(JPanel pnlEsquerda) { this.pnlEsquerda = pnlEsquerda; }
-
 	public JPanel getPnlEsquerda1() { return pnlEsquerda1; }
 
-	public void setPnlEsquerda1(JPanel pnlEsquerda1) { this.pnlEsquerda1 = pnlEsquerda1; }
-
 	public JPanel getPnlEsquerda2() { return pnlEsquerda2; }
-
-	public void setPnlEsquerda2(JPanel pnlEsquerda2) { this.pnlEsquerda2 = pnlEsquerda2; }
-
-	public void setPnlCentro(JPanel pnlCentro) { this.pnlCentro = pnlCentro; }
 
 	public JPanel getPnlCentro1() { return pnlCentro1; }
 
@@ -382,23 +311,9 @@ public abstract class YoutubeTela1 extends JFrame {
 
 	public JPanel getPnlCentro2() { return pnlCentro2; }
 
-	public void setPnlCentro2(JPanel pnlCentro2) { this.pnlCentro2 = pnlCentro2; }
-
 	public JPanel getPnlCentro3() { return pnlCentro3; }
-
-	public void setPnlCentro3(JPanel pnlCentro3) { this.pnlCentro3 = pnlCentro3; }
 
 	public JPanel getPnlCentro4() { return pnlCentro4; }
 
-	public void setPnlCentro4(JPanel pnlCentro4) { this.pnlCentro4 = pnlCentro4; }
-
 	public JScrollPane getPnlExtra() { return pnlExtra; }
-
-	public void setPnlExtra(JScrollPane pnlExtra) { }
-
-	public JPanel getPnlDireito() { return pnlDireito; }
-
-	public void setPnlDireito(JPanel pnlDireito) { this.pnlDireito = pnlDireito; }
-
-	public void setPnlRodape(JPanel pnlRodape) { this.pnlRodape = pnlRodape; }
 }

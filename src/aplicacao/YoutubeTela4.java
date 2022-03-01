@@ -15,11 +15,11 @@ public class YoutubeTela4 extends YoutubeTela3 {
 	 * @throws IOException
 	 */
 	protected void inicializar() {
-		String youtubeDlSaida = getCmd().comando("pip show youtube_dl");
-		String youtubeSearchSaida = getCmd().comando("pip show youtube_search");
+		String youtubeDlSaida = CMD.comando("pip show youtube_dl");
+		String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
 		if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
-			JOptionPane.showMessageDialog(null, getTEXTOS().getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && getArquivoChecaPrograma().getArq().isFile()) {
 			getArquivoChecaPrograma().deletar();
@@ -28,15 +28,15 @@ public class YoutubeTela4 extends YoutubeTela3 {
 		}
 
 		if (!getArquivoChecaPrograma().getArq().isFile()) {
-			JOptionPane.showMessageDialog(null, getTEXTOS().getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
-			setInstallYoutubeDl(getCmd().comando("pip install youtube-dl"));
-			setInstallYoutubeSearch(getCmd().comando("pip install youtube-search"));
+			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+			setInstallYoutubeDl(CMD.comando("pip install youtube-dl"));
+			setInstallYoutubeSearch(CMD.comando("pip install youtube-search"));
 			if (getInstallYoutubeDl().contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") || getInstallYoutubeSearch().equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
-				JOptionPane.showMessageDialog(null, getTEXTOS().getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			} else {
 				getArquivoChecaPrograma().criar("Checado!");
-				JOptionPane.showMessageDialog(null, getTEXTOS().getTextos(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 				youtubeDlSaida = "Name: youtube-dl";
 				youtubeSearchSaida = "Name: youtube-search";
 			}
@@ -47,7 +47,7 @@ public class YoutubeTela4 extends YoutubeTela3 {
 			this.setResizable(true);
 			this.setSize(920, 680);
 			this.setLocationRelativeTo(null);
-			this.setIconImage(getIMAGEM().pegarImage("/imagens/ytdBanner.png"));
+			this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
 
 			this.getContentPane().setLayout(new BorderLayout());
 
@@ -59,7 +59,7 @@ public class YoutubeTela4 extends YoutubeTela3 {
 			this.getCheckVideo().setSelected(true);
 			this.setVideo(true);
 
-			if (this.getHORA() >= 18 || this.getHORA() <= 5) {
+			if (this.HORA >= 18 || this.HORA <= 5) {
 				this.setNoturno(true);
 				this.getBtnModoNoite().setSelected(true);
 			}

@@ -13,10 +13,10 @@ public class YoutubeTela extends YoutubeTela4 {
 	 */
 	public YoutubeTela() {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		if (this.getSistema().contains("Windows")) {
-			setPastaPrincipal("C:\\users\\" + this.getUsuario()+ "\\YDownloads\\");
+		if (SISTEMA.contains("Windows")) {
+			setPastaPrincipal("C:\\users\\" + USUARIO + "\\YDownloads\\");
 		} else {
-			setPastaPrincipal("/home/" + this.getUsuario() + "/YDownloads/");
+			setPastaPrincipal("/home/" + USUARIO + "/YDownloads/");
 		}
 		setDiretorioPadrao(new YoutubeArquivo(this.getPastaPrincipal()));
 		if (!getDiretorioPadrao().getArq().isDirectory()) {
@@ -30,7 +30,7 @@ public class YoutubeTela extends YoutubeTela4 {
 			this.eventos();
 		} catch (NullPointerException e) {
 			//e.printStackTrace();
-			JOptionPane.showMessageDialog(null, (getIDIOMA().contains("português")) ? "<html><center>Falhou!<br>Clique em OK e inicie a aplicação novamente</center></html>":"<html><center>Failed!<br>Click OK and start the application again</center></html>", "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, (IDIOMA.contains("português")) ? "<html><center>Falhou!<br>Clique em OK e inicie a aplicação novamente</center></html>":"<html><center>Failed!<br>Click OK and start the application again</center></html>", "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 	}

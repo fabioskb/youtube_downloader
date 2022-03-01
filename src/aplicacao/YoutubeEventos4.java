@@ -27,7 +27,7 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 
 			setModificaBgLabelResultado(true);
 			configurarCores(isModificaBgLabelResultado());
-			getLblResultado().setText(getTEXTOS().getTextos(16));
+			getLblResultado().setText(TEXTOS.getTextos(16));
 			
 			try {
 				arquivoDesc.deletar();
@@ -49,7 +49,7 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 						+ "        arqDesc.write(f'Channel: {i[\"channel\"]}, Duration: {i[\"duration\"]}, Views: {i[\"views\"]}, Publish_time: {i[\"publish_time\"]}\\n')\n", 
 						getTxtPesquisa().getText(), getLinks().length));
 				
-				setCmdLineSaida(getCmd().comando("python3 /tmp/youtubeSearch"));
+				setCmdLineSaida(CMD.comando("python3 /tmp/youtubeSearch"));
 
 				for (String line : arquivoDesc.listar()) {
 					if (!line.equals(null)) getLstDescricao().add(line);
@@ -65,7 +65,7 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 								getLinks()[getContador()] = lstTitulosLinksTmp[i];
 								setContador(getContador() + 1);
 							}
-							getCmd().sleep(0.1);
+							CMD.sleep(0.1);
 							
 						}	
 					}
@@ -73,17 +73,17 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 
 
 			} catch (Exception e) { 
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
-				getLblResultado().setText(getTEXTOS().getTextos(17));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+				getLblResultado().setText(TEXTOS.getTextos(17));
 				setModificaBgLabelResultado(false);
 			}
 			if (!getLstTitulos().isEmpty() && !getLblResultado().getText().startsWith("[downloading audio from video]")) {
-				getLblResultado().setText(getTEXTOS().getTextos(25));
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 9));
+				getLblResultado().setText(TEXTOS.getTextos(25));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 				setModificaBgLabelResultado(false);
 			} else {
-				getLblResultado().setText(getTEXTOS().getTextos(17));
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
+				getLblResultado().setText(TEXTOS.getTextos(17));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				setModificaBgLabelResultado(false);
 			}
 		});

@@ -25,18 +25,18 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 			String link = getTxtLink().getText();
 
 			if ((isVideo() || isAudio()) && !getLstPesquisa().isSelectionEmpty()) {
-				getTxtLink().setText(getTEXTOS().getTextos(7));
+				getTxtLink().setText(TEXTOS.getTextos(7));
 				setIndex(getLstPesquisa().getSelectedIndex());
 				link = getLinks()[getIndex()];
 			} else if (!isVideo() && !isAudio()) {
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 8));
-				getLblResultado().setText(getTEXTOS().getTextos(20));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+				getLblResultado().setText(TEXTOS.getTextos(20));
 				setModificaBgLabelResultado(false);
 				Thread.currentThread().interrupt();
 				setCmdLineSaida("pass");
 			} else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 8));
-				getLblResultado().setText(getTEXTOS().getTextos(19));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+				getLblResultado().setText(TEXTOS.getTextos(19));
 				setModificaBgLabelResultado(false);
 				Thread.currentThread().interrupt();
 				setCmdLineSaida("pass");
@@ -46,7 +46,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 
 				setModificaBgLabelResultado(true);
 				configurarCores(isModificaBgLabelResultado());
-				getLblResultado().setText(getTEXTOS().getTextos(31));
+				getLblResultado().setText(TEXTOS.getTextos(31));
 				setFormat((isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", getPastaPrincipal())                        // format video para o YoutubeDL
 				:
@@ -85,16 +85,16 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								line = line.replace("[download]", "[downloading audio from video]");
 								setModificaBgLabelResultado(false);
 								getLblResultado().setText(String.format("<html>%s</html>", line));
-								getLblResultado().setBackground(getCORES().getCor(isNoturno(), 9));
+								getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
-									getLblResultado().setText(getTEXTOS().getTextos(30));
-									getLblResultado().setBackground(getCORES().getCor(isNoturno(), 8));
+									getLblResultado().setText(TEXTOS.getTextos(30));
+									getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
 									setModificaBgLabelResultado(false);
 								} else if (line.startsWith("[youtube]")) {
 									setModificaBgLabelResultado(true);
 									configurarCores(isModificaBgLabelResultado());
-									getLblResultado().setText(getTEXTOS().getTextos(31));
+									getLblResultado().setText(TEXTOS.getTextos(31));
 								}
 								else {
 									setModificaBgLabelResultado(true);
@@ -103,8 +103,8 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								}
 							}
 						} else {
-							getLblResultado().setText(getTEXTOS().getTextos(22));
-							getLblResultado().setBackground(getCORES().getCor(isNoturno(), 9));
+							getLblResultado().setText(TEXTOS.getTextos(22));
+							getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 							setModificaBgLabelResultado(false);
 						}
 
@@ -114,11 +114,11 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 						while ((line = getRead2().readLine()) != null) {
 							if (line.contains("DownloadError:")) {
 								setModificaBgLabelResultado(false);
-								getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
-								getLblResultado().setText(getTEXTOS().getTextos(21));
+								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+								getLblResultado().setText(TEXTOS.getTextos(21));
 							} else {
 								getLblResultado().setText(String.format("<html>%s</html>", line));
-								getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
+								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 								setModificaBgLabelResultado(false);
 							}
 
@@ -132,14 +132,14 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 
 				} catch (IOException e) {
 					getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
-					getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
+					getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 					setModificaBgLabelResultado(false);
 				}
 			}
 
 			if (getCmdLineSaida().equals("")) {
-				getLblResultado().setBackground(getCORES().getCor(isNoturno(), 7));
-				getLblResultado().setText(getTEXTOS().getTextos(21));
+				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+				getLblResultado().setText(TEXTOS.getTextos(21));
 				setModificaBgLabelResultado(false);
 			}
 		});
