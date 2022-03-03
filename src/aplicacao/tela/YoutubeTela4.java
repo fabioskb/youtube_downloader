@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.tela;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Classe responsável pelo método inicializar() da aplicação.
+ * Herda Telas 1, 2 e 3.
  */
 public class YoutubeTela4 extends YoutubeTela3 {
 	/**

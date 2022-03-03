@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.eventos;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -8,6 +8,7 @@ import metodos.YoutubeArquivo;
 /**
  * Classe responsável pelo evento que configura, executa e retorna os resultados 
  * da lista de pesquisa da aplicação, além de tratar possíveis erros.
+ * Herda eventos 1, 2 e 3.
  */
 public class YoutubeEventos4 extends YoutubeEventos3 {
 
@@ -25,9 +26,13 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 			setLinks(new String[20]);
 			String[] lstTitulosLinksTmp = null;
 
-			setModificaBgLabelResultado(true);
+			if (getLblResultado().getText().startsWith("[downloading audio")) {
+				setModificaBgLabelResultado(false);
+			} else setModificaBgLabelResultado(true);
+
 			configurarCores(isModificaBgLabelResultado());
 			getLblResultado().setText(TEXTOS.getTextos(16));
+			CMD.sleep(1);
 			
 			try {
 				arquivoDesc.deletar();
@@ -76,12 +81,14 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.getTextos(17));
 				setModificaBgLabelResultado(false);
+				return;
 			}
-			if (!getLstTitulos().isEmpty() && !getLblResultado().getText().startsWith("[downloading audio from video]")) {
+
+			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTextos(31)))) {
 				getLblResultado().setText(TEXTOS.getTextos(25));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 				setModificaBgLabelResultado(false);
-			} else {
+			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTextos(31))) {
 				getLblResultado().setText(TEXTOS.getTextos(17));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				setModificaBgLabelResultado(false);

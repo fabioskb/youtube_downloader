@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.tela;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,7 +9,8 @@ import javax.swing.event.AncestorEvent;
 
 /**
  * Classe responsável pelo método configurarCores(), que configura 
- * a maioria das cores dos elementos na aplicação.
+ * a maioria das cores dos componentes na aplicação.
+ * Herda Telas 1 e 2.
  */
 public class YoutubeTela3 extends YoutubeTela2 {
     /**
@@ -67,7 +68,7 @@ public class YoutubeTela3 extends YoutubeTela2 {
 	}
 
     @Override
-    protected void btnModoNoiteClick(ActionEvent ev) {}
+	protected void btnModoNoiteClick(ActionEvent ev) {}
     @Override
     protected void checkVideoClick(ActionEvent ev) {}
     @Override

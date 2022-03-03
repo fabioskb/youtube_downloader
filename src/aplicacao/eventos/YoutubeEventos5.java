@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.eventos;
 
 import java.io.BufferedReader;
 
@@ -9,6 +9,7 @@ import javax.swing.event.AncestorEvent;
 
 /**
  * Classe responsável pelos eventos de clique do mouse.
+ * Herda todos os eventos da aplicação.
  */
 public class YoutubeEventos5 extends YoutubeEventos4 {
 

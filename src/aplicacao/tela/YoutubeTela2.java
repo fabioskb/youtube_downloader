@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.tela;
 
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -8,7 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Clase responsável por cria o método eventos() da aplicação.
+ * Classe abstrata responsável por criar o método eventos() da aplicação.
+ * Herda Tela 1.
  */
 public abstract class YoutubeTela2 extends YoutubeTela1 {
     /**

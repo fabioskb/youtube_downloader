@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.eventos;
 
 import java.awt.event.ActionEvent;
 
@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 /**
  * Classe responsável pelos eventos de configurar ao clique os botões 
  * modo noturno, áudio e vídeo.
+ * Herda evento 1.
  */
 public class YoutubeEventos2 extends YoutubeEventos1 {
     public YoutubeEventos2(String format, String cmdLineSaida, String[] links, Process pro, BufferedReader read, BufferedReader read2) {

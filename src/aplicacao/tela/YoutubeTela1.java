@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.tela;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -28,13 +28,13 @@ import metodos.YoutubeImage;
 import metodos.YoutubeText;
 
 /**
- * Classe responsável por criar os componentes, suas variáveis e os seus getters e setters.
+ * Classe abstrata responsável por criar os componentes, e, os getters e setters dos atributos.
  */
 public abstract class YoutubeTela1 extends JFrame {
 	
 	private JLabel lblBanner;
 	private JLabel lblDescricao;
-	private final JLabel LBL_VAZIO = new JLabel("                ");
+	protected static final JLabel LBL_VAZIO = new JLabel("                ");
 	
 	private JToggleButton btnModoNoite;
 	private JCheckBox checkVideo, checkAudio;

@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacao.tela;
 
 import javax.swing.JOptionPane;
 
@@ -6,6 +6,7 @@ import metodos.YoutubeArquivo;
 
 /**
  * Classe responsável pelo construtor da aplicação.
+ * Herda Telas 1, 2, 3 e 4
  */
 public class YoutubeTela extends YoutubeTela4 {
     /**
