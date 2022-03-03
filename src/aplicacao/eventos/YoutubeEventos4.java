@@ -1,7 +1,6 @@
 package aplicacao.eventos;
 
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
 
 import metodos.YoutubeArquivo;
 
@@ -12,9 +11,6 @@ import metodos.YoutubeArquivo;
  */
 public class YoutubeEventos4 extends YoutubeEventos3 {
 
-    public YoutubeEventos4(String format, String cmdLineSaida, String[] links, Process pro, BufferedReader read, BufferedReader read2) {
-        super(format, cmdLineSaida, links, pro, read, read2);
-    }
 
 	@Override
 	protected void btnPesquisaClick(ActionEvent ev) {

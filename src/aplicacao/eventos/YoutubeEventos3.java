@@ -14,10 +14,6 @@ import metodos.YoutubeArquivo;
  */
 public class YoutubeEventos3 extends YoutubeEventos2 {
     
-    public YoutubeEventos3(String format, String cmdLineSaida, String[] links, Process pro, BufferedReader read,
-            BufferedReader read2) {
-        super(format, cmdLineSaida, links, pro, read, read2);        
-    }
 
     @Override
 	protected void btnBaixarClick(ActionEvent ev) {
@@ -73,7 +69,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 				link, getFormat()));
 
 				try {
-					setPro(getRUN().exec("python3 /tmp/baixar"));
+					setPro(RUN.exec("python3 /tmp/baixar"));
 					setRead(new BufferedReader(new InputStreamReader(getPro().getInputStream())));
 					setRead2(new BufferedReader(new InputStreamReader(getPro().getErrorStream())));
 					
