@@ -184,7 +184,7 @@ public class YoutubeText {
 	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento
 	 * @return String - Texto
 	 */
-	public String getTextos(int indice) {
+	public String getTexto(int indice) {
 		if (idioma.contains("português")) return txts[indice];
 		else return enTxts[indice];
 	}

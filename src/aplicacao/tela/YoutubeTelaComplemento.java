@@ -9,9 +9,9 @@ import java.awt.event.MouseEvent;
 
 /**
  * Classe abstrata responsável por criar o método eventos() da aplicação.
- * Herda Tela 1.
+ * Herda Tela.
  */
-public abstract class YoutubeTela2 extends YoutubeTela1 {
+public abstract class YoutubeTelaComplemento extends YoutubeTela {
     /**
      * Ativa o modo noturno
      * 

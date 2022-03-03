@@ -22,17 +22,17 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 			String link = getTxtLink().getText();
 
 			if ((isVideo() || isAudio()) && !getLstPesquisa().isSelectionEmpty()) {
-				getTxtLink().setText(TEXTOS.getTextos(7));
+				getTxtLink().setText(TEXTOS.getTexto(7));
 				setIndex(getLstPesquisa().getSelectedIndex());
 				link = getLinks()[getIndex()];
 			} else if (!isVideo() && !isAudio()) {
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
-				getLblResultado().setText(TEXTOS.getTextos(20));
+				getLblResultado().setText(TEXTOS.getTexto(20));
 				setModificaBgLabelResultado(false);
 				return;
 			} else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
-				getLblResultado().setText(TEXTOS.getTextos(19));
+				getLblResultado().setText(TEXTOS.getTexto(19));
 				setModificaBgLabelResultado(false);
 				return;
 			}
@@ -40,7 +40,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
 				setModificaBgLabelResultado(true);
 				configurarCores(isModificaBgLabelResultado());
-				getLblResultado().setText(TEXTOS.getTextos(31));
+				getLblResultado().setText(TEXTOS.getTexto(31));
 				setFormat((isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", getPastaPrincipal())                        // format video para o YoutubeDL
 				:
@@ -82,13 +82,13 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
-									getLblResultado().setText(TEXTOS.getTextos(30));
+									getLblResultado().setText(TEXTOS.getTexto(30));
 									getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
 									setModificaBgLabelResultado(false);
 								} else if (line.startsWith("[youtube]")) {
 									setModificaBgLabelResultado(true);
 									configurarCores(isModificaBgLabelResultado());
-									getLblResultado().setText(TEXTOS.getTextos(31));
+									getLblResultado().setText(TEXTOS.getTexto(31));
 								}
 								else {
 									if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) continue;
@@ -98,7 +98,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								}
 							}
 						} else {
-							getLblResultado().setText(TEXTOS.getTextos(22));
+							getLblResultado().setText(TEXTOS.getTexto(22));
 							getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 							setModificaBgLabelResultado(false);
 							return;
@@ -111,7 +111,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 							if (line.contains("DownloadError:")) {
 								setModificaBgLabelResultado(false);
 								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
-								getLblResultado().setText(TEXTOS.getTextos(21));
+								getLblResultado().setText(TEXTOS.getTexto(21));
 							} else {
 								getLblResultado().setText(String.format("<html>%s</html>", line));
 								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
@@ -136,7 +136,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 
 			if (getCmdLineSaida().equals("")) {
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
-				getLblResultado().setText(TEXTOS.getTextos(21));
+				getLblResultado().setText(TEXTOS.getTexto(21));
 				setModificaBgLabelResultado(false);
 			}
 		});

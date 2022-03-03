@@ -5,11 +5,13 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import aplicacao.eventos.YoutubeEventos5;
+
 /**
  * Classe responsável pelo método inicializar() da aplicação.
- * Herda Telas 1, 2 e 3.
+ * Herda Eventos.
  */
-public class YoutubeTela4 extends YoutubeTela3 {
+public class YoutubeTelaInicializa extends YoutubeEventos5 {
 	/**
 	 * Checa se esta Ok, corrige se necessário e possível, e, 
 	 * inicializa todos os componentes da aplicação (se possível).
@@ -20,7 +22,7 @@ public class YoutubeTela4 extends YoutubeTela3 {
 		String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
 		if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
-			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, TEXTOS.getTexto(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && getArquivoChecaPrograma().getArq().isFile()) {
 			getArquivoChecaPrograma().deletar();
@@ -29,15 +31,15 @@ public class YoutubeTela4 extends YoutubeTela3 {
 		}
 
 		if (!getArquivoChecaPrograma().getArq().isFile()) {
-			JOptionPane.showMessageDialog(null, TEXTOS.getTextos(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, TEXTOS.getTexto(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 			setInstallYoutubeDl(CMD.comando("pip install youtube-dl"));
 			setInstallYoutubeSearch(CMD.comando("pip install youtube-search"));
 			if (getInstallYoutubeDl().contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") || getInstallYoutubeSearch().equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
-				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.getTexto(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			} else {
 				getArquivoChecaPrograma().criar("Checado!");
-				JOptionPane.showMessageDialog(null, TEXTOS.getTextos(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.getTexto(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 				youtubeDlSaida = "Name: youtube-dl";
 				youtubeSearchSaida = "Name: youtube-search";
 			}

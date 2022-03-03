@@ -2,13 +2,13 @@ package aplicacao;
 
 import javax.swing.SwingUtilities;
 
-import aplicacao.eventos.YoutubeEventos5;
+import aplicacao.tela.YoutubeTelaConstrutor;
 
 public class Aplicacao {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			YoutubeEventos5 ydl = new YoutubeEventos5();
+			YoutubeTelaConstrutor ydl = new YoutubeTelaConstrutor();
 			ydl.setVisible(true);
 		});
 	}

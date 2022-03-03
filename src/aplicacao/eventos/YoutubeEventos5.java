@@ -7,7 +7,7 @@ import javax.swing.event.AncestorEvent;
 
 /**
  * Classe responsável pelos eventos de clique do mouse.
- * Herda tudo da aplicação.
+ * Herda Eventos.
  */
 public class YoutubeEventos5 extends YoutubeEventos4 {
 

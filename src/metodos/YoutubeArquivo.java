@@ -124,19 +124,6 @@ public class YoutubeArquivo {
             this.arq.delete();
         }
     }
-    
-    public void renomear(File novoArq) {
-        /*try {
-            Thread.sleep(10000);
-        } catch (InterruptedException ex) {
-        }
-        try {
-            Path source = Paths.get(this.arq.getPath());
-            Files.move(source, source.resolveSibling(novoArq.getPath()));
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }*/
-    }
 
     // Métodos especiais
     public File getArq() {

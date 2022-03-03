@@ -9,17 +9,18 @@ import javax.swing.event.AncestorEvent;
 
 /**
  * Classe responsável pelo método configurarCores(), que configura 
- * a maioria das cores dos componentes na aplicação.
- * Herda Telas 1 e 2.
+ * a maioria das cores dos componentes na aplicação e sobrescreve
+ * os eventos da classe abstrata YoutubeTelaEventos.
+ * Herda TelaEventos.
  */
-public class YoutubeTela3 extends YoutubeTela2 {
+public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
     /**
 	 * Modifica as cores da aplicação de acordo com o modo noturno ativado
 	 * ou não e cores do lblResultado.
 	 * @param modLblResultadoBg - se true modifica o background do label lblResultado, se 
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
-	protected void configurarCores(boolean modLblResultadoBg) {
+	public void configurarCores(boolean modLblResultadoBg) {
 		getLblBanner().setBackground(CORES.getCor(isNoturno(), 0));
 		getLblBanner().setForeground(CORES.getCor(isNoturno(), 1));
 

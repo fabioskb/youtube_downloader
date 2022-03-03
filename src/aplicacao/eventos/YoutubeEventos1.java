@@ -2,14 +2,14 @@ package aplicacao.eventos;
 
 import java.io.BufferedReader;
 
-import aplicacao.tela.YoutubeTela;
+import aplicacao.tela.YoutubeTelaCoresEEventos;
 
 /**
  * Classe responsável por criar todas os atributos que serão usados nos eventos, 
  * e, seus getters e setters.
- * Herda Tela da aplicação.
+ * Herda TelaCoresEventos da aplicação.
  */
-public class YoutubeEventos1 extends YoutubeTela {
+public class YoutubeEventos1 extends YoutubeTelaCoresEEventos {
 	private String format;
 	private String cmdLineSaida;
 	private String[] links;

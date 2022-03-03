@@ -27,7 +27,7 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 			} else setModificaBgLabelResultado(true);
 
 			configurarCores(isModificaBgLabelResultado());
-			getLblResultado().setText(TEXTOS.getTextos(16));
+			getLblResultado().setText(TEXTOS.getTexto(16));
 			CMD.sleep(1);
 			
 			try {
@@ -75,17 +75,17 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 
 			} catch (Exception e) { 
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
-				getLblResultado().setText(TEXTOS.getTextos(17));
+				getLblResultado().setText(TEXTOS.getTexto(17));
 				setModificaBgLabelResultado(false);
 				return;
 			}
 
-			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTextos(31)))) {
-				getLblResultado().setText(TEXTOS.getTextos(25));
+			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTexto(31)))) {
+				getLblResultado().setText(TEXTOS.getTexto(25));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 				setModificaBgLabelResultado(false);
-			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTextos(31))) {
-				getLblResultado().setText(TEXTOS.getTextos(17));
+			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTexto(31))) {
+				getLblResultado().setText(TEXTOS.getTexto(17));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				setModificaBgLabelResultado(false);
 			}
