@@ -66,6 +66,8 @@ public class YoutubeTelaInicializa extends YoutubeEventos5 {
 				this.setNoturno(true);
 				this.getBtnModoNoite().setSelected(true);
 			}
+
+			this.getBtnCancelar().setVisible(false);
 		}
 	}
 }

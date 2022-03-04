@@ -48,6 +48,8 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
      * @param ev - evento
      */
     protected abstract void btnPesquisaClick(ActionEvent ev);
+    
+    protected abstract void btnCancelarClick(ActionEvent ev);
 
     /**
      * Ao clicar na caixa de texto do link seleciona o texto
@@ -79,6 +81,7 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
      */
     protected abstract void lstPesquisaMouseClickItem(MouseEvent ev);
 
+
     /**
      * Chama todos os eventos de clique da aplicação
      * em botões, caixas de texto, labels e etc.
@@ -89,6 +92,7 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
         getCheckAudio().addActionListener(this::checkAudioClick);
         getBtnBaixa().addActionListener(this::btnBaixarClick);
         getBtnPesquisa().addActionListener(this::btnPesquisaClick);
+        getBtnCancelar().addActionListener(this::btnCancelarClick);
 
         getTxtLink().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent ev) {

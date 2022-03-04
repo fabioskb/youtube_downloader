@@ -40,7 +40,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		else getLblResultado().setBackground(getLblResultado().getBackground());
 		getLblResultado().setForeground(CORES.getCor(isNoturno(), 6));
 
-		Component[] btns = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo() };
+		Component[] btns = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
 		setCont(0);
 		for (Component b : btns) {
 			if (getCont() >= 4 && getCont() <= 5) {
@@ -86,4 +86,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
     protected void lstPesquisaAncestor(AncestorEvent ev) {}
     @Override
     protected void lstPesquisaMouseClickItem(MouseEvent ev) {}
+	@Override
+	protected void btnCancelarClick(ActionEvent ev) {}
 }

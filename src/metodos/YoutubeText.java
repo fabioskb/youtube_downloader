@@ -84,6 +84,9 @@ public class YoutubeText {
 			"<html><center>Pegando o título...   </center></htm>",      // [33] lblResults pegando título
 			"<html><center>Não é possível iniciar a pesquisa com<br>"
 			+ "download em andamento.</center></html>",                 // [34] Falha ao iniciar a ppesquisa com download em andamento 
+			"<html><center>Cancelar</center></html>",                    // [35] btnCancelar texto
+			"<html><center>Cancela o download atual</center></html>",    // [36] btnCancelar TootTip
+			"<html><center>Download Cancelado!   </center></html>",      // [37] lblResultado download cancelado texto
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -160,10 +163,13 @@ public class YoutubeText {
             + "   </center></html>",                            // [30] lblResult - This file has already been downloaded
 
             "<html><center>Checking the download...</center></html>",// [31] Checking the download
-			"<html>Results will be shown here</html>",          // [32] lblResult ToolTip
-			"<html><center>Getting title...   </center></htm>", // [33] lblResults getting title
+			"<html>Results will be shown here</html>",             // [32] lblResult ToolTip
+			"<html><center>Getting title...   </center></htm>",    // [33] lblResults getting title
 			"<html><center>Cannot start search with<br>"
-			+ "download in progress.</center></html>",           // [34] Failed to start psearch with download in progress
+			+ "download in progress.</center></html>",             // [34] Failed to start psearch with download in progress
+			"<html><center>Cancel</center></html>",                 // [35] btnCancel text
+			"<html><center>Cancel current download</center></html>",// [36] btnCancel TootTip
+			"<html><center>Download Cancelled!   </center></html>", // [37] lblResultado canceled download text
 	};
 	
 	public YoutubeText(String idioma) {
@@ -181,7 +187,7 @@ public class YoutubeText {
 	 * [21] lblResultado Falha no download, [22] lblResultado download concluido, [23] tooltip botão baixar, [24] tooltip lista results, [25] lblResultado Pesquisa conc, 
 	 * [26] JOptionPane Boas vindas, [27] JOptionPane Erro na instalação dependencias, [28] JOptionPane Instalação completada, [29] JOtionPane Erro pip não instalado,
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
-	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento
+	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto
 	 * @return String - Texto
 	 */
 	public String getTexto(int indice) {

@@ -48,6 +48,7 @@ public abstract class YoutubeTela extends JFrame {
 	private DefaultListModel<String> lstTitulos = new DefaultListModel<String>();
 	private List<String> lstDescricao = new LinkedList<>();
 	private JButton btnBaixa;
+	private JButton btnCancelar;
 	
 	private JLabel lblResultado;
 	
@@ -129,7 +130,6 @@ public abstract class YoutubeTela extends JFrame {
 
 			pnlEsquerda1.add(btnModoNoite);
 			pnlEsquerda2.add(checkVideo);
-			pnlEsquerda2.add(LBL_VAZIO);
 			pnlEsquerda2.add(checkAudio);
 
 			pnlEsquerda.add(pnlEsquerda1);
@@ -150,14 +150,16 @@ public abstract class YoutubeTela extends JFrame {
 		if (pnlCentro == null) {
 			pnlCentro = new JPanel(new GridLayout(4, 1));
 			Component[] pnls = { pnlCentro1 = new JPanel(new FlowLayout()), pnlCentro2 = new JPanel(new FlowLayout()),
-					pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()), };
+					pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()) };
 
 			Component[] comps = { lblLink = new JLabel(""),
 					txtLink = new JTextField(TEXTOS.getTexto(7), 48),
 					txtPesquisa = new JTextField(TEXTOS.getTexto(8), 25),
 					btnPesquisa = new JButton(TEXTOS.getTexto(5)),
 					lstPesquisa = new JList<>(lstTitulos),
-					btnBaixa = new JButton(TEXTOS.getTexto(6)) };
+					btnBaixa = new JButton(TEXTOS.getTexto(6)),
+					LBL_VAZIO,
+					btnCancelar = new JButton(TEXTOS.getTexto(35)) };
 
 			lstPesquisa.setBorder(lstBorda);
 			lstPesquisa.setToolTipText(TEXTOS.getTexto(24));
@@ -171,6 +173,8 @@ public abstract class YoutubeTela extends JFrame {
 			btnBaixa.setToolTipText(TEXTOS.getTexto(23));
 			btnPesquisa.setToolTipText(TEXTOS.getTexto(13));
 			btnPesquisa.setIcon(IMAGEM.pegarIcon("/imagens/system_search.png"));
+			btnCancelar.setIcon(IMAGEM.pegarIcon("/imagens/cancel.png"));
+			btnCancelar.setToolTipText(TEXTOS.getTexto(36));
 
 			pnlExtra = new JScrollPane();
 			pnlExtra.setViewportView(lstPesquisa);
@@ -214,8 +218,10 @@ public abstract class YoutubeTela extends JFrame {
 		return pnlRodape;
 	}
 	////////////
-
+	
 	public void setCont(int contador) { this.contador = contador; }
+
+	public JButton getBtnCancelar() { return btnCancelar; }
 
 	public int getCont() { return contador; }
 

@@ -1,5 +1,6 @@
 package aplicacao.eventos;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ToolTipManager;
@@ -43,5 +44,12 @@ public class YoutubeEventos5 extends YoutubeEventos4 {
 		}
 	}
 
+	@Override
+	protected void btnCancelarClick(ActionEvent ev) {
+		if (getLblResultado().getText().startsWith("[download")) {
+			getPro().destroy();
+			getBtnCancelar().setVisible(false);
+		}
+	}
     
 }
