@@ -73,19 +73,38 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 					setRead(new BufferedReader(new InputStreamReader(getPro().getInputStream())));
 					setRead2(new BufferedReader(new InputStreamReader(getPro().getErrorStream())));
 					
-					
 					while ((line = getRead().readLine()) != null) {
-						if (!getBtnCancelar().isVisible() && !getLblResultado().getText().equals(TEXTOS.getTexto(31))) {
+						if (!getBtnCancelar().isVisible()) {
 							getBtnCancelar().setVisible(true);
 						}
 						if ((!line.startsWith("[download] 100%") && !line.contains("Deleting"))) {
-							if (getLblResultado().getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
-								String line1 = line.replace("[download]", "[downloading audio from video]");
-								setModificaBgLabelResultado(false);
-								getLblResultado().setText(line1);
-								getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
+							int firstIndexPercentProgressDownload = line.indexOf(" ");
+							int lastIndexPercentProgressDownload = line.indexOf(".");
+							String progressPercentdownload = "";
+							if (line.contains("%")) {
+								getDownloadProgressBar().setVisible(true);
+								getLblProgressBar().setVisible(true);
+								getLblResultado().setVisible(false);
+								progressPercentdownload = line.substring(firstIndexPercentProgressDownload, lastIndexPercentProgressDownload).strip();
+								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload));
+								getLblProgressBar().setText(progressPercentdownload + "%");
+							} else if (progressPercentdownload.equals("100") && getLblResultado().getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
+								progressPercentdownload = "0";
+								if (line.contains("%")) {
+									getLblResultado().setVisible(false);
+									getLblProgressBar().setVisible(true);
+									getLblResultado().setVisible(false);
+									getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload));
+									getLblProgressBar().setText(progressPercentdownload + "%");
+								} else {
+									getLblResultado().setVisible(true);
+									//String line1 = line.replace("[download]", "[downloading audio from video]");
+									getLblResultado().setText(line);
+									CMD.sleep(2);
+								}
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
+									getLblResultado().setVisible(true);
 									getLblResultado().setText(TEXTOS.getTexto(30));
 									getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
 									setModificaBgLabelResultado(false);
@@ -94,24 +113,28 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 									configurarCores(isModificaBgLabelResultado());
 									getLblResultado().setText(TEXTOS.getTexto(31));
 								} else {
-									if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) continue;
+									if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) { continue; }
 									setModificaBgLabelResultado(true);
 									configurarCores(isModificaBgLabelResultado());
 									getLblResultado().setText(line);
 								}
-								
 							}
 						} else {
+							getLblProgressBar().setVisible(false);
+							getLblResultado().setVisible(true);
 							getLblResultado().setText(TEXTOS.getTexto(22));
 							getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 							setModificaBgLabelResultado(false);
 							getBtnCancelar().setVisible(false);
+							getDownloadProgressBar().setVisible(false);
 							return;
 						}
 
 						setCmdLineSaida(getCmdLineSaida() + line + "\n");
 
 					} if (line == null) {
+						getLblProgressBar().setVisible(false);
+						getLblResultado().setVisible(true);
 						while ((line = getRead2().readLine()) != null) {
 							if (line.contains("DownloadError:")) {
 								setModificaBgLabelResultado(false);
@@ -132,28 +155,35 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 					}
 
 				} catch (IOException e) {
+					getLblProgressBar().setVisible(false);
+					getLblResultado().setVisible(true);
 					if (e.toString().contains("Stream closed")) {
 						getLblResultado().setText(TEXTOS.getTexto(37));
 						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 						setModificaBgLabelResultado(false);
 						getBtnCancelar().setVisible(false);
+						getDownloadProgressBar().setVisible(false);
 						return;	
 					} else {
 						getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
 						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 						setModificaBgLabelResultado(false);
 						getBtnCancelar().setVisible(false);
+						getDownloadProgressBar().setVisible(false);
 						return;
 					}
 				}
 			}
-
 			if (getCmdLineSaida().equals("")) {
+				getLblProgressBar().setVisible(false);
+				getLblResultado().setVisible(true);
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.getTexto(21));
 				setModificaBgLabelResultado(false);
 			}
 			getBtnCancelar().setVisible(false);
+			getLblProgressBar().setVisible(false);
+			getDownloadProgressBar().setVisible(false);
 		});
 		download.start();
 	}

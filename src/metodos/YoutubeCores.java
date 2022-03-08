@@ -20,6 +20,7 @@ public class YoutubeCores {
 		cores[8] = "#FF6600";      // Avisos
 		cores[9] = "#00CC00";      // concluido com sucesso
 		cores[10] = "#EEEEEE";     // Área de textos (link, pesquisa e lista)
+		//cores[11] = "#990000";     // lblProgressBar e downloadProgressbarFG
 		
 		// Night
 		coresNight[0] = "#333333"; // Banner background & Descrição borda
@@ -33,6 +34,7 @@ public class YoutubeCores {
 		coresNight[8] = "#FF6600"; // Avisos
 		coresNight[9] = "#00CC00"; // concluido com sucesso
 		coresNight[10] = "#C0C0C0";// Área de textos (link, pesquisa e lista)
+		//coresNight[11] = "#CC0000";// lblProgressBar e downloadProgressbarFG
 	}
 	
 	/**

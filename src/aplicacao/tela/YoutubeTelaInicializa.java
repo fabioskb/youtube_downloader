@@ -68,6 +68,8 @@ public class YoutubeTelaInicializa extends YoutubeEventos5 {
 			}
 
 			this.getBtnCancelar().setVisible(false);
+			this.getDownloadProgressBar().setVisible(false);
+			this.getLblProgressBar().setVisible(false);
 		}
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -68,6 +69,8 @@ public abstract class YoutubeTela extends JFrame {
 	//private JPanel pnlDireito;
 	
 	private JPanel pnlRodape;
+	private JProgressBar downloadProgressBar;
+	private JLabel lblProgressBar;
 	
 	private boolean noturno, video, audio;
 	private String pastaPrincipal;
@@ -213,13 +216,36 @@ public abstract class YoutubeTela extends JFrame {
 			lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/info.png"));
 			lblResultado.setToolTipText(TEXTOS.getTexto(32));
 
+			downloadProgressBar = new JProgressBar(0, 100);
+			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
+			downloadProgressBar.setAlignmentY(CENTER_ALIGNMENT);
+			downloadProgressBar.setStringPainted(true);
+			downloadProgressBar.setString(TEXTOS.getTexto(18));
+
+			lblProgressBar = new JLabel("");
+			lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
+			lblProgressBar.setAlignmentY(CENTER_ALIGNMENT);
+			lblProgressBar.setOpaque(true);
+
 			pnlRodape.add(lblResultado);
+			pnlRodape.add(downloadProgressBar);
+			pnlRodape.add(lblProgressBar);
 		}
 		return pnlRodape;
 	}
 	////////////
-	
+
 	public void setCont(int contador) { this.contador = contador; }
+
+	public JLabel getLblProgressBar() { return lblProgressBar; }
+
+	public void setLblProgressBar(JLabel lblProgressBar) { this.lblProgressBar = lblProgressBar; }
+
+	public JProgressBar getDownloadProgressBar() { return downloadProgressBar; }
+
+	//public JPanel getPnlRodape1() { return pnlRodape1; }
+
+	//public JPanel getPnlRodape2() { return pnlRodape2; }
 
 	public JButton getBtnCancelar() { return btnCancelar; }
 

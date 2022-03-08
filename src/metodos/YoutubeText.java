@@ -37,7 +37,7 @@ public class YoutubeText {
 			"<html>Selecione para baixar em áudio (mp3)</html>", // [15] checkAudio toolTip
 			"<html><center>Pesquisando...&nbsp;</center></html> ",      // [16] lblResultado texto Pesquisando...
 			"<html><center>A pesquisa falhou!!!&nbsp;</center></html> ",// [17] lblResultado Falha na pesquisa
-			"<html><center>Baixando...&nbsp;</center></html>",         // [18] lblresultado Baixando...
+			"Baixando...",                                           // [18] lblresultado Baixando...
 			
 			"<html><center>Selecione um item na lista ou adicione um link válido&nbsp;&nbsp;&nbsp;<br/>"
 			+ " <strong>POR FAVOR!!!&nbsp;&nbsp;</strong></center></html> ",  // [19] lblResultado aviso de item não selecionado 
@@ -86,7 +86,8 @@ public class YoutubeText {
 			+ "download em andamento.</center></html>",                 // [34] Falha ao iniciar a ppesquisa com download em andamento 
 			"<html><center>Cancelar</center></html>",                    // [35] btnCancelar texto
 			"<html><center>Cancela o download atual</center></html>",    // [36] btnCancelar TootTip
-			"<html><center>Download Cancelado!   </center></html>",      // [37] lblResultado download cancelado texto
+			"<html><center>Download Cancelado!   </center></html>",      // [37] lblResultado download cancelado texto 
+			"Baixando o áudio do vídeo",                                 // [38] downloadProgressBar baixando o audio do video
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -123,7 +124,7 @@ public class YoutubeText {
 			"<html>Select to download audio (mp3)</html>",    // [15] checkAudio toolTip
 			"<html><center>Searching...&nbsp;</center></html>",    // [16] lblResultado texto Pesquisando...
 			"<html><center>Failed search!!!&nbsp;&nbsp;</center></html> ",// [17] lblResultado Falha na pesquisa
-			"<html><center>Downloading...&nbsp;</center></html> ", // [18] lblresultado Baixando...
+			"Downloading...",                                   // [18] lblresultado Baixando...
 			
 			"<html><center>Select an item from the list or add an valid link&nbsp;&nbsp;<br/>"
 			+ " <strong>PLEASE!!!&nbsp;&nbsp;</strong></center></html> ",// [19] lblResultado aviso item não selecionado
@@ -167,10 +168,11 @@ public class YoutubeText {
 			"<html><center>Getting title...   </center></htm>",    // [33] lblResults getting title
 			"<html><center>Cannot start search with<br>"
 			+ "download in progress.</center></html>",             // [34] Failed to start psearch with download in progress
-			"<html><center>Cancel</center></html>",                 // [35] btnCancel text
+			"<html><center>Cancel</center></html>",                 // [35] btnCancel text 
 			"<html><center>Cancel current download</center></html>",// [36] btnCancel TootTip
 			"<html><center>Download Cancelled!   </center></html>", // [37] lblResultado canceled download text
-	};
+			"Downloading audio from video",                         // [38] progressbar aixando o audio do video
+			};
 	
 	public YoutubeText(String idioma) {
 		this.idioma = idioma;
@@ -187,7 +189,7 @@ public class YoutubeText {
 	 * [21] lblResultado Falha no download, [22] lblResultado download concluido, [23] tooltip botão baixar, [24] tooltip lista results, [25] lblResultado Pesquisa conc, 
 	 * [26] JOptionPane Boas vindas, [27] JOptionPane Erro na instalação dependencias, [28] JOptionPane Instalação completada, [29] JOtionPane Erro pip não instalado,
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
-	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto
+	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto, [38] downloadProgressBar baixando o audio do video
 	 * @return String - Texto
 	 */
 	public String getTexto(int indice) {
