@@ -75,6 +75,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 					
 					while ((line = getRead().readLine()) != null) {
 						if (!getBtnCancelar().isVisible()) {
+							getBtnBaixa().setVisible(false);
 							getBtnCancelar().setVisible(true);
 						}
 						if ((!line.startsWith("[download] 100%") && !line.contains("Deleting"))) {
@@ -88,20 +89,12 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								progressPercentdownload = line.substring(firstIndexPercentProgressDownload, lastIndexPercentProgressDownload).strip();
 								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload));
 								getLblProgressBar().setText(progressPercentdownload + "%");
-							} else if (progressPercentdownload.equals("100") && getLblResultado().getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
+							} else if (progressPercentdownload.equals("100") || getLblResultado().getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
 								progressPercentdownload = "0";
-								if (line.contains("%")) {
-									getLblResultado().setVisible(false);
-									getLblProgressBar().setVisible(true);
-									getLblResultado().setVisible(false);
-									getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload));
-									getLblProgressBar().setText(progressPercentdownload + "%");
-								} else {
-									getLblResultado().setVisible(true);
-									//String line1 = line.replace("[download]", "[downloading audio from video]");
-									getLblResultado().setText(line);
-									CMD.sleep(2);
-								}
+								getDownloadProgressBar().setString(TEXTOS.getTexto(38));
+								getLblResultado().setVisible(true);
+								CMD.sleep(2);
+								
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
 									getLblResultado().setVisible(true);
@@ -120,6 +113,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								}
 							}
 						} else {
+							getBtnBaixa().setVisible(true);
 							getLblProgressBar().setVisible(false);
 							getLblResultado().setVisible(true);
 							getLblResultado().setText(TEXTOS.getTexto(22));
@@ -127,12 +121,15 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 							setModificaBgLabelResultado(false);
 							getBtnCancelar().setVisible(false);
 							getDownloadProgressBar().setVisible(false);
-							return;
+							getDownloadProgressBar().setString(TEXTOS.getTexto(18));
+							//return;
 						}
 
 						setCmdLineSaida(getCmdLineSaida() + line + "\n");
 
 					} if (line == null) {
+						getDownloadProgressBar().setString(TEXTOS.getTexto(18));
+						getBtnBaixa().setVisible(true);
 						getLblProgressBar().setVisible(false);
 						getLblResultado().setVisible(true);
 						while ((line = getRead2().readLine()) != null) {
@@ -155,20 +152,21 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 					}
 
 				} catch (IOException e) {
+					getDownloadProgressBar().setString(TEXTOS.getTexto(18));
+					getBtnBaixa().setVisible(true);
+					getBtnCancelar().setVisible(false);
 					getLblProgressBar().setVisible(false);
 					getLblResultado().setVisible(true);
 					if (e.toString().contains("Stream closed")) {
 						getLblResultado().setText(TEXTOS.getTexto(37));
 						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 						setModificaBgLabelResultado(false);
-						getBtnCancelar().setVisible(false);
 						getDownloadProgressBar().setVisible(false);
 						return;	
 					} else {
 						getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
 						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 						setModificaBgLabelResultado(false);
-						getBtnCancelar().setVisible(false);
 						getDownloadProgressBar().setVisible(false);
 						return;
 					}
@@ -181,6 +179,8 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 				getLblResultado().setText(TEXTOS.getTexto(21));
 				setModificaBgLabelResultado(false);
 			}
+			getDownloadProgressBar().setString(TEXTOS.getTexto(18));
+			getBtnBaixa().setVisible(true);
 			getBtnCancelar().setVisible(false);
 			getLblProgressBar().setVisible(false);
 			getDownloadProgressBar().setVisible(false);

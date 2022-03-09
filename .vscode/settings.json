@@ -9,5 +9,6 @@
         "exclude": [
             "/media/fabio/D738-9135/Java/webdrivermanager-5.0.3-fat.jar"
         ]
-    }
+    },
+    "java.help.shareDiagnostics": true
 }

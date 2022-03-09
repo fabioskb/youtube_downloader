@@ -133,6 +133,7 @@ public abstract class YoutubeTela extends JFrame {
 
 			pnlEsquerda1.add(btnModoNoite);
 			pnlEsquerda2.add(checkVideo);
+			pnlEsquerda2.add(LBL_VAZIO);
 			pnlEsquerda2.add(checkAudio);
 
 			pnlEsquerda.add(pnlEsquerda1);
@@ -161,7 +162,6 @@ public abstract class YoutubeTela extends JFrame {
 					btnPesquisa = new JButton(TEXTOS.getTexto(5)),
 					lstPesquisa = new JList<>(lstTitulos),
 					btnBaixa = new JButton(TEXTOS.getTexto(6)),
-					LBL_VAZIO,
 					btnCancelar = new JButton(TEXTOS.getTexto(35)) };
 
 			lstPesquisa.setBorder(lstBorda);
