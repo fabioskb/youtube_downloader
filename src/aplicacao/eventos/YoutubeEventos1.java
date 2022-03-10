@@ -14,7 +14,7 @@ public class YoutubeEventos1 extends YoutubeTelaCoresEEventos {
 	private String cmdLineSaida;
 	private String[] links;
 	private boolean modificaBgLabelResultado;
-	private int index;
+	protected int index = 20;
 	private Process pro;
 	private BufferedReader read;
     private BufferedReader read2;

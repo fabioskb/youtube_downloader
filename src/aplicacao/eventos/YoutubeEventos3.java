@@ -13,7 +13,7 @@ import metodos.YoutubeArquivo;
  * Herda eventos 1 e 2.
  */
 public class YoutubeEventos3 extends YoutubeEventos2 {
-    
+    private boolean downloadDone = false;
 
     @Override
 	protected void btnBaixarClick(ActionEvent ev) {
@@ -89,11 +89,10 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 								progressPercentdownload = line.substring(firstIndexPercentProgressDownload, lastIndexPercentProgressDownload).strip();
 								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload));
 								getLblProgressBar().setText(progressPercentdownload + "%");
-							} else if (progressPercentdownload.equals("100") || getLblResultado().getBackground().toString().equals("java.awt.Color[r=0,g=204,b=0]")) {
+							} else if (getLblProgressBar().getText().equals("100%")) {
 								progressPercentdownload = "0";
 								getDownloadProgressBar().setString(TEXTOS.getTexto(38));
-								getLblResultado().setVisible(true);
-								CMD.sleep(2);
+								downloadDone = true;
 								
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
@@ -112,7 +111,7 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 									getLblResultado().setText(line);
 								}
 							}
-						} else {
+						} else if (downloadDone) {
 							getBtnBaixa().setVisible(true);
 							getLblProgressBar().setVisible(false);
 							getLblResultado().setVisible(true);
@@ -122,7 +121,6 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 							getBtnCancelar().setVisible(false);
 							getDownloadProgressBar().setVisible(false);
 							getDownloadProgressBar().setString(TEXTOS.getTexto(18));
-							//return;
 						}
 
 						setCmdLineSaida(getCmdLineSaida() + line + "\n");
@@ -186,6 +184,5 @@ public class YoutubeEventos3 extends YoutubeEventos2 {
 			getDownloadProgressBar().setVisible(false);
 		});
 		download.start();
-	}
-
+	}	
 }

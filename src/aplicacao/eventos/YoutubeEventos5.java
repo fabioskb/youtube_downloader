@@ -46,7 +46,7 @@ public class YoutubeEventos5 extends YoutubeEventos4 {
 
 	@Override
 	protected void btnCancelarClick(ActionEvent ev) {
-		if (getLblResultado().getText().startsWith("[download") || getLblResultado().getText().startsWith(TEXTOS.getTexto(31)) || getLblResultado().getText().equals(TEXTOS.getTexto(25))) {
+		if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.getTexto(31)) || getLblResultado().getText().equals(TEXTOS.getTexto(25))) {
 			getPro().destroy();
 			getBtnCancelar().setVisible(false);
 			getBtnBaixa().setVisible(true);

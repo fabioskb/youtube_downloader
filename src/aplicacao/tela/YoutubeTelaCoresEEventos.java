@@ -67,9 +67,9 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getPnlCentro4().setBackground(CORES.getCor(isNoturno(), 3));
 		getPnlRodape().setBackground(CORES.getCor(isNoturno(), 3));
 		getDownloadProgressBar().setBackground(CORES.getCor(isNoturno(), 3));
-		getDownloadProgressBar().setForeground(CORES.getCor(isNoturno(), 1));
+		getDownloadProgressBar().setForeground(CORES.getCor(isNoturno(), 11));
 		getLblProgressBar().setBackground(CORES.getCor(isNoturno(), 3));
-		getLblProgressBar().setForeground(CORES.getCor(isNoturno(), 1));
+		getLblProgressBar().setForeground(CORES.getCor(isNoturno(), 11));
 	}
 
     @Override

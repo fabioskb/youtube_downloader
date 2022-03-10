@@ -10,7 +10,7 @@ public class YoutubeText {
 			+ "Retorno de até 20 items na pesquisa;<br>"
 			+ "Descrição de cada item da lista via ToolTip ao selecionar com o mouse;<br>"
 			+ "Modo Noturno (Automático e Manual)<br>"
-			+ "Progresso do Download"
+			+ "Barra de Progresso do Download"
 			+ "</center></html>",    							// [0] Descrição
 			
 			"<html><center>Modo<br/>Noturno</center></html>",   // [1] Botão Modo noite
@@ -97,7 +97,7 @@ public class YoutubeText {
 			+ "Return up to 20 items in the search;<br>"
 			+ "Description of each item in the list via ToolTip when selecting with the mouse;<br>"
 			+ "Night Mode (Automatic and Manual)<br>"
-			+ "Download progress"
+			+ "Download Progress Bar"
 			+ "</center></html>",                            // [0] Description
 
 			"<html><center>Night<br/>Mode</center></html>",  // [1] Night Mode Button
