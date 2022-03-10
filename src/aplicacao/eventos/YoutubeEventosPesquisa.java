@@ -7,9 +7,8 @@ import metodos.YoutubeArquivo;
 /**
  * Classe responsável pelo evento que configura, executa e retorna os resultados 
  * da lista de pesquisa da aplicação, além de tratar possíveis erros.
- * Herda eventos 1, 2 e 3.
  */
-public class YoutubeEventos4 extends YoutubeEventos3 {
+public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
 
 	@Override
@@ -27,7 +26,7 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 			} else setModificaBgLabelResultado(true);
 
 			configurarCores(isModificaBgLabelResultado());
-			getLblResultado().setText(TEXTOS.getTexto(16));
+			getLblResultado().setText(TEXTOS.pegarTexto(16));
 			CMD.sleep(1);
 			
 			try {
@@ -75,17 +74,17 @@ public class YoutubeEventos4 extends YoutubeEventos3 {
 
 			} catch (Exception e) { 
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
-				getLblResultado().setText(TEXTOS.getTexto(17));
+				getLblResultado().setText(TEXTOS.pegarTexto(17));
 				setModificaBgLabelResultado(false);
 				return;
 			}
 
-			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTexto(31)))) {
-				getLblResultado().setText(TEXTOS.getTexto(25));
+			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31)))) {
+				getLblResultado().setText(TEXTOS.pegarTexto(25));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
 				setModificaBgLabelResultado(false);
-			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.getTexto(31))) {
-				getLblResultado().setText(TEXTOS.getTexto(17));
+			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31))) {
+				getLblResultado().setText(TEXTOS.pegarTexto(17));
 				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
 				setModificaBgLabelResultado(false);
 			}

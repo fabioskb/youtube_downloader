@@ -192,7 +192,7 @@ public class YoutubeText {
 	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto, [38] downloadProgressBar baixando o audio do video
 	 * @return String - Texto
 	 */
-	public String getTexto(int indice) {
+	public String pegarTexto(int indice) {
 		if (idioma.contains("português")) return txts[indice];
 		else return enTxts[indice];
 	}

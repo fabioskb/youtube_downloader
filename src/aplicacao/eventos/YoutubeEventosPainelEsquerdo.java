@@ -3,11 +3,9 @@ package aplicacao.eventos;
 import java.awt.event.ActionEvent;
 
 /**
- * Classe responsável pelos eventos de configurar ao clique os botões 
- * modo noturno, áudio e vídeo.
- * Herda evento 1.
+ * Classe responsável pelos eventos dos botões do painel esquerdo (modo noturno, áudio e vídeo).
  */
-public class YoutubeEventos2 extends YoutubeEventos1 {
+public class YoutubeEventosPainelEsquerdo extends YoutubeEventosAtributos {
     
 
     @Override

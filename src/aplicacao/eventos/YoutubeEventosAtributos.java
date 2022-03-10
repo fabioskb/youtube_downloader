@@ -5,11 +5,10 @@ import java.io.BufferedReader;
 import aplicacao.tela.YoutubeTelaCoresEEventos;
 
 /**
- * Classe responsável por criar todas os atributos que serão usados nos eventos, 
+ * Classe responsável por criar todos os atributos que serão usados nos eventos, 
  * e, seus getters e setters.
- * Herda TelaCoresEventos da aplicação.
  */
-public class YoutubeEventos1 extends YoutubeTelaCoresEEventos {
+public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
 	private String format;
 	private String cmdLineSaida;
 	private String[] links;

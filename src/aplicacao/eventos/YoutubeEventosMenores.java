@@ -7,10 +7,9 @@ import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 
 /**
- * Classe responsável pelos eventos de clique do mouse.
- * Herda Eventos.
+ * Classe responsável pelos eventos menores.
  */
-public class YoutubeEventos5 extends YoutubeEventos4 {
+public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
  
     @Override
@@ -46,7 +45,7 @@ public class YoutubeEventos5 extends YoutubeEventos4 {
 
 	@Override
 	protected void btnCancelarClick(ActionEvent ev) {
-		if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.getTexto(31)) || getLblResultado().getText().equals(TEXTOS.getTexto(25))) {
+		if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.pegarTexto(31)) || getLblResultado().getText().equals(TEXTOS.pegarTexto(25))) {
 			getPro().destroy();
 			getBtnCancelar().setVisible(false);
 			getBtnBaixa().setVisible(true);

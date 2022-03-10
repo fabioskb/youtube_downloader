@@ -105,7 +105,7 @@ public abstract class YoutubeTela extends JFrame {
 			lblBanner.setOpaque(true);
 			lblBanner.setIcon(IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 
-			lblDescricao = new JLabel(TEXTOS.getTexto(0), (int) CENTER_ALIGNMENT);
+			lblDescricao = new JLabel(TEXTOS.pegarTexto(0), (int) CENTER_ALIGNMENT);
 			lblDescricao.setFont(FONT_DESC);
 
 			pnlTopo.add(lblBanner);
@@ -125,10 +125,10 @@ public abstract class YoutubeTela extends JFrame {
 			pnlEsquerda1 = new JPanel(new FlowLayout());
 			pnlEsquerda2 = new JPanel(new FlowLayout());
 
-			checkVideo = new JCheckBox(TEXTOS.getTexto(2));
-			checkAudio = new JCheckBox(TEXTOS.getTexto(3));
-			btnModoNoite = new JToggleButton(TEXTOS.getTexto(1));
-			btnModoNoite.setToolTipText(TEXTOS.getTexto(9));
+			checkVideo = new JCheckBox(TEXTOS.pegarTexto(2));
+			checkAudio = new JCheckBox(TEXTOS.pegarTexto(3));
+			btnModoNoite = new JToggleButton(TEXTOS.pegarTexto(1));
+			btnModoNoite.setToolTipText(TEXTOS.pegarTexto(9));
 			btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
 
 			pnlEsquerda1.add(btnModoNoite);
@@ -157,27 +157,27 @@ public abstract class YoutubeTela extends JFrame {
 					pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()) };
 
 			Component[] comps = { lblLink = new JLabel(""),
-					txtLink = new JTextField(TEXTOS.getTexto(7), 48),
-					txtPesquisa = new JTextField(TEXTOS.getTexto(8), 25),
-					btnPesquisa = new JButton(TEXTOS.getTexto(5)),
+					txtLink = new JTextField(TEXTOS.pegarTexto(7), 48),
+					txtPesquisa = new JTextField(TEXTOS.pegarTexto(8), 25),
+					btnPesquisa = new JButton(TEXTOS.pegarTexto(5)),
 					lstPesquisa = new JList<>(lstTitulos),
-					btnBaixa = new JButton(TEXTOS.getTexto(6)),
-					btnCancelar = new JButton(TEXTOS.getTexto(35)) };
+					btnBaixa = new JButton(TEXTOS.pegarTexto(6)),
+					btnCancelar = new JButton(TEXTOS.pegarTexto(35)) };
 
 			lstPesquisa.setBorder(lstBorda);
-			lstPesquisa.setToolTipText(TEXTOS.getTexto(24));
+			lstPesquisa.setToolTipText(TEXTOS.pegarTexto(24));
 			lblLink.setOpaque(false);
 			lblLink.setIcon(IMAGEM.pegarIcon("/imagens/link.png"));
-			txtLink.setToolTipText(TEXTOS.getTexto(10));
-			txtPesquisa.setToolTipText(TEXTOS.getTexto(11));
-			checkVideo.setToolTipText(TEXTOS.getTexto(14));
-			checkAudio.setToolTipText(TEXTOS.getTexto(15));
+			txtLink.setToolTipText(TEXTOS.pegarTexto(10));
+			txtPesquisa.setToolTipText(TEXTOS.pegarTexto(11));
+			checkVideo.setToolTipText(TEXTOS.pegarTexto(14));
+			checkAudio.setToolTipText(TEXTOS.pegarTexto(15));
 			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
-			btnBaixa.setToolTipText(TEXTOS.getTexto(23));
-			btnPesquisa.setToolTipText(TEXTOS.getTexto(13));
+			btnBaixa.setToolTipText(TEXTOS.pegarTexto(23));
+			btnPesquisa.setToolTipText(TEXTOS.pegarTexto(13));
 			btnPesquisa.setIcon(IMAGEM.pegarIcon("/imagens/system_search.png"));
 			btnCancelar.setIcon(IMAGEM.pegarIcon("/imagens/cancel.png"));
-			btnCancelar.setToolTipText(TEXTOS.getTexto(36));
+			btnCancelar.setToolTipText(TEXTOS.pegarTexto(36));
 
 			pnlExtra = new JScrollPane();
 			pnlExtra.setViewportView(lstPesquisa);
@@ -214,13 +214,13 @@ public abstract class YoutubeTela extends JFrame {
 			lblResultado.setOpaque(true);
 			lblResultado.setAutoscrolls(true);
 			lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/info.png"));
-			lblResultado.setToolTipText(TEXTOS.getTexto(32));
+			lblResultado.setToolTipText(TEXTOS.pegarTexto(32));
 
 			downloadProgressBar = new JProgressBar(0, 100);
 			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
 			downloadProgressBar.setAlignmentY(CENTER_ALIGNMENT);
 			downloadProgressBar.setStringPainted(true);
-			downloadProgressBar.setString(TEXTOS.getTexto(18));
+			downloadProgressBar.setString(TEXTOS.pegarTexto(18));
 
 			lblProgressBar = new JLabel("");
 			lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
