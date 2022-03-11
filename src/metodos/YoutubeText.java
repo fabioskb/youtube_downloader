@@ -84,10 +84,10 @@ public class YoutubeText {
 			"<html><center>Pegando o título...   </center></htm>",      // [33] lblResults pegando título
 			"<html><center>Não é possível iniciar a pesquisa com<br>"
 			+ "download em andamento.</center></html>",                 // [34] Falha ao iniciar a ppesquisa com download em andamento 
-			"<html><center>Cancelar</center></html>",                    // [35] btnCancelar texto
+			"<html><center>Cancelar<br>Download</center></html>",                    // [35] btnCancelar texto
 			"<html><center>Cancela o download atual</center></html>",    // [36] btnCancelar TootTip
 			"<html><center>Download Cancelado!   </center></html>",      // [37] lblResultado download cancelado texto 
-			"Baixando o áudio do vídeo",                                 // [38] downloadProgressBar baixando o audio do video
+			"Baixando o áudio do vídeo...",                              // [38] downloadProgressBar baixando o audio do video
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -168,10 +168,10 @@ public class YoutubeText {
 			"<html><center>Getting title...   </center></htm>",    // [33] lblResults getting title
 			"<html><center>Cannot start search with<br>"
 			+ "download in progress.</center></html>",             // [34] Failed to start psearch with download in progress
-			"<html><center>Cancel</center></html>",                 // [35] btnCancel text 
+			"<html><center>Cancel<br>Download</center></html>",     // [35] btnCancel text 
 			"<html><center>Cancel current download</center></html>",// [36] btnCancel TootTip
 			"<html><center>Download Cancelled!   </center></html>", // [37] lblResultado canceled download text
-			"Downloading audio from video",                         // [38] progressbar aixando o audio do video
+			"Downloading audio from video...",                      // [38] progressbar aixando o audio do video
 			};
 	
 	public YoutubeText(String idioma) {

@@ -220,12 +220,12 @@ public abstract class YoutubeTela extends JFrame {
 			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
 			downloadProgressBar.setAlignmentY(CENTER_ALIGNMENT);
 			downloadProgressBar.setStringPainted(true);
-			downloadProgressBar.setString(TEXTOS.pegarTexto(18));
 
 			lblProgressBar = new JLabel("");
 			lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
 			lblProgressBar.setAlignmentY(CENTER_ALIGNMENT);
 			lblProgressBar.setOpaque(true);
+			lblProgressBar.setText(TEXTOS.pegarTexto(18));
 
 			pnlRodape.add(lblResultado);
 			pnlRodape.add(downloadProgressBar);

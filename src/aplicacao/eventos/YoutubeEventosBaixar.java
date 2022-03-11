@@ -78,16 +78,19 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 							getBtnCancelar().setVisible(true);
 						}
 						if ((!line.startsWith("[download] 100%") && !line.contains("Deleting"))) {
-							String progressPercentdownload = "";
+							String progressPercentdownload = "", progressPercentdownload2 = "";
 							if (line.contains("%")) {
 								getDownloadProgressBar().setVisible(true);
 								getLblProgressBar().setVisible(true);
 								getLblResultado().setVisible(false);
-								progressPercentdownload = " " + line.substring(line.indexOf(" "), line.lastIndexOf("s ")).strip();
-								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload.substring(progressPercentdownload.indexOf(" "), progressPercentdownload.indexOf(".")).strip()));
-								getLblProgressBar().setText(progressPercentdownload + "s");
-							} else if (getLblProgressBar().getText().contains("100.0%")) {
-								getDownloadProgressBar().setString(TEXTOS.pegarTexto(38));
+								progressPercentdownload = line.substring(line.indexOf(" "), line.indexOf(".")).strip();
+								progressPercentdownload2 = "  " + line.substring(line.indexOf(" ")) + "  ";
+								getDownloadProgressBar().setString(progressPercentdownload2);
+								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload.strip()));
+								if (getDownloadProgressBar().getString().contains("100.0%")) CMD.sleep(0.5);
+							} else if (getDownloadProgressBar().getString().contains("100.0%")) {
+								getDownloadProgressBar().setValue(0);
+								getLblProgressBar().setText(TEXTOS.pegarTexto(38));
 								downloadDone = true;
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {
@@ -152,7 +155,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 					getLblResultado().setVisible(true);
 					if (e.toString().contains("Stream closed")) {
 						getLblResultado().setText(TEXTOS.pegarTexto(37));
-						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+						getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
 						setModificaBgLabelResultado(false);
 						getDownloadProgressBar().setVisible(false);
 						return;	
