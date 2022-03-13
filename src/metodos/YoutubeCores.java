@@ -47,7 +47,7 @@ public class YoutubeCores {
 	 * [9] Concluído com sucesso, [10] Área de texto (link, pesquisa e lista).
 	 * @return Retorna uma cor de cores[].
 	 */
-	public Color getCor(boolean noite, int indiceCor) {
+	public Color pegarCor(boolean noite, int indiceCor) {
 		if (noite) return Color.decode(coresNight[indiceCor]);
 		else return Color.decode(cores[indiceCor]);
 		

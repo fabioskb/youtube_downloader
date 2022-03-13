@@ -15,11 +15,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
 
 import metodos.YoutubeArquivo;
@@ -51,6 +55,10 @@ public abstract class YoutubeTela extends JFrame {
 	private JButton btnBaixa;
 	private JButton btnCancelar;
 	
+	private JMenuBar barraMenu;
+	private JMenu menuFile;
+	private JMenuItem itemMenuExit;
+	
 	private JLabel lblResultado;
 	
 	private JPanel pnlTopo;
@@ -66,7 +74,9 @@ public abstract class YoutubeTela extends JFrame {
 	private JPanel pnlCentro4;
 	private JScrollPane pnlExtra;
 	
-	//private JPanel pnlDireito;
+	private JPanel pnlDireita;
+	private JPanel pnlDireita1;
+	private JPanel pnlDireita2;
 	
 	private JPanel pnlRodape;
 	private JProgressBar downloadProgressBar;
@@ -114,32 +124,48 @@ public abstract class YoutubeTela extends JFrame {
 		return pnlTopo;
 	}
 
-	/**
-	 * Configura e retorna o Painel esquerdo da aplicação
-	 * 
-	 * @return JPanel pnlEsquerda
-	 */
+	
 	public JPanel getPnlEsquerda() {
-		if (pnlEsquerda == null) {
-			pnlEsquerda = new JPanel(new GridLayout(2, 1));
-			pnlEsquerda1 = new JPanel(new FlowLayout());
-			pnlEsquerda2 = new JPanel(new FlowLayout());
+		this.pnlEsquerda = new JPanel(new FlowLayout());
+
+		this.barraMenu = new JMenuBar();
+		barraMenu.setSize(40, 40);
+
+		this.menuFile = new JMenu("Menu");
+		this.itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
+		itemMenuExit.setToolTipText(TEXTOS.pegarTexto(40));
+
+		menuFile.add(itemMenuExit);
+		barraMenu.add(menuFile);
+
+		pnlEsquerda.add(barraMenu);
+
+		return this.pnlEsquerda;
+	}
+
+	public JPanel getPnlDireita() {
+		if (pnlDireita == null) {
+			pnlDireita = new JPanel(new GridLayout(2, 1));
+			pnlDireita1 = new JPanel(new FlowLayout());
+			pnlDireita2 = new JPanel(new FlowLayout());
 
 			checkVideo = new JCheckBox(TEXTOS.pegarTexto(2));
 			checkAudio = new JCheckBox(TEXTOS.pegarTexto(3));
+			checkVideo.setToolTipText(TEXTOS.pegarTexto(14));
+			checkAudio.setToolTipText(TEXTOS.pegarTexto(15));
 			btnModoNoite = new JToggleButton(TEXTOS.pegarTexto(1));
 			btnModoNoite.setToolTipText(TEXTOS.pegarTexto(9));
 			btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
 
-			pnlEsquerda1.add(btnModoNoite);
-			pnlEsquerda2.add(checkVideo);
-			pnlEsquerda2.add(LBL_VAZIO);
-			pnlEsquerda2.add(checkAudio);
+			pnlDireita1.add(btnModoNoite);
+			pnlDireita2.add(checkVideo);
+			pnlDireita2.add(LBL_VAZIO);
+			pnlDireita2.add(checkAudio);
 
-			pnlEsquerda.add(pnlEsquerda1);
-			pnlEsquerda.add(pnlEsquerda2);
+			pnlDireita.add(pnlDireita1);
+			pnlDireita.add(pnlDireita2);
 		}
-		return pnlEsquerda;
+		return pnlDireita;
 	}
 
 	/**
@@ -170,8 +196,6 @@ public abstract class YoutubeTela extends JFrame {
 			lblLink.setIcon(IMAGEM.pegarIcon("/imagens/link.png"));
 			txtLink.setToolTipText(TEXTOS.pegarTexto(10));
 			txtPesquisa.setToolTipText(TEXTOS.pegarTexto(11));
-			checkVideo.setToolTipText(TEXTOS.pegarTexto(14));
-			checkAudio.setToolTipText(TEXTOS.pegarTexto(15));
 			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
 			btnBaixa.setToolTipText(TEXTOS.pegarTexto(23));
 			btnPesquisa.setToolTipText(TEXTOS.pegarTexto(13));
@@ -234,6 +258,16 @@ public abstract class YoutubeTela extends JFrame {
 		return pnlRodape;
 	}
 	////////////
+
+	public JMenu getMenuFile() { return menuFile; }
+
+	public void setMenuFile(JMenu menuFile) { this.menuFile = menuFile; }
+
+	public JMenuItem getItemMenuExit() { return this.itemMenuExit; }
+
+	public void setItemMenuExit(JMenuItem itemMenuExit) { this.itemMenuExit = itemMenuExit; }
+
+	public JMenuBar getBarraMenu() { return barraMenu; }
 
 	public void setCont(int contador) { this.contador = contador; }
 
@@ -333,9 +367,9 @@ public abstract class YoutubeTela extends JFrame {
 
 	public void setDiretorioPadrao(YoutubeArquivo diretorioPadrao) { this.diretorioPadrao = diretorioPadrao; }
 
-	public JPanel getPnlEsquerda1() { return pnlEsquerda1; }
+	public JPanel getPnlDireita1() { return pnlDireita1; }
 
-	public JPanel getPnlEsquerda2() { return pnlEsquerda2; }
+	public JPanel getPnlDireita2() { return pnlDireita2; }
 
 	public JPanel getPnlCentro1() { return pnlCentro1; }
 
@@ -348,4 +382,5 @@ public abstract class YoutubeTela extends JFrame {
 	public JPanel getPnlCentro4() { return pnlCentro4; }
 
 	public JScrollPane getPnlExtra() { return pnlExtra; }
+
 }

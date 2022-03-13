@@ -4,14 +4,13 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorEvent;
 
 /**
  * Classe responsável pelo método configurarCores(), que configura 
  * a maioria das cores dos componentes na aplicação e sobrescreve
- * os eventos da classe abstrata YoutubeTelaEventos.
- * Herda TelaEventos.
  */
 public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
     /**
@@ -21,55 +20,55 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
 	public void configurarCores(boolean modLblResultadoBg) {
-		getLblBanner().setBackground(CORES.getCor(isNoturno(), 0));
-		getLblBanner().setForeground(CORES.getCor(isNoturno(), 1));
+		getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
+		getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
 
 		getLblDescricao().setOpaque(true);
-		getLblDescricao().setBackground(CORES.getCor(isNoturno(), 4));
-		getLblDescricao().setForeground(CORES.getCor(isNoturno(), 6));
-		getLblDescricao().setBorder(new LineBorder(CORES.getCor(isNoturno(), 0)));
+		getLblDescricao().setBackground(CORES.pegarCor(isNoturno(), 4));
+		getLblDescricao().setForeground(CORES.pegarCor(isNoturno(), 6));
+		getLblDescricao().setBorder(new LineBorder(CORES.pegarCor(isNoturno(), 0)));
 
 		getTxtLink().setOpaque(true);
-		getTxtLink().setBackground(CORES.getCor(isNoturno(), 10));
+		getTxtLink().setBackground(CORES.pegarCor(isNoturno(), 10));
 		getTxtPesquisa().setOpaque(true);
-		getTxtPesquisa().setBackground(CORES.getCor(isNoturno(), 10));
+		getTxtPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
 		getLstPesquisa().setOpaque(true);
-		getLstPesquisa().setBackground(CORES.getCor(isNoturno(), 10));
+		getLstPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
 
-		if (modLblResultadoBg) getLblResultado().setBackground(CORES.getCor(isNoturno(), 3));
+		getDownloadProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
+		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 4));
+		getLblProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
+		getLblProgressBar().setForeground(CORES.pegarCor(isNoturno(), 4));
+
+		if (modLblResultadoBg) getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 3));
 		else getLblResultado().setBackground(getLblResultado().getBackground());
-		getLblResultado().setForeground(CORES.getCor(isNoturno(), 6));
+		getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
 
-		Component[] btns = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
+		
+		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
 		setCont(0);
-		for (Component b : btns) {
+		for (Component button : buttons) {
 			if (getCont() >= 4 && getCont() <= 5) {
 				// Seta Background checkBoxes
-				b.setBackground(CORES.getCor(isNoturno(), 3));
-			  // Seta Background e Foreground de todos os Botões
+				button.setBackground(CORES.pegarCor(isNoturno(), 3));
+				// Seta Background e Foreground de todos os Botões
 			} else if (getCont() == 0 && getBtnModoNoite().isSelected())
-				b.setBackground(CORES.getCor(isNoturno(), 6));
-			else
-				b.setBackground(CORES.getCor(isNoturno(), 5));
-			b.setForeground(CORES.getCor(isNoturno(), 6));
-			b.setFocusable(false);
-			setCont(getCont() + 1);
-		}
-
-		getPnlTopo().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlEsquerda().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlEsquerda1().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlEsquerda2().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlCentro().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlCentro1().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlCentro2().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlCentro3().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlCentro4().setBackground(CORES.getCor(isNoturno(), 3));
-		getPnlRodape().setBackground(CORES.getCor(isNoturno(), 3));
-		getDownloadProgressBar().setBackground(CORES.getCor(isNoturno(), 3));
-		getDownloadProgressBar().setForeground(CORES.getCor(isNoturno(), 11));
-		getLblProgressBar().setBackground(CORES.getCor(isNoturno(), 3));
-		getLblProgressBar().setForeground(CORES.getCor(isNoturno(), 11));
+				button.setBackground(CORES.pegarCor(isNoturno(), 6));
+				else
+				button.setBackground(CORES.pegarCor(isNoturno(), 5));
+				button.setForeground(CORES.pegarCor(isNoturno(), 6));
+				button.setFocusable(false);
+				setCont(getCont() + 1);
+			}
+			
+			JPanel[] paineis = {
+				getPnlTopo(), getPnlEsquerda(), getPnlDireita(), getPnlDireita1(), getPnlDireita2(), 
+				getPnlCentro(), getPnlCentro1(), getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), 
+				getPnlRodape()
+			};
+			for (JPanel jPanel : paineis) {
+				jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+			}	
 	}
 
     @Override
@@ -92,4 +91,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
     protected void lstPesquisaMouseClickItem(MouseEvent ev) {}
 	@Override
 	protected void btnCancelarClick(ActionEvent ev) {}
+	@Override
+	protected void itemMenuExitClick(ActionEvent ev) {}
 }

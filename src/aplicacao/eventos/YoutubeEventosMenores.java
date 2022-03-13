@@ -51,5 +51,10 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 			getBtnBaixa().setVisible(true);
 		}
 	}
+
+	@Override
+	protected void itemMenuExitClick(ActionEvent ev) {
+		System.exit(0);
+	}
     
 }

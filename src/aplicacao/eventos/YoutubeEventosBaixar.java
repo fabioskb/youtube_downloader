@@ -11,7 +11,7 @@ import metodos.YoutubeArquivo;
  * Classe responsável pelo evento que configura o Download e o executa.
  * Além de tratar os erros.
  */
-public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
+public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
     private boolean downloadDone = false;
 
     @Override
@@ -25,12 +25,12 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 				setIndex(getLstPesquisa().getSelectedIndex());
 				link = getLinks()[getIndex()];
 			} else if (!isVideo() && !isAudio()) {
-				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 8));
 				getLblResultado().setText(TEXTOS.pegarTexto(20));
 				setModificaBgLabelResultado(false);
 				return;
 			} else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
-				getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 8));
 				getLblResultado().setText(TEXTOS.pegarTexto(19));
 				setModificaBgLabelResultado(false);
 				return;
@@ -96,7 +96,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 								if (line.contains("[download] " + getPastaPrincipal())) {
 									getLblResultado().setVisible(true);
 									getLblResultado().setText(TEXTOS.pegarTexto(30));
-									getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+									getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 8));
 									setModificaBgLabelResultado(false);
 								} else if (line.startsWith("[youtube]")) {
 									setModificaBgLabelResultado(true);
@@ -114,7 +114,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 							getLblProgressBar().setVisible(false);
 							getLblResultado().setVisible(true);
 							getLblResultado().setText(TEXTOS.pegarTexto(22));
-							getLblResultado().setBackground(CORES.getCor(isNoturno(), 9));
+							getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 9));
 							setModificaBgLabelResultado(false);
 							getBtnCancelar().setVisible(false);
 							getDownloadProgressBar().setVisible(false);
@@ -131,11 +131,11 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 						while ((line = getRead2().readLine()) != null) {
 							if (line.contains("DownloadError:")) {
 								setModificaBgLabelResultado(false);
-								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+								getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
 								getLblResultado().setText(TEXTOS.pegarTexto(21));
 							} else {
 								getLblResultado().setText(String.format("<html>%s</html>", line));
-								getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+								getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
 								setModificaBgLabelResultado(false);
 							}
 
@@ -155,13 +155,13 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 					getLblResultado().setVisible(true);
 					if (e.toString().contains("Stream closed")) {
 						getLblResultado().setText(TEXTOS.pegarTexto(37));
-						getLblResultado().setBackground(CORES.getCor(isNoturno(), 8));
+						getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 8));
 						setModificaBgLabelResultado(false);
 						getDownloadProgressBar().setVisible(false);
 						return;	
 					} else {
 						getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
-						getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+						getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
 						setModificaBgLabelResultado(false);
 						getDownloadProgressBar().setVisible(false);
 						return;
@@ -171,7 +171,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelEsquerdo {
 			if (getCmdLineSaida().equals("")) {
 				getLblProgressBar().setVisible(false);
 				getLblResultado().setVisible(true);
-				getLblResultado().setBackground(CORES.getCor(isNoturno(), 7));
+				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.pegarTexto(21));
 				setModificaBgLabelResultado(false);
 			}

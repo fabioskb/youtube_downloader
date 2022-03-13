@@ -57,6 +57,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 			this.getContentPane().add(getPnlTopo(), BorderLayout.NORTH);
 			this.getContentPane().add(getPnlEsquerda(), BorderLayout.WEST);
 			this.getContentPane().add(getPnlCentro(), BorderLayout.CENTER);
+			this.getContentPane().add(getPnlDireita(), BorderLayout.EAST);
 			this.getContentPane().add(getPnlRodape(), BorderLayout.SOUTH);
 
 			this.getCheckVideo().setSelected(true);
@@ -67,9 +68,11 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 				this.getBtnModoNoite().setSelected(true);
 			}
 
+			this.setModificaBgLabelResultado(true);
 			this.getBtnCancelar().setVisible(false);
 			this.getDownloadProgressBar().setVisible(false);
 			this.getLblProgressBar().setVisible(false);
+			this.setIndex(20);
 		}
 	}
 }

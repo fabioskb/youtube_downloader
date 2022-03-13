@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 /**
  * Classe responsável pelos eventos dos botões do painel esquerdo (modo noturno, áudio e vídeo).
  */
-public class YoutubeEventosPainelEsquerdo extends YoutubeEventosAtributos {
+public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
     
 
     @Override
