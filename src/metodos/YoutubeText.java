@@ -125,7 +125,7 @@ public class YoutubeText {
 			"<html>Select to download audio (mp3)</html>",    // [15] checkAudio toolTip
 			"<html><center>Searching...&nbsp;</center></html>",    // [16] lblResultado texto Pesquisando...
 			"<html><center>Failed search!!!&nbsp;&nbsp;</center></html> ",// [17] lblResultado Falha na pesquisa
-			"Downloading...",                                   // [18] lblresultado Baixando...
+			" Downloading...",                                   // [18] lblresultado Baixando...
 			
 			"<html><center>Select an item from the list or add an valid link&nbsp;&nbsp;<br/>"
 			+ " <strong>PLEASE!!!&nbsp;&nbsp;</strong></center></html> ",// [19] lblResultado aviso item não selecionado
@@ -172,7 +172,7 @@ public class YoutubeText {
 			"<html><center>Cancel<br>Download</center></html>",     // [35] btnCancel text 
 			"<html><center>Cancel current download</center></html>",// [36] btnCancel TootTip
 			"<html><center>Download Cancelled!   </center></html>", // [37] lblResultado canceled download text
-			"Downloading audio from video...",                      // [38] progressbar aixando o audio do video
+			" Downloading audio from video...",                      // [38] progressbar aixando o audio do video
 			"Exit", /* [39] Exit menu item text */ "Exit Application", // [40] Exit menu item tooltip
 			};
 	

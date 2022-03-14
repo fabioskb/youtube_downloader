@@ -17,6 +17,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
     @Override
 	protected void btnBaixarClick(ActionEvent ev) {
 		Thread download = new Thread(() -> {
+			downloadDone = false;
 			setCmdLineSaida(""); 
 			String link = getTxtLink().getText();
 
@@ -81,16 +82,17 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 							String progressPercentdownload = "", progressPercentdownload2 = "";
 							if (line.contains("%")) {
 								getDownloadProgressBar().setVisible(true);
-								getLblProgressBar().setVisible(true);
+								getLblProgressBar().setVisible(false);
 								getLblResultado().setVisible(false);
 								progressPercentdownload = line.substring(line.indexOf(" "), line.indexOf(".")).strip();
-								progressPercentdownload2 = "  " + line.substring(line.indexOf(" ")) + "  ";
-								getDownloadProgressBar().setString(progressPercentdownload2);
+								progressPercentdownload2 = line.substring(line.indexOf(" ")) + "  ";
+								if (!downloadDone) getDownloadProgressBar().setString(TEXTOS.pegarTexto(18) + progressPercentdownload2);
 								getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload.strip()));
-								if (getDownloadProgressBar().getString().contains("100.0%")) CMD.sleep(0.5);
-							} else if (getDownloadProgressBar().getString().contains("100.0%")) {
+								if (getDownloadProgressBar().getString().contains("100.0%")) CMD.sleep(0.2);
+							} else if (getDownloadProgressBar().getValue() == 100) {
 								getDownloadProgressBar().setValue(0);
-								getLblProgressBar().setText(TEXTOS.pegarTexto(38));
+								getDownloadProgressBar().setString(TEXTOS.pegarTexto(38) + progressPercentdownload2);
+								//getLblProgressBar().setText(TEXTOS.pegarTexto(38));
 								downloadDone = true;
 							} else {
 								if (line.contains("[download] " + getPastaPrincipal())) {

@@ -44,31 +44,30 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		else getLblResultado().setBackground(getLblResultado().getBackground());
 		getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
 
-		
+		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
+		getMenuFile().setForeground(CORES.pegarCor(isNoturno(), 6));
+
 		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
 		setCont(0);
 		for (Component button : buttons) {
-			if (getCont() >= 4 && getCont() <= 5) {
-				// Seta Background checkBoxes
-				button.setBackground(CORES.pegarCor(isNoturno(), 3));
-				// Seta Background e Foreground de todos os Botões
-			} else if (getCont() == 0 && getBtnModoNoite().isSelected())
+			if (getCont() == 0 && getBtnModoNoite().isSelected())
 				button.setBackground(CORES.pegarCor(isNoturno(), 6));
-				else
-				button.setBackground(CORES.pegarCor(isNoturno(), 5));
+			else {
+				button.setBackground(CORES.pegarCor(isNoturno(), 5));	
 				button.setForeground(CORES.pegarCor(isNoturno(), 6));
 				button.setFocusable(false);
-				setCont(getCont() + 1);
 			}
-			
-			JPanel[] paineis = {
-				getPnlTopo(), getPnlEsquerda(), getPnlDireita(), getPnlDireita1(), getPnlDireita2(), 
-				getPnlCentro(), getPnlCentro1(), getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), 
-				getPnlRodape()
-			};
-			for (JPanel jPanel : paineis) {
-				jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
-			}	
+			setCont(getCont() + 1);
+		}
+		
+		JPanel[] paineis = {
+			getPnlTopo(), getPnlEsquerda(), getPnlDireita(), getPnlDireita1(), getPnlDireita2(), 
+			getPnlCentro(), getPnlCentro1(), getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), 
+			getPnlRodape()
+		};
+		for (JPanel jPanel : paineis) {
+			jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+		}
 	}
 
     @Override

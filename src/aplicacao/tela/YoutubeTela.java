@@ -1,6 +1,7 @@
 package aplicacao.tela;
 
 import java.awt.Component;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -23,8 +24,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.border.LineBorder;
 
 import metodos.YoutubeArquivo;
 import metodos.YoutubeComando;
@@ -64,8 +63,8 @@ public abstract class YoutubeTela extends JFrame {
 	private JPanel pnlTopo;
 	
 	private JPanel pnlEsquerda;
-	private JPanel pnlEsquerda1;
-	private JPanel pnlEsquerda2;
+	//private JPanel pnlEsquerda1;
+	//private JPanel pnlEsquerda2;
 	
 	private JPanel pnlCentro;
 	private JPanel pnlCentro1;
@@ -88,6 +87,7 @@ public abstract class YoutubeTela extends JFrame {
 	private int contador;
 	private YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
 
+	private final BorderLayout borderLayout = new BorderLayout();
 	protected static final String USUARIO = System.getProperty("user.name");
 	protected static final String SISTEMA = System.getProperty("os.name");
 	protected static final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
@@ -126,10 +126,9 @@ public abstract class YoutubeTela extends JFrame {
 
 	
 	public JPanel getPnlEsquerda() {
-		this.pnlEsquerda = new JPanel(new FlowLayout());
+		pnlEsquerda = new JPanel(new FlowLayout());
 
 		this.barraMenu = new JMenuBar();
-		barraMenu.setSize(40, 40);
 
 		this.menuFile = new JMenu("Menu");
 		this.itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
@@ -140,7 +139,60 @@ public abstract class YoutubeTela extends JFrame {
 
 		pnlEsquerda.add(barraMenu);
 
-		return this.pnlEsquerda;
+		return pnlEsquerda;
+	}
+
+	/**
+	 * Configura e retorna o Painel central da aplicação
+	 * 
+	 * @return JPanel pnlCentro
+	 */
+	public JPanel getPnlCentro() {
+
+		// LineBorder lstBorda = new LineBorder(getForeground());
+
+		if (pnlCentro == null) {
+			pnlCentro = new JPanel(new GridLayout(4, 1));
+			Component[] pnls = { pnlCentro1 = new JPanel(new FlowLayout()), pnlCentro2 = new JPanel(new FlowLayout()), pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()) };
+
+			Component[] comps = { lblLink = new JLabel(""),
+					txtLink = new JTextField(TEXTOS.pegarTexto(7), 38),
+					txtPesquisa = new JTextField(TEXTOS.pegarTexto(8), 25),
+					btnPesquisa = new JButton(TEXTOS.pegarTexto(5)),
+					lstPesquisa = new JList<>(lstTitulos),
+					btnBaixa = new JButton(TEXTOS.pegarTexto(6)),
+					btnCancelar = new JButton(TEXTOS.pegarTexto(35)) };
+
+			lstPesquisa.setToolTipText(TEXTOS.pegarTexto(24));
+			lstPesquisa.setOpaque(false);
+			lblLink.setOpaque(false);
+			lblLink.setIcon(IMAGEM.pegarIcon("/imagens/link.png"));
+			txtLink.setToolTipText(TEXTOS.pegarTexto(10));
+			txtPesquisa.setToolTipText(TEXTOS.pegarTexto(11));
+			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
+			btnBaixa.setToolTipText(TEXTOS.pegarTexto(23));
+			btnPesquisa.setToolTipText(TEXTOS.pegarTexto(13));
+			btnPesquisa.setIcon(IMAGEM.pegarIcon("/imagens/system_search.png"));
+			btnCancelar.setIcon(IMAGEM.pegarIcon("/imagens/cancel.png"));
+			btnCancelar.setToolTipText(TEXTOS.pegarTexto(36));
+
+			pnlExtra = new JScrollPane();
+			pnlExtra.setViewportView(lstPesquisa);
+
+			for (int i = 0; i < comps.length; i++) {
+				if (i <= 1)
+					pnlCentro1.add(comps[i]);
+				else if (i <= 3)
+					pnlCentro2.add(comps[i]);
+				else if (i == 4)
+					pnlCentro3.add(pnlExtra);
+				else
+					pnlCentro4.add(comps[i]);
+			}
+			for (Component c : pnls)
+				pnlCentro.add(c);
+		}
+		return pnlCentro;
 	}
 
 	public JPanel getPnlDireita() {
@@ -161,66 +213,10 @@ public abstract class YoutubeTela extends JFrame {
 			pnlDireita2.add(checkVideo);
 			pnlDireita2.add(LBL_VAZIO);
 			pnlDireita2.add(checkAudio);
-
 			pnlDireita.add(pnlDireita1);
 			pnlDireita.add(pnlDireita2);
 		}
 		return pnlDireita;
-	}
-
-	/**
-	 * Configura e retorna o Painel central da aplicação
-	 * 
-	 * @return JPanel pnlCentro
-	 */
-	public JPanel getPnlCentro() {
-
-		LineBorder lstBorda = new LineBorder(getForeground());
-
-		if (pnlCentro == null) {
-			pnlCentro = new JPanel(new GridLayout(4, 1));
-			Component[] pnls = { pnlCentro1 = new JPanel(new FlowLayout()), pnlCentro2 = new JPanel(new FlowLayout()),
-					pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()) };
-
-			Component[] comps = { lblLink = new JLabel(""),
-					txtLink = new JTextField(TEXTOS.pegarTexto(7), 48),
-					txtPesquisa = new JTextField(TEXTOS.pegarTexto(8), 25),
-					btnPesquisa = new JButton(TEXTOS.pegarTexto(5)),
-					lstPesquisa = new JList<>(lstTitulos),
-					btnBaixa = new JButton(TEXTOS.pegarTexto(6)),
-					btnCancelar = new JButton(TEXTOS.pegarTexto(35)) };
-
-			lstPesquisa.setBorder(lstBorda);
-			lstPesquisa.setToolTipText(TEXTOS.pegarTexto(24));
-			lblLink.setOpaque(false);
-			lblLink.setIcon(IMAGEM.pegarIcon("/imagens/link.png"));
-			txtLink.setToolTipText(TEXTOS.pegarTexto(10));
-			txtPesquisa.setToolTipText(TEXTOS.pegarTexto(11));
-			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
-			btnBaixa.setToolTipText(TEXTOS.pegarTexto(23));
-			btnPesquisa.setToolTipText(TEXTOS.pegarTexto(13));
-			btnPesquisa.setIcon(IMAGEM.pegarIcon("/imagens/system_search.png"));
-			btnCancelar.setIcon(IMAGEM.pegarIcon("/imagens/cancel.png"));
-			btnCancelar.setToolTipText(TEXTOS.pegarTexto(36));
-
-			pnlExtra = new JScrollPane();
-			pnlExtra.setViewportView(lstPesquisa);
-			pnlExtra.setSize(80, 200);
-
-			for (int i = 0; i < comps.length; i++) {
-				if (i <= 1)
-					pnlCentro1.add(comps[i]);
-				else if (i <= 3)
-					pnlCentro2.add(comps[i]);
-				else if (i == 4)
-					pnlCentro3.add(pnlExtra);
-				else
-					pnlCentro4.add(comps[i]);
-			}
-			for (Component c : pnls)
-				pnlCentro.add(c);
-		}
-		return pnlCentro;
 	}
 
 	/**
@@ -259,6 +255,8 @@ public abstract class YoutubeTela extends JFrame {
 	}
 	////////////
 
+	public BorderLayout getBorderLayout() { return borderLayout; }
+	
 	public JMenu getMenuFile() { return menuFile; }
 
 	public void setMenuFile(JMenu menuFile) { this.menuFile = menuFile; }
