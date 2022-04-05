@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+import javax.swing.plaf.DimensionUIResource;
 
 import aplicacao.eventos.YoutubeEventosMenores;
 
@@ -50,11 +51,12 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 			this.setTitle("YouTube Downloader");
 			this.setResizable(true);
 			this.setSize(920, 680);
+			this.setMinimumSize(new DimensionUIResource(760, 560));
 			this.setLocationRelativeTo(null);
 			this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
 
-			getBorderLayout().setHgap(2);
-			getBorderLayout().setVgap(2);
+			getBorderLayout().setHgap(1);
+			getBorderLayout().setVgap(1);
 			this.getContentPane().setLayout(getBorderLayout());
 
 			this.getContentPane().add(getPnlTopo(), BorderLayout.NORTH);
@@ -66,7 +68,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 			this.getCheckVideo().setSelected(true);
 			this.setVideo(true);
 
-			if (this.HORA >= 18 || this.HORA <= 5) {
+			if (this.HORA >= 18 || this.HORA < 5) {
 				this.getBtnModoNoite().setSelected(true);
 				this.setNoturno(true);
 			}

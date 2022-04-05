@@ -1,7 +1,7 @@
 package aplicacao.tela;
 
-import java.awt.Component;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -39,6 +39,7 @@ public abstract class YoutubeTela extends JFrame {
 	private JLabel lblBanner;
 	private JLabel lblDescricao;
 	protected static final JLabel LBL_VAZIO = new JLabel("                ");
+	protected static final JLabel LBL_VAZIO1 = new JLabel("                ");
 	
 	private JToggleButton btnModoNoite;
 	private JCheckBox checkVideo, checkAudio;
@@ -128,10 +129,11 @@ public abstract class YoutubeTela extends JFrame {
 	public JPanel getPnlEsquerda() {
 		pnlEsquerda = new JPanel(new FlowLayout());
 
-		this.barraMenu = new JMenuBar();
+		barraMenu = new JMenuBar();
 
-		this.menuFile = new JMenu("Menu");
-		this.itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
+		menuFile = new JMenu("Menu");
+		
+		itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
 		itemMenuExit.setToolTipText(TEXTOS.pegarTexto(40));
 
 		menuFile.add(itemMenuExit);
@@ -178,7 +180,7 @@ public abstract class YoutubeTela extends JFrame {
 
 			pnlExtra = new JScrollPane();
 			pnlExtra.setViewportView(lstPesquisa);
-
+			
 			for (int i = 0; i < comps.length; i++) {
 				if (i <= 1)
 					pnlCentro1.add(comps[i]);
@@ -186,6 +188,7 @@ public abstract class YoutubeTela extends JFrame {
 					pnlCentro2.add(comps[i]);
 				else if (i == 4)
 					pnlCentro3.add(pnlExtra);
+					//pnlCentro3.add(comps[i]);
 				else
 					pnlCentro4.add(comps[i]);
 			}
@@ -211,7 +214,6 @@ public abstract class YoutubeTela extends JFrame {
 
 			pnlDireita1.add(btnModoNoite);
 			pnlDireita2.add(checkVideo);
-			pnlDireita2.add(LBL_VAZIO);
 			pnlDireita2.add(checkAudio);
 			pnlDireita.add(pnlDireita1);
 			pnlDireita.add(pnlDireita2);

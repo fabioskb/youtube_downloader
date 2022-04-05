@@ -20,6 +20,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
 	public void configurarCores(boolean modLblResultadoBg) {
+		
 		getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
 		getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
 
@@ -45,7 +46,8 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
 
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
-		getMenuFile().setForeground(CORES.pegarCor(isNoturno(), 6));
+		getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));
+		getMenuFile().setForeground(CORES.pegarCor(isNoturno(), 4));
 
 		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
 		setCont(0);
@@ -61,9 +63,9 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		}
 		
 		JPanel[] paineis = {
-			getPnlTopo(), getPnlEsquerda(), getPnlDireita(), getPnlDireita1(), getPnlDireita2(), 
-			getPnlCentro(), getPnlCentro1(), getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), 
-			getPnlRodape()
+			getPnlTopo(), getPnlEsquerda(), getPnlCentro(), getPnlCentro1(), 
+			getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(), 
+			getPnlDireita1(), getPnlDireita2(), getPnlRodape()
 		};
 		for (JPanel jPanel : paineis) {
 			jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
