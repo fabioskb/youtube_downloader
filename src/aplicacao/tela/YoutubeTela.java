@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,8 +101,7 @@ public abstract class YoutubeTela extends JFrame {
 	protected static YoutubeImage IMAGEM = new YoutubeImage();
 	protected static final YoutubeCores CORES = new YoutubeCores();
 	protected static final String IDIOMA = Locale.getDefault().getDisplayLanguage();
-	protected final Calendar CALENDARIO = Calendar.getInstance(Locale.getDefault());
-	protected final int HORA = CALENDARIO.get(Calendar.HOUR_OF_DAY);
+	protected final int HORA = LocalTime.now().getHour();
 	protected static final YoutubeText TEXTOS = new YoutubeText(IDIOMA);
 	protected static final YoutubeComando CMD = new YoutubeComando();
 
