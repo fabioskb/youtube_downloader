@@ -3,6 +3,7 @@ package aplicacao.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 
@@ -55,6 +56,16 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 	@Override
 	protected void itemMenuExitClick(ActionEvent ev) {
 		System.exit(0);
+	}
+
+	@Override
+	protected void itemMenuTutorialClick(ActionEvent ev) {
+		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(45), "Tutorial", JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
+	}
+	
+	@Override
+	protected void itemMenuSobreClick(ActionEvent ev) {
+		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(46), TEXTOS.pegarTexto(47), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 	}
     
 }

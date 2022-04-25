@@ -21,6 +21,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -55,10 +56,6 @@ public abstract class YoutubeTela extends JFrame {
 	private JButton btnBaixa;
 	private JButton btnCancelar;
 	
-	private JMenuBar barraMenu;
-	private JMenu menuFile;
-	private JMenuItem itemMenuExit;
-	
 	private JLabel lblResultado;
 	
 	private JPanel pnlTopo;
@@ -66,6 +63,11 @@ public abstract class YoutubeTela extends JFrame {
 	private JPanel pnlEsquerda;
 	//private JPanel pnlEsquerda1;
 	//private JPanel pnlEsquerda2;
+	private JMenuBar barraMenu;
+	private JMenu menuFile;
+	private JMenuItem itemMenuExit;
+	private JMenuItem itemMenuTutorial;
+	private JMenuItem itemMenuSobre;
 	
 	private JPanel pnlCentro;
 	private JPanel pnlCentro1;
@@ -81,7 +83,9 @@ public abstract class YoutubeTela extends JFrame {
 	private JPanel pnlRodape;
 	private JProgressBar downloadProgressBar;
 	private JLabel lblProgressBar;
-	
+
+	private JRootPane pnlPadrao;
+
 	private boolean noturno, video, audio;
 	private String pastaPrincipal;
 	private String installYoutubeSearch, installYoutubeDl;
@@ -127,15 +131,21 @@ public abstract class YoutubeTela extends JFrame {
 
 	
 	public JPanel getPnlEsquerda() {
-		pnlEsquerda = new JPanel(new FlowLayout());
+		pnlEsquerda = new JPanel();
 
 		barraMenu = new JMenuBar();
-
+		barraMenu.setOpaque(false);
 		menuFile = new JMenu("Menu");
 		
+		itemMenuTutorial = new JMenuItem(TEXTOS.pegarTexto(41));
+		itemMenuTutorial.setToolTipText(TEXTOS.pegarTexto(42));
+		itemMenuSobre = new JMenuItem(TEXTOS.pegarTexto(43));
+		itemMenuSobre.setToolTipText(TEXTOS.pegarTexto(44));
 		itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
 		itemMenuExit.setToolTipText(TEXTOS.pegarTexto(40));
 
+		menuFile.add(itemMenuTutorial);
+		menuFile.add(itemMenuSobre);
 		menuFile.add(itemMenuExit);
 		barraMenu.add(menuFile);
 
@@ -214,6 +224,7 @@ public abstract class YoutubeTela extends JFrame {
 
 			pnlDireita1.add(btnModoNoite);
 			pnlDireita2.add(checkVideo);
+			pnlDireita2.add(LBL_VAZIO);
 			pnlDireita2.add(checkAudio);
 			pnlDireita.add(pnlDireita1);
 			pnlDireita.add(pnlDireita2);
@@ -235,7 +246,7 @@ public abstract class YoutubeTela extends JFrame {
 			lblResultado.setAlignmentY(CENTER_ALIGNMENT);
 			lblResultado.setOpaque(true);
 			lblResultado.setAutoscrolls(true);
-			lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/info.png"));
+			lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/invisible.png"));
 			lblResultado.setToolTipText(TEXTOS.pegarTexto(32));
 
 			downloadProgressBar = new JProgressBar(0, 100);
@@ -255,6 +266,22 @@ public abstract class YoutubeTela extends JFrame {
 		}
 		return pnlRodape;
 	}
+	
+	public JRootPane getPnlPadrao() { 
+		if (pnlPadrao == null) {
+			pnlPadrao = new JRootPane();
+			pnlPadrao.setLayout(getBorderLayout());
+
+			pnlPadrao.add(getPnlTopo(), BorderLayout.NORTH);
+			pnlPadrao.add(getPnlEsquerda(), BorderLayout.WEST);
+			pnlPadrao.add(getPnlCentro(), BorderLayout.CENTER);
+			pnlPadrao.add(getPnlDireita(), BorderLayout.EAST);
+			pnlPadrao.add(getPnlRodape(), BorderLayout.SOUTH);
+		}
+
+		return pnlPadrao; 
+	}
+
 	////////////
 
 	public BorderLayout getBorderLayout() { return borderLayout; }
@@ -264,8 +291,10 @@ public abstract class YoutubeTela extends JFrame {
 	public void setMenuFile(JMenu menuFile) { this.menuFile = menuFile; }
 
 	public JMenuItem getItemMenuExit() { return this.itemMenuExit; }
+	
+	public JMenuItem getItemMenuTutorial() { return itemMenuTutorial; }
 
-	public void setItemMenuExit(JMenuItem itemMenuExit) { this.itemMenuExit = itemMenuExit; }
+	public JMenuItem getItemMenuSobre() { return itemMenuSobre; }
 
 	public JMenuBar getBarraMenu() { return barraMenu; }
 

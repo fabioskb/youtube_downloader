@@ -7,7 +7,7 @@
 * **Automatically activated night mode if the time is between 18:00 and 5:00 hours.**
 * **Choose between audio or video to download.**
 * **Description of each item in the list via ToolTip when selecting with the mouse (channel, duration, views and publish_time).**
-* **Download progress**
+* **Download progress bar**
 * **Install all dependencies on the first boot of the application.**
 
 # Screenshots

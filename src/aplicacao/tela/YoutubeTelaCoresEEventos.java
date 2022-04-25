@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorEvent;
 
@@ -20,10 +19,9 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
 	public void configurarCores(boolean modLblResultadoBg) {
-		
 		getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
 		getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
-
+		
 		getLblDescricao().setOpaque(true);
 		getLblDescricao().setBackground(CORES.pegarCor(isNoturno(), 4));
 		getLblDescricao().setForeground(CORES.pegarCor(isNoturno(), 6));
@@ -48,6 +46,15 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getMenuFile().setForeground(CORES.pegarCor(isNoturno(), 4));
+		
+		Component[] paineis = {
+			getPnlTopo(), getPnlCentro(), getPnlCentro1(), 
+			getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(), 
+			getPnlDireita1(), getPnlDireita2(), getPnlRodape(), getPnlPadrao()
+		};
+		for (Component jPanel : paineis) {
+			jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+		}
 
 		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
 		setCont(0);
@@ -62,14 +69,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 			setCont(getCont() + 1);
 		}
 		
-		JPanel[] paineis = {
-			getPnlTopo(), getPnlEsquerda(), getPnlCentro(), getPnlCentro1(), 
-			getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(), 
-			getPnlDireita1(), getPnlDireita2(), getPnlRodape()
-		};
-		for (JPanel jPanel : paineis) {
-			jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
-		}
 	}
 
     @Override
@@ -94,4 +93,8 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	protected void btnCancelarClick(ActionEvent ev) {}
 	@Override
 	protected void itemMenuExitClick(ActionEvent ev) {}
+	@Override
+	protected void itemMenuTutorialClick(ActionEvent ev) {}
+	@Override
+	protected void itemMenuSobreClick(ActionEvent ev) {}
 }

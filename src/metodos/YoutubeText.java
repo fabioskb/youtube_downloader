@@ -4,7 +4,7 @@ public class YoutubeText {
 	private String idioma;
 	private final String[] txts = {
 			"<html><center>"
-			+ "Idiomas: pt_BR, En;<br>"
+			+ "Idiomas: pt_BR, en;<br>"
 			+ "Baixa vídeos e áudios do YouTube;<br>"
 			+ "Opções de escolha: baixar direto pelo link ou pesquisar pelo nome;<br>"
 			+ "Retorno de até 20 items na pesquisa;<br>"
@@ -89,10 +89,26 @@ public class YoutubeText {
 			"<html><center>Download Cancelado!   </center></html>",      // [37] lblResultado download cancelado texto 
 			"Baixando o áudio do vídeo...",                              // [38] downloadProgressBar baixando o audio do video
 			"Sair", /* [39] Exit menu item text */ "Sair do programa", // [40] Exit menu item tooltip
+			"Tutorial", /* [41] Tutorial item Menu */ "Tutorial",      // [42] Tutorial
+			"Sobre", /* [43] Sobre item menu texto */ "Sobre o programa", // [44] Sobre o programa toolTip
+
+			"<html><center><h1>TUTORIAL</h1></center>1 - Adicione um link válido no campo de link ou pesquise o "
+			+"video pelo nome.<br>2 - Selecione vídeo ou áudio (de acordo com o que queira baixar). "
+			+"<br>3 - Clique no botão Baixar (se você fez uma pesquisa, selecione um item "
+			+"na lista antes de clicar em Baixar).<br><br>Por enquanto, só é possível fazer um "
+			+"download por vez.<br> Você pode cancelar o atual download em andamento a qualquer momento "
+			+"clicando no botão Cancelar.</html>",                         // [45] Tutorial JOptionPane
+
+			"<html><center><h1>Sobre</h1></center>Uma aplicação voltada para baixar vídeos e áudios "
+			+"<br>do YouTube. Contém modo noturno automático, ou seja, abrindo a aplicação "
+			+"<br>entre 18:00 e 5:00, o modo noturno é ativado.</html>"
+			+"<br><br><center>Autor: Fabio Santos</center></html>",      // [46] Sobre JOptionPane
+
+			"Sobre",                                                       // [47] Sobre JOptionPane Title
 	};
 	private final String[] enTxts = {
 			"<html><center>"
-			+ "Languages: pt_BR, En;<br>"
+			+ "Languages: pt_BR, en;<br>"
 			+ "Downloads videos and audios from YouTube;<br>"
 			+ "Choice options: download directly from the link or search by name;<br>"
 			+ "Return up to 20 items in the search;<br>"
@@ -108,7 +124,7 @@ public class YoutubeText {
 			"<html><center>Direct<br/>Download</center></html>", // [4] Download Button
 			"<html><center>Search</center></html>",          // [5] Search Button
 			"<html><center>Download</center></html>",        // [6] Download Button
-			"LINK -> eg. https://www.youtube.com/watch?v"
+			"LINK -> e.g. https://www.youtube.com/watch?v"
 			+ "=CdRhjkkbD",                                  // [7] txtLink
 			" Name",							             // [8] txtSearch
 			"<html>Enable Night Mode</html>",                // [9] Botão ModoNoturno ToolTip
@@ -174,6 +190,22 @@ public class YoutubeText {
 			"<html><center>Download Cancelled!   </center></html>", // [37] lblResultado canceled download text
 			" Downloading audio from video...",                      // [38] progressbar aixando o audio do video
 			"Exit", /* [39] Exit menu item text */ "Exit Application", // [40] Exit menu item tooltip
+			"Tutorials", /* [41] Tutorial item Menu */ "Tutorials",   // [42] Tutorial
+			"About", /* [43] Sobre item menu texto */ "About the program", // [44] Sobre o programa toolTip
+
+			"<html><center><h1>TUTORIAL</h1></center>1 - Add a valid link in the link field or search for the "
+			+"video by name.<br>2 - Select video or audio (depending on what you want to download). "
+			+"<br>3 - Click the Download button (if you did a search, select an item "
+			+"from the list before clicking Download).<br><br>For now, you can only download "
+			+"one file at a time.<br> You can cancel the current download in progress at any time "
+			+"by clicking the Cancel button.</html>",               // [45] Tutorial JOptionPane
+
+			"<html><center><h1>About</h1></center>An application aimed at downloading videos and audios"
+			+"<br>from YouTube. Contains automatic night mode, i.e. opening the application"
+			+"<br>between 18:00 and 5:00, night mode is activated."
+			+"<br><br><center>Author: Fabio Santos</center></html>", // [46] About JOptionPane
+
+			"About",                                                  // [47] About JOptionPane Title
 			};
 	
 	public YoutubeText(String idioma) {
@@ -192,6 +224,8 @@ public class YoutubeText {
 	 * [26] JOptionPane Boas vindas, [27] JOptionPane Erro na instalação dependencias, [28] JOptionPane Instalação completada, [29] JOtionPane Erro pip não instalado,
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
 	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto, [38] downloadProgressBar baixando o audio do video [30] Texto do itemMenu Sair, [40] ToolTip do itemMenu sair
+	 * , [41] Tutorial item menu texto, [42] Menu Tutorial ToolTip, [43] Sobre item menu texto, [44] Sobre item
+	 * menu ToolTip, [45] Tutorial JOptionPane, [46] Sobre JOptionPane, [47] Sobre JOptionPane Title
 	 * @return String - Texto
 	 */
 	public String pegarTexto(int indice) {

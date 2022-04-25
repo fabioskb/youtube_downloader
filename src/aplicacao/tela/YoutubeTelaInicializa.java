@@ -1,6 +1,5 @@
 package aplicacao.tela;
 
-import java.awt.BorderLayout;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -55,15 +54,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 			this.setLocationRelativeTo(null);
 			this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
 
-			getBorderLayout().setHgap(1);
-			getBorderLayout().setVgap(1);
-			this.getContentPane().setLayout(getBorderLayout());
-
-			this.getContentPane().add(getPnlTopo(), BorderLayout.NORTH);
-			this.getContentPane().add(getPnlEsquerda(), BorderLayout.WEST);
-			this.getContentPane().add(getPnlCentro(), BorderLayout.CENTER);
-			this.getContentPane().add(getPnlDireita(), BorderLayout.EAST);
-			this.getContentPane().add(getPnlRodape(), BorderLayout.SOUTH);
+			this.getContentPane().add(getPnlPadrao());
 
 			this.getCheckVideo().setSelected(true);
 			this.setVideo(true);
