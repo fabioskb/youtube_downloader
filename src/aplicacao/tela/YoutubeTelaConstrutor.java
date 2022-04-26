@@ -27,7 +27,7 @@ public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
 		setArquivoChecaPrograma(new YoutubeArquivo(getPastaPrincipal() + ".check"));		
 		try {
 			this.inicializar();
-			this.configurarCores(true);
+			this.configurarCores();
 			this.eventos();
 		} catch (NullPointerException e) {
 			e.printStackTrace();

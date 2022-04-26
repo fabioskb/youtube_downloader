@@ -12,10 +12,10 @@ public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
 	protected void btnModoNoiteClick(ActionEvent ev) {
 		if (!getBtnModoNoite().isSelected()) {
 			setNoturno(false);
-			configurarCores(this.isModificaBgLabelResultado());
+			configurarCores();
 		} else {
 			setNoturno(true);
-			configurarCores(this.isModificaBgLabelResultado());
+			configurarCores();
 		}
 	}
 

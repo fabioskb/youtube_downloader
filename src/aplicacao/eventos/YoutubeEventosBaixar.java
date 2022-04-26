@@ -28,18 +28,15 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 			} else if (!isVideo() && !isAudio()) {
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
 				getLblResultado().setText(TEXTOS.pegarTexto(20));
-				setModificaBgLabelResultado(false);
 				return;
 			} else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
 				getLblResultado().setText(TEXTOS.pegarTexto(19));
-				setModificaBgLabelResultado(false);
 				return;
 			}
 			
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
-				setModificaBgLabelResultado(true);
-				configurarCores(isModificaBgLabelResultado());
+				configurarCores();
 				getLblResultado().setText(TEXTOS.pegarTexto(31));
 				setFormat((isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", getPastaPrincipal())                        // format video para o YoutubeDL
@@ -99,15 +96,12 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 									getLblResultado().setVisible(true);
 									getLblResultado().setText(TEXTOS.pegarTexto(30));
 									getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-									setModificaBgLabelResultado(false);
 								} else if (line.startsWith("[youtube]")) {
-									setModificaBgLabelResultado(true);
-									configurarCores(isModificaBgLabelResultado());
+									configurarCores();
 									getLblResultado().setText(TEXTOS.pegarTexto(31));
 								} else {
 									if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) { continue; }
-									setModificaBgLabelResultado(true);
-									configurarCores(isModificaBgLabelResultado());
+									configurarCores();
 									getLblResultado().setText(line);
 								}
 							}
@@ -117,7 +111,6 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 							getLblResultado().setVisible(true);
 							getLblResultado().setText(TEXTOS.pegarTexto(22));
 							getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 9));
-							setModificaBgLabelResultado(false);
 							getBtnCancelar().setVisible(false);
 							getDownloadProgressBar().setVisible(false);
 							getDownloadProgressBar().setString(TEXTOS.pegarTexto(18));
@@ -132,13 +125,11 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 						getLblResultado().setVisible(true);
 						while ((line = getRead2().readLine()) != null) {
 							if (line.contains("DownloadError:")) {
-								setModificaBgLabelResultado(false);
 								getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 								getLblResultado().setText(TEXTOS.pegarTexto(21));
 							} else {
 								getLblResultado().setText(String.format("<html>%s</html>", line));
 								getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-								setModificaBgLabelResultado(false);
 							}
 
 							setCmdLineSaida(getCmdLineSaida() + line + "\n");
@@ -158,13 +149,11 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 					if (e.toString().contains("Stream closed")) {
 						getLblResultado().setText(TEXTOS.pegarTexto(37));
 						getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-						setModificaBgLabelResultado(false);
 						getDownloadProgressBar().setVisible(false);
 						return;	
 					} else {
 						getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
 						getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-						setModificaBgLabelResultado(false);
 						getDownloadProgressBar().setVisible(false);
 						return;
 					}
@@ -175,7 +164,6 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 				getLblResultado().setVisible(true);
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.pegarTexto(21));
-				setModificaBgLabelResultado(false);
 			}
 			getDownloadProgressBar().setString(TEXTOS.pegarTexto(18));
 			getBtnBaixa().setVisible(true);

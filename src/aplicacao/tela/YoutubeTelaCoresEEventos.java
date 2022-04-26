@@ -17,7 +17,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	 * @param modLblResultadoBg - se true modifica o background do label lblResultado, se 
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
-	public void configurarCores(boolean modLblResultadoBg) {
+	public void configurarCores() {
 		getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
 		getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
 		
@@ -34,12 +34,10 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
 		getDownloadProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 9));
-		//getLblProgressBar().setBackground(CORES.pegarCor(isNoturno(), 4));
-		//getLblProgressBar().setForeground(CORES.pegarCor(isNoturno(), 3));
 
-		if (modLblResultadoBg) getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
-		else getLblResultado().setBackground(getLblResultado().getBackground());
-		getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
+		getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
+		if (getLblResultado().getText() == TEXTOS.pegarTexto(16) || getLblResultado().getText() == TEXTOS.pegarTexto(31)) { getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6)); }
+		
 
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));

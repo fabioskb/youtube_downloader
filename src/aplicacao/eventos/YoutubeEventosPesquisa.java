@@ -21,11 +21,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 			setLinks(new String[20]);
 			String[] lstTitulosLinksTmp = null;
 
-			if (getLblResultado().getText().startsWith("[downloading audio")) {
-				setModificaBgLabelResultado(false);
-			} else setModificaBgLabelResultado(true);
-
-			configurarCores(isModificaBgLabelResultado());
+			configurarCores();
 			getLblResultado().setText(TEXTOS.pegarTexto(16));
 			CMD.sleep(1);
 			
@@ -75,18 +71,15 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 			} catch (Exception e) { 
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.pegarTexto(17));
-				setModificaBgLabelResultado(false);
 				return;
 			}
 
 			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31)))) {
 				getLblResultado().setText(TEXTOS.pegarTexto(25));
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 9));
-				setModificaBgLabelResultado(false);
 			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31))) {
 				getLblResultado().setText(TEXTOS.pegarTexto(17));
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-				setModificaBgLabelResultado(false);
 			}
 		});
 		pesquisa.start();

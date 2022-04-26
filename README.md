@@ -62,5 +62,5 @@
 
 ## Downloads
 
-* <a href="https://github.com/fabioskb/youtube_downloader/releases/Latest">Latest</a>
-* <a href="https://github.com/fabioskb/changes/blob/main/youdl.md">Changelogs</a>
+* [Latest](https://github.com/fabioskb/youtube_downloader/releases/Latest)
+* [Changelog](https://github.com/fabioskb/changes/blob/main/youdl.md)

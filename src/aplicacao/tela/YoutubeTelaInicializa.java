@@ -64,7 +64,6 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 				this.setNoturno(true);
 			}
 
-			this.setModificaBgLabelResultado(true);
 			this.getBtnCancelar().setVisible(false);
 			this.getDownloadProgressBar().setVisible(false);
 			this.getLblProgressBar().setVisible(false);

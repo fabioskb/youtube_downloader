@@ -12,7 +12,6 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
 	private String format;
 	private String cmdLineSaida;
 	private String[] links;
-	private boolean modificaBgLabelResultado;
 	protected int index = 20;
 	private Process pro;
 	private BufferedReader read;
@@ -34,12 +33,6 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
 	public String[] getLinks() { return links; }
 
 	public void setLinks(String[] links) { this.links = links; }
-
-	public boolean isModificaBgLabelResultado() { return modificaBgLabelResultado; }
-
-	public void setModificaBgLabelResultado(boolean modificaBgLabelResultado) {
-		this.modificaBgLabelResultado = modificaBgLabelResultado;
-	}
 
 	public int getIndex() { return index; }
 
