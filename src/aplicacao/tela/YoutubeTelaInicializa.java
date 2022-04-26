@@ -12,7 +12,6 @@ import aplicacao.eventos.YoutubeEventosMenores;
  * Herda Eventos.
  */
 public class YoutubeTelaInicializa extends YoutubeEventosMenores {
-	
 	/**
 	 * Checa se esta Ok, corrige se necessário e possível, e, 
 	 * inicializa todos os componentes da aplicação (se possível).
@@ -68,6 +67,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 			this.getDownloadProgressBar().setVisible(false);
 			this.getLblProgressBar().setVisible(false);
 			this.setIndex(20);
+
 		}
 	}
 }

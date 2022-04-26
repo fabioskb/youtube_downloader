@@ -9,11 +9,10 @@ import metodos.YoutubeArquivo;
  * da lista de pesquisa da aplicação, além de tratar possíveis erros.
  */
 public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
-
-
 	@Override
 	protected void btnPesquisaClick(ActionEvent ev) {
 		Thread pesquisa = new Thread(() -> {
+			setIndex(20);
 			if (!getLstTitulos().isEmpty()) getLstTitulos().removeAllElements();
 			if (!getLstDescricao().isEmpty()) getLstDescricao().clear();
 			YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt");

@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
 
 /**
@@ -18,6 +19,8 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 	 * false, seta o background atual da aplicação como background do lblResultado.
 	 */
 	public void configurarCores() {
+		
+
 		getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
 		getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
 		
@@ -37,7 +40,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
 		getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
 		if (getLblResultado().getText() == TEXTOS.pegarTexto(16) || getLblResultado().getText() == TEXTOS.pegarTexto(31)) { getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6)); }
-		
 
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));
@@ -68,6 +70,12 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 			}
 			setCont(getCont() + 1);
 		}
+
+		UIManager.put("OptionPane.background", CORES.pegarCor(isNoturno(), 3));
+		UIManager.put("OptionPane.messageForeground", CORES.pegarCor(isNoturno(), 6));
+		UIManager.put("Panel.background", CORES.pegarCor(isNoturno(), 3));
+		UIManager.put("Button.background", CORES.pegarCor(isNoturno(), 5));
+		UIManager.put("Button.foreground", CORES.pegarCor(isNoturno(), 6));
 		
 	}
 

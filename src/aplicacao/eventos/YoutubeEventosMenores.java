@@ -56,6 +56,7 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 	@Override
 	protected void itemMenuExitClick(ActionEvent ev) {
 		if (getBtnCancelar().isVisible()) {
+			configurarCores();
 			int option = JOptionPane.showConfirmDialog(null, TEXTOS.pegarTexto(48), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 			if (option == 0) { 
 				btnCancelarClick(ev);
@@ -66,11 +67,13 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
 	@Override
 	protected void itemMenuTutorialClick(ActionEvent ev) {
+		configurarCores();
 		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(45), "Tutorial", JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 	}
 	
 	@Override
 	protected void itemMenuSobreClick(ActionEvent ev) {
+		configurarCores();
 		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(46), TEXTOS.pegarTexto(47), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 	}
     
