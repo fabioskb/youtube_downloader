@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -122,6 +121,7 @@ public abstract class YoutubeTela extends JFrame {
 
 			lblDescricao = new JLabel(TEXTOS.pegarTexto(0), (int) CENTER_ALIGNMENT);
 			lblDescricao.setFont(FONT_DESC);
+			lblDescricao.setOpaque(true);
 
 			pnlTopo.add(lblBanner);
 			pnlTopo.add(lblDescricao);

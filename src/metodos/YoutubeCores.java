@@ -16,9 +16,9 @@ public class YoutubeCores {
 		cores[4] = "#999999";      // Background Descrição
 		cores[5] = "#CCCCCC";      // Background Botões
 		cores[6] = "#333333";      // Foreground Botões e Descrição
-		cores[7] = "#CC0000";      // Erros
+		cores[7] = "#990000";      // Erros
 		cores[8] = "#FF6600";      // Avisos
-		cores[9] = "#00CC00";      // concluido com sucesso
+		cores[9] = "#006600";      // concluido com sucesso
 		cores[10] = "#EEEEEE";     // Área de textos (link, pesquisa e lista)
 		cores[11] = "#00FF00";     // lblProgressBar e downloadProgressbarFG
 		
@@ -30,9 +30,9 @@ public class YoutubeCores {
 		coresNight[4] = "#666666"; // Background Descrição
 		coresNight[5] = "#666666"; // Background Botões
 		coresNight[6] = cores[3];  // Foreground Botões e Descrição
-		coresNight[7] = "#CC0000"; // Erros
-		coresNight[8] = "#FF6600"; // Avisos
-		coresNight[9] = "#00CC00"; // concluido com sucesso
+		coresNight[7] = cores[7]; // Erros
+		coresNight[8] = cores[8]; // Avisos
+		coresNight[9] = cores[9]; // concluido com sucesso
 		coresNight[10] = "#C0C0C0";// Área de textos (link, pesquisa e lista)
 		coresNight[11] = "#00FF00";// lblProgressBar e downloadProgressbarFG
 	}

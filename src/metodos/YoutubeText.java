@@ -105,6 +105,8 @@ public class YoutubeText {
 			+"<br><br><center>Autor: Fabio Santos</center></html>",      // [46] Sobre JOptionPane
 
 			"Sobre",                                                       // [47] Sobre JOptionPane Title
+			"<html>Ao sair o download em andamento será cancelado."
+			+"<br>Você realmente quer sair?",                             // [48] Pergunta ao sair JOptionPane
 	};
 	private final String[] enTxts = {
 			"<html><center>"
@@ -206,6 +208,8 @@ public class YoutubeText {
 			+"<br><br><center>Author: Fabio Santos</center></html>", // [46] About JOptionPane
 
 			"About",                                                  // [47] About JOptionPane Title
+			"<html>When exiting, the download in progress will be cancelled."
+			+"<br>Do you really want to exit?</html>",                // [48] Pergunta ao sair JoptionPane
 			};
 	
 	public YoutubeText(String idioma) {
@@ -225,7 +229,8 @@ public class YoutubeText {
 	 * [30] lblResultado arquivo existente, [31] lblresultado verificando o download, [32] lblResultado 
 	 * ToolTip, [33] lblResultado pegando título, [34] lblResultado Falha ao iniciar uma pesquisa com download em andamento, [35] btnCancelar texto, [36] btnCancelar ToolTip, [37] lblResultado download cancelado texto, [38] downloadProgressBar baixando o audio do video [30] Texto do itemMenu Sair, [40] ToolTip do itemMenu sair
 	 * , [41] Tutorial item menu texto, [42] Menu Tutorial ToolTip, [43] Sobre item menu texto, [44] Sobre item
-	 * menu ToolTip, [45] Tutorial JOptionPane, [46] Sobre JOptionPane, [47] Sobre JOptionPane Title
+	 * menu ToolTip, [45] Tutorial JOptionPane, [46] Sobre JOptionPane, [47] Sobre JOptionPane Title, 
+	 * [48] Pergunta ao sair JoptionPane
 	 * @return String - Texto
 	 */
 	public String pegarTexto(int indice) {

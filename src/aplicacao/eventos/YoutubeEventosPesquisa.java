@@ -73,7 +73,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
 
 			} catch (Exception e) { 
-				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
+				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 				getLblResultado().setText(TEXTOS.pegarTexto(17));
 				setModificaBgLabelResultado(false);
 				return;
@@ -81,11 +81,11 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
 			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31)))) {
 				getLblResultado().setText(TEXTOS.pegarTexto(25));
-				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 9));
+				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 9));
 				setModificaBgLabelResultado(false);
 			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31))) {
 				getLblResultado().setText(TEXTOS.pegarTexto(17));
-				getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 7));
+				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 				setModificaBgLabelResultado(false);
 			}
 		});

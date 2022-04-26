@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorEvent;
 
 /**
@@ -25,7 +24,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getLblDescricao().setOpaque(true);
 		getLblDescricao().setBackground(CORES.pegarCor(isNoturno(), 4));
 		getLblDescricao().setForeground(CORES.pegarCor(isNoturno(), 6));
-		getLblDescricao().setBorder(new LineBorder(CORES.pegarCor(isNoturno(), 0)));
 
 		getTxtLink().setOpaque(true);
 		getTxtLink().setBackground(CORES.pegarCor(isNoturno(), 10));
@@ -35,11 +33,11 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getLstPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
 
 		getDownloadProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
-		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 4));
-		getLblProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
-		getLblProgressBar().setForeground(CORES.pegarCor(isNoturno(), 4));
+		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 9));
+		//getLblProgressBar().setBackground(CORES.pegarCor(isNoturno(), 4));
+		//getLblProgressBar().setForeground(CORES.pegarCor(isNoturno(), 3));
 
-		if (modLblResultadoBg) getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 3));
+		if (modLblResultadoBg) getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
 		else getLblResultado().setBackground(getLblResultado().getBackground());
 		getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
 
@@ -52,8 +50,12 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 			getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(), 
 			getPnlDireita1(), getPnlDireita2(), getPnlRodape(), getPnlPadrao()
 		};
+		setContador(0);
 		for (Component jPanel : paineis) {
-			jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+			if (getContador() >= 6 && getContador() <= 9) {
+				jPanel.setBackground(CORES.pegarCor(isNoturno(), 4));
+			} else jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+			setContador(getContador()+1);
 		}
 
 		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };

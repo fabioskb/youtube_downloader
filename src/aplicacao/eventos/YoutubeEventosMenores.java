@@ -55,7 +55,13 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
 	@Override
 	protected void itemMenuExitClick(ActionEvent ev) {
-		System.exit(0);
+		if (getBtnCancelar().isVisible()) {
+			int option = JOptionPane.showConfirmDialog(null, TEXTOS.pegarTexto(48), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
+			if (option == 0) { 
+				btnCancelarClick(ev);
+				System.exit(0);
+			}
+		} else System.exit(0);
 	}
 
 	@Override
