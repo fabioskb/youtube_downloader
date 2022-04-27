@@ -3,6 +3,7 @@ package aplicacao.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
@@ -56,8 +57,8 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 	@Override
 	protected void itemMenuExitClick(ActionEvent ev) {
 		if (getBtnCancelar().isVisible()) {
-			configurarCores();
-			int option = JOptionPane.showConfirmDialog(null, TEXTOS.pegarTexto(48), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
+			Object[] choices = {TEXTOS.pegarTexto(49), TEXTOS.pegarTexto(50)};
+			int option = JOptionPane.showOptionDialog(null, TEXTOS.pegarTexto(48), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"), choices, choices[0]);
 			if (option == 0) { 
 				btnCancelarClick(ev);
 				System.exit(0);
@@ -67,13 +68,11 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
 	@Override
 	protected void itemMenuTutorialClick(ActionEvent ev) {
-		configurarCores();
 		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(45), "Tutorial", JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 	}
 	
 	@Override
 	protected void itemMenuSobreClick(ActionEvent ev) {
-		configurarCores();
 		JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(46), TEXTOS.pegarTexto(47), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 	}
     

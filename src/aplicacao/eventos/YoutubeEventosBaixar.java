@@ -36,8 +36,8 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 			}
 			
 			if (link.startsWith("https://www.youtube.com/watch?v=")) {
-				configurarCores();
 				getLblResultado().setText(TEXTOS.pegarTexto(31));
+				configurarCores();
 				setFormat((isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n" 
 				+ "'outtmpl': '%s' + title + '.mp4'}", getPastaPrincipal())                        // format video para o YoutubeDL
 				:

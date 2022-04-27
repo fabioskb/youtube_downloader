@@ -20,8 +20,8 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 			setLinks(new String[20]);
 			String[] lstTitulosLinksTmp = null;
 
-			configurarCores();
 			getLblResultado().setText(TEXTOS.pegarTexto(16));
+			configurarCores();
 			CMD.sleep(1);
 			
 			try {

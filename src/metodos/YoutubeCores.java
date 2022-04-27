@@ -41,7 +41,7 @@ public class YoutubeCores {
 	 * Cores para a aplicação, é aconselhável usar um método para setar o modo noturno, e então
 	 * usa-lo como um boolean getter no argumento noite para uma melhor automoção. 
 	 * 
-	 * @param noite - Se true o modo noturno será aplicado para o componente, se false, o padrão será aplicado.
+	 * @param noite (boolean) - Se true o modo noturno será aplicado para o componente, se false, o padrão será aplicado.
 	 * @param indiceCor (int) - [0] Banner BG e Descrição Borda, [1] Banner FG, [2] lblResultado BG,
 	 * [3] Padrão BG, [4] Descrição BG, [5] Botões BG, [6] FG botões e descrição, [7] Erros, [8] Avisos,
 	 * [9] Concluído com sucesso, [10] Área de texto (link, pesquisa e lista).
