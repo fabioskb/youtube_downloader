@@ -1,2 +1,6 @@
 
 .vscode/settings.json
+/youtube_downloader/nbproject/private/
+/nbproject/private/
+/build/
+/dist/
