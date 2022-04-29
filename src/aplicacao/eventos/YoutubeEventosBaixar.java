@@ -27,7 +27,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 				link = getLinks()[getIndex()];
 			} else if (!isVideo() && !isAudio()) {
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-				getLblResultado().setText(TEXTOS.pegarTexto(20));
+				getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.aviso.video"));
 				return;
 			} else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));

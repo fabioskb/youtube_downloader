@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -102,6 +103,8 @@ public abstract class YoutubeTela extends JFrame {
 	protected static final String IDIOMA = Locale.getDefault().getDisplayLanguage();
 	protected final int HORA = LocalTime.now().getHour();
 	protected static final YoutubeText TEXTOS = new YoutubeText(IDIOMA);
+        public static final ResourceBundle TEXTOS_BR = ResourceBundle.getBundle("textos_pt_BR", new Locale("pt", "BR"));
+        public static final ResourceBundle TEXTOS_US = ResourceBundle.getBundle("textos_en_US", new Locale("en", "US"));
 	protected static final YoutubeComando CMD = new YoutubeComando();
 
 	//////// PAINEIS PRINCIPAIS (Getters)
@@ -119,7 +122,7 @@ public abstract class YoutubeTela extends JFrame {
 			lblBanner.setOpaque(true);
 			lblBanner.setIcon(IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 
-			lblDescricao = new JLabel(TEXTOS.pegarTexto(0), (int) CENTER_ALIGNMENT);
+			lblDescricao = new JLabel(TEXTOS.pegarTexto("descricao"), (int) CENTER_ALIGNMENT);
 			lblDescricao.setFont(FONT_DESC);
 			lblDescricao.setOpaque(true);
 
@@ -137,12 +140,12 @@ public abstract class YoutubeTela extends JFrame {
 		barraMenu.setOpaque(false);
 		menuFile = new JMenu("Menu");
 		
-		itemMenuTutorial = new JMenuItem(TEXTOS.pegarTexto(41));
-		itemMenuTutorial.setToolTipText(TEXTOS.pegarTexto(42));
-		itemMenuSobre = new JMenuItem(TEXTOS.pegarTexto(43));
-		itemMenuSobre.setToolTipText(TEXTOS.pegarTexto(44));
-		itemMenuExit = new JMenuItem(TEXTOS.pegarTexto(39));
-		itemMenuExit.setToolTipText(TEXTOS.pegarTexto(40));
+		itemMenuTutorial = new JMenuItem(TEXTOS.pegarTexto("menuitem.tutorial"));
+		itemMenuTutorial.setToolTipText(TEXTOS.pegarTexto("tooltip.menuitem.tutorial"));
+		itemMenuSobre = new JMenuItem(TEXTOS.pegarTexto("menuitem.sobre"));
+		itemMenuSobre.setToolTipText(TEXTOS.pegarTexto("tooltip.menuitem.sobre"));
+		itemMenuExit = new JMenuItem(TEXTOS.pegarTexto("menuitem.sair"));
+		itemMenuExit.setToolTipText(TEXTOS.pegarTexto("tooltip.menuitem.sair"));
 
 		menuFile.add(itemMenuTutorial);
 		menuFile.add(itemMenuSobre);
@@ -168,25 +171,25 @@ public abstract class YoutubeTela extends JFrame {
 			Component[] pnls = { pnlCentro1 = new JPanel(new FlowLayout()), pnlCentro2 = new JPanel(new FlowLayout()), pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout()) };
 
 			Component[] comps = { lblLink = new JLabel(""),
-					txtLink = new JTextField(TEXTOS.pegarTexto(7), 38),
-					txtPesquisa = new JTextField(TEXTOS.pegarTexto(8), 25),
-					btnPesquisa = new JButton(TEXTOS.pegarTexto(5)),
+					txtLink = new JTextField(TEXTOS.pegarTexto("fieldtext.link"), 38),
+					txtPesquisa = new JTextField(TEXTOS.pegarTexto("fieldtext.pesquisa"), 25),
+					btnPesquisa = new JButton(TEXTOS.pegarTexto("botao.pesquisa")),
 					lstPesquisa = new JList<>(lstTitulos),
-					btnBaixa = new JButton(TEXTOS.pegarTexto(6)),
-					btnCancelar = new JButton(TEXTOS.pegarTexto(35)) };
+					btnBaixa = new JButton(TEXTOS.pegarTexto("botao.baixar")),
+					btnCancelar = new JButton(TEXTOS.pegarTexto("botao.cancelar")) };
 
-			lstPesquisa.setToolTipText(TEXTOS.pegarTexto(24));
+			lstPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.lista"));
 			lstPesquisa.setOpaque(false);
 			lblLink.setOpaque(false);
 			lblLink.setIcon(IMAGEM.pegarIcon("/imagens/link.png"));
-			txtLink.setToolTipText(TEXTOS.pegarTexto(10));
-			txtPesquisa.setToolTipText(TEXTOS.pegarTexto(11));
+			txtLink.setToolTipText(TEXTOS.pegarTexto("tooltip.link"));
+			txtPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.pesquisa"));
 			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
-			btnBaixa.setToolTipText(TEXTOS.pegarTexto(23));
-			btnPesquisa.setToolTipText(TEXTOS.pegarTexto(13));
+			btnBaixa.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.baixar"));
+			btnPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.pesquisa"));
 			btnPesquisa.setIcon(IMAGEM.pegarIcon("/imagens/system_search.png"));
 			btnCancelar.setIcon(IMAGEM.pegarIcon("/imagens/cancel.png"));
-			btnCancelar.setToolTipText(TEXTOS.pegarTexto(36));
+			btnCancelar.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.cancelar"));
 
 			pnlExtra = new JScrollPane();
 			pnlExtra.setViewportView(lstPesquisa);
@@ -214,12 +217,12 @@ public abstract class YoutubeTela extends JFrame {
 			pnlDireita1 = new JPanel(new FlowLayout());
 			pnlDireita2 = new JPanel(new FlowLayout());
 
-			checkVideo = new JCheckBox(TEXTOS.pegarTexto(2));
-			checkAudio = new JCheckBox(TEXTOS.pegarTexto(3));
-			checkVideo.setToolTipText(TEXTOS.pegarTexto(14));
-			checkAudio.setToolTipText(TEXTOS.pegarTexto(15));
-			btnModoNoite = new JToggleButton(TEXTOS.pegarTexto(1));
-			btnModoNoite.setToolTipText(TEXTOS.pegarTexto(9));
+			checkVideo = new JCheckBox(TEXTOS.pegarTexto("botao.video"));
+			checkAudio = new JCheckBox(TEXTOS.pegarTexto("botao.audio"));
+			checkVideo.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.video"));
+			checkAudio.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.audio"));
+			btnModoNoite = new JToggleButton(TEXTOS.pegarTexto("botao.modo.noite"));
+			btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
 			btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
 
 			pnlDireita1.add(btnModoNoite);
@@ -247,7 +250,7 @@ public abstract class YoutubeTela extends JFrame {
 			lblResultado.setOpaque(true);
 			lblResultado.setAutoscrolls(true);
 			lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/invisible.png"));
-			lblResultado.setToolTipText(TEXTOS.pegarTexto(32));
+			lblResultado.setToolTipText(TEXTOS.pegarTexto("tooltip.label.resultado"));
 
 			downloadProgressBar = new JProgressBar(0, 100);
 			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
@@ -258,7 +261,7 @@ public abstract class YoutubeTela extends JFrame {
 			lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
 			lblProgressBar.setAlignmentY(CENTER_ALIGNMENT);
 			lblProgressBar.setOpaque(true);
-			lblProgressBar.setText(TEXTOS.pegarTexto(18));
+			lblProgressBar.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
 
 			pnlRodape.add(lblResultado);
 			pnlRodape.add(downloadProgressBar);

@@ -1,5 +1,11 @@
 package metodos;
 
+import aplicacao.tela.YoutubeTela;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class YoutubeText {
 	private String idioma;
 	private final String[] txts = {
@@ -242,5 +248,39 @@ public class YoutubeText {
 	public String pegarTexto(int indice) {
 		if (idioma.contains("português")) return txts[indice];
 		else return enTxts[indice];
+	}
+        
+        /**
+         * Retorna o texto de acordo com o idioma do sistema.
+         * 
+         * @param key (String) - 
+         * KEYS: 
+         * 
+         * descricao. 
+         * 
+         * botao.modo.noite, botao.video, botao.audio, botao.pesquisar, botao.baixar, botao.cancelar.
+         * fieldtext.link, fieldtext.pesquisar.
+         * 
+         * tooltip.botao.noturno, tooltip.link, tooltip.pesquisa, tooltip.botao.pesquisa, tooltip.botao.baixar, 
+         * tooltip.botao.video, tooltip.botao.audio, tooltip.lista, tooltip.botao.cancelar, tooltip.label.resultado, 
+         * tooltip.menuitem.sair, tooltip.menuitem.sobre, tooltip.menuitem.tutorial.
+         * 
+         * label.resultado.pesquisando, label.resultado.baixando, label.resultado.falha.pesquisa, 
+         * label.resultado.falha.download, label.resultado.aviso.item, label.resultado.aviso.video, 
+         * label.resultado.download.concluido, label.resultado.pesquisa.concluida, label.resultado.aviso.ja.baixado, 
+         * label.resultado.download.cancelado, label.resultado.verificando.download.
+         * 
+         * joptionpane.boas.vndas, joptionpane.erro.dependencias, joptionpane.instalacao.concluida, 
+         * joptionpane.pip.nao.instalado, joptionpane.tutorial, joptionpane.sobre, joptionpane.sobre.titulo, 
+         * joptionpane.sair.pergunta, joptionpane.botao.oksair, joptionpane.botao.cancelar.
+         * 
+         * progressbar.baixando.audio.
+         * 
+         * menuitem.sobre, menuitem.sair, menuitem.tutorial.
+         * @return texto
+         */
+        public String pegarTexto(String key) {
+            if (idioma.contains("português")) return YoutubeTela.TEXTOS_BR.getString(key);
+            else return YoutubeTela.TEXTOS_US.getString(key);   
 	}
 }
