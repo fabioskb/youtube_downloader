@@ -3,7 +3,6 @@ package aplicacao.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
