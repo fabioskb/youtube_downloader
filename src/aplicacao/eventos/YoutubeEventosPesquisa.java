@@ -20,7 +20,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 			setLinks(new String[20]);
 			String[] lstTitulosLinksTmp = null;
 
-			getLblResultado().setText(TEXTOS.pegarTexto(16));
+			getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.pesquisando"));
 			configurarCores();
 			CMD.sleep(1);
 			
@@ -69,15 +69,15 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
 			} catch (Exception e) { 
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-				getLblResultado().setText(TEXTOS.pegarTexto(17));
+				getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
 				return;
 			}
 
-			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31)))) {
-				getLblResultado().setText(TEXTOS.pegarTexto(25));
+			if (!getLstTitulos().isEmpty() && (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download")))) {
+				getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.pesquisa.concluida"));
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 9));
-			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto(31))) {
-				getLblResultado().setText(TEXTOS.pegarTexto(17));
+			} else if (!getLblResultado().getText().startsWith("[download") && !getLblResultado().getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+				getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
 				getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
 			}
 		});

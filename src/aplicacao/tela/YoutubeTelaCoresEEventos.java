@@ -39,7 +39,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 9));
 
 		getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
-		if (getLblResultado().getText() == TEXTOS.pegarTexto(16) || getLblResultado().getText() == TEXTOS.pegarTexto(31)) { getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6)); }
+		if (getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.pesquisando") || getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")) { getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6)); }
 
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
 		getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));

@@ -22,7 +22,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 		String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
 		if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
-			JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(29), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.pip.nao.instalado"), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		} else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && getArquivoChecaPrograma().getArq().isFile()) {
 			getArquivoChecaPrograma().deletar();
@@ -31,15 +31,15 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 		}
 
 		if (!getArquivoChecaPrograma().getArq().isFile()) {
-			JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(26), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.boas.vndas"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 			setInstallYoutubeDl(CMD.comando("pip install youtube-dl"));
 			setInstallYoutubeSearch(CMD.comando("pip install youtube-search"));
 			if (getInstallYoutubeDl().contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") || getInstallYoutubeSearch().equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
-				JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(27), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.erro.dependencias"), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			} else {
 				getArquivoChecaPrograma().criar("Checado!");
-				JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto(28), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.instalacao.concluida"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
 				youtubeDlSaida = "Name: youtube-dl";
 				youtubeSearchSaida = "Name: youtube-search";
 			}
