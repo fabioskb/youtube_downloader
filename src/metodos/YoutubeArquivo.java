@@ -4,9 +4,11 @@
  */
 package metodos;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,12 +22,11 @@ import java.util.List;
 public class YoutubeArquivo {
     private String caminho;
     private File arq;
-    private Formatter arq1; // Cria
-    private BufferedWriter escrever; // Escreve ou edita
 
-    public YoutubeArquivo(String path) {
-        this.caminho = path;
-        this.arq = new File(this.caminho);
+    public YoutubeArquivo(String caminho) throws IOException {
+        this.caminho = caminho;
+        arq = new File(caminho);
+        arq.createNewFile();
     }
     
     // Métodos personalizados
@@ -34,13 +35,12 @@ public class YoutubeArquivo {
      * @param arquivoConteudo Conteúdo do arquivo.
      */
     public void criar(String arquivoConteudo) {
-        try {
-            this.arq1 = new Formatter(this.caminho);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        try (FileWriter fw = new FileWriter(arq);
+            BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.write(arquivoConteudo);
+            bw.newLine();
+        } catch (Exception e) {
         }
-        this.arq1.format(arquivoConteudo);
-        this.arq1.close();
     }
     
     /**
@@ -68,7 +68,6 @@ public class YoutubeArquivo {
         try {
             l = Files.readAllLines(this.arq.toPath());
         } catch (IOException ex) {
-            System.out.println(ex);
         }
         return l;
     }
@@ -79,17 +78,13 @@ public class YoutubeArquivo {
      * @param conteudo String de conteúdo.
      */
     public void editar(String conteudo) {
-        try {
-            this.escrever = new BufferedWriter(new FileWriter(this.arq));
+        try (FileWriter fw = new FileWriter(this.arq);
+            BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.append(conteudo);
+            bw.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            this.escrever.append(conteudo);
-            this.escrever.close();
-        } catch (IOException ex) {
-        }
-        
     }
     
     /**
@@ -98,21 +93,18 @@ public class YoutubeArquivo {
      * @param conteudo Lista de conteúdos.
      */
     public void editar(List<String> conteudo) {
-        try {
-            this.escrever = new BufferedWriter(new FileWriter(this.arq));
+        try (FileWriter fw = new FileWriter(this.arq);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(this.arq))) {
+            
+            for (String item : conteudo) {
+                try {
+                    bw.append(item);
+                    bw.newLine();
+                } catch (IOException ex) {
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        for (String item : conteudo) {
-            try {
-                this.escrever.append(item);
-                this.escrever.newLine();
-            } catch (IOException ex) {
-            }
-        }
-        try {
-            this.escrever.close();
-        } catch (IOException ex) {
         }
     }
     /**
@@ -134,14 +126,6 @@ public class YoutubeArquivo {
         this.arq = arq;
     }
 
-    public Formatter getArq1() {
-        return arq1;
-    }
-    
-    public void setArq1(Formatter arq1) {    
-        this.arq1 = arq1;
-    }
-
     public String getCaminho() {
         return caminho;
     }
@@ -150,11 +134,4 @@ public class YoutubeArquivo {
         this.caminho = caminho;
     }
 
-    public BufferedWriter getEscrever() {
-        return escrever;
-    }
-
-    public void setEscrever(BufferedWriter escrever) {
-        this.escrever = escrever;
-    }
 }
