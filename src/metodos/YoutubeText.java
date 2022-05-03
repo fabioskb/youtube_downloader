@@ -23,7 +23,7 @@ public class YoutubeText {
      * tooltip.lista, tooltip.botao.cancelar, tooltip.label.resultado, 
      * tooltip.menuitem.sair, tooltip.menuitem.sobre, tooltip.menuitem.tutorial.
      * LABEL RESULTADO-----------> label.resultado.pesquisando, 
-     * label.resultado.baixando, label.resultado.falha.pesquisa, 
+     * label.resultado.baixando, label.resultado.baixando.pendentes, label.resultado.falha.pesquisa, 
      * label.resultado.falha.download, label.resultado.aviso.item, 
      * label.resultado.aviso.video, label.resultado.download.concluido, 
      * label.resultado.pesquisa.concluida, label.resultado.aviso.ja.baixado, 
