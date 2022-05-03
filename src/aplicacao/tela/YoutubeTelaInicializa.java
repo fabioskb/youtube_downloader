@@ -59,7 +59,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             this.getCheckVideo().setSelected(true);
             this.setVideo(true);
 
-            if (this.HORA >= 18 || this.HORA < 5) {
+            if (this.HORA >= 17 || this.HORA < 5) {
                 this.getBtnModoNoite().setSelected(true);
                 this.setNoturno(true);
                 getBtnModoNoite().setText(TEXTOS.pegarTexto("botao.modo.dia"));
