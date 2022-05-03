@@ -14,10 +14,10 @@ public class YoutubeText {
      *
      * @param key (String) - KEYS: 
      * DESCRIÇÃO-----------> descricao. 
-     * BUTTONS-------------> botao.modo.noite, botao.video, botao.audio,
+     * BUTTONS-------------> botao.modo.noite, botao.modo.dia, botao.video, botao.audio,
      * botao.pesquisa, botao.baixar, botao.cancelar. 
      * FIELDTEXT----------> fieldtext.link, fieldtext.pesquisa. 
-     * TOOLTIP------------> tooltip.botao.noturno, 
+     * TOOLTIP------------> tooltip.botao.noturno, tooltip.botao.diurno, 
      * tooltip.link, tooltip.pesquisa, tooltip.botao.pesquisa, 
      * tooltip.botao.baixar, tooltip.botao.video, tooltip.botao.audio, 
      * tooltip.lista, tooltip.botao.cancelar, tooltip.label.resultado, 
