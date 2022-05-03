@@ -35,10 +35,16 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		getLstPesquisa().setOpaque(true);
 		getLstPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
 
-		getDownloadProgressBar().setBackground(CORES.pegarCor(isNoturno(), 3));
-		getDownloadProgressBar().setForeground(CORES.pegarCor(isNoturno(), 9));
+		downloadProgressBar.setBackground(CORES.pegarCor(isNoturno(), 3));
+		downloadProgressBar.setForeground(CORES.pegarCor(isNoturno(), 9));
+		downloadProgressBar2.setBackground(CORES.pegarCor(isNoturno(), 3));
+		downloadProgressBar2.setForeground(CORES.pegarCor(isNoturno(), 9));
+		downloadProgressBar3.setBackground(CORES.pegarCor(isNoturno(), 3));
+		downloadProgressBar3.setForeground(CORES.pegarCor(isNoturno(), 9));
 
-		getLblResultado().setBackground(CORES.pegarCor(isNoturno(), 4));
+		lblResultado.setBackground(CORES.pegarCor(isNoturno(), 4));
+		lblResultado2.setBackground(CORES.pegarCor(isNoturno(), 4));
+		lblResultado3.setBackground(CORES.pegarCor(isNoturno(), 4));
 		if (getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.pesquisando") || getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")) { getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6)); }
 
 		getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
@@ -48,17 +54,20 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 		Component[] paineis = {
 			getPnlTopo(), getPnlCentro(), getPnlCentro1(), 
 			getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(), 
-			getPnlDireita1(), getPnlDireita2(), getPnlRodape(), getPnlPadrao()
+			getPnlDireita1(), getPnlDireita2(), getPnlRodape(), pnlRodape1, 
+                        pnlRodape2, pnlRodape3, getPnlPadrao()
 		};
 		setContador(0);
 		for (Component jPanel : paineis) {
-			if (getContador() >= 6 && getContador() <= 9) {
+			if (getContador() >= 6 && getContador() <= 12) {
 				jPanel.setBackground(CORES.pegarCor(isNoturno(), 4));
 			} else jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
 			setContador(getContador()+1);
 		}
 
-		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), getBtnBaixa(), getCheckAudio(), getCheckVideo(), getBtnCancelar() };
+		Component[] buttons = { getBtnModoNoite(), getLblLink(), getBtnPesquisa(), 
+                    getBtnBaixa(), btnBaixa2, btnBaixa3, getCheckAudio(), getCheckVideo(), 
+                    getBtnCancelar() };
 		setCont(0);
 		for (Component button : buttons) {
 			if (getCont() == 0 && getBtnModoNoite().isSelected())
@@ -66,7 +75,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 			else {
 				button.setBackground(CORES.pegarCor(isNoturno(), 5));	
 				button.setForeground(CORES.pegarCor(isNoturno(), 6));
-				button.setFocusable(false);
 			}
 			setCont(getCont() + 1);
 		}

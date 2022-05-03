@@ -45,7 +45,7 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void btnCancelarClick(ActionEvent ev) {
-        if (isRunningDownload || getLblResultado().getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download")) || getLblResultado().getText().equals(TEXTOS.pegarTexto("label.resultado.pesquisa.concluida"))) {
+        if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download")) || getLblResultado().getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
             getPro().destroy();
             getBtnCancelar().setVisible(false);
             getBtnBaixa().setVisible(true);

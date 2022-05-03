@@ -5,48 +5,76 @@ import java.io.BufferedReader;
 import aplicacao.tela.YoutubeTelaCoresEEventos;
 
 /**
- * Classe responsável por criar todos os atributos que serão usados nos eventos, 
+ * Classe responsável por criar todos os atributos que serão usados nos eventos,
  * e, seus getters e setters.
  */
 public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
-	private String format;
-	private String cmdLineSaida;
-	private String[] links;
-	protected int index = 20;
-	private Process pro;
-	private BufferedReader read;
-    private BufferedReader read2;
-	
-	protected String line;
-	protected static final Runtime RUN = Runtime.getRuntime();
-	
-	public String getFormat() { return format; }
 
-	public void setFormat(String format) { this.format = format; }
+    private String format;
+    private String cmdLineSaida;
+    private String[] links;
+    protected int index = 20;
+    protected Process pro;
+    protected Process pro2;
+    protected Process pro3;
+    protected BufferedReader read, read2, read3, read4, read5, read6;
 
-	public String getCmdLineSaida() { return cmdLineSaida; }
+    protected String line;
+    protected static final Runtime RUN = Runtime.getRuntime();
 
-	public void setCmdLineSaida(String cmdLineSaida) {
-		this.cmdLineSaida = cmdLineSaida;
-	}
+    public String getFormat() {
+        return format;
+    }
 
-	public String[] getLinks() { return links; }
+    public void setFormat(String format) {
+        this.format = format;
+    }
 
-	public void setLinks(String[] links) { this.links = links; }
+    public String getCmdLineSaida() {
+        return cmdLineSaida;
+    }
 
-	public int getIndex() { return index; }
+    public void setCmdLineSaida(String cmdLineSaida) {
+        this.cmdLineSaida = cmdLineSaida;
+    }
 
-	public void setIndex(int index) { this.index = index; }
+    public String[] getLinks() {
+        return links;
+    }
 
-	public Process getPro() { return pro; }
+    public void setLinks(String[] links) {
+        this.links = links;
+    }
 
-	public void setPro(Process pro) { this.pro = pro; }
+    public int getIndex() {
+        return index;
+    }
 
-	public BufferedReader getRead() { return read; }
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	public void setRead(BufferedReader read) { this.read = read; }
+    public Process getPro() {
+        return pro;
+    }
 
-	public BufferedReader getRead2() { return read2; }
+    public void setPro(Process pro) {
+        this.pro = pro;
+    }
 
-	public void setRead2(BufferedReader read2) { this.read2 = read2; }
+    public BufferedReader getRead() {
+        return read;
+    }
+
+    public void setRead(BufferedReader read) {
+        this.read = read;
+    }
+
+    public BufferedReader getRead2() {
+        return read2;
+    }
+
+    public void setRead2(BufferedReader read2) {
+        this.read2 = read2;
+    }
 }
