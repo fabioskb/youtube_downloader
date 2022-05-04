@@ -136,11 +136,9 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                                 if (line.contains("DownloadError:")) {
                                     getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
                                     getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
-                                    System.out.println(line);
                                 } else {
                                     getLblResultado().setText(String.format("<html>%s</html>", line));
                                     getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-                                    System.out.println(line);
                                 }
 
                                 setCmdLineSaida(getCmdLineSaida() + line + "\n");

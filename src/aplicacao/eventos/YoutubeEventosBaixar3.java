@@ -15,14 +15,13 @@ import metodos.YoutubeArquivo;
  */
 public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
 
-    protected boolean downloadDone, isRunningDownload;
-    protected boolean isBaixarExecutando, isBaixar2Executando, isBaixar3Executando;
+    protected boolean downloadDone3;
 
     @Override
     protected void btnBaixar3Click(ActionEvent ev) {
-        Thread download = new Thread(() -> {
-            downloadDone = false;
-            setCmdLineSaida("");
+        Thread download3 = new Thread(() -> {
+            downloadDone3 = false;
+            setCmdLineSaida3("");
             String link = getTxtLink().getText();
 
             if ((isVideo() || isAudio()) && !getLstPesquisa().isSelectionEmpty()) {
@@ -30,18 +29,29 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                 setIndex(getLstPesquisa().getSelectedIndex());
                 link = getLinks()[getIndex()];
             } else if (!isVideo() && !isAudio()) {
-                getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-                getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.aviso.video"));
+                lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 8));
+                lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.aviso.video"));
+                CMD.sleep(2);
+                lblResultado3.setVisible(false);
                 return;
             } else if (!getLstPesquisa().isSelectedIndex(getIndex()) && !link.startsWith("https://www.youtube.com/watch?v=")) {
-                getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-                getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.aviso.item"));
+                lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 8));
+                lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.aviso.item"));
+                CMD.sleep(2);
+                lblResultado3.setVisible(false);
                 return;
             }
 
             if (link.startsWith("https://www.youtube.com/watch?v=")) {
                 try {
-                    getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
+                    isBaixando3 = true;
+                    btnBaixa3.setVisible(false);
+                    if (!isBaixando) {
+                        btnBaixa.setVisible(true);
+                    } else if (!isBaixando2) {
+                        btnBaixa2.setVisible(true);
+                    }
+                    lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
                     configurarCores();
                     setFormat((isVideo()) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
                             + "'outtmpl': '%s' + title + '.mp4'}", getPastaPrincipal()) // format video para o YoutubeDL
@@ -53,8 +63,8 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                                     + "    'preferredquality': '0'\n"
                                     + "    }]\n"
                                     + "}", getPastaPrincipal()));
-                    YoutubeArquivo scriptBaixar = new YoutubeArquivo("/tmp/baixar");
-                    scriptBaixar.criar(String.format(
+                    YoutubeArquivo scriptBaixar3 = new YoutubeArquivo("/tmp/baixar3");
+                    scriptBaixar3.criar(String.format(
                             "#!/usr/bin/python3\n"
                             + "import youtube_dl\n\n"
                             + ""
@@ -70,113 +80,117 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                             link, getFormat()));
 
                     try {
-                        setPro(RUN.exec("python3 /tmp/baixar"));
-                        setRead(new BufferedReader(new InputStreamReader(getPro().getInputStream())));
-                        setRead2(new BufferedReader(new InputStreamReader(getPro().getErrorStream())));
+                        setPro3(RUN_3.exec("python3 /tmp/baixar3"));
+                        setRead5(new BufferedReader(new InputStreamReader(pro3.getInputStream())));
+                        setRead6(new BufferedReader(new InputStreamReader(pro3.getErrorStream())));
 
-                        while ((line = getRead().readLine()) != null) {
+                        while ((line3 = read5.readLine()) != null) {
                             getBtnCancelar().setVisible(true);
-                            if ((isBaixarExecutando && isBaixar2Executando) || (isBaixarExecutando && isBaixar3Executando)
-                                    || (isBaixar2Executando && isBaixarExecutando) || (isBaixar2Executando && isBaixar3Executando)
-                                    || (isBaixar3Executando && isBaixarExecutando) || (isBaixar3Executando && isBaixar2Executando)) {
-                                isRunningDownload = true;
-                            } else {
-                                isRunningDownload = false;
-                            }
-                            if (isBaixar2Executando && isBaixar3Executando) {
-                                getBtnBaixa().setVisible(false);
-                            } else {
-                                getBtnBaixa().setVisible(true);
-                            }
-                            System.out.println(line);
-                            if ((!line.startsWith("[download] 100%") && !line.contains("Deleting"))) {
+                            if ((!line3.startsWith("[download] 100%") && !line3.contains("Deleting"))) {
                                 String progressPercentdownload = "", progressPercentdownload2 = "";
-                                if (line.contains("%")) {
-                                    getDownloadProgressBar().setVisible(true);
-                                    getLblProgressBar().setVisible(false);
-                                    getLblResultado().setVisible(false);
-                                    progressPercentdownload = line.substring(line.indexOf(" "), line.indexOf(".")).strip();
-                                    progressPercentdownload2 = line.substring(line.indexOf(" ")) + "  ";
-                                    if (!downloadDone) {
-                                        getDownloadProgressBar().setString(TEXTOS.pegarTexto("label.resultado.baixando") + progressPercentdownload2);
+                                if (line3.contains("%")) {
+                                    downloadProgressBar3.setVisible(true);
+                                    lblProgressBar3.setVisible(false);
+                                    lblResultado3.setVisible(false);
+                                    progressPercentdownload = line3.substring(line3.indexOf(" "), line3.indexOf(".")).strip();
+                                    progressPercentdownload2 = line3.substring(line3.indexOf(" ")) + "  ";
+                                    if (!downloadDone3) {
+                                        downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando") + progressPercentdownload2);
                                     }
-                                    getDownloadProgressBar().setValue(Integer.parseInt(progressPercentdownload.strip()));
-                                    if (getDownloadProgressBar().getString().contains("100.0%")) {
+                                    downloadProgressBar3.setValue(Integer.parseInt(progressPercentdownload.strip()));
+                                    if (downloadProgressBar3.getString().contains("100.0%")) {
                                         CMD.sleep(0.2);
                                     }
-                                } else if (getDownloadProgressBar().getValue() == 100) {
-                                    getDownloadProgressBar().setValue(0);
-                                    getDownloadProgressBar().setString(TEXTOS.pegarTexto("progressbar.baixando.audio") + progressPercentdownload2);
-                                    downloadDone = true;
+                                } else if (downloadProgressBar3.getValue() == 100) {
+                                    downloadProgressBar3.setValue(0);
+                                    downloadProgressBar3.setString(TEXTOS.pegarTexto("progressbar.baixando.audio") + progressPercentdownload2);
+                                    downloadDone3 = true;
                                 } else {
-                                    if (line.contains("[download] " + getPastaPrincipal())) {
-                                        getLblResultado().setVisible(true);
-                                        getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.aviso.ja.baixado"));
-                                        getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-                                    } else if (line.startsWith("[youtube]")) {
+                                    if (line3.contains("[download] " + getPastaPrincipal())) {
+                                        lblResultado3.setVisible(true);
+                                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.aviso.ja.baixado"));
+                                        lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 8));
+                                    } else if (line3.startsWith("[youtube]")) {
                                         configurarCores();
-                                        getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
+                                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
                                     } else {
-                                        if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) {
+                                        if (line3.startsWith("[ffmpeg]") && line3.endsWith("skipping")) {
                                             continue;
                                         }
                                         configurarCores();
-                                        getLblResultado().setText(line);
+                                        lblResultado3.setText(line3);
                                     }
                                 }
-                            } else if (downloadDone) {
-                                getBtnBaixa().setVisible(true);
-                                getLblProgressBar().setVisible(false);
-                                getLblResultado().setVisible(true);
-                                getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.download.concluido"));
-                                getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 9));
-                                getBtnCancelar().setVisible(false);
-                                getDownloadProgressBar().setVisible(false);
-                                getDownloadProgressBar().setString(TEXTOS.pegarTexto("label.resultado.baixando"));
+                            } else if (downloadDone3) {
+                                lblProgressBar3.setVisible(false);
+                                lblResultado3.setVisible(true);
+                                lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.download.concluido"));
+                                lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 9));
+
+                                downloadProgressBar3.setVisible(false);
+                                downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
                             }
 
-                            setCmdLineSaida(getCmdLineSaida() + line + "\n");
+                            setCmdLineSaida3(cmdLineSaida3 + line3 + "\n");
 
                         }
-                        if (line == null) {
-                            getDownloadProgressBar().setString(TEXTOS.pegarTexto("label.resultado.baixando"));
-                            getBtnBaixa().setVisible(true);
-                            getLblProgressBar().setVisible(false);
-                            getLblResultado().setVisible(true);
-                            while ((line = getRead2().readLine()) != null) {
-                                if (line.contains("DownloadError:")) {
-                                    getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-                                    getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
-                                    System.out.println(line);
+                        if (line3 == null) {
+                            downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
+                            lblProgressBar3.setVisible(false);
+                            lblResultado3.setVisible(true);
+                            while ((line3 = read6.readLine()) != null) {
+                                if (line3.contains("DownloadError:")) {
+                                    lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 7));
+                                    lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
                                 } else {
-                                    getLblResultado().setText(String.format("<html>%s</html>", line));
-                                    getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-                                    System.out.println(line);
+                                    lblResultado3.setText(String.format("<html>%s</html>", line3));
+                                    lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 7));
                                 }
 
-                                setCmdLineSaida(getCmdLineSaida() + line + "\n");
+                                setCmdLineSaida3(cmdLineSaida3 + line3 + "\n");
 
                             }
 
-                            getRead().close();
-                            getRead2().close();
+                            read5.close();
+                            read6.close();
                         }
 
                     } catch (IOException e) {
-                        getDownloadProgressBar().setString(TEXTOS.pegarTexto("label.resultado.baixando"));
-                        getBtnBaixa().setVisible(true);
-                        getBtnCancelar().setVisible(false);
-                        getLblProgressBar().setVisible(false);
-                        getLblResultado().setVisible(true);
+                        downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
+
+                        lblProgressBar3.setVisible(false);
+                        lblResultado3.setVisible(true);
                         if (e.toString().contains("Stream closed")) {
-                            getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.download.cancelado"));
-                            getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 8));
-                            getDownloadProgressBar().setVisible(false);
+                            lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.download.cancelado"));
+                            lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 8));
+                            downloadProgressBar3.setVisible(false);
+                            isBaixando3 = false;
+                            if (isBaixando && isBaixando2) {
+                                btnBaixa3.setVisible(true);
+                            }
+                            if (!isBaixando && !isBaixando2 && !isBaixando3) {
+                                btnCancelar.setVisible(false);
+                            }
+                            CMD.sleep(3);
+                            lblResultado3.setVisible(false);
+                            downloadProgressBar3.setVisible(false);
+                            lblProgressBar3.setVisible(false);
                             return;
                         } else {
-                            getLblResultado().setText(String.format("<html>%s</html>", e.toString()));
-                            getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-                            getDownloadProgressBar().setVisible(false);
+                            lblResultado3.setText(String.format("<html>%s</html>", e.toString()));
+                            lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 7));
+                            downloadProgressBar3.setVisible(false);
+                            isBaixando3 = false;
+                            if (isBaixando && isBaixando2) {
+                                btnBaixa3.setVisible(true);
+                            }
+                            if (!isBaixando && !isBaixando2 && !isBaixando3) {
+                                btnCancelar.setVisible(false);
+                            }
+                            CMD.sleep(3);
+                            lblResultado3.setVisible(false);
+                            downloadProgressBar3.setVisible(false);
+                            lblProgressBar3.setVisible(false);
                             return;
                         }
 
@@ -185,19 +199,29 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                     ex.printStackTrace();
                 }
             }
-            if (getCmdLineSaida().equals("")) {
-                getLblProgressBar().setVisible(false);
-                getLblResultado().setVisible(true);
-                getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 7));
-                getLblResultado().setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
+            if (cmdLineSaida3.equals("")) {
+                lblProgressBar3.setVisible(false);
+                lblResultado3.setVisible(true);
+                lblResultado3.setForeground(CORES.pegarCor(isNoturno(), 7));
+                lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
             }
-            getDownloadProgressBar().setString(TEXTOS.pegarTexto("label.resultado.baixando"));
-            getBtnCancelar().setVisible(false);
-            getLblProgressBar().setVisible(false);
-            getDownloadProgressBar().setVisible(false);
-            getLblResultado().setVisible(true);
+            downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
+
+            lblProgressBar3.setVisible(false);
+            downloadProgressBar3.setVisible(false);
+            lblResultado3.setVisible(true);
+            isBaixando3 = false;
+            if (isBaixando && isBaixando2) {
+                btnBaixa3.setVisible(true);
+            }
+            if (!isBaixando && !isBaixando2 && !isBaixando3) {
+                btnCancelar.setVisible(false);
+            }
+            CMD.sleep(3);
+            lblResultado3.setVisible(false);
+            downloadProgressBar3.setVisible(false);
+            lblProgressBar3.setVisible(false);
         });
-        download.start();
-        // Multilaser MS5v2
+        download3.start();
     }
 }

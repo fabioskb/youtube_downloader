@@ -46,15 +46,24 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
     @Override
     protected void btnCancelarClick(ActionEvent ev) {
         if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-            || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-            || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
-            if (pro.isAlive()) { getPro().destroy(); }
-            if (pro2.isAlive()) { pro2.destroy(); }
-            if (pro3.isAlive()) { pro3.destroy(); }
+                || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+                || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+            if (pro.isAlive()) {
+                btnBaixa.setVisible(true);
+                getPro().destroy();
+            }
+            if (pro2.isAlive()) {
+                btnBaixa2.setVisible(false);
+                pro2.destroy();
+            }
+            if (pro3.isAlive()) {
+                btnBaixa3.setVisible(false);
+                pro3.destroy();
+            }
             getBtnCancelar().setVisible(false);
-            getBtnBaixa().setVisible(true);
-            btnBaixa2.setVisible(false);
-            btnBaixa3.setVisible(false);
+            System.out.println(pro.isAlive());
+            System.out.println(pro2.isAlive());
+            System.out.println(pro3.isAlive());
         }
     }
 
@@ -65,9 +74,11 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             int option = JOptionPane.showOptionDialog(null, TEXTOS.pegarTexto("joptionpane.sair.pergunta"), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"), choices, choices[0]);
             if (option == 0) {
                 btnCancelarClick(ev);
+                this.dispose();
                 System.exit(0);
             }
         } else {
+            this.dispose();
             System.exit(0);
         }
     }

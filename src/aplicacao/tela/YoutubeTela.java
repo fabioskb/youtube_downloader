@@ -317,16 +317,16 @@ public abstract class YoutubeTela extends JFrame {
 			lblProgressBar3.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
 
                         pnlRodape1.add(lblResultado);
-                        pnlRodape1.add(downloadProgressBar);
                         pnlRodape1.add(lblProgressBar);
+                        pnlRodape1.add(downloadProgressBar);
                         
                         pnlRodape2.add(lblResultado2);
-                        pnlRodape2.add(downloadProgressBar2);
                         pnlRodape2.add(lblProgressBar2);
+                        pnlRodape2.add(downloadProgressBar2);
                         
                         pnlRodape3.add(lblResultado3);
-                        pnlRodape3.add(downloadProgressBar3);
                         pnlRodape3.add(lblProgressBar3);
+                        pnlRodape3.add(downloadProgressBar3);
                         
 			pnlRodape.add(pnlRodape1);
 			pnlRodape.add(pnlRodape2);
