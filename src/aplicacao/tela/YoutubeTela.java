@@ -188,8 +188,8 @@ public abstract class YoutubeTela extends JFrame {
 					btnPesquisa = new JButton(TEXTOS.pegarTexto("botao.pesquisa")),
 					lstPesquisa = new JList<>(lstTitulos),
 					btnBaixa = new JButton(TEXTOS.pegarTexto("botao.baixar")),
-					btnBaixa2 = new JButton(TEXTOS.pegarTexto("botao.baixar")),
-					btnBaixa3 = new JButton(TEXTOS.pegarTexto("botao.baixar")),
+					btnBaixa2 = new JButton("Download2"),
+					btnBaixa3 = new JButton("Download3"),
 					btnCancelar = new JButton(TEXTOS.pegarTexto("botao.cancelar")) };
 
 			lstPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.lista"));
@@ -201,7 +201,7 @@ public abstract class YoutubeTela extends JFrame {
 			btnBaixa.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
 			btnBaixa.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.baixar"));
 			btnBaixa2.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
-			btnBaixa3.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.baixar"));
+			btnBaixa2.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.baixar"));
 			btnBaixa3.setIcon(IMAGEM.pegarIcon("/imagens/download.png"));
 			btnBaixa3.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.baixar"));
 			btnPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.pesquisa"));

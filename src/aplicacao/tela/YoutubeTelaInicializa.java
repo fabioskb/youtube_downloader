@@ -71,10 +71,10 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
             downloadProgressBar.setVisible(false);
-            //downloadProgressBar2.setVisible(false);
+            downloadProgressBar2.setVisible(false);
             downloadProgressBar3.setVisible(false);
             lblProgressBar.setVisible(false);
-            //lblProgressBar2.setVisible(false);
+            lblProgressBar2.setVisible(false);
             lblProgressBar3.setVisible(false);
             this.setIndex(20);
 

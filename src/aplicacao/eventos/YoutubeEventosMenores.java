@@ -45,10 +45,16 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void btnCancelarClick(ActionEvent ev) {
-        if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download")) || getLblResultado().getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
-            getPro().destroy();
+        if (getDownloadProgressBar().isVisible() || getLblResultado().getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+            || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+            || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+            if (pro.isAlive()) { getPro().destroy(); }
+            if (pro2.isAlive()) { pro2.destroy(); }
+            if (pro3.isAlive()) { pro3.destroy(); }
             getBtnCancelar().setVisible(false);
             getBtnBaixa().setVisible(true);
+            btnBaixa2.setVisible(false);
+            btnBaixa3.setVisible(false);
         }
     }
 

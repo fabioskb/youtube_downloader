@@ -11,7 +11,7 @@ import metodos.YoutubeArquivo;
  * Classe responsável pelo evento que configura, executa e retorna os resultados
  * da lista de pesquisa da aplicação, além de tratar possíveis erros.
  */
-public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
+public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
 
     @Override
     protected void btnPesquisaClick(ActionEvent ev) {

@@ -40,6 +40,8 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
      * @param ev - evento
      */
     protected abstract void btnBaixarClick(ActionEvent ev);
+    protected abstract void btnBaixar2Click(ActionEvent ev);
+    protected abstract void btnBaixar3Click(ActionEvent ev);
 
     /**
      * Pesquisa o vídeo ou áudio pelo nome e retorna até 20 opções
@@ -94,7 +96,9 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
         getBtnModoNoite().addActionListener(this::btnModoNoiteClick);
         getCheckVideo().addActionListener(this::checkVideoClick);
         getCheckAudio().addActionListener(this::checkAudioClick);
-        getBtnBaixa().addActionListener(this::btnBaixarClick);
+        btnBaixa.addActionListener(this::btnBaixarClick);
+        btnBaixa2.addActionListener(this::btnBaixar2Click);
+        btnBaixa3.addActionListener(this::btnBaixar3Click);
         getBtnPesquisa().addActionListener(this::btnPesquisaClick);
         getBtnCancelar().addActionListener(this::btnCancelarClick);
         getItemMenuExit().addActionListener(this::itemMenuExitClick);
