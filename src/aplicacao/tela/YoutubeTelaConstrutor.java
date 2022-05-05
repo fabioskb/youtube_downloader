@@ -1,10 +1,7 @@
 package aplicacao.tela;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 import metodos.YoutubeArquivo;
 
 /**
@@ -19,15 +16,15 @@ public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
         try {
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             if (SISTEMA.contains("Windows")) {
-                setPastaPrincipal("C:\\users\\" + USUARIO + "\\YDownloads\\");
+                pastaPrincipal = "C:\\users\\" + USUARIO + "\\YDownloads\\";
             } else {
-                setPastaPrincipal("/home/" + USUARIO + "/YDownloads/");
+                pastaPrincipal = "/home/" + USUARIO + "/YDownloads/";
             }
-            setDiretorioPadrao(new YoutubeArquivo(this.getPastaPrincipal()));
-            if (!getDiretorioPadrao().getArq().isDirectory()) {
-                getDiretorioPadrao().getArq().mkdir();
+            diretorioPadrao = new YoutubeArquivo(pastaPrincipal);
+            if (!diretorioPadrao.getArq().isDirectory()) {
+                diretorioPadrao.getArq().mkdir();
             }
-            setArquivoChecaPrograma(new YoutubeArquivo(getPastaPrincipal() + ".check"));
+            arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check");
             try {
                 this.inicializar();
                 this.configurarCores();

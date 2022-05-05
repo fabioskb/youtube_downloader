@@ -1,11 +1,10 @@
 package aplicacao.tela;
 
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 /**
  * Classe abstrata responsável por criar o método eventos() da aplicação.
@@ -93,31 +92,31 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
      * em botões, caixas de texto, labels e etc.
      */
     protected void eventos() {
-        getBtnModoNoite().addActionListener(this::btnModoNoiteClick);
-        getCheckVideo().addActionListener(this::checkVideoClick);
-        getCheckAudio().addActionListener(this::checkAudioClick);
+        btnModoNoite.addActionListener(this::btnModoNoiteClick);
+        checkVideo.addActionListener(this::checkVideoClick);
+        checkAudio.addActionListener(this::checkAudioClick);
         btnBaixa.addActionListener(this::btnBaixarClick);
         btnBaixa2.addActionListener(this::btnBaixar2Click);
         btnBaixa3.addActionListener(this::btnBaixar3Click);
-        getBtnPesquisa().addActionListener(this::btnPesquisaClick);
-        getBtnCancelar().addActionListener(this::btnCancelarClick);
-        getItemMenuExit().addActionListener(this::itemMenuExitClick);
-        getItemMenuTutorial().addActionListener(this::itemMenuTutorialClick);
-        getItemMenuSobre().addActionListener(this::itemMenuSobreClick);
+        btnPesquisa.addActionListener(this::btnPesquisaClick);
+        btnCancelar.addActionListener(this::btnCancelarClick);
+        itemMenuExit.addActionListener(this::itemMenuExitClick);
+        itemMenuTutorial.addActionListener(this::itemMenuTutorialClick);
+        itemMenuSobre.addActionListener(this::itemMenuSobreClick);
 
-        getTxtLink().addMouseListener(new MouseAdapter() {
+        txtLink.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent ev) {
                 txtLinkMouseClick(ev);
             }
         });
 
-        getTxtPesquisa().addMouseListener(new MouseAdapter() {
+        txtPesquisa.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent ev) {
                 txtPesquisaMouseClick(ev);
             }
         });
 
-        getLstPesquisa().addAncestorListener(new AncestorListener() {
+        lstPesquisa.addAncestorListener(new AncestorListener() {
 
             @Override
             public void ancestorAdded(AncestorEvent event) {
@@ -136,7 +135,7 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
 
         });
 
-        getLstPesquisa().addMouseListener(new MouseAdapter() {
+        lstPesquisa.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent ev) {
                 lstPesquisaMouseClickItem(ev);
             }

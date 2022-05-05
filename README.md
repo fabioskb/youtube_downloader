@@ -4,10 +4,11 @@
 
 * **You can download directly through the link or search by name.**
 * **The search returns 20 options that can be downloaded.**
+* **Download up to three files simultaneously**
 * **Support only for Linux amd64 (for now).**
 * **Option for night mode.**
 * **Automatically activated night mode if the time is between 18:00 and 5:00 hours.**
-* **Choose between audio or video to download.**
+* **Choose between audio or video to download**
 * **Description of each item in the list via ToolTip when selecting with the mouse (channel, duration, views and publish_time).**
 * **Download progress bar**
 * **Install all dependencies on the first boot of the application.**
@@ -40,14 +41,14 @@
 
 ### via apt
 
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.3.1_amd64.deb`
-2. `sudo apt install ./youtube-downloader_amd64_2.3.1.deb`
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.3.2_amd64.deb`
+2. `sudo apt install ./youtube-downloader_amd64_2.3.2.deb`
 3. `ydl` (or simply open it in the network applications category)
 
 ### via dpkg
 
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.3.1_amd64.deb`
-2. `sudo dpkg -i ./youtube-downloader_amd64_2.3.1.deb`
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.3.2_amd64.deb`
+2. `sudo dpkg -i ./youtube-downloader_amd64_2.3.2.deb`
 3. `sudo apt install -f`
 4. `ydl` (or simply open it in the network applications category)
 

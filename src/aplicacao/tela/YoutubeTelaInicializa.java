@@ -1,11 +1,9 @@
 package aplicacao.tela;
 
+import aplicacao.eventos.YoutubeEventosMenores;
 import java.io.IOException;
-
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
-
-import aplicacao.eventos.YoutubeEventosMenores;
 
 /**
  * Classe responsável pelo método inicializar() da aplicação. Herda Eventos.
@@ -16,7 +14,6 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
      * Checa se esta Ok, corrige se necessário e possível, e, inicializa todos
      * os componentes da aplicação (se possível).
      *
-     * @throws IOException
      */
     protected void inicializar() {
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
@@ -25,21 +22,22 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
         if (youtubeDlSaida.contains("command not found") || youtubeSearchSaida.contains("command not found")) {
             JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.pip.nao.instalado"), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
-        } else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && getArquivoChecaPrograma().getArq().isFile()) {
-            getArquivoChecaPrograma().deletar();
+        } else if ((!youtubeDlSaida.startsWith("Name: youtube-dl") || !youtubeSearchSaida.startsWith("Name: youtube-search")) && arquivoChecaPrograma.getArq().isFile()) {
+            arquivoChecaPrograma.deletar();
         } else {
-            getArquivoChecaPrograma().criar("Checado!");
+            arquivoChecaPrograma.criar("Checado!");
         }
 
-        if (!getArquivoChecaPrograma().getArq().isFile()) {
+        if (!arquivoChecaPrograma.getArq().isFile()) {
             JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.boas.vndas"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
-            setInstallYoutubeDl(CMD.comando("pip install youtube-dl"));
-            setInstallYoutubeSearch(CMD.comando("pip install youtube-search"));
-            if (getInstallYoutubeDl().contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") || getInstallYoutubeSearch().equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
+            installYoutubeDl = CMD.comando("pip install youtube-dl");
+            installYoutubeSearch = CMD.comando("pip install youtube-search");
+            if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") 
+                    || installYoutubeSearch.equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
                 JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.erro.dependencias"), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             } else {
-                getArquivoChecaPrograma().criar("Checado!");
+                arquivoChecaPrograma.criar("Checado!");
                 JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.instalacao.concluida"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
                 youtubeDlSaida = "Name: youtube-dl";
                 youtubeSearchSaida = "Name: youtube-search";
@@ -56,18 +54,18 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 
             this.getContentPane().add(getPnlPadrao());
 
-            this.getCheckVideo().setSelected(true);
-            this.setVideo(true);
+            checkVideo.setSelected(true);
+            video = true;
 
-            if (this.HORA >= 17 || this.HORA < 5) {
-                this.getBtnModoNoite().setSelected(true);
-                this.setNoturno(true);
-                getBtnModoNoite().setText(TEXTOS.pegarTexto("botao.modo.dia"));
-                getBtnModoNoite().setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
-                getBtnModoNoite().setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
+            if (HORA >= 17 || HORA < 5) {
+                btnModoNoite.setSelected(true);
+                noturno = true;
+                btnModoNoite.setText(TEXTOS.pegarTexto("botao.modo.dia"));
+                btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
+                btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
             }
 
-            this.getBtnCancelar().setVisible(false);
+            btnCancelar.setVisible(false);
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
             downloadProgressBar.setVisible(false);
@@ -76,7 +74,16 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             lblProgressBar.setVisible(false);
             lblProgressBar2.setVisible(false);
             lblProgressBar3.setVisible(false);
-            this.setIndex(20);
+            
+            try {
+                pro = RUN.exec("ls");
+                pro2 = RUN_2.exec("ls");
+                pro3 = RUN_3.exec("ls");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            index = 20;
 
         }
     }

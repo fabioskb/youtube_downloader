@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,7 +25,6 @@ import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-
 import metodos.YoutubeArquivo;
 import metodos.YoutubeComando;
 import metodos.YoutubeCores;
@@ -38,22 +36,22 @@ import metodos.YoutubeText;
  */
 public abstract class YoutubeTela extends JFrame {
 	
-	private JLabel lblBanner;
-	private JLabel lblDescricao;
+	protected JLabel lblBanner;
+	protected JLabel lblDescricao;
 	protected static final JLabel LBL_VAZIO = new JLabel("                ");
 	protected static final JLabel LBL_VAZIO1 = new JLabel("                ");
 	
-	private JToggleButton btnModoNoite;
-	private JCheckBox checkVideo, checkAudio;
+	protected JToggleButton btnModoNoite;
+	protected JCheckBox checkVideo, checkAudio;
 	
-	private JTextField txtLink;
-	private JTextField txtPesquisa;
-	private JButton btnPesquisa;
-	private JLabel lblLink;
+	protected JTextField txtLink;
+	protected JTextField txtPesquisa;
+	protected JButton btnPesquisa;
+	protected JLabel lblLink;
 	
-	private JList<String> lstPesquisa;
-	private DefaultListModel<String> lstTitulos = new DefaultListModel<String>();
-	private List<String> lstDescricao = new LinkedList<>();
+	protected JList<String> lstPesquisa;
+	protected DefaultListModel<String> lstTitulos = new DefaultListModel<String>();
+	protected List<String> lstDescricao = new LinkedList<>();
 	protected JButton btnBaixa;
 	protected JButton btnBaixa2;
 	protected JButton btnBaixa3;
@@ -63,29 +61,29 @@ public abstract class YoutubeTela extends JFrame {
 	protected JLabel lblResultado2;
 	protected JLabel lblResultado3;
 	
-	private JPanel pnlTopo;
+	protected JPanel pnlTopo;
 	
-	private JPanel pnlEsquerda;
-	//private JPanel pnlEsquerda1;
-	//private JPanel pnlEsquerda2;
-	private JMenuBar barraMenu;
-	private JMenu menuFile;
-	private JMenuItem itemMenuExit;
-	private JMenuItem itemMenuTutorial;
-	private JMenuItem itemMenuSobre;
+	protected JPanel pnlEsquerda;
+	//protected JPanel pnlEsquerda1;
+	//protected JPanel pnlEsquerda2;
+	protected JMenuBar barraMenu;
+	protected JMenu menuFile;
+	protected JMenuItem itemMenuExit;
+	protected JMenuItem itemMenuTutorial;
+	protected JMenuItem itemMenuSobre;
 	
-	private JPanel pnlCentro;
-	private JPanel pnlCentro1;
-	private JPanel pnlCentro2;
-	private JPanel pnlCentro3;
-	private JPanel pnlCentro4;
-	private JScrollPane pnlExtra;
+	protected JPanel pnlCentro;
+	protected JPanel pnlCentro1;
+	protected JPanel pnlCentro2;
+	protected JPanel pnlCentro3;
+	protected JPanel pnlCentro4;
+	protected JScrollPane pnlExtra;
 	
-	private JPanel pnlDireita;
-	private JPanel pnlDireita1;
-	private JPanel pnlDireita2;
+	protected JPanel pnlDireita;
+	protected JPanel pnlDireita1;
+	protected JPanel pnlDireita2;
 	
-	private JPanel pnlRodape;
+	protected JPanel pnlRodape;
         protected JPanel pnlRodape1;
         protected JPanel pnlRodape2;
         protected JPanel pnlRodape3;
@@ -96,20 +94,21 @@ public abstract class YoutubeTela extends JFrame {
 	protected JLabel lblProgressBar2;
 	protected JLabel lblProgressBar3;
 
-	private JRootPane pnlPadrao;
+	protected JRootPane pnlPadrao;
 
-	private boolean noturno, video, audio;
+	protected boolean noturno, video, audio;
         protected boolean isBaixando, isBaixando2, isBaixando3;
-	private String pastaPrincipal;
-	private String installYoutubeSearch, installYoutubeDl;
-	private int contador;
-	private YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
+	protected String pastaPrincipal;
+	protected String installYoutubeSearch, installYoutubeDl;
+	protected int contador, cont;
+	protected YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
 
-	private final BorderLayout borderLayout = new BorderLayout();
+	protected final BorderLayout borderLayout = new BorderLayout();
 	protected static final String USUARIO = System.getProperty("user.name");
 	protected static final String SISTEMA = System.getProperty("os.name");
 	protected static final Font FONT_BANNER = new Font(Font.SANS_SERIF, Font.BOLD, 48);
 	protected static final Font FONT_DESC = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+	protected static final Font FONT_PROGRESS_BAR = new Font(Font.SANS_SERIF, Font.BOLD, 11);
 	protected static YoutubeImage IMAGEM = new YoutubeImage();
 	protected static final YoutubeCores CORES = new YoutubeCores();
 	protected static final String IDIOMA = Locale.getDefault().getDisplayLanguage();
@@ -188,8 +187,8 @@ public abstract class YoutubeTela extends JFrame {
 					btnPesquisa = new JButton(TEXTOS.pegarTexto("botao.pesquisa")),
 					lstPesquisa = new JList<>(lstTitulos),
 					btnBaixa = new JButton(TEXTOS.pegarTexto("botao.baixar")),
-					btnBaixa2 = new JButton("Download2"),
-					btnBaixa3 = new JButton("Download3"),
+					btnBaixa2 = new JButton(TEXTOS.pegarTexto("botao.baixar2")),
+					btnBaixa3 = new JButton(TEXTOS.pegarTexto("botao.baixar3")),
 					btnCancelar = new JButton(TEXTOS.pegarTexto("botao.cancelar")) };
 
 			lstPesquisa.setToolTipText(TEXTOS.pegarTexto("tooltip.lista"));
@@ -287,19 +286,6 @@ public abstract class YoutubeTela extends JFrame {
 			//lblResultado3.setIcon(IMAGEM.pegarIcon("/imagens/invisible.png"));
 			lblResultado3.setToolTipText(TEXTOS.pegarTexto("tooltip.label.resultado"));
 
-			downloadProgressBar = new JProgressBar(0, 100);
-			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
-			downloadProgressBar.setAlignmentY(CENTER_ALIGNMENT);
-			downloadProgressBar.setStringPainted(true);
-			downloadProgressBar2 = new JProgressBar(0, 100);
-			downloadProgressBar2.setAlignmentX(CENTER_ALIGNMENT);
-			downloadProgressBar2.setAlignmentY(CENTER_ALIGNMENT);
-			downloadProgressBar2.setStringPainted(true);
-			downloadProgressBar3 = new JProgressBar(0, 100);
-			downloadProgressBar3.setAlignmentX(CENTER_ALIGNMENT);
-			downloadProgressBar3.setAlignmentY(CENTER_ALIGNMENT);
-			downloadProgressBar3.setStringPainted(true);
-
 			lblProgressBar = new JLabel("");
 			lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
 			lblProgressBar.setAlignmentY(CENTER_ALIGNMENT);
@@ -315,6 +301,22 @@ public abstract class YoutubeTela extends JFrame {
 			lblProgressBar3.setAlignmentY(CENTER_ALIGNMENT);
 			lblProgressBar3.setOpaque(true);
 			lblProgressBar3.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
+
+			downloadProgressBar = new JProgressBar(0, 100);
+			downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
+			downloadProgressBar.setAlignmentY(CENTER_ALIGNMENT);
+			downloadProgressBar.setStringPainted(true);
+                        downloadProgressBar.setFont(FONT_PROGRESS_BAR);
+			downloadProgressBar2 = new JProgressBar(0, 100);
+			downloadProgressBar2.setAlignmentX(CENTER_ALIGNMENT);
+			downloadProgressBar2.setAlignmentY(CENTER_ALIGNMENT);
+			downloadProgressBar2.setStringPainted(true);
+                        downloadProgressBar2.setFont(FONT_PROGRESS_BAR);
+			downloadProgressBar3 = new JProgressBar(0, 100);
+			downloadProgressBar3.setAlignmentX(CENTER_ALIGNMENT);
+			downloadProgressBar3.setAlignmentY(CENTER_ALIGNMENT);
+			downloadProgressBar3.setStringPainted(true);
+			downloadProgressBar3.setFont(FONT_PROGRESS_BAR);
 
                         pnlRodape1.add(lblResultado);
                         pnlRodape1.add(lblProgressBar);
@@ -338,7 +340,7 @@ public abstract class YoutubeTela extends JFrame {
 	public JRootPane getPnlPadrao() { 
 		if (pnlPadrao == null) {
 			pnlPadrao = new JRootPane();
-			pnlPadrao.setLayout(getBorderLayout());
+			pnlPadrao.setLayout(borderLayout);
 
 			pnlPadrao.add(getPnlTopo(), BorderLayout.NORTH);
 			pnlPadrao.add(getPnlEsquerda(), BorderLayout.WEST);
@@ -349,135 +351,4 @@ public abstract class YoutubeTela extends JFrame {
 
 		return pnlPadrao; 
 	}
-
-	////////////
-
-	public BorderLayout getBorderLayout() { return borderLayout; }
-	
-	public JMenu getMenuFile() { return menuFile; }
-
-	public void setMenuFile(JMenu menuFile) { this.menuFile = menuFile; }
-
-	public JMenuItem getItemMenuExit() { return this.itemMenuExit; }
-	
-	public JMenuItem getItemMenuTutorial() { return itemMenuTutorial; }
-
-	public JMenuItem getItemMenuSobre() { return itemMenuSobre; }
-
-	public JMenuBar getBarraMenu() { return barraMenu; }
-
-	public void setCont(int contador) { this.contador = contador; }
-
-	public JLabel getLblProgressBar() { return lblProgressBar; }
-
-	public void setLblProgressBar(JLabel lblProgressBar) { this.lblProgressBar = lblProgressBar; }
-
-	public JProgressBar getDownloadProgressBar() { return downloadProgressBar; }
-
-	//public JPanel getPnlRodape1() { return pnlRodape1; }
-
-	//public JPanel getPnlRodape2() { return pnlRodape2; }
-
-	public JButton getBtnCancelar() { return btnCancelar; }
-
-	public int getCont() { return contador; }
-
-	/**
-	 * Retorna true se o checkbox video estiver selecionado.
-	 * É uma condição para baixar em vídeo (mp4).
-	 * 
-	 * @return boolean video
-	 */
-	public boolean isVideo() { return video; }
-
-	public void setVideo(boolean video) { this.video = video; }
-
-	public boolean isAudio() { return audio; }
-
-	/**
-	 * Retorna true se o checkbox Audio estiver selecionado.
-	 * É uma condição para baixar em áudio (mp3).
-	 * 
-	 * @param audio
-	 */
-	public void setAudio(boolean audio) { this.audio = audio; }
-
-	/**
-	 * Retorna true se o modo noturno estiver ativo, se não,
-	 * retorna false.
-	 * 
-	 * @return boolean
-	 */
-	public boolean isNoturno() { return noturno; }
-
-	public void setNoturno(boolean noturno) { this.noturno = noturno; }
-
-	public JLabel getLblBanner() { return lblBanner; }
-
-	public JLabel getLblDescricao() { return lblDescricao; }
-
-	public JToggleButton getBtnModoNoite() { return btnModoNoite; }
-
-	public JCheckBox getCheckVideo() { return checkVideo; }
-
-	public JCheckBox getCheckAudio() { return checkAudio; }
-
-	public JTextField getTxtLink() { return txtLink; }
-
-	public JTextField getTxtPesquisa() { return txtPesquisa; }
-
-	public JButton getBtnPesquisa() { return btnPesquisa; }
-
-	public JLabel getLblLink() { return lblLink; }
-
-	public JList<String> getLstPesquisa() { return lstPesquisa; }
-
-	public DefaultListModel<String> getLstTitulos() { return lstTitulos; }
-
-	public List<String> getLstDescricao() { return lstDescricao; }
-
-	public JButton getBtnBaixa() { return btnBaixa; }
-
-	public JLabel getLblResultado() { return lblResultado; }
-
-	public String getPastaPrincipal() { return pastaPrincipal; }
-
-	public void setPastaPrincipal(String pastaPrincipal) { this.pastaPrincipal = pastaPrincipal; }
-
-	public String getInstallYoutubeSearch() { return installYoutubeSearch; }
-
-	public void setInstallYoutubeSearch(String installYoutubeSearch) { this.installYoutubeSearch = installYoutubeSearch; }
-
-	public String getInstallYoutubeDl() { return installYoutubeDl; }
-
-	public void setInstallYoutubeDl(String installYoutubeDl) { this.installYoutubeDl = installYoutubeDl; }
-
-	public int getContador() { return contador; }
-
-	public void setContador(int contador) { this.contador = contador; }
-
-	public YoutubeArquivo getArquivoChecaPrograma() { return arquivoChecaPrograma; }
-
-	public void setArquivoChecaPrograma(YoutubeArquivo arquivoChecaPrograma) { this.arquivoChecaPrograma = arquivoChecaPrograma; }
-
-	public YoutubeArquivo getDiretorioPadrao() { return diretorioPadrao; }
-
-	public void setDiretorioPadrao(YoutubeArquivo diretorioPadrao) { this.diretorioPadrao = diretorioPadrao; }
-
-	public JPanel getPnlDireita1() { return pnlDireita1; }
-
-	public JPanel getPnlDireita2() { return pnlDireita2; }
-
-	public JPanel getPnlCentro1() { return pnlCentro1; }
-
-	public void setPnlCentro1(JPanel pnlCentro1) { this.pnlCentro1 = pnlCentro1; }
-
-	public JPanel getPnlCentro2() { return pnlCentro2; }
-
-	public JPanel getPnlCentro3() { return pnlCentro3; }
-
-	public JPanel getPnlCentro4() { return pnlCentro4; }
-
-	public JScrollPane getPnlExtra() { return pnlExtra; }
-
 }

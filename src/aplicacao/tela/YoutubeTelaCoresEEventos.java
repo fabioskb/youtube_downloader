@@ -3,7 +3,6 @@ package aplicacao.tela;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
 
@@ -23,73 +22,77 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
      */
     public void configurarCores() {
 
-        getLblBanner().setBackground(CORES.pegarCor(isNoturno(), 0));
-        getLblBanner().setForeground(CORES.pegarCor(isNoturno(), 1));
+        lblBanner.setBackground(CORES.pegarCor(noturno, 0));
+        lblBanner.setForeground(CORES.pegarCor(noturno, 1));
 
-        getLblDescricao().setOpaque(true);
-        getLblDescricao().setBackground(CORES.pegarCor(isNoturno(), 4));
-        getLblDescricao().setForeground(CORES.pegarCor(isNoturno(), 6));
+        lblDescricao.setOpaque(true);
+        lblDescricao.setBackground(CORES.pegarCor(noturno, 4));
+        lblDescricao.setForeground(CORES.pegarCor(noturno, 6));
 
-        getTxtLink().setOpaque(true);
-        getTxtLink().setBackground(CORES.pegarCor(isNoturno(), 10));
-        getTxtPesquisa().setOpaque(true);
-        getTxtPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
-        getLstPesquisa().setOpaque(true);
-        getLstPesquisa().setBackground(CORES.pegarCor(isNoturno(), 10));
+        txtLink.setOpaque(true);
+        txtLink.setBackground(CORES.pegarCor(noturno, 10));
+        txtPesquisa.setOpaque(true);
+        txtPesquisa.setBackground(CORES.pegarCor(noturno, 10));
+        lstPesquisa.setOpaque(true);
+        lstPesquisa.setBackground(CORES.pegarCor(noturno, 10));
 
-        downloadProgressBar.setBackground(CORES.pegarCor(isNoturno(), 3));
-        downloadProgressBar.setForeground(CORES.pegarCor(isNoturno(), 9));
-        downloadProgressBar2.setBackground(CORES.pegarCor(isNoturno(), 3));
-        downloadProgressBar2.setForeground(CORES.pegarCor(isNoturno(), 9));
-        downloadProgressBar3.setBackground(CORES.pegarCor(isNoturno(), 3));
-        downloadProgressBar3.setForeground(CORES.pegarCor(isNoturno(), 9));
+        downloadProgressBar.setBackground(CORES.pegarCor(noturno, 3));
+        downloadProgressBar.setForeground(CORES.pegarCor(noturno, 9));
+        downloadProgressBar2.setBackground(CORES.pegarCor(noturno, 3));
+        downloadProgressBar2.setForeground(CORES.pegarCor(noturno, 9));
+        downloadProgressBar3.setBackground(CORES.pegarCor(noturno, 3));
+        downloadProgressBar3.setForeground(CORES.pegarCor(noturno, 9));
 
-        lblResultado.setBackground(CORES.pegarCor(isNoturno(), 4));
-        lblResultado2.setBackground(CORES.pegarCor(isNoturno(), 4));
-        lblResultado3.setBackground(CORES.pegarCor(isNoturno(), 4));
-        if (getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.pesquisando") || getLblResultado().getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")) {
-            getLblResultado().setForeground(CORES.pegarCor(isNoturno(), 6));
+        lblResultado.setBackground(CORES.pegarCor(noturno, 4));
+        lblResultado2.setBackground(CORES.pegarCor(noturno, 4));
+        lblResultado3.setBackground(CORES.pegarCor(noturno, 4));
+        if (lblResultado.getText() == TEXTOS.pegarTexto("label.resultado.pesquisando") 
+           || lblResultado.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")
+           || lblResultado2.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")
+           || lblResultado3.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")) {
+            lblResultado.setForeground(CORES.pegarCor(noturno, 6));
+            lblResultado2.setForeground(CORES.pegarCor(noturno, 6));
+            lblResultado3.setForeground(CORES.pegarCor(noturno, 6));
         }
 
-        getBarraMenu().setBackground(CORES.pegarCor(isNoturno(), 3));
-        getMenuFile().setBackground(CORES.pegarCor(isNoturno(), 3));
-        getMenuFile().setForeground(CORES.pegarCor(isNoturno(), 4));
+        barraMenu.setBackground(CORES.pegarCor(noturno, 3));
+        menuFile.setBackground(CORES.pegarCor(noturno, 3));
+        menuFile.setForeground(CORES.pegarCor(noturno, 4));
 
         Component[] paineis = {
-            getPnlTopo(), getPnlCentro(), getPnlCentro1(),
-            getPnlCentro2(), getPnlCentro3(), getPnlCentro4(), getPnlDireita(),
-            getPnlDireita1(), getPnlDireita2(), getPnlRodape(), pnlRodape1,
-            pnlRodape2, pnlRodape3, getPnlPadrao()
+            pnlTopo, pnlCentro, pnlCentro1, pnlCentro2, pnlCentro3, pnlCentro4, 
+            pnlDireita, pnlDireita1, pnlDireita2, pnlRodape, pnlRodape1, 
+            pnlRodape2, pnlRodape3, pnlPadrao
         };
-        setContador(0);
+        contador = 0;
         for (Component jPanel : paineis) {
-            if (getContador() >= 6 && getContador() <= 12) {
-                jPanel.setBackground(CORES.pegarCor(isNoturno(), 4));
+            if (contador >= 6 && contador <= 12) {
+                jPanel.setBackground(CORES.pegarCor(noturno, 4));
             } else {
-                jPanel.setBackground(CORES.pegarCor(isNoturno(), 3));
+                jPanel.setBackground(CORES.pegarCor(noturno, 3));
             }
-            setContador(getContador() + 1);
+            contador++;
         }
 
-        Component[] buttons = {getBtnModoNoite(), getLblLink(), getBtnPesquisa(),
-            getBtnBaixa(), btnBaixa2, btnBaixa3, getCheckAudio(), getCheckVideo(),
-            getBtnCancelar()};
-        setCont(0);
+        Component[] buttons = {btnModoNoite, lblLink, btnPesquisa,
+            btnBaixa, btnBaixa2, btnBaixa3, checkAudio, checkVideo,
+            btnCancelar};
+        cont = 0;
         for (Component button : buttons) {
-            if (getCont() == 0 && getBtnModoNoite().isSelected()) {
-                button.setBackground(CORES.pegarCor(isNoturno(), 6));
+            if (cont == 0 && btnModoNoite.isSelected()) {
+                button.setBackground(CORES.pegarCor(noturno, 6));
             } else {
-                button.setBackground(CORES.pegarCor(isNoturno(), 5));
-                button.setForeground(CORES.pegarCor(isNoturno(), 6));
+                button.setBackground(CORES.pegarCor(noturno, 5));
+                button.setForeground(CORES.pegarCor(noturno, 6));
             }
-            setCont(getCont() + 1);
+            cont++;
         }
 
-        UIManager.put("OptionPane.background", CORES.pegarCor(isNoturno(), 3));
-        UIManager.put("OptionPane.messageForeground", CORES.pegarCor(isNoturno(), 6));
-        UIManager.put("Panel.background", CORES.pegarCor(isNoturno(), 3));
-        UIManager.put("Button.background", CORES.pegarCor(isNoturno(), 5));
-        UIManager.put("Button.foreground", CORES.pegarCor(isNoturno(), 6));
+        UIManager.put("OptionPane.background", CORES.pegarCor(noturno, 3));
+        UIManager.put("OptionPane.messageForeground", CORES.pegarCor(noturno, 6));
+        UIManager.put("Panel.background", CORES.pegarCor(noturno, 3));
+        UIManager.put("Button.background", CORES.pegarCor(noturno, 5));
+        UIManager.put("Button.foreground", CORES.pegarCor(noturno, 6));
 
     }
 

@@ -1,8 +1,7 @@
 package aplicacao;
 
-import javax.swing.SwingUtilities;
-
 import aplicacao.tela.YoutubeTelaConstrutor;
+import javax.swing.SwingUtilities;
 
 public class Aplicacao {
 
