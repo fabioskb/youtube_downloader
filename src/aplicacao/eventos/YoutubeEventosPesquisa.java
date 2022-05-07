@@ -23,7 +23,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                 if (!lstDescricao.isEmpty()) {
                     lstDescricao.clear();
                 }
-                YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt");
+                YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt", false);
 
                 links = new String[20];
                 String[] lstTitulosLinksTmp = null;
@@ -34,7 +34,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
 
                 try {
                     arquivoDesc.deletar();
-                    YoutubeArquivo scriptTitulosLinks = new YoutubeArquivo("/tmp/youtubeSearch");
+                    YoutubeArquivo scriptTitulosLinks = new YoutubeArquivo("/tmp/youtubeSearch", false);
                     scriptTitulosLinks.criar(String.format("#!/usr/bin/python3\n"
                             + "import os, time\n"
                             + "from youtube_search import YoutubeSearch\n\n"
@@ -43,13 +43,15 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                             + "arquivo = '/tmp/descricoes.txt'\n"
                             + "results = YoutubeSearch(texto, %d)\n\n"
                             + ""
+                            + "cont = 1\n"
                             + "for i in results.videos:\n"
                             + "  for k, v in i.items():\n"
                             + "    if k == 'title':\n"
-                            + "      print(v)\n"
+                            + "      print(f'{cont}) {v}')\n"
                             + "      print('https://www.youtube.com'+i['url_suffix'])\n"
                             + "      with open(arquivo, 'a' if os.path.isfile(arquivo) else 'w') as arqDesc:\n"
-                            + "        arqDesc.write(f'Channel: {i[\"channel\"]}, Duration: {i[\"duration\"]}, Views: {i[\"views\"]}, Publish_time: {i[\"publish_time\"]}\\n')\n",
+                            + "        arqDesc.write(f'Channel: {i[\"channel\"]}, Duration: {i[\"duration\"]}, Views: {i[\"views\"]}, Publish_time: {i[\"publish_time\"]}\\n')\n"
+                            + "      cont += 1\n",
                             txtPesquisa.getText(), links.length));
 
                     cmdLineSaida = CMD.comando("python3 /tmp/youtubeSearch");
@@ -71,8 +73,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                                     links[contador] = lstTitulosLinksTmp[i];
                                     contador = contador + 1;
                                 }
-                                CMD.sleep(0.2);
-
+                                CMD.sleep(0.1);
                             }
                         }
                     }

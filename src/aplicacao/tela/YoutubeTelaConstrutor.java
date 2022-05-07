@@ -17,14 +17,20 @@ public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             if (SISTEMA.contains("Windows")) {
                 pastaPrincipal = "C:\\users\\" + USUARIO + "\\YDownloads\\";
+                pastaVideo = pastaPrincipal+"videos\\";
+                pastaAudio = pastaPrincipal+"audios\\";
             } else {
                 pastaPrincipal = "/home/" + USUARIO + "/YDownloads/";
+                pastaVideo = pastaPrincipal+"videos/";
+                pastaAudio = pastaPrincipal+"audios/";
             }
-            diretorioPadrao = new YoutubeArquivo(pastaPrincipal);
+            YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
+            YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
+            diretorioPadrao = new YoutubeArquivo(pastaPrincipal, true);
             if (!diretorioPadrao.getArq().isDirectory()) {
                 diretorioPadrao.getArq().mkdir();
             }
-            arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check");
+            arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check", false);
             try {
                 this.inicializar();
                 this.configurarCores();

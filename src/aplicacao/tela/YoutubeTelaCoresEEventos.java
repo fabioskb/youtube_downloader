@@ -46,16 +46,19 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         lblResultado.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado2.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado3.setBackground(CORES.pegarCor(noturno, 4));
-        if (lblResultado.getText() == TEXTOS.pegarTexto("label.resultado.pesquisando") 
-           || lblResultado.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")
-           || lblResultado2.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")
-           || lblResultado3.getText() == TEXTOS.pegarTexto("label.resultado.verificando.download")) {
+        if (lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pesquisando")) 
+           || lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download")) 
+           || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download")) 
+           || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download")) 
+           || lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo")) 
+           || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo")) 
+           || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
             lblResultado.setForeground(CORES.pegarCor(noturno, 6));
             lblResultado2.setForeground(CORES.pegarCor(noturno, 6));
             lblResultado3.setForeground(CORES.pegarCor(noturno, 6));
         }
 
-        barraMenu.setBackground(CORES.pegarCor(noturno, 3));
+        barraMenu.setBackground(CORES.pegarCor(noturno, 3)); 
         menuFile.setBackground(CORES.pegarCor(noturno, 3));
         menuFile.setForeground(CORES.pegarCor(noturno, 4));
 

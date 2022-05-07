@@ -26,8 +26,10 @@ public class YoutubeText {
      * label.resultado.baixando, label.resultado.baixando.pendentes, label.resultado.falha.pesquisa, 
      * label.resultado.falha.download, label.resultado.aviso.item, 
      * label.resultado.aviso.video, label.resultado.download.concluido, 
+     * label.resultado.downloadvideo.concluido, label.resultado.downloadaudio.concluido, 
      * label.resultado.pesquisa.concluida, label.resultado.aviso.ja.baixado, 
-     * label.resultado.download.cancelado, label.resultado.verificando.download.
+     * label.resultado.download.cancelado, label.resultado.verificando.download
+     * label.resultado.pegandotitulo.
      * JPTIONPANE----------> joptionpane.boas.vndas, 
      * joptionpane.erro.dependencias, joptionpane.instalacao.concluida, 
      * joptionpane.pip.nao.instalado, joptionpane.tutorial, joptionpane.sobre, 

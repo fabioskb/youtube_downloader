@@ -15,7 +15,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
      * os componentes da aplicação (se possível).
      *
      */
-    protected void inicializar() {
+    protected void inicializar() throws IOException {
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
         String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
@@ -75,16 +75,12 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             lblProgressBar2.setVisible(false);
             lblProgressBar3.setVisible(false);
             
-            try {
-                pro = RUN.exec("ls");
-                pro2 = RUN_2.exec("ls");
-                pro3 = RUN_3.exec("ls");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            pro = RUN.exec("ls");
+            pro2 = RUN_2.exec("ls");
+            pro3 = RUN_3.exec("ls");
             
             index = 20;
-
+            
         }
     }
 }

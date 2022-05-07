@@ -26,6 +26,8 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                 txtLink.setText(TEXTOS.pegarTexto("fieldtext.link"));
                 index = lstPesquisa.getSelectedIndex();
                 link = links[index];
+                downloadPath = (video) ? TEXTOS.pegarTexto("label.resultado.downloadvideo.concluido") 
+                        : TEXTOS.pegarTexto("label.resultado.downloadaudio.concluido");
             } else if (!video && !audio) {
                 lblResultado3.setForeground(CORES.pegarCor(noturno, 8));
                 lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.aviso.video"));
@@ -39,7 +41,7 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                 try {
                     isBaixando3 = true;
                     format = ((video) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
-                            + "'outtmpl': '%s' + title + '.mp4'}", pastaPrincipal) // format video para o YoutubeDL
+                            + "'outtmpl': '%s' + title + '.mp4'}", pastaVideo) // format video para o YoutubeDL
                             : String.format("{'format': 'bestaudio[ext=m4a]',\n"
                                     + "'outtmpl': '%s' + title + '.mp3',\n"
                                     + "'postprocessors': [{\n"
@@ -47,8 +49,8 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                                     + "    'preferredcodec': 'mp3',\n"
                                     + "    'preferredquality': '0'\n"
                                     + "    }]\n"
-                                    + "}", pastaPrincipal));
-                    YoutubeArquivo scriptBaixar3 = new YoutubeArquivo("/tmp/baixar3");
+                                    + "}", pastaAudio));
+                    YoutubeArquivo scriptBaixar3 = new YoutubeArquivo("/tmp/baixar3", false);
                     scriptBaixar3.criar(String.format(
                             "#!/usr/bin/python3\n"
                             + "import youtube_dl\n\n"
@@ -64,32 +66,53 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                             + "    ydl.download([link])\n",
                             link, format));
 
+                    YoutubeArquivo pegarTitulos = new YoutubeArquivo("/tmp/titulo.py", false);
+                    pegarTitulos.criar(String.format("#!/usr/bin/python3\n"
+                            + "import os, time\n"
+                            + "from youtube_search import YoutubeSearch\n\n"
+                            + ""
+                            + "link = '%s'\n"
+                            + "results = YoutubeSearch(link, 1)\n\n"
+                            + ""
+                            + "for i in results.videos:\n"
+                            + "  for k, v in i.items():\n"
+                            + "    if k == 'title':\n"
+                            + "      print(v)\n", link));
+                    btnBaixa3.setVisible(false);
+                    if (!isBaixando) {
+                        btnBaixa.setVisible(true);
+                    } else if (!isBaixando2) {
+                        btnBaixa2.setVisible(true);
+                    }
+                    btnCancelar.setVisible(true);
+                    lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
+                    configurarCores();
+                    tituloVideo3 = CMD.comando("python3 /tmp/titulo.py");
+                    int tituloTam = (tituloVideo3.length() > 50) ? tituloVideo3.length() - 20 
+                            : tituloVideo3.length()-1;
+                    String tituloFormatado = (tituloVideo3.length() > 50) ? tituloVideo3.substring(0, tituloTam)+"..."
+                            : tituloVideo3.substring(0, tituloTam);
+
                     try {
                         pro3 = RUN_3.exec("python3 /tmp/baixar3");
                         read5 = new BufferedReader(new InputStreamReader(pro3.getInputStream()));
                         read6 = new BufferedReader(new InputStreamReader(pro3.getErrorStream()));
 
-                        btnBaixa3.setVisible(false);
-                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
+                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download") 
+                                + " (" + tituloFormatado + ")");
                         configurarCores();
-                        if (!isBaixando) {
-                            btnBaixa.setVisible(true);
-                        } else if (!isBaixando2) {
-                            btnBaixa2.setVisible(true);
-                        }
-                        btnCancelar.setVisible(true);
                         
                         while ((line3 = read5.readLine()) != null) {
                             if ((!line3.startsWith("[download] 100%") && !line3.contains("Deleting"))) {
                                 String progressPercentdownload = "", progressPercentdownload2 = "";
                                 if (line3.contains("%")) {
-                                    downloadProgressBar3.setVisible(true);
                                     lblProgressBar3.setVisible(false);
                                     lblResultado3.setVisible(false);
+                                    downloadProgressBar3.setVisible(true);
                                     progressPercentdownload = line3.substring(line3.indexOf(" "), line3.indexOf(".")).strip();
                                     progressPercentdownload2 = line3.substring(line3.indexOf(" ")) + "  ";
                                     if (!downloadDone3) {
-                                        downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando") + progressPercentdownload2);
+                                        downloadProgressBar3.setString(tituloFormatado + progressPercentdownload2);
                                     }
                                     downloadProgressBar3.setValue(Integer.parseInt(progressPercentdownload.strip()));
                                     if (downloadProgressBar3.getString().contains("100.0%")) {
@@ -106,7 +129,8 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                                         lblResultado3.setForeground(CORES.pegarCor(noturno, 8));
                                     } else if (line3.startsWith("[youtube]")) {
                                         configurarCores();
-                                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download"));
+                                        lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download")
+                                        + " (" + tituloFormatado + ")");
                                     } else {
                                         if (line3.startsWith("[ffmpeg]") && line3.endsWith("skipping")) {
                                             continue;
@@ -118,7 +142,7 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                             } else if (downloadDone3) {
                                 lblProgressBar3.setVisible(false);
                                 lblResultado3.setVisible(true);
-                                lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.download.concluido"));
+                                lblResultado3.setText(downloadPath);
                                 lblResultado3.setForeground(CORES.pegarCor(noturno, 9));
 
                                 downloadProgressBar3.setVisible(false);

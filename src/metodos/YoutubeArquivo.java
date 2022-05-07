@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,12 +21,20 @@ import java.util.List;
  */
 public class YoutubeArquivo {
     private String caminho;
-    private File arq;
+    private Path arq;
+    private boolean dir;
 
-    public YoutubeArquivo(String caminho) throws IOException {
+    /**
+     *
+     * @param caminho - Path
+     * @param dir - Se true cria um diretorio em vez de um arquivo.
+     */
+    public YoutubeArquivo(String caminho, boolean dir) throws IOException {
         this.caminho = caminho;
-        arq = new File(caminho);
-        arq.createNewFile();
+        this.dir = dir;
+        arq = Paths.get(caminho);
+        if (!dir && Files.notExists(arq)) Files.createFile(arq);
+        else if (Files.notExists(arq)) Files.createDirectory(arq);
     }
     
     // Métodos personalizados
@@ -31,7 +43,7 @@ public class YoutubeArquivo {
      * @param arquivoConteudo Conteúdo do arquivo.
      */
     public void criar(String arquivoConteudo) {
-        try (FileWriter fw = new FileWriter(arq);
+        try (FileWriter fw = new FileWriter(arq.toFile());
             BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write(arquivoConteudo);
             bw.newLine();
@@ -46,7 +58,7 @@ public class YoutubeArquivo {
     public String ler() {
         String s = null;
         try {
-            s = new String(Files.readAllBytes(this.arq.toPath()));
+            s = new String(Files.readAllBytes(arq));
         } catch (IOException ex) {
             
         }
@@ -60,9 +72,9 @@ public class YoutubeArquivo {
      */
     public List<String> listar() {
         List<String> l = null;
-        this.arq = new File(this.getCaminho());
+        //this.arq = new File(this.getCaminho());
         try {
-            l = Files.readAllLines(this.arq.toPath());
+            l = Files.readAllLines(arq);
         } catch (IOException ex) {
         }
         return l;
@@ -74,7 +86,7 @@ public class YoutubeArquivo {
      * @param conteudo String de conteúdo.
      */
     public void editar(String conteudo) {
-        try (FileWriter fw = new FileWriter(this.arq);
+        try (FileWriter fw = new FileWriter(arq.toFile());
             BufferedWriter bw = new BufferedWriter(fw)) {
             bw.append(conteudo);
             bw.newLine();
@@ -89,9 +101,7 @@ public class YoutubeArquivo {
      * @param conteudo Lista de conteúdos.
      */
     public void editar(List<String> conteudo) {
-        try (FileWriter fw = new FileWriter(this.arq);
-            BufferedWriter bw = new BufferedWriter(new FileWriter(this.arq))) {
-            
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arq.toFile()))) {
             for (String item : conteudo) {
                 try {
                     bw.append(item);
@@ -108,17 +118,19 @@ public class YoutubeArquivo {
      * e se é um arquivo válido.
      */
     public void deletar() {
-        if (this.arq.isFile()) {
-            this.arq.delete();
+        try {
+            Files.deleteIfExists(arq);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
     // Métodos especiais
     public File getArq() {
-        return arq;
+        return arq.toFile();
     }
 
-    public void setArq(File arq) {
+    public void setArq(Path arq) {
         this.arq = arq;
     }
 
