@@ -1,5 +1,8 @@
 package aplicacao.tela;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import metodos.YoutubeArquivo;
@@ -14,7 +17,12 @@ public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
      */
     public YoutubeTelaConstrutor() {
         try {
-            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    ActionEvent ev = null;
+                    itemMenuExitClick(ev);
+                }
+            });
             if (SISTEMA.contains("Windows")) {
                 pastaPrincipal = "C:\\users\\" + USUARIO + "\\YDownloads\\";
                 pastaVideo = pastaPrincipal+"videos\\";

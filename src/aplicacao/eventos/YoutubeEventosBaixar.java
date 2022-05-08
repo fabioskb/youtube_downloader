@@ -39,7 +39,6 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 
             if (link.startsWith("https://www.youtube.com/watch?v=")) {
                 try {
-                    isBaixando = true;
                     format = (video) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
                             + "'outtmpl': '%s' + title + '.mp4'}", pastaVideo) // format video para o YoutubeDL
                             : String.format("{'format': 'bestaudio[ext=m4a]',\n"
@@ -84,7 +83,6 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                     } else if (!isBaixando3) {
                         btnBaixa3.setVisible(true);
                     }
-                    btnCancelar.setVisible(true);
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
                     configurarCores();
                     tituloVideo = CMD.comando("python3 /tmp/titulo.py");
@@ -99,6 +97,8 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                         pro = RUN.exec("python3 /tmp/baixar");
                         read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
                         read2 = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+                        isBaixando = true;
+                        btnCancelar.setVisible(true);
 
 
                         while ((line = read.readLine()) != null) {

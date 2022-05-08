@@ -37,7 +37,6 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
             }
             if (link.startsWith("https://www.youtube.com/watch?v=")) {
                 try {
-                    isBaixando2 = true;
                     format = (video) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
                             + "'outtmpl': '%s' + title + '.mp4'}", pastaVideo) // format video para o YoutubeDL
                             : String.format("{'format': 'bestaudio[ext=m4a]',\n"
@@ -82,7 +81,6 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
                     } else if (!isBaixando) {
                         btnBaixa.setVisible(true);
                     }
-                    btnCancelar.setVisible(true);
                     lblResultado2.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
                     configurarCores();
                     tituloVideo2 = CMD.comando("python3 /tmp/titulo.py");
@@ -95,6 +93,8 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
                         pro2 = RUN_2.exec("python3 /tmp/baixar2");
                         read3 = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
                         read4 = new BufferedReader(new InputStreamReader(pro2.getErrorStream()));
+                        isBaixando2 = true;
+                        btnCancelar.setVisible(true);
 
                         lblResultado2.setText(TEXTOS.pegarTexto("label.resultado.verificando.download")
                         + " (" + tituloFormatado + ")");
