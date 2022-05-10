@@ -19,8 +19,7 @@ public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
         try {
             this.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
-                    ActionEvent ev = null;
-                    itemMenuExitClick(ev);
+                    inTheExit();
                 }
             });
             if (SISTEMA.contains("Windows")) {

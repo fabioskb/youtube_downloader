@@ -59,18 +59,7 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void itemMenuExitClick(ActionEvent ev) {
-        if (btnCancelar.isVisible()) {
-            Object[] choices = {TEXTOS.pegarTexto("joptionpane.botao.oksair"), TEXTOS.pegarTexto("joptionpane.botao.cancelar")};
-            int option = JOptionPane.showOptionDialog(null, TEXTOS.pegarTexto("joptionpane.sair.pergunta"), "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"), choices, choices[0]);
-            if (option == 0) {
-                btnCancelarClick(ev);
-                this.dispose();
-                System.exit(0);
-            }
-        } else {
-            this.dispose();
-            System.exit(0);
-        }
+        inTheExit();
     }
 
     @Override
@@ -83,4 +72,22 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
         JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.sobre"), TEXTOS.pegarTexto("joptionpane.sobre.titulo"), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
     }
 
+    protected void inTheExit() {
+        if (downloadProgressBar.isVisible() || lblResultado.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+                || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+                || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+            Object[] choices = {TEXTOS.pegarTexto("joptionpane.botao.sim"), TEXTOS.pegarTexto("joptionpane.botao.nao")};
+            int showConfirmDownloadOnExit = JOptionPane.showOptionDialog(null, TEXTOS.pegarTexto("joptionpane.intheexit"), "", 
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"), choices, choices[0]);
+            if (showConfirmDownloadOnExit == 1) {
+                ActionEvent ev = null;
+                btnCancelarClick(ev);
+                this.dispose();
+                System.exit(0);
+            } else this.dispose();
+        } else {
+            this.dispose();
+            System.exit(0);
+        }
+    }
 }

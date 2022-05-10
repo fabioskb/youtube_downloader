@@ -34,7 +34,7 @@ public class YoutubeText {
      * joptionpane.erro.dependencias, joptionpane.instalacao.concluida, 
      * joptionpane.pip.nao.instalado, joptionpane.tutorial, joptionpane.sobre, 
      * joptionpane.sobre.titulo, joptionpane.sair.pergunta, 
-     * joptionpane.botao.oksair, joptionpane.botao.cancelar. 
+     * joptionpane.botao.oksair, joptionpane.botao.cancelar, optionpane.intheexit. 
      * PROGRESSBAR----------> progressbar.baixando.audio. 
      * MENU ITEM-----------> menuitem.sobre, menuitem.sair, menuitem.tutorial.
      * @return texto

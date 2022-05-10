@@ -29,7 +29,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
         }
 
         if (!arquivoChecaPrograma.getArq().isFile()) {
-            JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.boas.vndas"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.boas.vindas"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
             installYoutubeDl = CMD.comando("pip install youtube-dl");
             installYoutubeSearch = CMD.comando("pip install youtube-search");
             if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") 
