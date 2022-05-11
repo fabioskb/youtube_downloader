@@ -2,6 +2,9 @@ package aplicacao.eventos;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metodos.YoutubeArquivo;
@@ -26,7 +29,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                 YoutubeArquivo arquivoDesc = new YoutubeArquivo("/tmp/descricoes.txt", false);
 
                 links = new String[20];
-                String[] lstTitulosLinksTmp = null;
+                List<String> lstTitulosLinksTmp = null;
 
                 lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pesquisando"));
                 configurarCores();
@@ -63,15 +66,16 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                     }
 
                     if (!cmdLineSaida.startsWith("Traceback (most recent call last):") || !cmdLineSaida.startsWith("command not found") && cmdLineSaida.length() > 0) {
-                        lstTitulosLinksTmp = cmdLineSaida.split("\n");
+                        lstTitulosLinksTmp = new ArrayList<>(Arrays.asList(cmdLineSaida.split("\n")));
                         contador = 0;
-                        if (!lstTitulosLinksTmp[0].equals("command not found")) {
-                            for (int i = 0; i < lstTitulosLinksTmp.length; i++) {
+                        
+                        if (!lstTitulosLinksTmp.get(0).equals("command not found")) {
+                            for (int i = 0; i < lstTitulosLinksTmp.size(); i++) {
                                 if (i % 2 == 0) {
-                                    lstTitulos.addElement(lstTitulosLinksTmp[i]);
+                                    lstTitulos.addElement(lstTitulosLinksTmp.get(i));
                                 } else if (i % 2 == 1) {
-                                    links[contador] = lstTitulosLinksTmp[i];
-                                    contador = contador + 1;
+                                    links[contador] = lstTitulosLinksTmp.get(i);
+                                    contador++;
                                 }
                                 CMD.sleep(0.1);
                             }

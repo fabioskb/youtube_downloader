@@ -86,10 +86,14 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                     lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
                     configurarCores();
                     tituloVideo3 = CMD.comando("python3 /tmp/titulo.py");
-                    int tituloTam = (tituloVideo3.length() > 50) ? tituloVideo3.length() - 20 
+                    try {
+                        int tituloTam = (tituloVideo3.length() > 50) ? tituloVideo3.length() - 20 
                             : tituloVideo3.length()-1;
-                    String tituloFormatado = (tituloVideo3.length() > 50) ? tituloVideo3.substring(0, tituloTam)+"..."
-                            : tituloVideo3.substring(0, tituloTam);
+                        tituloFormatado = (tituloVideo3.length() > 50) ? tituloVideo3.substring(0, tituloTam)+"..."
+                                : tituloVideo3.substring(0, tituloTam);
+                    } catch (StringIndexOutOfBoundsException s) {
+                        s.printStackTrace();
+                    }
 
                     try {
                         pro3 = RUN_3.exec("python3 /tmp/baixar3");

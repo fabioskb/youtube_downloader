@@ -12,6 +12,7 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String tituloVideo = "";
     protected String tituloVideo2 = "";
     protected String tituloVideo3 = "";
+    protected String tituloFormatado = "";
     protected String format;
     protected String cmdLineSaida;
     protected String cmdLineSaida2;

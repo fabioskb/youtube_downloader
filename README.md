@@ -53,7 +53,7 @@
 3. `sudo apt install -f`
 4. `ydl` (or simply open it in the network applications category)
 
-**A stable internet connection is required on the first boot of the application.**
+**A stable internet connection is required.**
 
 ## Credits
 

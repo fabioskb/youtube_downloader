@@ -64,7 +64,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                             + "with youtube_dl.YoutubeDL(options) as ydl:\n"
                             + "    ydl.download([link])\n",
                             link, format));
-                    
+                
                     YoutubeArquivo pegarTitulos = new YoutubeArquivo("/tmp/titulo.py", false);
                     pegarTitulos.criar(String.format("#!/usr/bin/python3\n"
                             + "import os, time\n"
@@ -86,10 +86,15 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
                     configurarCores();
                     tituloVideo = CMD.comando("python3 /tmp/titulo.py");
-                    int tituloTam = (tituloVideo.length() > 50) ? tituloVideo.length() - 20 
-                            : tituloVideo.length()-1;
-                    String tituloFormatado = (tituloVideo.length() > 50) ? tituloVideo.substring(0, tituloTam)+"..."
-                            : tituloVideo.substring(0, tituloTam);
+                    
+                    try {
+                        int tituloTam = (tituloVideo.length() > 50) ? tituloVideo.length() - 20 
+                                : tituloVideo.length()-1;
+                        tituloFormatado = (tituloVideo.length() > 50) ? tituloVideo.substring(0, tituloTam)+"..."
+                                : tituloVideo.substring(0, tituloTam);
+                    } catch (StringIndexOutOfBoundsException s) {
+                        s.printStackTrace();
+                    }
 
                     try {
                         lblResultado.setText(String.format("%s %s", 
