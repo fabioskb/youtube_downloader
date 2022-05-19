@@ -1,5 +1,6 @@
 package aplicacao.eventos;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
@@ -13,12 +14,32 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void txtLinkMouseClick(MouseEvent ev) {
+        if (txtLink.getSelectionColor() == Color.lightGray 
+                || txtLink.getSelectionColor() == Color.gray) {
+            txtLink.setSelectionEnd(0);
+            txtLink.setSelectionColor(Color.white);
+            txtLink.setSelectedTextColor(Color.black);
+            return;
+        }
         txtLink.selectAll();
+        if (!noturno) txtLink.setSelectionColor(Color.lightGray);
+        else txtLink.setSelectionColor(Color.gray);
+        txtLink.setSelectedTextColor(Color.white);
     }
 
     @Override
     protected void txtPesquisaMouseClick(MouseEvent ev) {
+        if (txtPesquisa.getSelectionColor() == Color.lightGray 
+                || txtPesquisa.getSelectionColor() == Color.gray) {
+            txtPesquisa.setSelectionEnd(0);
+            txtPesquisa.setSelectionColor(Color.white);
+            txtPesquisa.setSelectedTextColor(Color.black);
+            return;
+        }
         txtPesquisa.selectAll();
+        if (!noturno) txtPesquisa.setSelectionColor(Color.lightGray);
+        else txtPesquisa.setSelectionColor(Color.gray);
+        txtPesquisa.setSelectedTextColor(Color.white);
     }
 
     @Override
@@ -36,6 +57,9 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             lstPesquisa.setToolTipText("<html>" + lstDescricao.get(index) + "</html>");
             ToolTipManager.sharedInstance().mouseMoved(ev);
             ToolTipManager.sharedInstance().setDismissDelay(6000);
+            if (noturno) lstPesquisa.setSelectionBackground(Color.gray);
+            else lstPesquisa.setSelectionBackground(Color.lightGray);
+            lstPesquisa.setSelectionForeground(Color.white);
         } else {
             lstPesquisa.clearSelection();
             index = 20;

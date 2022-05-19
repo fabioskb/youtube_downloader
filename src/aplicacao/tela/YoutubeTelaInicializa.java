@@ -1,9 +1,14 @@
 package aplicacao.tela;
 
 import aplicacao.eventos.YoutubeEventosMenores;
+import static aplicacao.tela.YoutubeTela.SISTEMA;
+import static aplicacao.tela.YoutubeTela.USUARIO;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
+import metodos.YoutubeArquivo;
 
 /**
  * Classe responsável pelo método inicializar() da aplicação. Herda Eventos.
@@ -16,6 +21,24 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
      *
      */
     protected void inicializar() throws IOException {
+        
+        if (SISTEMA.contains("Windows")) {
+            pastaPrincipal = "C:\\users\\" + USUARIO + "\\YDownloads\\";
+            pastaVideo = pastaPrincipal + "videos\\";
+            pastaAudio = pastaPrincipal + "audios\\";
+        } else {
+            pastaPrincipal = "/home/" + USUARIO + "/YDownloads/";
+            pastaVideo = pastaPrincipal + "videos/";
+            pastaAudio = pastaPrincipal + "audios/";
+        }
+        YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
+        YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
+        diretorioPadrao = new YoutubeArquivo(pastaPrincipal, true);
+        if (!diretorioPadrao.getArq().isDirectory()) {
+            diretorioPadrao.getArq().mkdir();
+        }
+        arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check", false);
+        
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
         String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
@@ -32,7 +55,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.boas.vindas"), "YouTube Downloader", JOptionPane.INFORMATION_MESSAGE);
             installYoutubeDl = CMD.comando("pip install youtube-dl");
             installYoutubeSearch = CMD.comando("pip install youtube-search");
-            if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)") 
+            if (installYoutubeDl.contains("ERROR: Could not find a version that satisfies the requirement youtube-dl (from versions: none)")
                     || installYoutubeSearch.equals("ERROR: Could not find a version that satisfies the requirement youtube-search (from versions: none)")) {
                 JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.erro.dependencias"), "YouTube Downloader", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
@@ -45,9 +68,13 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
         }
 
         if (youtubeDlSaida.startsWith("Name: youtube-dl") || youtubeSearchSaida.startsWith("Name: youtube-search")) {
+            this.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    inTheExit();
+                }});
             this.setTitle("YouTube Downloader");
             this.setResizable(true);
-            this.setSize(920, 680);
+            this.setSize(1000, 700);
             this.setMinimumSize(new DimensionUIResource(760, 560));
             this.setLocationRelativeTo(null);
             this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
@@ -74,13 +101,13 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             lblProgressBar.setVisible(false);
             lblProgressBar2.setVisible(false);
             lblProgressBar3.setVisible(false);
-            
+
             pro = RUN.exec("ls");
             pro2 = RUN_2.exec("ls");
             pro3 = RUN_3.exec("ls");
-            
+
             index = 20;
-            
+
         }
     }
 }

@@ -8,7 +8,7 @@
 * **Support only for Linux amd64 (for now).**
 * **Option for night mode.**
 * **Option to run background downloads when exiting the app.**
-* **Automatically activated night mode if the time is between 18:00 and 5:00 hours.**
+* **Automatically activated night mode if the time is between 17:00 and 5:00 hours.**
 * **Choose between audio or video to download**
 * **Description of each item in the list via ToolTip when selecting with the mouse (channel, duration, views and publish_time).**
 * **Download progress bar**

@@ -77,6 +77,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                             + "  for k, v in i.items():\n"
                             + "    if k == 'title':\n"
                             + "      print(v)\n", link));
+                    isBaixando = true;
                     btnBaixa.setVisible(false);
                     if (!isBaixando2) {
                         btnBaixa2.setVisible(true);
@@ -102,7 +103,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                         pro = RUN.exec("python3 /tmp/baixar");
                         read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
                         read2 = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
-                        isBaixando = true;
+                        
                         btnCancelar.setVisible(true);
 
 

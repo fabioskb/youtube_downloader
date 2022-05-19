@@ -75,6 +75,7 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
                             + "  for k, v in i.items():\n"
                             + "    if k == 'title':\n"
                             + "      print(v)\n", link));
+                    isBaixando2 = true;
                     btnBaixa2.setVisible(false);
                     if (!isBaixando3) {
                         btnBaixa3.setVisible(true);
@@ -97,7 +98,7 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
                         pro2 = RUN_2.exec("python3 /tmp/baixar2");
                         read3 = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
                         read4 = new BufferedReader(new InputStreamReader(pro2.getErrorStream()));
-                        isBaixando2 = true;
+                        
                         btnCancelar.setVisible(true);
 
                         lblResultado2.setText(TEXTOS.pegarTexto("label.resultado.verificando.download")
