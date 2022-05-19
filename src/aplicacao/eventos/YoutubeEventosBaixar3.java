@@ -65,7 +65,7 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                             + "    ydl.download([link])\n",
                             link, format));
 
-                    YoutubeArquivo pegarTitulos = new YoutubeArquivo("/tmp/titulo.py", false);
+                    YoutubeArquivo pegarTitulos = new YoutubeArquivo("/tmp/titulo3", false);
                     pegarTitulos.criar(String.format("#!/usr/bin/python3\n"
                             + "import os, time\n"
                             + "from youtube_search import YoutubeSearch\n\n"
@@ -86,7 +86,7 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                     }
                     lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.pegandotitulo"));
                     configurarCores();
-                    tituloVideo3 = CMD.comando("python3 /tmp/titulo.py");
+                    tituloVideo3 = CMD.comando("python3 /tmp/titulo3");
                     try {
                         int tituloTam = (tituloVideo3.length() > 50) ? tituloVideo3.length() - 20 
                             : tituloVideo3.length()-1;
