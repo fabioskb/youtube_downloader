@@ -12,8 +12,6 @@ import metodos.YoutubeArquivo;
  */
 public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 
-    protected boolean downloadDone;
-
     @Override
     protected void btnBaixarClick(ActionEvent ev) {
         download = new Thread(() -> {
@@ -96,6 +94,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
+                    pegarTitulos.deletar();
 
                     try {
                         lblResultado.setText(String.format("%s %s", 
