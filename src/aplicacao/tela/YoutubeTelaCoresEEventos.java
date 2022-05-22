@@ -1,10 +1,17 @@
 package aplicacao.tela;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
+import javax.swing.plaf.MenuItemUI;
+import javax.swing.plaf.metal.MetalButtonUI;
+import javax.swing.plaf.metal.MetalToggleButtonUI;
 
 /**
  * Classe responsável pelo método configurarCores(), que configura a maioria das
@@ -35,6 +42,8 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         txtPesquisa.setBackground(CORES.pegarCor(noturno, 10));
         lstPesquisa.setOpaque(true);
         lstPesquisa.setBackground(CORES.pegarCor(noturno, 10));
+        lstPesquisa.setSelectionBackground(Color.gray);
+        lstPesquisa.setSelectionForeground(Color.white);
 
         downloadProgressBar.setBackground(CORES.pegarCor(noturno, 3));
         downloadProgressBar.setForeground(CORES.pegarCor(noturno, 9));
@@ -84,9 +93,16 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         for (Component button : buttons) {
             if (cont == 0 && btnModoNoite.isSelected()) {
                 button.setBackground(CORES.pegarCor(noturno, 6));
+                btnModoNoite.setUI(new MetalToggleButtonUI() {
+                    @Override
+                    protected Color getSelectColor() {
+                        return Color.lightGray;
+                    }
+                });
             } else {
                 button.setBackground(CORES.pegarCor(noturno, 5));
                 button.setForeground(CORES.pegarCor(noturno, 6));
+                btnModoNoite.setBackground(Color.gray);
             }
             cont++;
         }

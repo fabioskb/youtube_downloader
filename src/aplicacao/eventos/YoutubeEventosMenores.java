@@ -57,9 +57,7 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             lstPesquisa.setToolTipText("<html>" + lstDescricao.get(index) + "</html>");
             ToolTipManager.sharedInstance().mouseMoved(ev);
             ToolTipManager.sharedInstance().setDismissDelay(6000);
-            if (noturno) lstPesquisa.setSelectionBackground(Color.gray);
-            else lstPesquisa.setSelectionBackground(Color.lightGray);
-            lstPesquisa.setSelectionForeground(Color.white);
+            
         } else {
             lstPesquisa.clearSelection();
             index = 20;

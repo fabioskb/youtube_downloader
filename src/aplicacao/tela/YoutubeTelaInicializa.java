@@ -31,13 +31,13 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             pastaVideo = pastaPrincipal + "videos/";
             pastaAudio = pastaPrincipal + "audios/";
         }
-        YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
-        YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
         diretorioPadrao = new YoutubeArquivo(pastaPrincipal, true);
         if (!diretorioPadrao.getArq().isDirectory()) {
             diretorioPadrao.getArq().mkdir();
         }
         arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check", false);
+        YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
+        YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
         
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
         String youtubeSearchSaida = CMD.comando("pip show youtube_search");
