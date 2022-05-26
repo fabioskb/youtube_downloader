@@ -74,9 +74,9 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
             btnCancelar.setVisible(false);
-            pro1.destroyForcibly();
-            pro2.destroyForcibly();
-            pro3.destroyForcibly();
+            pro1.destroy();
+            pro2.destroy();
+            pro3.destroy();
             downloadProgressBar.setVisible(false);
             downloadProgressBar2.setVisible(false);
             downloadProgressBar3.setVisible(false);
