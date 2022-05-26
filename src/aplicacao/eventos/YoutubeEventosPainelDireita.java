@@ -24,6 +24,11 @@ public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
             btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
         }
     }
+    
+    @Override
+    protected void btnCancelProcessClick(ActionEvent ev) {
+        CMD.destruir();
+    }
 
     @Override
     protected void checkVideoClick(ActionEvent ev) {

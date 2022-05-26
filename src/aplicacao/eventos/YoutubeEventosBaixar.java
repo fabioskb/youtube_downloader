@@ -87,21 +87,23 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                     tituloVideo = CMD.comando("python3 /tmp/titulo");
                     
                     try {
-                        int tituloTam = (tituloVideo.length() > 50) ? tituloVideo.length() - 20 
+                        int tituloTam = (tituloVideo.length() > 50) 
+                                ? tituloVideo.length() - (tituloVideo.length() - 50) 
                                 : tituloVideo.length()-1;
-                        tituloFormatado = (tituloVideo.length() > 50) ? tituloVideo.substring(0, tituloTam)+"..."
+                        tituloFormatado = (tituloVideo.length() > 50) 
+                                ? tituloVideo.substring(0, tituloTam)+"..."
                                 : tituloVideo.substring(0, tituloTam);
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
-                    pegarTitulos.deletar();
+//                    pegarTitulos.deletar();
 
                     try {
                         lblResultado.setText(String.format("%s %s", 
                         TEXTOS.pegarTexto("label.resultado.verificando.download"), tituloFormatado));
-                        pro = RUN.exec("python3 /tmp/baixar");
-                        read = new BufferedReader(new InputStreamReader(pro.getInputStream()));
-                        read2 = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+                        pro1 = RUN_1.exec("python3 /tmp/baixar");
+                        read = new BufferedReader(new InputStreamReader(pro1.getInputStream()));
+                        read2 = new BufferedReader(new InputStreamReader(pro1.getErrorStream()));
                         
                         btnCancelar.setVisible(true);
 
@@ -173,9 +175,9 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
 
                             }
 
-                            read.close();
-                            read2.close();
                         }
+                        read.close();
+                        read2.close();
 
                     } catch (IOException e) {
                         downloadProgressBar.setString(TEXTOS.pegarTexto("label.resultado.baixando"));

@@ -86,14 +86,16 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
                     configurarCores();
                     tituloVideo2 = CMD.comando("python3 /tmp/titulo2");
                     try {
-                        int tituloTam = (tituloVideo2.length() > 50) ? tituloVideo2.length() - 20 
+                        int tituloTam = (tituloVideo2.length() > 50) 
+                                ? tituloVideo2.length() - (tituloVideo2.length() - 50)
                                 : tituloVideo2.length()-1;
-                        tituloFormatado2 = (tituloVideo2.length() > 50) ? tituloVideo2.substring(0, tituloTam)+"..."
+                        tituloFormatado2 = (tituloVideo2.length() > 50) 
+                                ? tituloVideo2.substring(0, tituloTam)+"..."
                                 : tituloVideo2.substring(0, tituloTam);
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
-                    pegarTitulos.deletar();
+//                    pegarTitulos.deletar();
 
                     try {
                         pro2 = RUN_2.exec("python3 /tmp/baixar2");
@@ -173,9 +175,9 @@ public class YoutubeEventosBaixar2 extends YoutubeEventosBaixar {
 
                             }
 
-                            read3.close();
-                            read4.close();
                         }
+                        read3.close();
+                        read4.close();
 
                     } catch (IOException e) {
                         downloadProgressBar2.setString(TEXTOS.pegarTexto("label.resultado.baixando"));

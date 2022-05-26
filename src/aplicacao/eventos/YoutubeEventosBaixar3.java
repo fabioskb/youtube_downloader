@@ -12,8 +12,6 @@ import metodos.YoutubeArquivo;
  */
 public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
 
-    protected boolean downloadDone3;
-
     @Override
     protected void btnBaixar3Click(ActionEvent ev) {
         download3 = new Thread(() -> {
@@ -88,15 +86,17 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                     configurarCores();
                     tituloVideo3 = CMD.comando("python3 /tmp/titulo3");
                     try {
-                        int tituloTam = (tituloVideo3.length() > 50) ? tituloVideo3.length() - 20 
-                            : tituloVideo3.length()-1;
-                        tituloFormatado3 = (tituloVideo3.length() > 50) ? tituloVideo3.substring(0, tituloTam)+"..."
+                        int tituloTam = (tituloVideo3.length() > 50) 
+                                ? tituloVideo3.length() - (tituloVideo3.length() - 50) 
+                                : tituloVideo3.length()-1;
+                        tituloFormatado3 = (tituloVideo3.length() > 50) 
+                                ? tituloVideo3.substring(0, tituloTam)+"..."
                                 : tituloVideo3.substring(0, tituloTam);
                         
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
-                    pegarTitulos.deletar();
+//                    pegarTitulos.deletar();
 
                     try {
                         pro3 = RUN_3.exec("python3 /tmp/baixar3");
@@ -176,9 +176,9 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
 
                             }
 
-                            read5.close();
-                            read6.close();
                         }
+                        read5.close();
+                        read6.close();
 
                     } catch (IOException e) {
                         downloadProgressBar3.setString(TEXTOS.pegarTexto("label.resultado.baixando"));

@@ -1,14 +1,10 @@
 package aplicacao.tela;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import metodos.YoutubeArquivo;
 
 /**
- * Classe responsável pelo construtor da aplicação. Herda Telas 1, 2, 3 e 4
+ * Classe responsável pelo construtor da aplicação.
  */
 public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
 

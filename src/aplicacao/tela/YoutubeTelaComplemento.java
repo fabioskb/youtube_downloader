@@ -51,6 +51,8 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
     protected abstract void btnPesquisaClick(ActionEvent ev);
     
     protected abstract void btnCancelarClick(ActionEvent ev);
+    
+    protected abstract void btnCancelProcessClick(ActionEvent ev);
 
     protected abstract void itemMenuExitClick(ActionEvent ev);
     protected abstract void itemMenuTutorialClick(ActionEvent ev);
@@ -100,6 +102,7 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
         btnBaixa3.addActionListener(this::btnBaixar3Click);
         btnPesquisa.addActionListener(this::btnPesquisaClick);
         btnCancelar.addActionListener(this::btnCancelarClick);
+        btnCancelProcess.addActionListener(this::btnCancelProcessClick);
         itemMenuExit.addActionListener(this::itemMenuExitClick);
         itemMenuTutorial.addActionListener(this::itemMenuTutorialClick);
         itemMenuSobre.addActionListener(this::itemMenuSobreClick);

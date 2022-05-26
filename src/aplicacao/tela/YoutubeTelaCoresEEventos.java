@@ -4,13 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
-import javax.swing.plaf.MenuItemUI;
-import javax.swing.plaf.metal.MetalButtonUI;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 
 /**
@@ -23,9 +18,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
      * Modifica as cores da aplicação de acordo com o modo noturno ativado ou
      * não e cores do lblResultado.
      *
-     * @param modLblResultadoBg - se true modifica o background do label
-     * lblResultado, se false, seta o background atual da aplicação como
-     * background do lblResultado.
      */
     public void configurarCores() {
 
@@ -73,12 +65,12 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
         Component[] paineis = {
             pnlTopo, pnlCentro, pnlCentro1, pnlCentro2, pnlCentro3, pnlCentro4, 
-            pnlDireita, pnlDireita1, pnlDireita2, pnlRodape, pnlRodape1, 
+            pnlDireita, pnlDireita1, pnlDireita2, pnlDireita3, pnlRodape, pnlRodape1, 
             pnlRodape2, pnlRodape3, pnlPadrao
         };
         contador = 0;
         for (Component jPanel : paineis) {
-            if (contador >= 6 && contador <= 12) {
+            if (contador >= 6 && contador <= 13) {
                 jPanel.setBackground(CORES.pegarCor(noturno, 4));
             } else {
                 jPanel.setBackground(CORES.pegarCor(noturno, 3));
@@ -88,7 +80,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
         Component[] buttons = {btnModoNoite, lblLink, btnPesquisa,
             btnBaixa, btnBaixa2, btnBaixa3, checkAudio, checkVideo,
-            btnCancelar};
+            btnCancelar, btnCancelProcess};
         cont = 0;
         for (Component button : buttons) {
             if (cont == 0 && btnModoNoite.isSelected()) {
@@ -99,10 +91,15 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
                         return Color.lightGray;
                     }
                 });
+                btnModoNoite.setForeground(Color.black);
+            } else if (cont == 9) {
+                button.setBackground(CORES.pegarCor(noturno, 3));
+                button.setForeground(CORES.pegarCor(noturno, 6));
             } else {
                 button.setBackground(CORES.pegarCor(noturno, 5));
                 button.setForeground(CORES.pegarCor(noturno, 6));
-                btnModoNoite.setBackground(Color.gray);
+                btnModoNoite.setBackground(Color.darkGray);
+                if (!btnModoNoite.isSelected()) btnModoNoite.setForeground(Color.white);
             }
             cont++;
         }
@@ -153,6 +150,10 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
     @Override
     protected void btnCancelarClick(ActionEvent ev) {
+    }
+
+    @Override
+    protected void btnCancelProcessClick(ActionEvent ev) {
     }
 
     @Override

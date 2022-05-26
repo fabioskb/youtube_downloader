@@ -19,9 +19,10 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String cmdLineSaida;
     protected String cmdLineSaida2;
     protected String cmdLineSaida3;
+    protected String link = "";
     protected String[] links;
     protected int index = 20;
-    protected Process pro;
+    protected Process pro1;
     protected Process pro2;
     protected Process pro3;
     protected BufferedReader read, read2, read3, read4, read5, read6;
@@ -30,8 +31,9 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String line3;
     protected boolean downloadDone, downloadDone2, downloadDone3;
     protected Thread download, download2, download3;
-    protected static final Runtime RUN = Runtime.getRuntime();
+    protected YoutubeTelaCoresEEventos coresEvento = new YoutubeTelaCoresEEventos();
+//    protected static final Runtime RUN = Runtime.getRuntime();
+    protected static final Runtime RUN_1 = Runtime.getRuntime();
     protected static final Runtime RUN_2 = Runtime.getRuntime();
     protected static final Runtime RUN_3 = Runtime.getRuntime();
-    
 }

@@ -2,6 +2,7 @@ package aplicacao.eventos;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.ToolTipManager;
@@ -73,9 +74,12 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
             btnCancelar.setVisible(false);
-            pro.destroy();
-            pro2.destroy();
-            pro3.destroy();
+            pro1.destroyForcibly();
+            pro2.destroyForcibly();
+            pro3.destroyForcibly();
+            downloadProgressBar.setVisible(false);
+            downloadProgressBar2.setVisible(false);
+            downloadProgressBar3.setVisible(false);
         }
     }
 
@@ -104,12 +108,23 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             if (showConfirmDownloadOnExit == 1) {
                 ActionEvent ev = null;
                 btnCancelarClick(ev);
+                CMD.destruir();
                 this.dispose();
                 System.exit(0);
-            } else this.dispose();
+            } else {
+                CMD.destruir();
+                this.dispose();
+            }
         } else {
+            CMD.destruir();
             this.dispose();
             System.exit(0);
         }
     }
+
+    @Override
+    protected void processComponentEvent(ComponentEvent e) {
+        super.processComponentEvent(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
 }

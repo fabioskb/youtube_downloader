@@ -56,7 +56,7 @@ public class YoutubeComando {
 	}
 
 	public void destruir() {
-		RUN.exit(0);
+            this.pro.destroyForcibly();
 	}
 }
 

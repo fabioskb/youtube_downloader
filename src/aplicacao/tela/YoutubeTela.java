@@ -85,6 +85,8 @@ public abstract class YoutubeTela extends JFrame {
     protected JPanel pnlDireita;
     protected JPanel pnlDireita1;
     protected JPanel pnlDireita2;
+    protected JPanel pnlDireita3;
+    protected JButton btnCancelProcess;
 
     protected JPanel pnlRodape;
     protected JPanel pnlRodape1;
@@ -234,9 +236,10 @@ public abstract class YoutubeTela extends JFrame {
 
     public JPanel getPnlDireita() {
         if (pnlDireita == null) {
-            pnlDireita = new JPanel(new GridLayout(2, 1));
+            pnlDireita = new JPanel(new GridLayout(3, 1));
             pnlDireita1 = new JPanel(new FlowLayout());
             pnlDireita2 = new JPanel(new FlowLayout());
+            pnlDireita3 = new JPanel(new FlowLayout());
 
             checkVideo = new JCheckBox(TEXTOS.pegarTexto("botao.video"));
             checkAudio = new JCheckBox(TEXTOS.pegarTexto("botao.audio"));
@@ -245,13 +248,19 @@ public abstract class YoutubeTela extends JFrame {
             btnModoNoite = new JToggleButton(TEXTOS.pegarTexto("botao.modo.noite"));
             btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
             btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
+            btnModoNoite.setFocusable(false);
+            btnCancelProcess = new JButton(TEXTOS.pegarTexto("botao.cancel.process"));
+            btnCancelProcess.setToolTipText(TEXTOS.pegarTexto("tootip.botao.cancel.process"));
+            
 
             pnlDireita1.add(btnModoNoite);
             pnlDireita2.add(checkVideo);
             pnlDireita2.add(LBL_VAZIO);
             pnlDireita2.add(checkAudio);
+            pnlDireita3.add(btnCancelProcess);
             pnlDireita.add(pnlDireita1);
             pnlDireita.add(pnlDireita2);
+            pnlDireita.add(pnlDireita3);
         }
         return pnlDireita;
     }

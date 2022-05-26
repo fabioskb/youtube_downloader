@@ -102,10 +102,6 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             lblProgressBar2.setVisible(false);
             lblProgressBar3.setVisible(false);
 
-            pro = RUN.exec("ls");
-            pro2 = RUN_2.exec("ls");
-            pro3 = RUN_3.exec("ls");
-
             index = 20;
 
         }
