@@ -44,7 +44,6 @@ public abstract class YoutubeTela extends JFrame {
     protected static final JLabel LBL_VAZIO = new JLabel("                ");
     protected static final JLabel LBL_VAZIO1 = new JLabel("                ");
 
-    protected JToggleButton btnModoNoite;
     protected JCheckBox checkVideo, checkAudio;
 
     protected JTextField txtLink;
@@ -86,6 +85,7 @@ public abstract class YoutubeTela extends JFrame {
     protected JPanel pnlDireita1;
     protected JPanel pnlDireita2;
     protected JPanel pnlDireita3;
+    protected JToggleButton btnTema;
     protected JButton btnCancelProcess;
 
     protected JPanel pnlRodape;
@@ -245,15 +245,16 @@ public abstract class YoutubeTela extends JFrame {
             checkAudio = new JCheckBox(TEXTOS.pegarTexto("botao.audio"));
             checkVideo.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.video"));
             checkAudio.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.audio"));
-            btnModoNoite = new JToggleButton(TEXTOS.pegarTexto("botao.modo.noite"));
-            btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
-            btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
-            btnModoNoite.setFocusable(false);
+            btnTema = new JToggleButton(TEXTOS.pegarTexto("botao.modo.noite"));
+            btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
+            btnTema.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
+            btnTema.setFocusable(false);
             btnCancelProcess = new JButton(TEXTOS.pegarTexto("botao.cancel.process"));
             btnCancelProcess.setToolTipText(TEXTOS.pegarTexto("tootip.botao.cancel.process"));
+            btnCancelProcess.setFocusable(false);
             
 
-            pnlDireita1.add(btnModoNoite);
+            pnlDireita1.add(btnTema);
             pnlDireita2.add(checkVideo);
             pnlDireita2.add(LBL_VAZIO);
             pnlDireita2.add(checkAudio);

@@ -96,7 +96,9 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
-//                    pegarTitulos.deletar();
+                    if (tituloFormatado3.startsWith("Traceback (most recent call last):")) {
+                        tituloFormatado3 = "... ";
+                    }
 
                     try {
                         pro3 = RUN_3.exec("python3 /tmp/baixar3");
@@ -135,7 +137,7 @@ public class YoutubeEventosBaixar3 extends YoutubeEventosBaixar2 {
                                         lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.aviso.ja.baixado"));
                                         lblResultado3.setForeground(CORES.pegarCor(noturno, 8));
                                     } else if (line3.startsWith("[youtube]")) {
-                                        configurarCores();
+//                                        configurarCores();
                                         lblResultado3.setText(TEXTOS.pegarTexto("label.resultado.verificando.download")
                                         + " (" + tituloFormatado3 + ")");
                                     } else {

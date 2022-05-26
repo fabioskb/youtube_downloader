@@ -94,7 +94,7 @@ public abstract class YoutubeTelaComplemento extends YoutubeTela {
      * em botões, caixas de texto, labels e etc.
      */
     protected void eventos() {
-        btnModoNoite.addActionListener(this::btnModoNoiteClick);
+        btnTema.addActionListener(this::btnModoNoiteClick);
         checkVideo.addActionListener(this::checkVideoClick);
         checkAudio.addActionListener(this::checkAudioClick);
         btnBaixa.addActionListener(this::btnBaixarClick);

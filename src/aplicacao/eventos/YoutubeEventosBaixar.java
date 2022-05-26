@@ -96,7 +96,9 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                     } catch (StringIndexOutOfBoundsException s) {
                         s.printStackTrace();
                     }
-//                    pegarTitulos.deletar();
+                    if (tituloFormatado.startsWith("Traceback (most recent call last):")) {
+                        tituloFormatado = "... ";
+                    }
 
                     try {
                         lblResultado.setText(String.format("%s %s", 
@@ -134,7 +136,7 @@ public class YoutubeEventosBaixar extends YoutubeEventosPainelDireita {
                                         lblResultado.setText(TEXTOS.pegarTexto("label.resultado.aviso.ja.baixado"));
                                         lblResultado.setForeground(CORES.pegarCor(noturno, 8));
                                     } else if (line.startsWith("[youtube]")) {
-                                        configurarCores();
+//                                        configurarCores();
                                         lblResultado.setText(String.format("%s (%s)", TEXTOS.pegarTexto("label.resultado.verificando.download"), 
                                                 tituloFormatado));
                                     } else {

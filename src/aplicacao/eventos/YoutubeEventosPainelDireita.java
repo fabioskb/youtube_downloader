@@ -10,18 +10,18 @@ public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
 
     @Override
     protected void btnModoNoiteClick(ActionEvent ev) {
-        if (!btnModoNoite.isSelected()) {
+        if (!btnTema.isSelected()) {
             noturno = false;
             configurarCores();
-            btnModoNoite.setText(TEXTOS.pegarTexto("botao.modo.noite"));
-            btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
-            btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
+            btnTema.setText(TEXTOS.pegarTexto("botao.modo.noite"));
+            btnTema.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
+            btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
         } else {
             noturno = true;
             configurarCores();
-            btnModoNoite.setText(TEXTOS.pegarTexto("botao.modo.dia"));
-            btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
-            btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
+            btnTema.setText(TEXTOS.pegarTexto("botao.modo.dia"));
+            btnTema.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
+            btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
         }
     }
     

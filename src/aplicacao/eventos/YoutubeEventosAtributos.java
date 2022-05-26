@@ -30,7 +30,7 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String line2;
     protected String line3;
     protected boolean downloadDone, downloadDone2, downloadDone3;
-    protected Thread download, download2, download3;
+    protected Thread download, download2, download3, pesquisa;
     protected YoutubeTelaCoresEEventos coresEvento = new YoutubeTelaCoresEEventos();
 //    protected static final Runtime RUN = Runtime.getRuntime();
     protected static final Runtime RUN_1 = Runtime.getRuntime();

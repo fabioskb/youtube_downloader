@@ -17,7 +17,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
 
     @Override
     protected void btnPesquisaClick(ActionEvent ev) {
-        Thread pesquisa = new Thread(() -> {
+        pesquisa = new Thread(() -> {
             try {
                 index = 20;
                 if (!lstTitulos.isEmpty()) {

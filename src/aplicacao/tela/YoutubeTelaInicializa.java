@@ -3,6 +3,7 @@ package aplicacao.tela;
 import aplicacao.eventos.YoutubeEventosMenores;
 import static aplicacao.tela.YoutubeTela.SISTEMA;
 import static aplicacao.tela.YoutubeTela.USUARIO;
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
      *
      */
     protected void inicializar() throws IOException {
-        
+
         if (SISTEMA.contains("Windows")) {
             pastaPrincipal = "C:\\users\\" + USUARIO + "\\YDownloads\\";
             pastaVideo = pastaPrincipal + "videos\\";
@@ -38,7 +39,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
         arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check", false);
         YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
         YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
-        
+
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
         String youtubeSearchSaida = CMD.comando("pip show youtube_search");
 
@@ -71,7 +72,8 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             this.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     inTheExit();
-                }});
+                }
+            });
             this.setTitle("YouTube Downloader");
             this.setResizable(true);
             this.setSize(1000, 700);
@@ -85,11 +87,11 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             video = true;
 
             if (HORA >= 17 || HORA < 5) {
-                btnModoNoite.setSelected(true);
+                btnTema.setSelected(true);
                 noturno = true;
-                btnModoNoite.setText(TEXTOS.pegarTexto("botao.modo.dia"));
-                btnModoNoite.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
-                btnModoNoite.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
+                btnTema.setText(TEXTOS.pegarTexto("botao.modo.dia"));
+                btnTema.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
+                btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
             }
 
             btnCancelar.setVisible(false);

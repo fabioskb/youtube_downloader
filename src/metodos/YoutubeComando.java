@@ -42,6 +42,10 @@ public class YoutubeComando {
 			return saida;
 		}
 	}
+
+    public Process getPro() {
+        return pro;
+    }
 	
 	/**
 	 * Pausa 
