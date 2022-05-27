@@ -17,11 +17,11 @@
 
 ## Screenshots
 
-### Night Mode
+### Dark Mode
 
 ![ydlNightMode](./screenshots/youtube_downloader_night_mode.png "Night Mode YouTube Downloader")
 
-### Default
+### Light Mode
 
 ![ydl](./screenshots/youtube_downloader.png "Default YouTube Downloader")
 
