@@ -7,6 +7,7 @@
 * **Download up to three files simultaneously**
 * **Support only for Linux amd64 (for now).**
 * **Option for night mode.**
+* **Cancel currently running process**
 * **Option to run background downloads when exiting the app.**
 * **Automatically activated night mode if the time is between 17:00 and 5:00 hours.**
 * **Choose between audio or video to download**
