@@ -82,7 +82,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
                     }
 
                 } catch (Exception e) {
-                    lblResultado.setForeground(CORES.pegarCor(noturno, 7));
+                    lblResultado.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
                     colorBtnCancelPro.stop();
                     return;
@@ -90,10 +90,10 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
                 if (!lstTitulos.isEmpty()) {
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pesquisa.concluida"));
-                    lblResultado.setForeground(CORES.pegarCor(noturno, 9));
+                    lblResultado.setForeground(CORES.pegarCorComBrilho(noturno, "Concluido"));
                 } else {
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
-                    lblResultado.setForeground(CORES.pegarCor(noturno, 7));
+                    lblResultado.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();

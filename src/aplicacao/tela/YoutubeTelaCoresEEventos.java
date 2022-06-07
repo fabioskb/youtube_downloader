@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.util.regex.Pattern;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
@@ -22,6 +23,19 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
      */
     public void configurarCores() {
 
+        colorBtnCancelPro = new Thread(() -> {
+            while (true) {
+                if (CMD.getPro().isAlive() || CMD.getProDownloadTitle().isAlive()) {
+                    btnCancelProcess.setBackground(Color.RED);
+                    btnCancelProcess.setForeground(Color.white);
+                    CMD.sleep(0.5);
+                    btnCancelProcess.setBackground(CORES.pegarCor(noturno, 3));
+                    btnCancelProcess.setForeground(CORES.pegarCor(noturno, 6));
+                }
+            }
+        });
+        colorBtnCancelPro.start();
+        
         lblBanner.setBackground(CORES.pegarCor(noturno, 0));
         lblBanner.setForeground(CORES.pegarCor(noturno, 1));
 
@@ -47,6 +61,12 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         lblResultado.setBackground(CORES.pegarCor(noturno, 4));
         if (lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pesquisando"))) {
             lblResultado.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        } else {
+            if (noturno) {
+                lblResultado.setForeground(lblResultado.getForeground().brighter());
+            } else {
+                lblResultado.setForeground(lblResultado.getForeground().darker());
+            }
         }
         lblResultado1.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado2.setBackground(CORES.pegarCor(noturno, 4));
@@ -57,9 +77,19 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
                 || lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
                 || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
                 || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
-            lblResultado1.setForeground(CORES.pegarCor(noturno, 6));
-            lblResultado2.setForeground(CORES.pegarCor(noturno, 6));
-            lblResultado3.setForeground(CORES.pegarCor(noturno, 6));
+            lblResultado1.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+            lblResultado2.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+            lblResultado3.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        } else {
+            if (noturno) {
+                lblResultado1.setForeground(lblResultado1.getForeground().brighter());
+                lblResultado2.setForeground(lblResultado2.getForeground().brighter());
+                lblResultado3.setForeground(lblResultado3.getForeground().brighter());
+            } else {
+                lblResultado1.setForeground(lblResultado1.getForeground().darker());
+                lblResultado2.setForeground(lblResultado2.getForeground().darker());
+                lblResultado3.setForeground(lblResultado3.getForeground().darker());
+            }
         }
 
         barraMenu.setForeground(CORES.pegarCor(noturno, 3));
@@ -79,7 +109,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         };
         contador = 0;
         for (Component jPanel : paineis) {
-            if (contador >= 6  && contador <= 17) {
+            if (contador >= 6 && contador <= 17) {
                 jPanel.setBackground(CORES.pegarCor(noturno, 4));
             } else {
                 jPanel.setBackground(CORES.pegarCor(noturno, 3));
@@ -121,19 +151,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         UIManager.put("Button.background", CORES.pegarCor(noturno, 5));
         UIManager.put("Button.foreground", CORES.pegarCor(noturno, 6));
 
-        colorBtnCancelPro = new Thread(() -> {
-            while (true) {
-                if (CMD.getPro().isAlive() || CMD.getProDownloadTitle().isAlive()) {
-                    btnCancelProcess.setBackground(Color.RED);
-                    btnCancelProcess.setForeground(Color.white);
-                    CMD.sleep(1.5);
-                    btnCancelProcess.setBackground(CORES.pegarCor(noturno, 3));
-                    btnCancelProcess.setForeground(CORES.pegarCor(noturno, 6));
-                }
-            }
-        });
-        //212 maratona java virado no jiraya
-        colorBtnCancelPro.start();
     }
 
     @Override

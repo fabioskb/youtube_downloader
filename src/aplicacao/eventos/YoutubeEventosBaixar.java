@@ -40,7 +40,7 @@ public class YoutubeEventosBaixar extends Download {
                 return;
             }
 
-//            isBaixando = false;
+            isBaixando = false;
             buttonsSettings(btnBaixa, btnBaixa2, btnBaixa3, isBaixando, isBaixando2,
                     isBaixando3, true, false);
             buttonsSettings(btnBaixa, btnBaixa2, btnBaixa3, isBaixando, isBaixando2,
@@ -77,7 +77,7 @@ public class YoutubeEventosBaixar extends Download {
                 return;
             }
 
-//            isBaixando2 = false;
+            isBaixando2 = false;
             buttonsSettings(btnBaixa2, btnBaixa, btnBaixa3, isBaixando2, isBaixando,
                     isBaixando3, true, false);
             buttonsSettings(btnBaixa2, btnBaixa, btnBaixa3, isBaixando2, isBaixando,
@@ -114,7 +114,7 @@ public class YoutubeEventosBaixar extends Download {
                 return;
             }
 
-//            isBaixando3 = false;
+            isBaixando3 = false;
             buttonsSettings(btnBaixa3, btnBaixa, btnBaixa2, isBaixando3, isBaixando,
                     isBaixando2, true, false);
             buttonsSettings(btnBaixa3, btnBaixa, btnBaixa2, isBaixando3, isBaixando,

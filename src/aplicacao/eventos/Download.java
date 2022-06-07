@@ -34,9 +34,9 @@ public class Download extends YoutubeEventosPainelDireita {
             link = links[index];
         } else if (!video && !audio) {
             lblResultado.setText(TEXTOS.pegarTexto("label.resultado.aviso.video"));
-            lblResultado.setForeground(CORES.pegarCor(noturno, 8));
+            lblResultado.setForeground(CORES.pegarCorComBrilho(noturno, "Avisos"));
         } else if (!lstPesquisa.isSelectedIndex(index) && !link.startsWith("https://www.youtube.com/watch?v=")) {
-            lblResultado.setForeground(CORES.pegarCor(noturno, 8));
+            lblResultado.setForeground(CORES.pegarCorComBrilho(noturno, "Avisos"));
             lblResultado.setText(TEXTOS.pegarTexto("label.resultado.aviso.item"));
         }
         return link;
@@ -48,6 +48,9 @@ public class Download extends YoutubeEventosPainelDireita {
         
         configurarCores();
         try {
+            if (!pesquisa.isAlive()) {
+                lblResultado.setText("");
+            }
             format = (video) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
                     + "'outtmpl': '%s' + title + '.mp4'}", pastaVideo) // format video para o YoutubeDL
                     : String.format("{'format': 'bestaudio[ext=m4a]',\n"
@@ -197,7 +200,7 @@ public class Download extends YoutubeEventosPainelDireita {
                         if (line.contains("[download] " + pastaVideo)
                                 || line.contains("[download] " + pastaAudio)) {
                             resultLbl.setText(TEXTOS.pegarTexto("label.resultado.aviso.ja.baixado"));
-                            resultLbl.setForeground(CORES.pegarCor(noturno, 8));
+                            resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Avisos"));
                         } else if (line.startsWith("[youtube]")) {
                             resultLbl.setText(verifyingDownload + " " + formatedTitle);
                             configurarCores();
@@ -210,7 +213,7 @@ public class Download extends YoutubeEventosPainelDireita {
                     }
                 } else if (downloadDone) {
                     resultLbl.setText(downloadPath + "/" + formatedTitle);
-                    resultLbl.setForeground(CORES.pegarCor(noturno, 9));
+                    resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Concluido"));
                     progressBarPadrao.setVisible(false);
                     progressBarPadrao.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
                     progressBarPadrao.setValue(0);
@@ -223,11 +226,11 @@ public class Download extends YoutubeEventosPainelDireita {
                 progressBarPadrao.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
                 while ((line = reader2.readLine()) != null) {
                     if (line.contains("DownloadError:")) {
-                        resultLbl.setForeground(CORES.pegarCor(noturno, 7));
+                        resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
                         resultLbl.setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
                     } else {
                         resultLbl.setText(String.format("<html>%s</html>", line));
-                        resultLbl.setForeground(CORES.pegarCor(noturno, 7));
+                        resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
                     }
                     commandOut = commandOut + line + "\n";
                 }
@@ -244,7 +247,7 @@ public class Download extends YoutubeEventosPainelDireita {
             progressBarPadrao.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
             if (ex.toString().contains("Stream closed")) {
                 resultLbl.setText(TEXTOS.pegarTexto("label.resultado.download.cancelado"));
-                resultLbl.setForeground(CORES.pegarCor(noturno, 8));
+                resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Avisos"));
                 progressBarPadrao.setVisible(false);
 //                isBaixandoPadrao = false;
                 CMD.sleep(0.5);
@@ -253,7 +256,7 @@ public class Download extends YoutubeEventosPainelDireita {
                 return resultLbl.getText();
             } else {
                 resultLbl.setText(String.format("<html>%s</html>", ex.toString()));
-                resultLbl.setForeground(CORES.pegarCor(noturno, 7));
+                resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
                 progressBarPadrao.setVisible(false);
                 buttonsSettings(btnPadrao, btnSecundario, btnTerciario, isBaixandoPadrao,
                         isBaixandoSecundario, isBaixandoTerciario, true, false);
@@ -266,7 +269,7 @@ public class Download extends YoutubeEventosPainelDireita {
         }
 
         if (commandOut.equals("")) {
-            resultLbl.setForeground(CORES.pegarCor(noturno, 7));
+            resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
             resultLbl.setText(TEXTOS.pegarTexto("label.resultado.falha.download"));
         } else {
             configurarCores();
