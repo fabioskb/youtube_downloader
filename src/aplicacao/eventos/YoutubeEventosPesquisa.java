@@ -5,18 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import metodos.YoutubeArquivo;
 
 /**
  * Classe responsável pelo evento que configura, executa e retorna os resultados
  * da lista de pesquisa da aplicação, além de tratar possíveis erros.
  */
-public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
+public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
 
     @Override
     protected void btnPesquisaClick(ActionEvent ev) {
+
+        lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pesquisando"));
+        configurarCores();
+        
         pesquisa = new Thread(() -> {
             try {
                 index = 20;
@@ -31,10 +33,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                 links = new String[20];
                 List<String> lstTitulosLinksTmp = null;
 
-                lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pesquisando"));
-                configurarCores();
-                CMD.sleep(1);
-
+//                CMD.sleep(1);
                 try {
                     arquivoDesc.deletar();
                     YoutubeArquivo scriptTitulosLinks = new YoutubeArquivo("/tmp/youtubeSearch", false);
@@ -68,7 +67,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                     if (!cmdLineSaida.startsWith("Traceback (most recent call last):") || !cmdLineSaida.startsWith("command not found") && cmdLineSaida.length() > 0) {
                         lstTitulosLinksTmp = new ArrayList<>(Arrays.asList(cmdLineSaida.split("\n")));
                         contador = 0;
-                        
+
                         if (!lstTitulosLinksTmp.get(0).equals("command not found")) {
                             for (int i = 0; i < lstTitulosLinksTmp.size(); i++) {
                                 if (i % 2 == 0) {
@@ -85,20 +84,19 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar3 {
                 } catch (Exception e) {
                     lblResultado.setForeground(CORES.pegarCor(noturno, 7));
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
+                    colorBtnCancelPro.stop();
                     return;
                 }
 
-                if (!lstTitulos.isEmpty() && (!lblResultado.getText().startsWith("[download")
-                        && !lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download")))) {
+                if (!lstTitulos.isEmpty()) {
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.pesquisa.concluida"));
                     lblResultado.setForeground(CORES.pegarCor(noturno, 9));
-                } else if (!lblResultado.getText().startsWith("[download")
-                        && !lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+                } else {
                     lblResultado.setText(TEXTOS.pegarTexto("label.resultado.falha.pesquisa"));
                     lblResultado.setForeground(CORES.pegarCor(noturno, 7));
                 }
             } catch (IOException ex) {
-                Logger.getLogger(YoutubeEventosPesquisa.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         });
         pesquisa.start();

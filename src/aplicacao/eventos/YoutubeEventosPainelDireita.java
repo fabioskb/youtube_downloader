@@ -23,11 +23,13 @@ public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
             btnTema.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
             btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
         }
+        configurarCores();
     }
     
     @Override
     protected void btnCancelProcessClick(ActionEvent ev) {
         CMD.destruir();
+        colorBtnCancelPro.stop();
     }
 
     @Override

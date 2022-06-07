@@ -3,7 +3,6 @@ package aplicacao.tela;
 import aplicacao.eventos.YoutubeEventosMenores;
 import static aplicacao.tela.YoutubeTela.SISTEMA;
 import static aplicacao.tela.YoutubeTela.USUARIO;
-import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -20,6 +19,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
      * Checa se esta Ok, corrige se necessário e possível, e, inicializa todos
      * os componentes da aplicação (se possível).
      *
+     * @throws java.io.IOException
      */
     protected void inicializar() throws IOException {
 
@@ -70,13 +70,14 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 
         if (youtubeDlSaida.startsWith("Name: youtube-dl") || youtubeSearchSaida.startsWith("Name: youtube-search")) {
             this.addWindowListener(new WindowAdapter() {
+                @Override
                 public void windowClosing(WindowEvent e) {
                     inTheExit();
                 }
             });
             this.setTitle("YouTube Downloader");
             this.setResizable(true);
-            this.setSize(1000, 700);
+            this.setSize(900, 640);
             this.setMinimumSize(new DimensionUIResource(760, 560));
             this.setLocationRelativeTo(null);
             this.setIconImage(IMAGEM.pegarImage("/imagens/ytdBanner.png"));
@@ -100,13 +101,11 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             downloadProgressBar.setVisible(false);
             downloadProgressBar2.setVisible(false);
             downloadProgressBar3.setVisible(false);
-            lblProgressBar.setVisible(false);
-            lblProgressBar2.setVisible(false);
-            lblProgressBar3.setVisible(false);
 
             pro1 = RUN_1.exec("ls");
             pro2 = RUN_2.exec("ls");
             pro3 = RUN_3.exec("ls");
+            CMD.comandoDownload("ls");
 
             index = 20;
 

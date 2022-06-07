@@ -2,6 +2,8 @@ package aplicacao.eventos;
 
 import aplicacao.tela.YoutubeTelaCoresEEventos;
 import java.io.BufferedReader;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Classe responsável por criar todos os atributos que serão usados nos eventos,
@@ -15,6 +17,15 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String tituloFormatado = "";
     protected String tituloFormatado2 = "";
     protected String tituloFormatado3 = "";
+    protected String scriptDown = "/tmp/baixar";
+    protected String scriptDown2 = "/tmp/baixar2";
+    protected String scriptDown3 = "/tmp/baixar3";
+    protected String scriptTitle = "/tmp/titulo";
+    protected String scriptTitle2 = "/tmp/titulo2";
+    protected String scriptTitle3 = "/tmp/titulo3";
+    protected String downloadPath = "";
+    protected String verifyingDownload = TEXTOS.pegarTexto("label.resultado.verificando.download");
+    protected boolean isBaixando, isBaixando2, isBaixando3;
     protected String format;
     protected String cmdLineSaida;
     protected String cmdLineSaida2;
@@ -22,18 +33,19 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String link = "";
     protected String[] links;
     protected int index = 20;
-    protected Process pro1;
-    protected Process pro2;
-    protected Process pro3;
-    protected BufferedReader read, read2, read3, read4, read5, read6;
-    protected String line;
-    protected String line2;
-    protected String line3;
+    protected Process pro1 = null;
+    protected Process pro2 = null;
+    protected Process pro3 = null;
+    protected BufferedReader read = null, read2 = null, read3 = null, read4 = null, 
+            read5 = null, read6 = null;
+    protected String line = "";
+    protected String line2 = "";
+    protected String line3 = "";
     protected boolean downloadDone, downloadDone2, downloadDone3;
     protected Thread download, download2, download3, pesquisa;
     protected YoutubeTelaCoresEEventos coresEvento = new YoutubeTelaCoresEEventos();
-//    protected static final Runtime RUN = Runtime.getRuntime();
     protected static final Runtime RUN_1 = Runtime.getRuntime();
     protected static final Runtime RUN_2 = Runtime.getRuntime();
     protected static final Runtime RUN_3 = Runtime.getRuntime();
+    
 }

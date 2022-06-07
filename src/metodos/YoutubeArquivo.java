@@ -26,6 +26,7 @@ public class YoutubeArquivo {
      *
      * @param caminho - Path
      * @param dir - Se true cria um diretorio em vez de um arquivo.
+     * @throws java.io.IOException
      */
     public YoutubeArquivo(String caminho, boolean dir) throws IOException {
         this.caminho = caminho;
@@ -46,6 +47,7 @@ public class YoutubeArquivo {
             bw.write(arquivoConteudo);
             bw.newLine();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     

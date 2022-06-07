@@ -59,15 +59,11 @@ public abstract class YoutubeTela extends JFrame {
     protected JButton btnBaixa3;
     protected JButton btnCancelar;
 
-    protected JLabel lblResultado;
-    protected JLabel lblResultado2;
-    protected JLabel lblResultado3;
 
     protected JPanel pnlTopo;
+    protected JPanel jTopFlowPanel;
 
     protected JPanel pnlEsquerda;
-    //protected JPanel pnlEsquerda1;
-    //protected JPanel pnlEsquerda2;
     protected JMenuBar barraMenu;
     protected JMenu menuFile;
     protected JMenuItem itemMenuExit;
@@ -92,22 +88,23 @@ public abstract class YoutubeTela extends JFrame {
     protected JPanel pnlRodape1;
     protected JPanel pnlRodape2;
     protected JPanel pnlRodape3;
+    protected JPanel pnlRodape4;
+    protected JLabel lblResultado;
+    protected JLabel lblResultado1;
+    protected JLabel lblResultado2;
+    protected JLabel lblResultado3;
     protected JProgressBar downloadProgressBar;
     protected JProgressBar downloadProgressBar2;
     protected JProgressBar downloadProgressBar3;
-    protected JLabel lblProgressBar;
-    protected JLabel lblProgressBar2;
-    protected JLabel lblProgressBar3;
 
     protected JRootPane pnlPadrao;
 
     protected boolean noturno, video, audio;
-    protected boolean isBaixando, isBaixando2, isBaixando3;
     protected String pastaPrincipal, pastaVideo, pastaAudio;
-    protected String downloadPath = "";
     protected String installYoutubeSearch, installYoutubeDl;
     protected int contador, cont;
     protected YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
+    protected Thread colorBtnCancelPro;
 
     protected final BorderLayout borderLayout = new BorderLayout();
     protected static final String USUARIO = System.getProperty("user.name");
@@ -133,18 +130,21 @@ public abstract class YoutubeTela extends JFrame {
     public JPanel getPnlTopo() {
         if (pnlTopo == null) {
             pnlTopo = new JPanel(new GridLayout(2, 1));
+            jTopFlowPanel = new JPanel(new FlowLayout());
 
-            lblBanner = new JLabel("<html><center>YouTube<br/>Downloader</center></html>", (int) CENTER_ALIGNMENT);
+            lblBanner = new JLabel("<html><center>YouTube</center></html>", (int) CENTER_ALIGNMENT);
             lblBanner.setFont(FONT_BANNER);
             lblBanner.setOpaque(true);
             lblBanner.setIcon(IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
 
-            lblDescricao = new JLabel(TEXTOS.pegarTexto("descricao"), (int) CENTER_ALIGNMENT);
-            lblDescricao.setFont(FONT_DESC);
+            lblDescricao = new JLabel("Downloader", (int) CENTER_ALIGNMENT);
+            lblDescricao.setFont(FONT_BANNER);
             lblDescricao.setOpaque(true);
 
+            jTopFlowPanel.add(lblDescricao);
+            
             pnlTopo.add(lblBanner);
-            pnlTopo.add(lblDescricao);
+            pnlTopo.add(jTopFlowPanel);
         }
         return pnlTopo;
     }
@@ -183,8 +183,13 @@ public abstract class YoutubeTela extends JFrame {
         // LineBorder lstBorda = new LineBorder(getForeground());
         if (pnlCentro == null) {
             pnlCentro = new JPanel(new GridLayout(4, 1));
-            Component[] pnls = {pnlCentro1 = new JPanel(new FlowLayout()), pnlCentro2 = new JPanel(new FlowLayout()), pnlCentro3 = new JPanel(new GridLayout()), pnlCentro4 = new JPanel(new FlowLayout())};
-
+            Component[] pnls = {
+                pnlCentro1 = new JPanel(new FlowLayout()), 
+                pnlCentro2 = new JPanel(new FlowLayout()), 
+                pnlCentro3 = new JPanel(new GridLayout()), 
+                pnlCentro4 = new JPanel(new FlowLayout())
+            };
+            
             Component[] comps = {lblLink = new JLabel(""),
                 txtLink = new JTextField(TEXTOS.pegarTexto("fieldtext.link"), 38),
                 txtPesquisa = new JTextField(TEXTOS.pegarTexto("fieldtext.pesquisa"), 25),
@@ -222,8 +227,8 @@ public abstract class YoutubeTela extends JFrame {
                     pnlCentro2.add(comps[i]);
                 } else if (i == 4) {
                     pnlCentro3.add(pnlExtra);
-                } //pnlCentro3.add(comps[i]);
-                else {
+                    //pnlCentro3.add(comps[i]);
+                } else {
                     pnlCentro4.add(comps[i]);
                 }
             }
@@ -252,7 +257,6 @@ public abstract class YoutubeTela extends JFrame {
             btnCancelProcess = new JButton(TEXTOS.pegarTexto("botao.cancel.process"));
             btnCancelProcess.setToolTipText(TEXTOS.pegarTexto("tootip.botao.cancel.process"));
             btnCancelProcess.setFocusable(false);
-            
 
             pnlDireita1.add(btnTema);
             pnlDireita2.add(checkVideo);
@@ -273,16 +277,22 @@ public abstract class YoutubeTela extends JFrame {
      */
     public JPanel getPnlRodape() {
         if (pnlRodape == null) {
-            pnlRodape = new JPanel(new GridLayout(3, 1));
+            pnlRodape = new JPanel(new GridLayout(4, 1));
             pnlRodape1 = new JPanel(new FlowLayout());
             pnlRodape2 = new JPanel(new FlowLayout());
             pnlRodape3 = new JPanel(new FlowLayout());
+            pnlRodape4 = new JPanel(new FlowLayout());
 
             lblResultado = new JLabel("", (int) CENTER_ALIGNMENT);
             lblResultado.setAlignmentX(CENTER_ALIGNMENT);
             lblResultado.setAlignmentY(CENTER_ALIGNMENT);
             lblResultado.setOpaque(true);
             lblResultado.setAutoscrolls(true);
+            lblResultado1 = new JLabel("", (int) CENTER_ALIGNMENT);
+            lblResultado1.setAlignmentX(CENTER_ALIGNMENT);
+            lblResultado1.setAlignmentY(CENTER_ALIGNMENT);
+            lblResultado1.setOpaque(true);
+            lblResultado1.setAutoscrolls(true);
             //lblResultado.setIcon(IMAGEM.pegarIcon("/imagens/invisible.png"));
             lblResultado.setToolTipText(TEXTOS.pegarTexto("tooltip.label.resultado"));
             lblResultado2 = new JLabel("", (int) CENTER_ALIGNMENT);
@@ -299,22 +309,6 @@ public abstract class YoutubeTela extends JFrame {
             lblResultado3.setAutoscrolls(true);
             //lblResultado3.setIcon(IMAGEM.pegarIcon("/imagens/invisible.png"));
             lblResultado3.setToolTipText(TEXTOS.pegarTexto("tooltip.label.resultado"));
-
-            lblProgressBar = new JLabel("");
-            lblProgressBar.setAlignmentX(CENTER_ALIGNMENT);
-            lblProgressBar.setAlignmentY(CENTER_ALIGNMENT);
-            lblProgressBar.setOpaque(true);
-            lblProgressBar.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
-            lblProgressBar2 = new JLabel("");
-            lblProgressBar2.setAlignmentX(CENTER_ALIGNMENT);
-            lblProgressBar2.setAlignmentY(CENTER_ALIGNMENT);
-            lblProgressBar2.setOpaque(true);
-            lblProgressBar2.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
-            lblProgressBar3 = new JLabel("");
-            lblProgressBar3.setAlignmentX(CENTER_ALIGNMENT);
-            lblProgressBar3.setAlignmentY(CENTER_ALIGNMENT);
-            lblProgressBar3.setOpaque(true);
-            lblProgressBar3.setText(TEXTOS.pegarTexto("label.resultado.baixando"));
 
             downloadProgressBar = new JProgressBar(0, 100);
             downloadProgressBar.setAlignmentX(CENTER_ALIGNMENT);
@@ -336,20 +330,20 @@ public abstract class YoutubeTela extends JFrame {
             downloadProgressBar3.setSize(new Dimension(200, 10));
 
             pnlRodape1.add(lblResultado);
-            pnlRodape1.add(lblProgressBar);
-            pnlRodape1.add(downloadProgressBar);
 
-            pnlRodape2.add(lblResultado2);
-            pnlRodape2.add(lblProgressBar2);
-            pnlRodape2.add(downloadProgressBar2);
+            pnlRodape2.add(lblResultado1);
+            pnlRodape2.add(downloadProgressBar);
 
-            pnlRodape3.add(lblResultado3);
-            pnlRodape3.add(lblProgressBar3);
-            pnlRodape3.add(downloadProgressBar3);
+            pnlRodape3.add(lblResultado2);
+            pnlRodape3.add(downloadProgressBar2);
+
+            pnlRodape4.add(lblResultado3);
+            pnlRodape4.add(downloadProgressBar3);
 
             pnlRodape.add(pnlRodape1);
             pnlRodape.add(pnlRodape2);
             pnlRodape.add(pnlRodape3);
+            pnlRodape.add(pnlRodape4);
         }
         return pnlRodape;
     }

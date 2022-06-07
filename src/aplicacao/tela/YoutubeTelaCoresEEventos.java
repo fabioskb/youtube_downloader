@@ -25,9 +25,8 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         lblBanner.setBackground(CORES.pegarCor(noturno, 0));
         lblBanner.setForeground(CORES.pegarCor(noturno, 1));
 
-        lblDescricao.setOpaque(true);
-        lblDescricao.setBackground(CORES.pegarCor(noturno, 4));
-        lblDescricao.setForeground(CORES.pegarCor(noturno, 6));
+        lblDescricao.setBackground(CORES.pegarCor(noturno, "Descricao BG"));
+        lblDescricao.setForeground(CORES.pegarCor(noturno, "Padrao BG"));
 
         txtLink.setOpaque(true);
         txtLink.setBackground(CORES.pegarCor(noturno, 10));
@@ -39,39 +38,48 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         lstPesquisa.setSelectionForeground(Color.white);
 
         downloadProgressBar.setBackground(CORES.pegarCor(noturno, 3));
-        downloadProgressBar.setForeground(CORES.pegarCor(noturno, 9));
+        downloadProgressBar.setForeground(CORES.pegarCor(noturno, 11));
         downloadProgressBar2.setBackground(CORES.pegarCor(noturno, 3));
-        downloadProgressBar2.setForeground(CORES.pegarCor(noturno, 9));
+        downloadProgressBar2.setForeground(CORES.pegarCor(noturno, 11));
         downloadProgressBar3.setBackground(CORES.pegarCor(noturno, 3));
-        downloadProgressBar3.setForeground(CORES.pegarCor(noturno, 9));
+        downloadProgressBar3.setForeground(CORES.pegarCor(noturno, 11));
 
         lblResultado.setBackground(CORES.pegarCor(noturno, 4));
+        if (lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pesquisando"))) {
+            lblResultado.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        }
+        lblResultado1.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado2.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado3.setBackground(CORES.pegarCor(noturno, 4));
-        if (lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pesquisando"))
-                || lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+        if (lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
                 || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
                 || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || lblResultado.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
+                || lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
                 || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
                 || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
-            lblResultado.setForeground(CORES.pegarCor(noturno, 6));
+            lblResultado1.setForeground(CORES.pegarCor(noturno, 6));
             lblResultado2.setForeground(CORES.pegarCor(noturno, 6));
             lblResultado3.setForeground(CORES.pegarCor(noturno, 6));
         }
 
-        barraMenu.setBackground(CORES.pegarCor(noturno, 3));
+        barraMenu.setForeground(CORES.pegarCor(noturno, 3));
         menuFile.setBackground(CORES.pegarCor(noturno, 3));
-        menuFile.setForeground(CORES.pegarCor(noturno, 4));
+        menuFile.setForeground(CORES.pegarCor(noturno, 3));
+        itemMenuTutorial.setBackground(CORES.pegarCor(noturno, "Descricao BG"));
+        itemMenuSobre.setBackground(CORES.pegarCor(noturno, "Descricao BG"));
+        itemMenuExit.setBackground(CORES.pegarCor(noturno, "Descricao BG"));
+        itemMenuTutorial.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        itemMenuSobre.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        itemMenuExit.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
 
         Component[] paineis = {
             pnlTopo, pnlCentro, pnlCentro1, pnlCentro2, pnlCentro3, pnlCentro4,
             pnlDireita, pnlDireita1, pnlDireita2, pnlDireita3, pnlRodape, pnlRodape1,
-            pnlRodape2, pnlRodape3, pnlPadrao
+            pnlRodape2, pnlRodape3, pnlRodape4, pnlPadrao, jTopFlowPanel, pnlEsquerda
         };
         contador = 0;
         for (Component jPanel : paineis) {
-            if (contador >= 6 && contador <= 13) {
+            if (contador >= 6  && contador <= 17) {
                 jPanel.setBackground(CORES.pegarCor(noturno, 4));
             } else {
                 jPanel.setBackground(CORES.pegarCor(noturno, 3));
@@ -113,17 +121,18 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         UIManager.put("Button.background", CORES.pegarCor(noturno, 5));
         UIManager.put("Button.foreground", CORES.pegarCor(noturno, 6));
 
-        Thread colorBtnCancelPro = new Thread(() -> {
+        colorBtnCancelPro = new Thread(() -> {
             while (true) {
-                if (CMD.getPro().isAlive()) {
+                if (CMD.getPro().isAlive() || CMD.getProDownloadTitle().isAlive()) {
                     btnCancelProcess.setBackground(Color.RED);
                     btnCancelProcess.setForeground(Color.white);
-                    CMD.sleep(1);
+                    CMD.sleep(1.5);
                     btnCancelProcess.setBackground(CORES.pegarCor(noturno, 3));
                     btnCancelProcess.setForeground(CORES.pegarCor(noturno, 6));
                 }
             }
         });
+        //212 maratona java virado no jiraya
         colorBtnCancelPro.start();
     }
 

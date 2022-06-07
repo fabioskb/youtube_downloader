@@ -67,19 +67,25 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void btnCancelarClick(ActionEvent ev) {
-        if (downloadProgressBar.isVisible() || lblResultado.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+        if (downloadProgressBar.isVisible() || lblResultado1.getText().equals(verifyingDownload + " " + tituloFormatado)
+                || downloadProgressBar2.isVisible() || lblResultado2.getText().equals(verifyingDownload + " " + tituloFormatado2)
+                || downloadProgressBar3.isVisible() || lblResultado3.getText().equals(verifyingDownload + " " + tituloFormatado3)) {
             btnBaixa.setVisible(true);
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
-            btnCancelar.setVisible(false);
-            pro1.destroy();
-            pro2.destroy();
-            pro3.destroy();
             downloadProgressBar.setVisible(false);
             downloadProgressBar2.setVisible(false);
             downloadProgressBar3.setVisible(false);
+            CMD.getProDownloadTitle().destroy();
+            pro1.destroy();
+            pro2.destroy();
+            pro3.destroy();
+            CMD.sleep(0.5);
+            isBaixando = false;
+            isBaixando2 = false;
+            isBaixando3 = false;
+            btnCancelar.setVisible(false);
+            downsThreadStop();
         }
     }
 
@@ -95,18 +101,19 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void itemMenuSobreClick(ActionEvent ev) {
-        JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("joptionpane.sobre"), TEXTOS.pegarTexto("joptionpane.sobre.titulo"), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
+        JOptionPane.showMessageDialog(null, TEXTOS.pegarTexto("fora.descricao"), TEXTOS.pegarTexto("joptionpane.sobre.titulo"), JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"));
     }
 
     protected void inTheExit() {
-        if (downloadProgressBar.isVisible() || lblResultado.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
+        ActionEvent ev = null;
+        if (pro1.isAlive() || pro2.isAlive() || pro3.isAlive()) {
+        /*if (downloadProgressBar.isVisible() || lblResultado1.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
                 || downloadProgressBar2.isVisible() || lblResultado2.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {
+                || downloadProgressBar3.isVisible() || lblResultado3.getText().startsWith(TEXTOS.pegarTexto("label.resultado.verificando.download"))) {*/
             Object[] choices = {TEXTOS.pegarTexto("joptionpane.botao.sim"), TEXTOS.pegarTexto("joptionpane.botao.nao")};
             int showConfirmDownloadOnExit = JOptionPane.showOptionDialog(null, TEXTOS.pegarTexto("joptionpane.intheexit"), "", 
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, IMAGEM.pegarIcon("/imagens/ytdBanner.png"), choices, choices[0]);
             if (showConfirmDownloadOnExit == 1) {
-                ActionEvent ev = null;
                 btnCancelarClick(ev);
                 CMD.destruir();
                 this.dispose();
