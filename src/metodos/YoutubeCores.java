@@ -3,7 +3,6 @@ package metodos;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class YoutubeCores {
 
@@ -46,7 +45,7 @@ public class YoutubeCores {
         coresNight[1] = "#CC0000"; // Banner Foreground
         coresNight[2] = "#333333"; // Area de Texto Resultado
         coresNight[3] = "#333333"; // Background Padrão
-        coresNight[4] = "#666666"; // Background Descrição
+        coresNight[4] = "#555555"; // Background Descrição
         coresNight[5] = "#666666"; // Background Botões
         coresNight[6] = cores[3];  // Foreground Botões e Descrição
         coresNight[7] = cores[7]; // Erros
