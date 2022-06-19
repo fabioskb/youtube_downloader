@@ -14,9 +14,6 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String tituloVideo = "";
     protected String tituloVideo2 = "";
     protected String tituloVideo3 = "";
-    protected String tituloFormatado = "";
-    protected String tituloFormatado2 = "";
-    protected String tituloFormatado3 = "";
     protected String scriptDown = "/tmp/baixar";
     protected String scriptDown2 = "/tmp/baixar2";
     protected String scriptDown3 = "/tmp/baixar3";
@@ -24,7 +21,7 @@ public class YoutubeEventosAtributos extends YoutubeTelaCoresEEventos {
     protected String scriptTitle2 = "/tmp/titulo2";
     protected String scriptTitle3 = "/tmp/titulo3";
     protected String downloadPath = "";
-    protected String verifyingDownload = TEXTOS.pegarTexto("label.resultado.verificando.download");
+    protected String extensao = "";
     protected boolean isBaixando, isBaixando2, isBaixando3;
     protected String format;
     protected String cmdLineSaida;

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.regex.Pattern;
-import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
@@ -35,7 +33,7 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
             }
         });
         colorBtnCancelPro.start();
-        
+
         lblBanner.setBackground(CORES.pegarCor(noturno, 0));
         lblBanner.setForeground(CORES.pegarCor(noturno, 1));
 
@@ -71,26 +69,32 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         lblResultado1.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado2.setBackground(CORES.pegarCor(noturno, 4));
         lblResultado3.setBackground(CORES.pegarCor(noturno, 4));
-        if (lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.verificando.download"))
-                || lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
-                || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))
-                || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
+        
+        if (lblResultado1.getText().equals(verifyingDownload + " " + tituloFormatado)
+                || lblResultado1.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
             lblResultado1.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
-            lblResultado2.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
-            lblResultado3.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
-        } else {
-            if (noturno) {
-                lblResultado1.setForeground(lblResultado1.getForeground().brighter());
-                lblResultado2.setForeground(lblResultado2.getForeground().brighter());
-                lblResultado3.setForeground(lblResultado3.getForeground().brighter());
-            } else {
-                lblResultado1.setForeground(lblResultado1.getForeground().darker());
-                lblResultado2.setForeground(lblResultado2.getForeground().darker());
-                lblResultado3.setForeground(lblResultado3.getForeground().darker());
-            }
         }
+        if (lblResultado2.getText().equals(verifyingDownload + " " + tituloFormatado2)
+                || lblResultado2.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
+            lblResultado2.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        }
+        if (lblResultado3.getText().equals(verifyingDownload + " " + tituloFormatado3)
+                || lblResultado3.getText().equals(TEXTOS.pegarTexto("label.resultado.pegandotitulo"))) {
+            lblResultado3.setForeground(CORES.pegarCor(noturno, "Botoes e descricao FG"));
+        }
+
+        
+//        } else {
+//            if (noturno) {
+//                if (isDiffColor1) lblResultado1.setForeground(lblResultado1.getForeground().brighter());
+//                if (isDiffColor2) lblResultado2.setForeground(lblResultado2.getForeground().brighter());
+//                if (isDiffColor3) lblResultado3.setForeground(lblResultado3.getForeground().brighter());
+//            } else {
+//                if (isDiffColor1) lblResultado1.setForeground(lblResultado1.getForeground().darker());
+//                if (isDiffColor2) lblResultado2.setForeground(lblResultado2.getForeground().darker());
+//                if (isDiffColor3) lblResultado3.setForeground(lblResultado3.getForeground().darker());
+//            }
+//        }
 
         barraMenu.setForeground(CORES.pegarCor(noturno, 3));
         menuFile.setBackground(CORES.pegarCor(noturno, 3));
@@ -124,12 +128,6 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
         for (Component button : buttons) {
             if (cont == 0 && btnTema.isSelected()) {
                 button.setBackground(CORES.pegarCor(noturno, 6));
-                btnTema.setUI(new MetalToggleButtonUI() {
-                    @Override
-                    protected Color getSelectColor() {
-                        return Color.lightGray;
-                    }
-                });
                 button.setForeground(Color.black);
             } else if (cont == 9) {
                 button.setBackground(CORES.pegarCor(noturno, 3));
@@ -153,8 +151,18 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
 
     }
 
+    public void setBtnTemaCor() {
+        btnTema.setUI(new MetalToggleButtonUI() {
+            @Override
+            protected Color getSelectColor() {
+                return Color.lightGray;
+            }
+
+        });
+    }
+
     @Override
-    protected void btnModoNoiteClick(ActionEvent ev) {
+    protected void btnModoTemaClick(ActionEvent ev) {
     }
 
     @Override

@@ -93,6 +93,7 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
                 btnTema.setText(TEXTOS.pegarTexto("botao.modo.dia"));
                 btnTema.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
                 btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
+                setBtnTemaCor();
             }
 
             btnCancelar.setVisible(false);

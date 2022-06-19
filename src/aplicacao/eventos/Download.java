@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package aplicacao.eventos;
 
 import java.io.BufferedReader;
@@ -22,7 +18,6 @@ import metodos.YoutubeArquivo;
  */
 public class Download extends YoutubeEventosPainelDireita {
 
-    
     public String check(boolean downloadDone, String saida) {
         downloadDone = false;
         cmdLineSaida = "";
@@ -43,14 +38,19 @@ public class Download extends YoutubeEventosPainelDireita {
     }
 
     public void format(String link, String scriptDownPath, String scriptTitlePath) {
-        downloadPath = (video) ? TEXTOS.pegarTexto("label.resultado.downloadvideo.concluido")
-                : TEXTOS.pegarTexto("label.resultado.downloadaudio.concluido");
-        
+
         configurarCores();
+
         try {
             if (!pesquisa.isAlive()) {
                 lblResultado.setText("");
             }
+
+            downloadPath = video ? TEXTOS.pegarTexto("label.resultado.downloadvideo.concluido")
+                    : TEXTOS.pegarTexto("label.resultado.downloadaudio.concluido");
+
+            extensao = video ? ".mp4" : ".mp3";
+
             format = (video) ? String.format("{'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]',\n"
                     + "'outtmpl': '%s' + title + '.mp4'}", pastaVideo) // format video para o YoutubeDL
                     : String.format("{'format': 'bestaudio[ext=m4a]',\n"
@@ -94,42 +94,7 @@ public class Download extends YoutubeEventosPainelDireita {
         }
     }
 
-    public void buttonsSettings(JButton btnPadrao, JButton btnSecundario, JButton btnTerciario,
-            boolean isBaixandoPadrao, boolean isBaixandoSecundario, boolean isBaixandoTerciario,
-            boolean isFinalSettings, boolean isCancelBtnSet) {
-        if (isFinalSettings) {
-            isCancelBtnSet = false;
-        }
-        if (isFinalSettings || isCancelBtnSet) {
-            if (isFinalSettings && btnCancelar.isVisible()) {
-                isBaixandoPadrao = false;
-                if (isBaixandoSecundario && isBaixandoTerciario) {
-                    btnPadrao.setVisible(true);
-                }
-            } else if (isCancelBtnSet) {
-                isBaixandoPadrao = false;
-                if (!isBaixando && !isBaixando2 && !isBaixando3) {
-                    btnCancelar.setVisible(false);
-                    downloadProgressBar.setVisible(false);
-                    downloadProgressBar2.setVisible(false);
-                    downloadProgressBar3.setVisible(false);
-                    pro1.destroy();
-                    pro2.destroy();
-                    pro3.destroy();
-                }
-            }
-        } else {
-            isBaixandoPadrao = true;
-            btnPadrao.setVisible(false);
-            if (!isBaixandoSecundario) {
-                btnSecundario.setVisible(true);
-            } else if (!isBaixandoTerciario) {
-                btnTerciario.setVisible(true);
-            }
-        }
-    }
-
-    public String title(JLabel resultLbl, String videoTitle, String script,
+    public List<String> title(JLabel resultLbl, String videoTitle, String script,
             String formatedTitle) {
 
         resultLbl.setVisible(true);
@@ -151,11 +116,12 @@ public class Download extends YoutubeEventosPainelDireita {
             formatedTitle = "...";
         }
         resultLbl.setText(verifyingDownload + " " + formatedTitle);
-        return formatedTitle;
+        List<String> titles = List.of(videoTitle, formatedTitle);
+        return titles;
     }
 
-    public List<Object> processes(Process pro, Runtime run, String scriptDown, BufferedReader reader,
-            BufferedReader reader2) {
+    public List<Object> processes(Process pro, Runtime run, String scriptDown,
+            BufferedReader reader, BufferedReader reader2) {
         try {
             pro = run.exec("python3 " + scriptDown);
         } catch (IOException ex) {
@@ -173,8 +139,8 @@ public class Download extends YoutubeEventosPainelDireita {
             BufferedReader reader2, JProgressBar progressBarPadrao, JProgressBar progressBarSecundario,
             JProgressBar progressBarTerciario, JLabel resultLbl, boolean downloadDone,
             boolean isBaixandoPadrao, boolean isBaixandoSecundario, boolean isBaixandoTerciario,
-            String formatedTitle, String script, JButton btnPadrao,
-            JButton btnSecundario, JButton btnTerciario) {
+            String videoTitle, String formatedTitle, String script, JButton btnPadrao,
+            JButton btnSecundario, JButton btnTerciario, String ext, String downFolder) {
 
         try {
             progressBarPadrao.setValue(0);
@@ -183,7 +149,8 @@ public class Download extends YoutubeEventosPainelDireita {
                     String progressPercentdownload = "", progressPercentdownload2 = "";
                     if (line.contains("%")) {
                         progressBarPadrao.setVisible(true);
-                        progressPercentdownload = line.substring(line.indexOf(" "), line.indexOf(".")).strip();
+                        progressPercentdownload = line.substring(line.indexOf(" "),
+                                line.indexOf(".")).strip();
                         progressPercentdownload2 = line.substring(line.indexOf(" ")) + "  ";
                         if (!downloadDone) {
                             progressBarPadrao.setString(formatedTitle + progressPercentdownload2);
@@ -194,7 +161,7 @@ public class Download extends YoutubeEventosPainelDireita {
                         }
                     } else if (progressBarPadrao.getValue() == 100) {
                         progressBarPadrao.setValue(0);
-                        progressBarPadrao.setString(TEXTOS.pegarTexto("progressbar.baixando.audio") + formatedTitle);
+                        progressBarPadrao.setString(TEXTOS.pegarTexto("progressbar.baixando.audio") + videoTitle);
                         downloadDone = true;
                     } else {
                         if (line.contains("[download] " + pastaVideo)
@@ -205,14 +172,17 @@ public class Download extends YoutubeEventosPainelDireita {
                             resultLbl.setText(verifyingDownload + " " + formatedTitle);
                             configurarCores();
                         } else {
-                            resultLbl.setText(line);
-                            if (line.startsWith("[ffmpeg]") && line.endsWith("skipping")) {
+                            if ((line.startsWith("[ffmpeg]") && line.endsWith("skipping"))
+                                    || line.startsWith("[ffmpeg] Merging formats into")) {
+                                downloadDone = true;
                                 continue;
                             }
+                            resultLbl.setText(line);
                         }
                     }
-                } else if (downloadDone) {
-                    resultLbl.setText(downloadPath + "/" + formatedTitle);
+                }
+                if (downloadDone) {
+                    resultLbl.setText("<html>" + downFolder + "/" + videoTitle + ext + "</html>");
                     resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Concluido"));
                     progressBarPadrao.setVisible(false);
                     progressBarPadrao.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
@@ -299,4 +269,40 @@ public class Download extends YoutubeEventosPainelDireita {
             }
         }
     }
+
+    public void buttonsSettings(JButton btnPadrao, JButton btnSecundario, JButton btnTerciario,
+            boolean isBaixandoPadrao, boolean isBaixandoSecundario, boolean isBaixandoTerciario,
+            boolean isFinalSettings, boolean isCancelBtnSet) {
+        if (isFinalSettings) {
+            isCancelBtnSet = false;
+        }
+        if (isFinalSettings || isCancelBtnSet) {
+            if (isFinalSettings && btnCancelar.isVisible()) {
+                isBaixandoPadrao = false;
+                if (isBaixandoSecundario && isBaixandoTerciario) {
+                    btnPadrao.setVisible(true);
+                }
+            } else if (isCancelBtnSet) {
+                isBaixandoPadrao = false;
+                if (!isBaixando && !isBaixando2 && !isBaixando3) {
+                    btnCancelar.setVisible(false);
+                    downloadProgressBar.setVisible(false);
+                    downloadProgressBar2.setVisible(false);
+                    downloadProgressBar3.setVisible(false);
+                    pro1.destroy();
+                    pro2.destroy();
+                    pro3.destroy();
+                }
+            }
+        } else {
+            isBaixandoPadrao = true;
+            btnPadrao.setVisible(false);
+            if (!isBaixandoSecundario) {
+                btnSecundario.setVisible(true);
+            } else if (!isBaixandoTerciario) {
+                btnTerciario.setVisible(true);
+            }
+        }
+    }
+
 }

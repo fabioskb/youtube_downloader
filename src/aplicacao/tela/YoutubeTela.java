@@ -120,6 +120,11 @@ public abstract class YoutubeTela extends JFrame {
     public static final ResourceBundle TEXTOS_BR = ResourceBundle.getBundle("textos_pt_BR", new Locale("pt", "BR"));
     public static final ResourceBundle TEXTOS_US = ResourceBundle.getBundle("textos_en_US", new Locale("en", "US"));
     protected static final YoutubeComando CMD = new YoutubeComando();
+    protected String verifyingDownload = TEXTOS.pegarTexto("label.resultado.verificando.download");
+    protected String tituloFormatado = "";
+    protected String tituloFormatado2 = "";
+    protected String tituloFormatado3 = "";
+
 
     //////// PAINEIS PRINCIPAIS (Getters)
     /**

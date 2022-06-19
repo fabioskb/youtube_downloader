@@ -3,25 +3,23 @@ package aplicacao.eventos;
 import java.awt.event.ActionEvent;
 
 /**
- * Classe responsável pelos eventos dos botões do painel esquerdo (modo noturno,
- * áudio e vídeo).
+ * Classe responsável pelos eventos dos botões do painel direito.
  */
 public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
 
     @Override
-    protected void btnModoNoiteClick(ActionEvent ev) {
+    protected void btnModoTemaClick(ActionEvent ev) {
         if (!btnTema.isSelected()) {
             noturno = false;
-            configurarCores();
-            btnTema.setText(TEXTOS.pegarTexto("botao.modo.noite"));
             btnTema.setIcon(IMAGEM.pegarIcon("/imagens/night.png"));
+            btnTema.setText(TEXTOS.pegarTexto("botao.modo.noite"));
             btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.noturno"));
         } else {
             noturno = true;
-            configurarCores();
-            btnTema.setText(TEXTOS.pegarTexto("botao.modo.dia"));
             btnTema.setIcon(IMAGEM.pegarIcon("/imagens/day.png"));
+            btnTema.setText(TEXTOS.pegarTexto("botao.modo.dia"));
             btnTema.setToolTipText(TEXTOS.pegarTexto("tooltip.botao.diurno"));
+            setBtnTemaCor();
         }
         configurarCores();
     }
