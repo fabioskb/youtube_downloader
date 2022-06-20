@@ -238,13 +238,16 @@ public class Download extends YoutubeEventosPainelDireita {
             }
         }
 
-        if (commandOut.equals("")) {
-            resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
-            resultLbl.setText(TEXTOS.pegarTexto(formatedTitle + " " + "label.resultado.falha.download"));
-        } else {
-            configurarCores();
-            resultLbl.setText(cmdLineSaida);
-        }
+        switch (commandOut) {
+		case "":
+			resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Erros"));
+			resultLbl.setText(TEXTOS.pegarTexto(formatedTitle + " " + "label.resultado.falha.download"));
+			break;
+		default:
+			configurarCores();
+			resultLbl.setText(cmdLineSaida);
+			break;
+		}
         progressBarPadrao.setString(TEXTOS.pegarTexto("label.resultado.baixando"));
         progressBarPadrao.setVisible(false);
         isBaixandoPadrao = false;
