@@ -305,7 +305,9 @@ public abstract class YoutubeTela extends JFrame {
                     TEXTOS.pegarTexto("tootip.botao.cancel.process"));
             btnCancelProcess.setFocusable(false);
             menuBarRadioBtn = new JMenuBar();
+            menuBarRadioBtn.setToolTipText(TEXTOS.pegarTexto("tooltip.radio.menu.bar"));
             menuRadioBtn = new JMenu(TEXTOS.pegarTexto("radio.menu.title"));
+            menuRadioBtn.setToolTipText(TEXTOS.pegarTexto("tooltip.radio.menu.bar"));
             ButtonGroup bg = new ButtonGroup();
 
             radioBtnMenuItem1 = new JRadioButtonMenuItem(TEXTOS.pegarTexto("radio.menu.melhor.resolucao"));
@@ -343,27 +345,6 @@ public abstract class YoutubeTela extends JFrame {
                 menuRadioBtn.add(button);
             }
             
-//            menuRadioBtn.add(radioBtnMenuItem1);
-//            menuRadioBtn.add(radioBtnMenuItem2);
-//            menuRadioBtn.add(radioBtnMenuItem3);
-//            menuRadioBtn.add(radioBtnMenuItem4);
-//            menuRadioBtn.add(radioBtnMenuItem5);
-//            menuRadioBtn.add(radioBtnMenuItem6);
-//            menuRadioBtn.add(radioBtnMenuItem7);
-//            menuRadioBtn.add(radioBtnMenuItem8);
-//            menuRadioBtn.add(radioBtnMenuItem9);
-//            menuRadioBtn.add(radioBtnMenuItem10);
-//            menuRadioBtn.add(radioBtnMenuItem11);
-//            menuRadioBtn.add(radioBtnMenuItem12);
-//            menuRadioBtn.add(radioBtnMenuItem13);
-//            menuRadioBtn.add(radioBtnMenuItem14);
-//            menuRadioBtn.add(radioBtnMenuItem15);
-//            menuRadioBtn.add(radioBtnMenuItem16);
-//            menuRadioBtn.add(radioBtnMenuItem17);
-//            menuRadioBtn.add(radioBtnMenuItem18);
-//            menuRadioBtn.add(radioBtnMenuItem19);
-//            menuRadioBtn.add(radioBtnMenuItem20);
-
             menuBarRadioBtn.add(menuRadioBtn);
 
             pnlDireita1.add(btnTema);

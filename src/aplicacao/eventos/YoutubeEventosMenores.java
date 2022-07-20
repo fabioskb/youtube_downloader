@@ -195,7 +195,6 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
             isBaixando2 = false;
             isBaixando3 = false;
             btnCancelar.setVisible(false);
-//            downsThreadStop();
         }
     }
 
@@ -239,7 +238,7 @@ public class YoutubeEventosMenores extends YoutubeEventosPesquisa {
 
     @Override
     protected void processComponentEvent(ComponentEvent e) {
-        super.processComponentEvent(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        
     }
 
 }

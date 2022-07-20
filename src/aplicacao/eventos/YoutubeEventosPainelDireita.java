@@ -94,102 +94,64 @@ public class YoutubeEventosPainelDireita extends YoutubeEventosAtributos {
     }
 
     @Override
-    protected void selectRadioMenuItem20(ActionEvent ev) {
-        setResId(radioBtnMenuItem20);
-    }
+    protected void selectRadioMenuItem20(ActionEvent ev) { setResId(radioBtnMenuItem20); }
 
     @Override
-    protected void selectRadioMenuItem19(ActionEvent ev) {
-        setResId(radioBtnMenuItem19);
-    }
+    protected void selectRadioMenuItem19(ActionEvent ev) { setResId(radioBtnMenuItem19); }
 
     @Override
-    protected void selectRadioMenuItem18(ActionEvent ev) {
-        setResId(radioBtnMenuItem18);
-    }
+    protected void selectRadioMenuItem18(ActionEvent ev) { setResId(radioBtnMenuItem18); }
 
     @Override
-    protected void selectRadioMenuItem17(ActionEvent ev) {
-        setResId(radioBtnMenuItem17);
-    }
+    protected void selectRadioMenuItem17(ActionEvent ev) { setResId(radioBtnMenuItem17); }
 
     @Override
-    protected void selectRadioMenuItem16(ActionEvent ev) {
-        setResId(radioBtnMenuItem16);
-    }
+    protected void selectRadioMenuItem16(ActionEvent ev) { setResId(radioBtnMenuItem16); }
 
     @Override
-    protected void selectRadioMenuItem15(ActionEvent ev) {
-        setResId(radioBtnMenuItem15);
-    }
+    protected void selectRadioMenuItem15(ActionEvent ev) { setResId(radioBtnMenuItem15); }
 
     @Override
-    protected void selectRadioMenuItem14(ActionEvent ev) {
-        setResId(radioBtnMenuItem14);
-    }
+    protected void selectRadioMenuItem14(ActionEvent ev) { setResId(radioBtnMenuItem14); }
 
     @Override
-    protected void selectRadioMenuItem13(ActionEvent ev) {
-        setResId(radioBtnMenuItem13);
-    }
+    protected void selectRadioMenuItem13(ActionEvent ev) { setResId(radioBtnMenuItem13); }
 
     @Override
-    protected void selectRadioMenuItem12(ActionEvent ev) {
-        setResId(radioBtnMenuItem12);
-    }
+    protected void selectRadioMenuItem12(ActionEvent ev) { setResId(radioBtnMenuItem12); }
 
     @Override
-    protected void selectRadioMenuItem11(ActionEvent ev) {
-        setResId(radioBtnMenuItem11);
-    }
+    protected void selectRadioMenuItem11(ActionEvent ev) { setResId(radioBtnMenuItem11); }
 
     @Override
-    protected void selectRadioMenuItem10(ActionEvent ev) {
-        setResId(radioBtnMenuItem10);
-    }
+    protected void selectRadioMenuItem10(ActionEvent ev) { setResId(radioBtnMenuItem10); }
 
     @Override
-    protected void selectRadioMenuItem9(ActionEvent ev) {
-        setResId(radioBtnMenuItem9);
-    }
+    protected void selectRadioMenuItem9(ActionEvent ev) { setResId(radioBtnMenuItem9); }
 
     @Override
-    protected void selectRadioMenuItem8(ActionEvent ev) {
-        setResId(radioBtnMenuItem8);
-    }
+    protected void selectRadioMenuItem8(ActionEvent ev) { setResId(radioBtnMenuItem8); }
 
     @Override
-    protected void selectRadioMenuItem7(ActionEvent ev) {
-        setResId(radioBtnMenuItem7);
-    }
+    protected void selectRadioMenuItem7(ActionEvent ev) { setResId(radioBtnMenuItem7); }
 
     @Override
-    protected void selectRadioMenuItem6(ActionEvent ev) {
-        setResId(radioBtnMenuItem6);
-    }
+    protected void selectRadioMenuItem6(ActionEvent ev) { setResId(radioBtnMenuItem6); }
 
     @Override
-    protected void selectRadioMenuItem5(ActionEvent ev) {
-        setResId(radioBtnMenuItem5);
-    }
+    protected void selectRadioMenuItem5(ActionEvent ev) { setResId(radioBtnMenuItem5); }
 
     @Override
-    protected void selectRadioMenuItem4(ActionEvent ev) {
-        setResId(radioBtnMenuItem4);
-    }
+    protected void selectRadioMenuItem4(ActionEvent ev) { setResId(radioBtnMenuItem4); }
 
     @Override
-    protected void selectRadioMenuItem3(ActionEvent ev) {
-        setResId(radioBtnMenuItem3);
-    }
+    protected void selectRadioMenuItem3(ActionEvent ev) { setResId(radioBtnMenuItem3); }
 
     @Override
-    protected void selectRadioMenuItem2(ActionEvent ev) {
-        setResId(radioBtnMenuItem2);
-    }
+    protected void selectRadioMenuItem2(ActionEvent ev) { setResId(radioBtnMenuItem2); }
 
     @Override
-    protected void selectRadioMenuItem1(ActionEvent ev) {
-        resId = TEXTOS.pegarTexto("radio.menu.melhor.resolucao");
+    protected void selectRadioMenuItem1(ActionEvent ev) { 
+        resId = TEXTOS.pegarTexto("radio.menu.melhor.resolucao"); 
     }
 }
