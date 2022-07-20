@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 /**
  * Classe responsável pelo construtor da aplicação.
  */
+@SuppressWarnings("serial")
 public class YoutubeTelaConstrutor extends YoutubeTelaInicializa {
 
     /**

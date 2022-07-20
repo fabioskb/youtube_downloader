@@ -20,8 +20,6 @@ import java.util.List;
 public class YoutubeArquivo {
     private String caminho;
     private Path arq;
-    private boolean dir;
-
     /**
      *
      * @param caminho - Path
@@ -30,12 +28,11 @@ public class YoutubeArquivo {
      */
     public YoutubeArquivo(String caminho, boolean dir) throws IOException {
         this.caminho = caminho;
-        this.dir = dir;
         arq = Paths.get(caminho);
         if (!dir && Files.notExists(arq)) Files.createFile(arq);
         else if (Files.notExists(arq)) Files.createDirectory(arq);
     }
-    
+
     // Métodos personalizados
     /**
      * Cria um arquivo.
@@ -50,7 +47,7 @@ public class YoutubeArquivo {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Ler um arquivo.
      * @return Retorna uma String com o conteúdo do arquivo.
@@ -60,11 +57,11 @@ public class YoutubeArquivo {
         try {
             s = new String(Files.readAllBytes(arq));
         } catch (IOException ex) {
-            
+
         }
         return s;
     }
-    
+
     /**
      * Lista um arquivo.
      * @return Retorna uma lista com o conteúdo
@@ -79,7 +76,7 @@ public class YoutubeArquivo {
         }
         return l;
     }
-    
+
     /**
      * Adiciona um conteúdo na ultima linha do arquivo
      * e o fecha após isso.
@@ -94,7 +91,7 @@ public class YoutubeArquivo {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Adiciona os conteúdos apartir da última linha do arquivo
      * e o fecha após todos os conteúdos serem adicionados.

@@ -1,11 +1,10 @@
 package aplicacao.tela;
 
 import aplicacao.eventos.YoutubeEventosMenores;
-import static aplicacao.tela.YoutubeTela.SISTEMA;
-import static aplicacao.tela.YoutubeTela.USUARIO;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 import metodos.YoutubeArquivo;
@@ -13,6 +12,7 @@ import metodos.YoutubeArquivo;
 /**
  * Classe responsável pelo método inicializar() da aplicação. Herda Eventos.
  */
+@SuppressWarnings("serial")
 public class YoutubeTelaInicializa extends YoutubeEventosMenores {
 
     /**
@@ -37,8 +37,8 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             diretorioPadrao.getArq().mkdir();
         }
         arquivoChecaPrograma = new YoutubeArquivo(pastaPrincipal + ".check", false);
-        YoutubeArquivo videoDir = new YoutubeArquivo(pastaVideo, true);
-        YoutubeArquivo audioDir = new YoutubeArquivo(pastaAudio, true);
+        new YoutubeArquivo(pastaVideo, true);
+        new YoutubeArquivo(pastaAudio, true);
 
         String youtubeDlSaida = CMD.comando("pip show youtube_dl");
         String youtubeSearchSaida = CMD.comando("pip show youtube_search");
@@ -96,6 +96,15 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
                 setBtnTemaCor();
             }
 
+            pro1 = RUN_1.exec("ls");
+            pro2 = RUN_2.exec("ls");
+            pro3 = RUN_3.exec("ls");
+            scheduleDownload = EXECUTOR.schedule((() -> { System.out.print("");}), 0, TimeUnit.SECONDS);
+            scheduleDownload2 = EXECUTOR.schedule((() -> { System.out.print("");}), 0, TimeUnit.SECONDS);
+            scheduleDownload3 = EXECUTOR.schedule((() -> { System.out.print("");}), 0, TimeUnit.SECONDS);
+            scheduleGetId = EXECUTOR.schedule((() -> { System.out.print("");}), 0, TimeUnit.SECONDS);
+            CMD.comandoDownload("ls");
+
             btnCancelar.setVisible(false);
             btnBaixa2.setVisible(false);
             btnBaixa3.setVisible(false);
@@ -103,11 +112,16 @@ public class YoutubeTelaInicializa extends YoutubeEventosMenores {
             downloadProgressBar.setVisible(false);
             downloadProgressBar2.setVisible(false);
             downloadProgressBar3.setVisible(false);
-
-            pro1 = RUN_1.exec("ls");
-            pro2 = RUN_2.exec("ls");
-            pro3 = RUN_3.exec("ls");
-            CMD.comandoDownload("ls");
+            radioBtnMenuItem1.setSelected(true);
+            radioBtnMenuItem2.setVisible(false);
+            radioBtnMenuItem3.setVisible(false);
+            radioBtnMenuItem4.setVisible(false);
+            radioBtnMenuItem5.setVisible(false);
+            radioBtnMenuItem6.setVisible(false);
+            radioBtnMenuItem7.setVisible(false);
+            radioBtnMenuItem8.setVisible(false);
+            radioBtnMenuItem9.setVisible(false);
+           menuBarRadioBtn.setVisible(false);
 
             index = 20;
 

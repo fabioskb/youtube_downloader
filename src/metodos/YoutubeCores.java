@@ -114,9 +114,9 @@ public class YoutubeCores {
     }
 
     /**
-     * Cores para a aplicação com brilho (brighter ou darker) de acordo com o 
-     * modo, é aconselhável usar um método para setar o modo noturno, e então 
-     * usa-lo como um boolean getter no argumento noite para uma melhor 
+     * Cores para a aplicação com brilho (brighter ou darker) de acordo com o
+     * modo, é aconselhável usar um método para setar o modo noturno, e então
+     * usa-lo como um boolean getter no argumento noite para uma melhor
      * automoção.
      *
      * @param noite (boolean) - MODO: Se true o modo noturno será aplicado para o
