@@ -208,7 +208,7 @@ public class Download extends YoutubeEventosPainelDireita {
                                 progressBarPadrao.setString(formatedTitle + progressPercentDownload2);
                             } else {
                                 if (progressBarPadrao.getString().contains("100.0%")) {
-                                    progressBarPadrao.setValue(0);
+                                    if (!".mp3".equals(ext)) progressBarPadrao.setValue(0);
                                 }
                                 progressBarPadrao
                                         .setString(TEXTOS.pegarTexto("progressbar.baixando.audio") + formatedTitle);
@@ -231,7 +231,7 @@ public class Download extends YoutubeEventosPainelDireita {
                                 resultLbl.setText(line);
                             }
                         }
-                    } else if (downloadConcluido) {
+                    } else if (downloadConcluido || ".mp3".equals(ext)) {
                         resultLbl.setText("<html>" + downFolder + "/" + formatedTitle + ext + "</html>");
                         resultLbl.setForeground(CORES.pegarCorComBrilho(noturno, "Concluido"));
                         progressBarPadrao.setVisible(false);

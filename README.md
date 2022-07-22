@@ -3,6 +3,7 @@
 ## Download videos and audios from YouTube
 
 * **You can download directly through the link or search by name.**
+* **You can choose the video resolution.**
 * **The search returns 20 options that can be downloaded.**
 * **Download up to three files simultaneously**
 * **Support only for Linux amd64 (for now).**
@@ -43,14 +44,14 @@
 
 ### via apt
 
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.4.1_amd64.deb`
-2. `sudo apt install ./youtube-downloader_amd64_2.4.1.deb`
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.5.0_amd64.deb`
+2. `sudo apt install ./youtube-downloader_amd64_2.5.0.deb`
 3. `ydl` (or simply open it in the network applications category)
 
 ### via dpkg
 
-1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.4.1_amd64.deb`
-2. `sudo dpkg -i ./youtube-downloader_amd64_2.4.1.deb`
+1. `wget https://github.com/fabioskb/youtube_downloader/releases/download/Latest/youtube-downloader_2.5.0_amd64.deb`
+2. `sudo dpkg -i ./youtube-downloader_amd64_2.5.0.deb`
 3. `sudo apt install -f`
 4. `ydl` (or simply open it in the network applications category)
 
