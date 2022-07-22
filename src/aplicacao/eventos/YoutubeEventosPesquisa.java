@@ -79,8 +79,8 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
                                 && cmdLineSaida.length() > 0) {
                             lstTitulosLinksTmp = new ArrayList<>(
                                     Arrays.asList(cmdLineSaida.split("\n")));
-                            contador = 0;
-
+                            
+                            contadorLinksTitulos = 0;
                             if (!lstTitulosLinksTmp.get(0)
                                     .equals("command not found")) {
                                 for (int i = 0; i < lstTitulosLinksTmp
@@ -88,12 +88,12 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
                                     if (i % 2 == 0) {
                                         lstTitulos.addElement(
                                                 lstTitulosLinksTmp.get(i));
+                                                CMD.sleep(0.1);
                                     } else if (i % 2 == 1) {
-                                        links[contador] = lstTitulosLinksTmp
+                                        links[contadorLinksTitulos] = lstTitulosLinksTmp
                                                 .get(i);
-                                        contador++;
+                                        contadorLinksTitulos++;
                                     }
-                                    CMD.sleep(0.1);
                                 }
                             }
                         }
@@ -103,6 +103,7 @@ public class YoutubeEventosPesquisa extends YoutubeEventosBaixar {
                                 "YoutubeEventosPesquisa.btnPesquisaClick() - Processo pesquisa cancelado!");
                     }
 
+                    CMD.sleep(0.5);
                     if (!lstTitulos.isEmpty()) {
                         lblResultado.setText(TEXTOS.pegarTexto(
                                 "label.resultado.pesquisa.concluida"));

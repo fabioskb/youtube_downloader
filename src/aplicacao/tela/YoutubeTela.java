@@ -123,7 +123,7 @@ public abstract class YoutubeTela extends JFrame {
     protected boolean noturno, video, audio;
     protected String pastaPrincipal, pastaVideo, pastaAudio;
     protected String installYoutubeSearch, installYoutubeDl;
-    protected int contador, cont;
+    protected int contadorLinksTitulos, cont;
     protected YoutubeArquivo arquivoChecaPrograma, diretorioPadrao;
     // protected Thread colorBtnCancelPro;
 

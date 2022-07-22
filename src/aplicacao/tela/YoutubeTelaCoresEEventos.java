@@ -106,14 +106,14 @@ public class YoutubeTelaCoresEEventos extends YoutubeTelaComplemento {
             pnlCentro3, pnlCentro4, pnlDireita, pnlDireita1, pnlDireita2, pnlDireita3,
             pnlDireita4, pnlRodape, pnlRodape1, pnlRodape2, pnlRodape3,
             pnlRodape4, pnlPadrao, jTopFlowPanel, pnlEsquerda};
-        contador = 0;
+        contadorLinksTitulos = 0;
         for (Component jPanel : paineis) {
-            if (contador >= 6 && contador <= 18) {
+            if (contadorLinksTitulos >= 6 && contadorLinksTitulos <= 18) {
                 jPanel.setBackground(CORES.pegarCor(noturno, 4));
             } else {
                 jPanel.setBackground(CORES.pegarCor(noturno, 3));
             }
-            contador++;
+            contadorLinksTitulos++;
         }
 
         Component[] clicaveis = {btnTema, lblLink, btnPesquisa, btnBaixa,
