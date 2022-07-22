@@ -66,5 +66,5 @@
 
 ## Downloads
 
-* [Latest](https://github.com/fabioskb/youtube_downloader/releases/Latest)
+* [Latest](https://github.com/fabioskb/youtube_downloader/releases/tag/v2.5.0)
 * [Changelog](https://github.com/fabioskb/changes/blob/main/youdl.md)
